@@ -1,2 +1,6 @@
-# duke
-A starter template for the Duke implementations
+# Duke
+A starter template for the Duke implementations.
+
+# Tutorials
+* [**Setting Up**](tutorials/settingUp.md)
+
