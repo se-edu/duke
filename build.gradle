@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
+}
+
+group 'duke'
+version '0.1-ALPHA'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+javafx {
+    version = "12.0.1"
+    modules = [
+            'javafx.controls'
+            , 'javafx.base'
+            , 'javafx.graphics'
+            , 'javafx.fxml'
+    ]
+}
+
+application {
+    mainClassName = 'duke.DukeApp'
+}
