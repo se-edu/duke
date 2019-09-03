@@ -1,0 +1,7 @@
+language: java
+matrix:
+  include:
+    - jdk: oraclejdk11
+
+script:
+  ./gradlew clean build checkstyleMain checkstlyeTest
