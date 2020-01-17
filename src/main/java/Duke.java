@@ -1,14 +1,13 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Duke {
-    private static String[] mainList;
+    private static Task[] mainList;
     private static int maxLength;
 
     public static void main(String[] args) {
-        mainList = new String[100];
-        maxLength = 30;
+        mainList = new Task[100];
+        maxLength = 40;
         int currIndex = 0;
         String logo = " _________                        \n" +
                 " __  ____/_______________________ \n" +
@@ -23,19 +22,38 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        while (!input.equals("bye") && !input.equals("Bye")) {
+        while (!input.equalsIgnoreCase("bye")) {
             if (input.equals("list")) {
                 // print list
-                System.out.println(wrapLine("Here's your list: \n" + printList()));
-            } else {
+                System.out.println(wrapLine("Honk! Here's your task list: \n" + printList()));
+            } else if (input.subSequence(0,4).equals("done")) {
+                // extract list number of task to be marked as done
+                char[] inputArr = input.toCharArray();
+                int intIndex = 5;
+                String taskIndexStr = "";
+                while (intIndex < input.length()) {
+                    taskIndexStr += inputArr[intIndex];
+                    intIndex++;
+                }
+                int taskIndexInt = Integer.parseInt(taskIndexStr);
+                mainList[taskIndexInt - 1].markAsDone();
+
+                String reply = "Okay, I've honked it as done:\n";
+                reply += "            [" +
+                        mainList[taskIndexInt - 1].getStatusIcon() + "] "
+                        + mainList[taskIndexInt - 1];
+                System.out.println(wrapLine(reply));
+            }
+            else {
                 // add to list
-                mainList[currIndex] = input;
+                Task inputTask = new Task(input);
+                mainList[currIndex] = inputTask;
                 currIndex++;
                 String reply = "added: " + input;
                 if (reply.length() > maxLength) {
                     maxLength = reply.length() + 2;
                 }
-                System.out.println("\n" + wrapLine("added: " + input));
+                System.out.println("\n" + wrapLine("added: " + inputTask));
             }
             input = scanner.nextLine();
         }
@@ -49,7 +67,7 @@ public class Duke {
                 break;
             }
             int indexNum = i + 1;
-            String item = "           " + indexNum + ". " + mainList[i];
+            String item = "           " + indexNum + ".[" + mainList[i].getStatusIcon() + "] " + mainList[i];
             if (i != mainList.length - 1) {
                 item += "\n";
             }
@@ -74,7 +92,7 @@ public class Duke {
         }
         bottomArrow += "\\ \n";
         bottom += "  __" + "\n" + bottomArrow;
-        
+
         return top + "\n" + "          " + msg + "\n" + bottom;
     }
 
