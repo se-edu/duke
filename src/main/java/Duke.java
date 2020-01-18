@@ -25,8 +25,7 @@ public class Duke {
                 tasks[completedTask - 1].markAsDone();
 
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println(" [" + tasks[completedTask - 1].getStatusIcon() + "] "
-                        + tasks[completedTask - 1].getDescription());
+                System.out.println("  " + tasks[completedTask - 1].obtainTaskInfo());
             } else {
                 tasks[numTasks] = new Task(input);
                 numTasks++;
@@ -49,52 +48,7 @@ public class Duke {
         System.out.println("Here are the tasks in your list:");
 
         for (int i = 1; i < numTasks + 1; i++) {
-            System.out.println(i + ".[" + tasks[i - 1].getStatusIcon() + "] "
-                    + tasks[i - 1].getDescription());
+            System.out.println(i + "." + tasks[i - 1].obtainTaskInfo());
         }
-    }
-}
-
-/**
- * Each object of class Task represents a task to be saved
- */
-class Task {
-    private String description;
-    private boolean isDone;
-
-    /**
-     * Class constructor
-     * @param description Task description
-     */
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-
-    /**
-     * Returns symbol representing status of task
-     * @return If task is done, return tick symbol, else return X symbol
-     */
-    public String getStatusIcon() {
-        if (isDone) {
-            return ("\u2713");
-        } else {
-            return ("\u2718");
-        }
-    }
-
-    /**
-     * Returns description of task
-     * @return description
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * Mark task as done
-     */
-    public void markAsDone() {
-        isDone = true;
     }
 }
