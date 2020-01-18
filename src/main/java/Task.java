@@ -3,14 +3,17 @@
  */
 public class Task {
     private String description;
+    private String taskType;
     private boolean isDone;
 
     /**
      * Class constructor
      * @param description Task description
+     * @param taskType Type of task: deadline, event, to-do
      */
-    public Task(String description) {
+    public Task(String description, String taskType) {
         this.description = description;
+        this.taskType = taskType;
         this.isDone = false;
     }
 
@@ -35,6 +38,14 @@ public class Task {
     }
 
     /**
+     * Returns the type of the task
+     * @return Type of task
+     */
+    public String getTaskType() {
+        return taskType;
+    }
+
+    /**
      * Mark task as done
      */
     public void markAsDone() {
@@ -43,9 +54,10 @@ public class Task {
 
     /**
      * Returns all information about the task formatted in a single string
-     * @return return information about task
+     * @return Information about task
      */
     public String obtainTaskInfo() {
-        return "[" + this.getStatusIcon() + "] " + this.getDescription();
+        return "[" + this.getTaskType() + "]["
+                + this.getStatusIcon() + "] " + this.getDescription();
     }
 }
