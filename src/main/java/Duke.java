@@ -7,16 +7,18 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        EventInvoker invoker = new EventInvoker();
+        System.out.println("I am a very angry bot and I hate you");
+        System.out.println("Now what you want?");
+        CommandInvoker invoker = new CommandInvoker();
+        CommandCreator.initCreator();
 
         while(true){
-            String userinput = getUserInput();
-            UserCommand c = EventCreator.Create(userinput);
-            if(c!=null && c.getID()==0){
-                invoker.Invoke(c);
+            String userInput = getUserInput();
+            UserCommand c = CommandCreator.getCommand(userInput);
+            invoker.Invoke(c);
+            if(CommandInvoker.checkOff()){
                 break;
             }
-            System.out.println(userinput);
         }
 
     }

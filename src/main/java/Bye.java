@@ -1,6 +1,9 @@
 public class Bye extends UserCommand{
 
-    private int ID = 0;
+    Bye() {
+     super(1);
+    }
+
 
     @Override
     public void reply() {
@@ -8,19 +11,9 @@ public class Bye extends UserCommand{
     }
 
     @Override
-    public int action() {
-        //does nothign
-        return 0;
+    public boolean action() {
+        CommandInvoker.stop();
+        return true;
     }
 
-    @Override
-    public int getID() {
-        return ID;
-    }
-
-
-    @Override
-    public java.lang.String toString() {
-        return "Bye. Have a nice day lol you shit...";
-    }
 }

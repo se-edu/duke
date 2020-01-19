@@ -1,31 +1,31 @@
 public class UserCommand implements Commands{
-    UserCommand(){
+
+   // private  String myWords;
+    private int ID = 0;
+
+
+  /*  UserCommand(String s){
+        myWords =s;
+    };
+*/
+    UserCommand(int id){
+        ID = id;
     };
 
 
     @Override
-    public java.lang.String toString() {
-        return "what an event!";
-    }
-
-
-    @Override
     public void reply() {
-        //dnot
+        System.out.println("This is some crazy event");
     }
 
     @Override
-    public int action() {
-        return 0;
+    public boolean action() {
+        return true;
     }
 
-    @Override
-    public void userAction() {
-
-    }
 
     @Override
     public int getID() {
-        return 0;
+        return ID;
     }
 }
