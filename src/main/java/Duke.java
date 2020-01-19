@@ -27,13 +27,17 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println("  " + tasks[completedTask - 1].obtainTaskInfo() + "\n");
             } else {
-                addTask(inputs, tasks, numTasks);
-                numTasks++;
+                try {
+                    addTask(inputs, tasks, numTasks);
+                    numTasks++;
 
-                if (numTasks == 1) {
-                    System.out.println("Now you have " + numTasks + " task in the list.\n");
-                } else {
-                    System.out.println("Now you have " + numTasks + " tasks in the list.\n");
+                    if (numTasks == 1) {
+                        System.out.println("Now you have " + numTasks + " task in the list.\n");
+                    } else {
+                        System.out.println("Now you have " + numTasks + " tasks in the list.\n");
+                    }
+                } catch (DukeException exception) {
+                    System.out.println(exception);
                 }
             }
 
@@ -49,19 +53,30 @@ public class Duke {
      * @param tasks List of saved tasks
      * @param num Id of task to be added
      */
-    private static void addTask(String[] inputs, Task[] tasks, int num) {
-        String task = inputs[1];
+    private static void addTask(String[] inputs, Task[] tasks, int num) throws DukeException {
+        String task;
 
         if (inputs[0].equals("todo")) {
+            if (inputs.length == 1) {
+                throw new DukeException("\u2639" + " OOPS!!! The description of a todo cannot be empty\n");
+            }
+
+            task = inputs[1];
             for (int i = 2; i < inputs.length; i++) {
                 task = task.concat(" " + inputs[i]);
             }
 
             tasks[num] = new ToDo(task, "T");
-        } else {
+        } else if (inputs[0].equals("event") || inputs[0].equals("deadline")) {
+            if (inputs.length == 1) {
+                throw new DukeException("\u2639" + " OOPS!!! The description of a "
+                        + inputs[0] + " cannot be empty\n");
+            }
+
             int j = 2;
 
-            while (inputs[j].charAt(0) != '/') {
+            task = inputs[1];
+            while (j != inputs.length && inputs[j].charAt(0) != '/') {
                 task = task.concat(" " + inputs[j]);
                 j++;
             }
@@ -74,6 +89,10 @@ public class Duke {
                 j++;
             }
 
+            if (timing.equals("")) {
+                throw new DukeException("\u2639" + " OOPS!!! This task requires a timing\n");
+            }
+
             if (inputs[0].equals("event")) {
                 timing = "(at:" + timing + ")";
                 tasks[num] = new Event(task, "E", timing);
@@ -81,6 +100,8 @@ public class Duke {
                 timing = "(by:" + timing + ")";
                 tasks[num] = new Deadline(task, "D", timing);
             }
+        } else {
+            throw new DukeException("\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
 
         System.out.println("Got it. I've added this task:");
