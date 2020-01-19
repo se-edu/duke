@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -11,34 +12,55 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
 
         String input = scanner.nextLine();
-        Task[] tasks = new Task[100];
-        int numTasks = 0;
+        ArrayList<Task> tasks = new ArrayList<Task>();
 
         while (!input.equals("bye")) {
             String[] inputs = input.split(" ");
 
-            if (input.equals("list")) {
-                printList(tasks, numTasks);
-            } else if (inputs[0].equals("done")) {
+            switch (inputs[0]) {
+            case "list":
+                printList(tasks);
+                break;
+            case "done":
                 int completedTask = Integer.valueOf(inputs[1]);
 
-                tasks[completedTask - 1].markAsDone();
+                tasks.get(completedTask - 1).markAsDone();
 
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println("  " + tasks[completedTask - 1].obtainTaskInfo() + "\n");
-            } else {
-                try {
-                    addTask(inputs, tasks, numTasks);
-                    numTasks++;
+                System.out.println("  " + tasks.get(completedTask - 1).obtainTaskInfo() + "\n");
+                break;
+            case "delete":
+                int removeTask = Integer.valueOf(inputs[1]);
 
-                    if (numTasks == 1) {
-                        System.out.println("Now you have " + numTasks + " task in the list.\n");
+                System.out.println("Noted. I've removed this task:");
+                System.out.println("  " + tasks.get(removeTask - 1).obtainTaskInfo());
+
+                tasks.remove(removeTask - 1);
+
+                if (tasks.size() == 1) {
+                    System.out.println("Now you have " + tasks.size() + " task in the list.\n");
+                } else {
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.\n");
+                }
+
+                break;
+            default:
+                try {
+                    addTask(inputs, tasks);
+
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + tasks.get(tasks.size() - 1).obtainTaskInfo());
+
+                    if (tasks.size() == 1) {
+                        System.out.println("Now you have " + tasks.size() + " task in the list.\n");
                     } else {
-                        System.out.println("Now you have " + numTasks + " tasks in the list.\n");
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.\n");
                     }
                 } catch (DukeException exception) {
                     System.out.println(exception);
                 }
+
+                break;
             }
 
             input = scanner.nextLine();
@@ -51,9 +73,8 @@ public class Duke {
      * Adds a task to the list of saved tasks
      * @param inputs Components of task to be added
      * @param tasks List of saved tasks
-     * @param num Id of task to be added
      */
-    private static void addTask(String[] inputs, Task[] tasks, int num) throws DukeException {
+    private static void addTask(String[] inputs, ArrayList<Task> tasks) throws DukeException {
         String task;
 
         if (inputs[0].equals("todo")) {
@@ -66,7 +87,7 @@ public class Duke {
                 task = task.concat(" " + inputs[i]);
             }
 
-            tasks[num] = new ToDo(task, "T");
+            tasks.add(new ToDo(task, "T"));
         } else if (inputs[0].equals("event") || inputs[0].equals("deadline")) {
             if (inputs.length == 1) {
                 throw new DukeException("\u2639" + " OOPS!!! The description of a "
@@ -95,29 +116,25 @@ public class Duke {
 
             if (inputs[0].equals("event")) {
                 timing = "(at:" + timing + ")";
-                tasks[num] = new Event(task, "E", timing);
+                tasks.add(new Event(task, "E", timing));
             } else {
                 timing = "(by:" + timing + ")";
-                tasks[num] = new Deadline(task, "D", timing);
+                tasks.add(new Deadline(task, "D", timing));
             }
         } else {
             throw new DukeException("\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
-
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + tasks[num].obtainTaskInfo());
     }
 
     /**
      * Prints the list of tasks currently saved
      * @param tasks List of tasks that are saved
-     * @param numTasks Number of tasks in the list
      */
-    private static void printList(Task[] tasks, int numTasks) {
+    private static void printList(ArrayList<Task> tasks) {
         System.out.println("Here are the tasks in your list:");
 
-        for (int i = 1; i < numTasks + 1; i++) {
-            System.out.println(i + "." + tasks[i - 1].obtainTaskInfo());
+        for (int i = 1; i < tasks.size() + 1; i++) {
+            System.out.println(i + "." + tasks.get(i - 1).obtainTaskInfo());
         }
         System.out.println();
     }
