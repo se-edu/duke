@@ -7,10 +7,28 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
+/**
+ * 
+ */
 public class Duke
 {
+    // The list of Tasks
+    static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    static BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
+
+    /**
+     * 
+     * @param task A task to be added to the list.
+     * @return {@code true} if task was successfully added (as specified by {@link ArrayList#add})
+     * @throws IOException
+     */
+    
+    
     public static void main(String[] args) throws IOException
     {
+        // Creates a task list.
+        Task.createList();
+
         String logo = " ____        _        \n" 
                 + "|  _ \\ _   _| | _____ \n" 
                 + "| | | | | | | |/ / _ \\\n"
@@ -22,36 +40,46 @@ public class Duke
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        // The ArrayList of inputs 
-        ArrayList<String> inputs = new ArrayList<String>();
-
         // The input String
         String input;
-        while (!(input = reader.readLine()).equals("bye"))
+        // The tokenised input
+        String[] inputTokens;
+        // A possible command to the application
+        Command command;
+
+        while (!(command = Command.whichCommand(
+                Parser.getFirstToken((
+                inputTokens = Parser.tokenise((input = reader.readLine()))))))
+                .equals(Command.BYE))
         {
-            if (input.equals("list"))
+            switch (command)
             {
-                // Print everything in the list, with a number
-                int i = 1;
-                for (String item : inputs)
+                case LIST:
                 {
-                    writer.append(String.format("%d\t%s%n", i++, item));
-                    writer.flush();
+                    Task.listTasks();
+                    break;
                 }
-                continue;
+                case DONE:
+                {
+                    Task.getTaskAtPosition(Integer.parseInt(inputTokens[1])).markComplete();
+                    break;
+                }
+                case BYE:
+                {
+                    // Exit message
+                    writer.write("Goodbye, see you soon!");
+                    
+                    // Clean up and exit gracefully. 
+                    reader.close();
+                    writer.close();
+                    System.exit(0);
+                }
+                default:
+                {
+                    // Assume add for now
+                    Task.addTask(new Task(input));
+                }
             }
-
-            // Add the String input to the ArrayList of inputs
-            inputs.add(input);
-            writer.write(String.format("added: %s%n", input));
-            writer.flush();
         }
-        writer.write("Goodbye, see you soon!");
-        writer.flush();
-
-        // Clean up and exit gracefully. 
-        reader.close();
-        writer.close();
-        System.exit(0);
     }
 }
