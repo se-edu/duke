@@ -6,7 +6,7 @@ public class Duke {
         DukeList dl = new DukeList();
 
         while (sc.hasNext()) {
-            String command = sc.next();
+            String command = sc.nextLine();
 
             switch (command) {
                 case "list":
