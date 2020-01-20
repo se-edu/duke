@@ -1,6 +1,7 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String taskSymbol = "X";
     public String checkMark = "Done";
     public String cross     = "Not Done";
     //public char checkMark = '\u2713';
@@ -24,6 +25,10 @@ public class Task {
         this.isDone = true;
         System.out.println ("Nice! You have marked this task as done:\n["
             + checkMark + "] " + this.description);
+    }
+
+    public String getSymbol() {
+        return this.taskSymbol;
     }
 
     public String toString() {

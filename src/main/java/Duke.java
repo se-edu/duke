@@ -13,7 +13,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         String line = "__________________________";
-        ArrayList <Task> lst = new ArrayList <Task>();
+        ArrayList <Task> lst = new ArrayList <>();
         int pendingTask = 0;
         System.out.println(line + "\nWhat can i do for you?\n" + line);
 
@@ -29,7 +29,8 @@ public class Duke {
                 int num = lst.size();
                 for (int i = 1; i <= num; i++) {
                     Task task = lst.get(i - 1);
-                    System.out.println(i + ". [" + task.getStatus() + "]" + task);
+                    System.out.println(i + ". [" + task.getSymbol() + "]["
+                            + task.getStatus() + "]" + task);
                 }
             } else if (input.contains ("done")) {
                 //Mark task as done
@@ -61,10 +62,44 @@ public class Duke {
                 }
             } else {
                 //User adding a new task
-                Task task = new Task (input);
-                lst.add (task);
-                pendingTask++;
-                System.out.println ("added: " + input);
+                switch (input.toLowerCase()) {
+                    case "todo":
+                        System.out.println("Okay! Whats your todo task?");
+                        Todo task1 = new Todo (sc.nextLine());
+                        lst.add(task1);
+                        pendingTask++;
+                        System.out.println ("Got it! I'm adding this to your list:\n "
+                                + "[T] [" + task1.getStatus() + "] " + task1);
+                        System.out.println ("Now you have " + pendingTask + " task remaining.");
+                        break;
+                    case "deadline":
+                        System.out.println("Okay! What is your deadline task?");
+                        String deadlineTask = sc.nextLine();
+                        System.out.println("Alright. When is the deadline?");
+                        Deadline task2 = new Deadline (deadlineTask, sc.nextLine());
+                        lst.add(task2);
+                        pendingTask++;
+                        System.out.println ("Got it! I'm adding this to your list:\n "
+                                + "[D] [" + task2.getStatus() + "] " + task2
+                                + "(by: " + task2.getDeadline() + ")");
+                        System.out.println ("Now you have " + pendingTask + " task in your list.");
+                        break;
+                    case "event":
+                        System.out.println("Okay! What event is coming up?");
+                        String event = sc.nextLine();
+                        System.out.println ("Alright! What time is the event?");
+                        String eventTime = sc.nextLine();
+                        Event task3 = new Event (event, eventTime);
+                        lst.add(task3);
+                        pendingTask++;
+                        System.out.println ("Got it! I'm adding this to your list:\n "
+                                + "[E] [" + task3.getStatus() + "] " + task3
+                                + "(at: " + task3.getEventTime() + ")");
+                        System.out.println ("Now you have " + pendingTask + " task remaining.");
+                        break;
+                    default:
+                        System.out.println ("Invalid Command");
+                }
             }
         }
     }
