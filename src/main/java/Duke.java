@@ -1,14 +1,14 @@
 import java.util.Scanner;
 import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Duke {
-    private static Task[] mainList;
+    private static ArrayList<Task> mainList;
     private static int maxLength;
 
     public static void main(String[] args) {
-        mainList = new Task[100];
+        mainList = new ArrayList<>();
         maxLength = 60;
-        int currIndex = 0;
         String logo = " _________                        \n" +
                 " __  ____/_______________________ \n" +
                 " _  / __ _  __ \\  __ \\_  ___/  _ \\  >(o )___\n" +
@@ -31,19 +31,20 @@ public class Duke {
 
                 if (inputArr[0].equals("list")) {
                     // print list
-                    System.out.println(wrapLine("Honk! Here's your task list: \n" + printList(currIndex)));
+                    System.out.println(wrapLine("Honk! Here's your task list: \n" + printList()));
                     input = scanner.nextLine();
 
                 } else if (inputArr[0].equals("done")) {
                     // extract list number of task to be marked as done
-                    int taskIndex = Integer.parseInt(inputArr[1]);
-                    Task selected = mainList[taskIndex - 1];
-                    selected.markAsDone();
+                    int taskIndex = Integer.parseInt(inputArr[1]) - 1;
 
-                    String reply = "Good job! I've honked it as done:\n";
-                    System.out.println(wrapLine(reply + "           " + selected));
+                    markDone(taskIndex);
                     input = scanner.nextLine();
-
+                } else if (inputArr[0].equals("delete")) {
+                    // extract list number of task to delete
+                    int taskIndex = Integer.parseInt(inputArr[1]) - 1;
+                    deleteTask(taskIndex);
+                    input = scanner.nextLine();
                 } else {
                     try {
                         Task inputTask;
@@ -58,28 +59,27 @@ public class Duke {
                             inputTask = createTodo(inputArr);
                         }
 
-                        mainList[currIndex] = inputTask;
-                        currIndex++;
+                        mainList.add(inputTask);
                         if (inputTask.toString().length() > maxLength) {
                             maxLength = inputTask.toString().length() + 2;
                         }
 
-                        String count = currIndex == 1 ?
-                                "\n\n          Now you have " + currIndex + " task in the list."
-                                : "\n\n          Now you have " + currIndex + " tasks in the list.";
+                        String count = mainList.size() == 1
+                                ? "\n\n          Now you have " + mainList.size() + " task in the list."
+                                : "\n\n          Now you have " + mainList.size() + " tasks in the list.";
                         System.out.println("\n" + wrapLine("Honk! Okay added the task:\n            " +
                                 inputTask +
                                 count));
                         input = scanner.nextLine();
 
                     } catch (GooseEmptyDescriptionException | GooseIllegalFormatException e) {
-                        System.err.println(e.getMessage());
+                        System.err.println(wrapLine(e.getMessage()));
                         input = scanner.nextLine();
                     }
                 }
 
-            } catch (GooseUnrecognisedException e) {
-                System.err.println(e.getMessage());
+            } catch (GooseUnrecognisedException | GooseTaskExistenceException e) {
+                System.err.println(wrapLine(e.getMessage()));
                 input = scanner.nextLine();
             }
         }
@@ -96,10 +96,10 @@ public class Duke {
         }
 
         if (description.isEmpty()) {
-            throw new GooseEmptyDescriptionException(wrapLine("Honk! Description of an event cannot be empty."));
+            throw new GooseEmptyDescriptionException("Honk! Description of an event cannot be empty.");
         } else {
             if (eventArr.length == 1) {
-                throw new GooseIllegalFormatException(wrapLine("Honk! No event date specified."));
+                throw new GooseIllegalFormatException("Honk! No event date specified.");
             }
 
             String at = eventArr[1];
@@ -116,10 +116,10 @@ public class Duke {
         }
 
         if (description.isEmpty()) {
-            throw new GooseEmptyDescriptionException(wrapLine("Honk! Description of a deadline cannot be empty."));
+            throw new GooseEmptyDescriptionException("Honk! Description of a deadline cannot be empty.");
         } else {
             if (deadlineArr.length == 1) {
-                throw new GooseIllegalFormatException(wrapLine("Honk! No deadline specified."));
+                throw new GooseIllegalFormatException("Honk! No deadline specified.");
             }
 
             String by = deadlineArr[1];
@@ -134,32 +134,58 @@ public class Duke {
         }
 
         if (description.isEmpty()) {
-            throw new GooseEmptyDescriptionException(wrapLine("Honk! Description of a todo cannot be empty."));
+            throw new GooseEmptyDescriptionException("Honk! Description of a todo cannot be empty.");
         } else {
             return new Todo(description);
         }
     }
 
+    public static void deleteTask(int index) throws GooseTaskExistenceException {
+        if (index >= mainList.size() || index < 0) {
+            throw new GooseTaskExistenceException("You trick Goose? This task doesn't exist. Honk...");
+        }
+
+        Task selected = mainList.get(index);
+        mainList.remove(index);
+        String count = mainList.size() == 1
+            ? "\n\n          Now you have " + mainList.size() + " task in the list."
+            : "\n\n          Now you have " + mainList.size() + " tasks in the list.";
+        System.out.println(wrapLine("Honk! Removed this task from the list:\n" + "           " +
+                selected + count));
+    }
+
+    public static void markDone(int index) throws GooseTaskExistenceException {
+        if (index >= mainList.size() || index < 0) {
+            throw new GooseTaskExistenceException("You trick Goose? This task doesn't exist. Honk...");
+        }
+
+        Task selected = mainList.get(index);
+        selected.markAsDone();
+
+        String reply = "Good job! I've honked it as done:\n";
+        System.out.println(wrapLine(reply + "           " + selected));
+    }
+
     public static void checkInput(String[] inputArr) throws GooseUnrecognisedException {
         if (!inputArr[0].equals("list") && !inputArr[0].equals("done") && !inputArr[0].equals("deadline") &&
-                !inputArr[0].equals("event") && !inputArr[0].equals("todo") ||
+                !inputArr[0].equals("event") && !inputArr[0].equals("todo") && !inputArr[0].equals("delete") ||
                     inputArr[0].equals("list") && inputArr.length > 1) {
-            throw new GooseUnrecognisedException(wrapLine("Honk honk??"));
+            throw new GooseUnrecognisedException("Honk honk??");
         }
     }
 
-    public static String printList(int currIndex) {
+    public static String printList() {
         String formattedList = "";
-        if (currIndex == 0) {
+        if (mainList.size() == 0) {
             formattedList = "           You haven't added any tasks. Honk...";
         } else {
-            for (int i = 0; i < mainList.length; i++) {
-                if (mainList[i] == null) {
+            for (int i = 0; i < mainList.size(); i++) {
+                if (mainList.get(i) == null) {
                     break;
                 }
                 int indexNum = i + 1;
-                String item = "           " + indexNum + "." + mainList[i];
-                if (i != mainList.length - 1) {
+                String item = "           " + indexNum + "." + mainList.get(i);
+                if (i != mainList.size() - 1) {
                     item += "\n";
                 }
                 formattedList += item;
