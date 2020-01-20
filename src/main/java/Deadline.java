@@ -12,4 +12,14 @@ public class Deadline extends Task {
         return this.deadline;
     }
 
+    @Override
+    public String toString() {
+        if (super.isDone) {
+            return ("[" + taskSymbol + "][Done] " + super.description
+                    + " (by: " + this.deadline + ")");
+        } else {
+            return ("[" + taskSymbol + "][Not Done] " + super.description
+                    + " (by: " + this.deadline + ")");
+        }
+    }
 }

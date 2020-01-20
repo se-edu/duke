@@ -6,4 +6,13 @@ public class Todo extends Task {
         super (description);
     }
 
+    @Override
+    public String toString() {
+        if (super.isDone) {
+            return ("[" + taskSymbol + "][Done] " + super.description);
+        } else {
+            return ("[" + taskSymbol + "][Not Done] " + super.description);
+        }
+    }
+
 }

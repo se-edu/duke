@@ -31,6 +31,7 @@ public class Task {
         return this.taskSymbol;
     }
 
+    @Override
     public String toString() {
         return this.description;
     }

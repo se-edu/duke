@@ -29,13 +29,12 @@ public class Duke {
                 int num = lst.size();
                 for (int i = 1; i <= num; i++) {
                     Task task = lst.get(i - 1);
-                    System.out.println(i + ". [" + task.getSymbol() + "]["
-                            + task.getStatus() + "]" + task);
+                    System.out.println(i + ". " + task);
                 }
             } else if (input.contains ("done")) {
                 //Mark task as done
                 try {
-                    int taskNum = sc.nextInt() - 1;
+                    int taskNum = (sc.nextInt()) - 1;
                     sc.nextLine();
                     if (taskNum > lst.size()) {
                         //If user inputs invalid task number
@@ -52,7 +51,9 @@ public class Duke {
                         }
                         if (pendingTask == 0) {
                             //Indicate to user there are no more pending task
-                            System.out.println("No task remaining! You are free:)\n");
+                            System.out.println("0 task remaining! You are free:)\n");
+                        } else {
+                            System.out.println ("You have " + pendingTask + " task remaining!");
                         }
                     }
                 } catch (Exception e){
@@ -68,8 +69,7 @@ public class Duke {
                         Todo task1 = new Todo (sc.nextLine());
                         lst.add(task1);
                         pendingTask++;
-                        System.out.println ("Got it! I'm adding this to your list:\n "
-                                + "[T] [" + task1.getStatus() + "] " + task1);
+                        System.out.println ("Got it! I'm adding this to your list:\n" + task1);
                         System.out.println ("Now you have " + pendingTask + " task remaining.");
                         break;
                     case "deadline":
@@ -79,9 +79,7 @@ public class Duke {
                         Deadline task2 = new Deadline (deadlineTask, sc.nextLine());
                         lst.add(task2);
                         pendingTask++;
-                        System.out.println ("Got it! I'm adding this to your list:\n "
-                                + "[D] [" + task2.getStatus() + "] " + task2
-                                + "(by: " + task2.getDeadline() + ")");
+                        System.out.println ("Got it! I'm adding this to your list:\n" + task2);
                         System.out.println ("Now you have " + pendingTask + " task in your list.");
                         break;
                     case "event":
@@ -92,9 +90,7 @@ public class Duke {
                         Event task3 = new Event (event, eventTime);
                         lst.add(task3);
                         pendingTask++;
-                        System.out.println ("Got it! I'm adding this to your list:\n "
-                                + "[E] [" + task3.getStatus() + "] " + task3
-                                + "(at: " + task3.getEventTime() + ")");
+                        System.out.println ("Got it! I'm adding this to your list:\n " + task3);
                         System.out.println ("Now you have " + pendingTask + " task remaining.");
                         break;
                     default:
