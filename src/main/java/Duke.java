@@ -20,9 +20,11 @@ public class Duke {
         while (true) {
             String input = sc.nextLine();
             if (input.equals("bye")) {
+                //Leaves Duke
                 System.out.println ("Cya next time!");
                 break;
             } else if (input.equals ("list")) {
+                //Open up list of Task
                 System.out.println ("Here are the tasks in your list: ");
                 int num = lst.size();
                 for (int i = 1; i <= num; i++) {
@@ -30,28 +32,35 @@ public class Duke {
                     System.out.println(i + ". [" + task.getStatus() + "]" + task);
                 }
             } else if (input.contains ("done")) {
+                //Mark task as done
                 try {
                     int taskNum = sc.nextInt() - 1;
                     sc.nextLine();
                     if (taskNum > lst.size()) {
+                        //If user inputs invalid task number
                         System.out.println("No such task!\n");
                     } else {
+                        //User marks undone task as done
                         Task completedTask = lst.get(taskNum);
                         if (!completedTask.isItDone()) {
                             completedTask.markAsDone();
                             pendingTask--;
                         } else {
+                            //Indicating a task that has already been done
                             System.out.println ("This task has already been done!");
                         }
                         if (pendingTask == 0) {
+                            //Indicate to user there are no more pending task
                             System.out.println("No task remaining! You are free:)\n");
                         }
                     }
                 } catch (Exception e){
+                    //In the case user inputs a non-int data type
                     sc.nextLine();
                     System.out.println ("Please type in a task number:(");
                 }
             } else {
+                //User adding a new task
                 Task task = new Task (input);
                 lst.add (task);
                 pendingTask++;
