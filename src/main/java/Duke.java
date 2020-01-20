@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static Scanner sc = new Scanner (System.in);
+    public static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -16,11 +16,11 @@ public class Duke {
 
         while (true) {
             String input = sc.next();
-            if (input.equals ("bye")) {
-                System.out.println ("Cya next time!");
+            if (input.equals("bye")) {
+                System.out.println("Cya next time!");
                 break;
             } else {
-                System.out.println (input);
+                System.out.println(input);
             }
         }
     }
