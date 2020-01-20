@@ -4,10 +4,11 @@ import java.util.StringTokenizer;
 public class Duke {
     static String space = "     ";
     static String line = space + "_____________________________________________";
+    static Task[] tasks = new Task[100];
+    static int count = 0;
 
     public static void main(String[] args) {
-        Task[] tasks = new Task[100];
-        int count = 0;
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -19,25 +20,51 @@ public class Duke {
 
         while (true) {
             String next = scanner.nextLine();
-            StringTokenizer st = new StringTokenizer(next);
-            String first_token = st.nextToken();
+
             if (next.equals("bye")) {
                 respond("Bye. Hope to see you again soon!");
                 break;
-            } else if (next.equals("list")){
-                print_list(tasks, count);
-            } else if (first_token.equals("done")) {
-                int index = Integer.parseInt(st.nextToken()) - 1;
-                Task temp = tasks[index];
-                markDone(temp);
-
             } else {
-                respond("added: " + next);
-                tasks[count] = new Task(next);
-                count++;
+                process(next);
             }
         }
 
+    }
+
+    public static void process(String next) {
+        StringTokenizer st = new StringTokenizer(next);
+        String first_token = st.nextToken();
+
+        if (next.equals("list")){
+            print_list(tasks, count);
+        } else if (first_token.equals("done")) {
+            int index = Integer.parseInt(st.nextToken()) - 1;
+            Task temp = tasks[index];
+            markDone(temp);
+
+        } else {
+            Task itemToAdd = null;
+            if (first_token.equals("deadline")) {
+                next = next.substring(9);
+                String[] temp = next.split(" /by ");
+                itemToAdd = new Deadline(temp[0], temp[1]);
+            } else if (first_token.equals("event")) {
+                next = next.substring(6);
+                String[] temp = next.split(" /at ");
+                itemToAdd = new Event(temp[0], temp[1]);
+            } else if (first_token.equals("todo")) {
+                next = next.substring(5);
+                itemToAdd = new Todo(next);
+            }
+            if (itemToAdd != null) {
+                tasks[count] = itemToAdd;
+                String out = line + "\n" + space + "Got it. I've added this task: " + "\n" + space
+                        + "  " + itemToAdd + "\n" + space + "Now you have " + (count+1) +
+                        " tasks in your list." + "\n" + line;
+                System.out.println(out);
+                count++;
+            }
+        }
     }
 
     public static void respond(String in) {
