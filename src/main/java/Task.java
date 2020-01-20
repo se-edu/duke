@@ -1,23 +1,15 @@
-public class Task {
-        private String description;
+abstract class Task {
+        String description;
         private boolean isDone;
 
-        Task(String description) {
+        Task(String description, boolean isDone) {
             this.description = description;
-            this.isDone = false;
+            this.isDone = isDone;
         }
 
-        Task(Task task) {
-            this.description = task.description;
-            this.isDone = true;
-        }
+        abstract Task completeTask();
 
-        private String getStatusIcon() {
+        String getStatusIcon() {
             return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
-        }
-
-        @Override
-        public String toString() {
-            return "[" + this.getStatusIcon() + "] " + this.description;
         }
 }

@@ -6,29 +6,25 @@ public class Duke {
         DukeList dl = new DukeList();
 
         while (sc.hasNext()) {
-            String line = sc.nextLine();
-            String[] lineArr = line.split(" ");
-            String command = lineArr[0];
+            String command = sc.next();
 
             switch (command) {
                 case "list":
+                    sc.nextLine();
                     System.out.println(DukeFormatting.DIVIDER);
                     dl.printList();
                     System.out.println(DukeFormatting.DIVIDER);
                     break;
 
-                case "blah":
-                    System.out.println(DukeFormatting.DIVIDER + DukeFormatting.BLAH
-                            + DukeFormatting.DIVIDER);
-                    break;
-
                 case "bye":
+                    sc.nextLine();
                     System.out.println(DukeFormatting.DIVIDER + DukeFormatting.BYE
                             + DukeFormatting.DIVIDER);
                     break;
 
                 case "done":
-                    int index = Integer.parseInt(lineArr[1]) - 1;
+                    int index = sc.nextInt() - 1;
+                    sc.nextLine();
                     dl = dl.setDone(index);
                     System.out.println(DukeFormatting.DIVIDER);
                     System.out.println("Nice! I've marked this task as done:");
@@ -36,12 +32,47 @@ public class Duke {
                     System.out.println(DukeFormatting.DIVIDER);
                     break;
 
-                default:
-                    dl.addToList(line);
-                    System.out.println(DukeFormatting.DIVIDER);
-                    System.out.println("   added: " + line);
-                    System.out.println(DukeFormatting.DIVIDER);
+                case "todo":
+                    String description = sc.nextLine();
+                    ToDoTask tTask = new ToDoTask(description, false);
+                    dl = dl.addToList(tTask);
+
+                    System.out.println(DukeFormatting.DIVIDER
+                            + DukeFormatting.ADDED
+                            + "      " + tTask.toString()
+                            + "\n   Now you have " + dl.listSize()
+                            + (dl.listSize() == 1 ? " task" : " tasks")
+                            + " in the list.\n"
+                            + DukeFormatting.DIVIDER);
                     break;
+
+                case "deadline":
+                    String line = sc.nextLine();
+                    String[] lineArr = line.split(" /");
+                    DeadlineTask dTask = new DeadlineTask(lineArr[0], false, lineArr[1]);
+                    dl = dl.addToList(dTask);
+
+                    System.out.println(DukeFormatting.DIVIDER
+                            + DukeFormatting.ADDED
+                            + "      " + dTask.toString()
+                            + "\n   Now you have " + dl.listSize()
+                            + (dl.listSize() == 1 ? " task" : " tasks")
+                            + " in the list.\n"
+                            + DukeFormatting.DIVIDER);
+
+                case "event":
+                    String text = sc.nextLine();
+                    String[] textArr = text.split(" /");
+                    DeadlineTask eTask = new DeadlineTask(textArr[0], false, textArr[1]);
+                    dl = dl.addToList(eTask);
+
+                    System.out.println(DukeFormatting.DIVIDER
+                            + DukeFormatting.ADDED
+                            + "      " + eTask.toString()
+                            + "\n   Now you have " + dl.listSize()
+                            + (dl.listSize() == 1 ? " task" : " tasks")
+                            + " in the list.\n"
+                            + DukeFormatting.DIVIDER);
             }
 
             if (command.equals("bye")) {
@@ -51,10 +82,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        System.out.println(DukeFormatting.DIVIDER + DukeFormatting.LOGO
-                + "   Hello! I'm Duke! " +
-                "\n   What can I do for you?\n" + DukeFormatting.DIVIDER);
-
+        System.out.println(DukeFormatting.HELLO);
         parseInput();
     }
 }

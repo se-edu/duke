@@ -12,8 +12,10 @@ class DukeList {
          this.list = dl.list;
      }
 
-    void addToList(String str) {
-         this.list.add(new Task(str));
+    DukeList addToList(Task task) {
+         DukeList dl = new DukeList(this);
+         dl.list.add(task);
+         return dl;
     }
 
     void printList() {
@@ -24,11 +26,15 @@ class DukeList {
 
     DukeList setDone(int index) {
          DukeList dl = new DukeList(this);
-         dl.list.set(index, new Task(this.list.get(index)));
+         dl.list.set(index, this.list.get(index).completeTask());
          return dl;
     }
 
     String printTask(int index) {
          return this.list.get(index).toString();
+    }
+
+    int listSize() {
+         return this.list.size();
     }
 }
