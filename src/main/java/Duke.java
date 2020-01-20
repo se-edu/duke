@@ -21,7 +21,7 @@ public class Duke {
             if (input.equals("bye")) {
                 System.out.println("Cya next time!");
                 break;
-            } else if (input.equals("list")) {
+            } else if (input.equals ("list")) {
                 int num = lst.size();
                 for (int i = 1; i < num; i++) {
                     System.out.println(i + ". " + lst.get(i));
