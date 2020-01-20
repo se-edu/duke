@@ -14,6 +14,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         String line = "__________________________";
         ArrayList <Task> lst = new ArrayList <Task>();
+        int pendingTask = 0;
         System.out.println(line + "\nWhat can i do for you?\n" + line);
 
         while (true) {
@@ -24,21 +25,27 @@ public class Duke {
             } else if (input.equals ("list")) {
                 System.out.println ("Here are the tasks in your list: ");
                 int num = lst.size();
-                for (int i = 1; i < num; i++) {
-                    Task task = lst.get(i);
-                    System.out.println(i + ". " + task.getStatus() + task);
+                for (int i = 1; i <= num; i++) {
+                    Task task = lst.get(i - 1);
+                    System.out.println(i + ". [" + task.getStatus() + "]" + task);
                 }
             } else if (input.contains ("done")) {
-                int taskNum = sc.nextInt();
+                int taskNum = sc.nextInt() - 1;
+                sc.nextLine();
                 if (taskNum > lst.size()) {
-                    System.out.println ("No such task!");
+                    System.out.println ("No such task!\n");
                 } else {
                     Task completedTask = lst.get(taskNum);
                     completedTask.markAsDone();
+                    pendingTask--;
+                    if (pendingTask == 0) {
+                        System.out.println ("No task remaining! You are free:)\n");
+                    }
                 }
             } else {
                 Task task = new Task (input);
                 lst.add (task);
+                pendingTask++;
                 System.out.println ("added: " + input);
             }
         }

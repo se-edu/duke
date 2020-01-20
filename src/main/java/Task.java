@@ -1,6 +1,11 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    public String checkMark = "Done";
+    public String cross     = "Not Done";
+    //public char checkMark = '\u2713';
+    //public char cross     = '\u2718';
+    //Cannot print unicode
 
     public Task (String description) {
         this.description = description;
@@ -8,13 +13,13 @@ public class Task {
     }
 
     public String getStatus() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? checkMark : cross);
     }
 
     public void markAsDone() {
         this.isDone = true;
-        System.out.println ("Nice! You have marked this task as done:\n "
-            + "\u2713 " + this.description);
+        System.out.println ("Nice! You have marked this task as done:\n["
+            + checkMark + "] " + this.description);
     }
 
     public String toString() {
