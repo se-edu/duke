@@ -10,5 +10,5 @@ class DukeFormatting {
     static final String DIVIDER = "______________________________________________________\n";
     static final String LIST = "list\n";
     static final String BLAH = "blah\n";
-    static final String BYE = "Bye. Hope to see you again soon!\n";
+    static final String BYE = "   Bye. Hope to see you again soon!\n";
 }
