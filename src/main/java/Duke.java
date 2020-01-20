@@ -25,73 +25,61 @@ public class Duke {
         String[] inputArr;
 
         while (!input.equalsIgnoreCase("bye")) {
-            inputArr = input.split(" ");
+            try {
+                inputArr = input.split(" ");
+                checkInput(inputArr);
 
-            if (input.equals("list")) {
-                // print list
-                System.out.println(wrapLine("Honk! Here's your task list: \n" + printList()));
-                input = scanner.nextLine();
+                if (inputArr[0].equals("list")) {
+                    // print list
+                    System.out.println(wrapLine("Honk! Here's your task list: \n" + printList(currIndex)));
+                    input = scanner.nextLine();
 
-            } else if (inputArr[0].equals("done")) {
-                // extract list number of task to be marked as done
-                int taskIndex = Integer.parseInt(inputArr[1]);
-                Task selected = mainList[taskIndex - 1];
-                selected.markAsDone();
+                } else if (inputArr[0].equals("done")) {
+                    // extract list number of task to be marked as done
+                    int taskIndex = Integer.parseInt(inputArr[1]);
+                    Task selected = mainList[taskIndex - 1];
+                    selected.markAsDone();
 
-                String reply = "Good job! I've honked it as done:\n";
-                System.out.println(wrapLine(reply + "           " + selected));
-                input = scanner.nextLine();
-
-            } else if (inputArr[0].equals("event") || inputArr[0].equals("deadline") || inputArr[0].equals("todo")) {
-                Task inputTask;
-
-                if (inputArr[0].equals("event")) {
-                    String[] eventArr = input.split(" /at ");
-                    String[] descriptionSplit = eventArr[0].split(" ");
-                    String description = "";
-                    for (int i = 1; i < descriptionSplit.length; i++) {
-                        description += " " + descriptionSplit[i];
-                    }
-
-                    String at = eventArr[1];
-                    inputTask = new Event(description, at);
-
-                } else if (inputArr[0].equals("deadline")) {
-                    String[] eventArr = input.split(" /by ");
-                    String[] descriptionSplit = eventArr[0].split(" ");
-                    String description = "";
-                    for (int i = 1; i < descriptionSplit.length; i++) {
-                        description += " " + descriptionSplit[i];
-                    }
-
-                    String by = eventArr[1];
-                    inputTask = new Deadline(description, by);
+                    String reply = "Good job! I've honked it as done:\n";
+                    System.out.println(wrapLine(reply + "           " + selected));
+                    input = scanner.nextLine();
 
                 } else {
-                    String description = "";
-                    for (int i = 1; i < inputArr.length; i++) {
-                        description += " " + inputArr[i];
+                    try {
+                        Task inputTask;
+
+                        if (inputArr[0].equals("event")) {
+                            inputTask = createEvent(input);
+
+                        } else if (inputArr[0].equals("deadline")) {
+                            inputTask = createDeadline(input);
+
+                        } else {
+                            inputTask = createTodo(inputArr);
+                        }
+
+                        mainList[currIndex] = inputTask;
+                        currIndex++;
+                        if (inputTask.toString().length() > maxLength) {
+                            maxLength = inputTask.toString().length() + 2;
+                        }
+
+                        String count = currIndex == 1 ?
+                                "\n\n          Now you have " + currIndex + " task in the list."
+                                : "\n\n          Now you have " + currIndex + " tasks in the list.";
+                        System.out.println("\n" + wrapLine("Honk! Okay added the task:\n            " +
+                                inputTask +
+                                count));
+                        input = scanner.nextLine();
+
+                    } catch (GooseEmptyDescriptionException | GooseIllegalFormatException e) {
+                        System.err.println(e.getMessage());
+                        input = scanner.nextLine();
                     }
-
-                    inputTask = new Todo(description);
                 }
 
-                mainList[currIndex] = inputTask;
-                currIndex++;
-                if (inputTask.toString().length() > maxLength) {
-                    maxLength = inputTask.toString().length() + 2;
-                }
-                
-                String count = currIndex == 1 ?
-                        "\n\n          Now you have " + currIndex + " task in the list."
-                        : "\n\n          Now you have " + currIndex + " tasks in the list.";
-                System.out.println("\n" + wrapLine("Honk! Okay added the task:\n            " +
-                        inputTask +
-                        count));
-                input = scanner.nextLine();
-
-            } else {
-                System.out.println(wrapLine("Honk honk?"));
+            } catch (GooseUnrecognisedException e) {
+                System.err.println(e.getMessage());
                 input = scanner.nextLine();
             }
         }
@@ -99,18 +87,83 @@ public class Duke {
         System.out.println(wrapLine("Honk honk!"));
     }
 
-    public static String printList() {
+    public static Event createEvent(String input) throws GooseEmptyDescriptionException, GooseIllegalFormatException {
+        String[] eventArr = input.split(" /at ");
+        String[] descriptionSplit = eventArr[0].split(" ");
+        String description = "";
+        for (int i = 1; i < descriptionSplit.length; i++) {
+            description += " " + descriptionSplit[i];
+        }
+
+        if (description.isEmpty()) {
+            throw new GooseEmptyDescriptionException(wrapLine("Honk! Description of an event cannot be empty."));
+        } else {
+            if (eventArr.length == 1) {
+                throw new GooseIllegalFormatException(wrapLine("Honk! No event date specified."));
+            }
+
+            String at = eventArr[1];
+            return new Event(description, at);
+        }
+    }
+
+    public static Deadline createDeadline(String input) throws GooseEmptyDescriptionException, GooseIllegalFormatException {
+        String[] deadlineArr = input.split(" /by ");
+        String[] descriptionSplit = deadlineArr[0].split(" ");
+        String description = "";
+        for (int i = 1; i < descriptionSplit.length; i++) {
+            description += " " + descriptionSplit[i];
+        }
+
+        if (description.isEmpty()) {
+            throw new GooseEmptyDescriptionException(wrapLine("Honk! Description of a deadline cannot be empty."));
+        } else {
+            if (deadlineArr.length == 1) {
+                throw new GooseIllegalFormatException(wrapLine("Honk! No deadline specified."));
+            }
+
+            String by = deadlineArr[1];
+            return new Deadline(description, by);
+        }
+    }
+
+    public static Todo createTodo(String[] inputArr) throws GooseEmptyDescriptionException {
+        String description = "";
+        for (int i = 1; i < inputArr.length; i++) {
+            description += " " + inputArr[i];
+        }
+
+        if (description.isEmpty()) {
+            throw new GooseEmptyDescriptionException(wrapLine("Honk! Description of a todo cannot be empty."));
+        } else {
+            return new Todo(description);
+        }
+    }
+
+    public static void checkInput(String[] inputArr) throws GooseUnrecognisedException {
+        if (!inputArr[0].equals("list") && !inputArr[0].equals("done") && !inputArr[0].equals("deadline") &&
+                !inputArr[0].equals("event") && !inputArr[0].equals("todo") ||
+                    inputArr[0].equals("list") && inputArr.length > 1) {
+            throw new GooseUnrecognisedException(wrapLine("Honk honk??"));
+        }
+    }
+
+    public static String printList(int currIndex) {
         String formattedList = "";
-        for (int i = 0; i < mainList.length; i++) {
-            if (mainList[i] == null) {
-                break;
+        if (currIndex == 0) {
+            formattedList = "           You haven't added any tasks. Honk...";
+        } else {
+            for (int i = 0; i < mainList.length; i++) {
+                if (mainList[i] == null) {
+                    break;
+                }
+                int indexNum = i + 1;
+                String item = "           " + indexNum + "." + mainList[i];
+                if (i != mainList.length - 1) {
+                    item += "\n";
+                }
+                formattedList += item;
             }
-            int indexNum = i + 1;
-            String item = "           " + indexNum + "." + mainList[i];
-            if (i != mainList.length - 1) {
-                item += "\n";
-            }
-            formattedList += item;
         }
 
         return formattedList;
