@@ -6,7 +6,9 @@ public class Duke {
         DukeList dl = new DukeList();
 
         while (sc.hasNext()) {
-            String command = sc.nextLine();
+            String line = sc.nextLine();
+            String[] lineArr = line.split(" ");
+            String command = lineArr[0];
 
             switch (command) {
                 case "list":
@@ -25,10 +27,19 @@ public class Duke {
                             + DukeFormatting.DIVIDER);
                     break;
 
-                default:
-                    dl.addToList(command);
+                case "done":
+                    int index = Integer.parseInt(lineArr[1]) - 1;
+                    dl = dl.setDone(index);
                     System.out.println(DukeFormatting.DIVIDER);
-                    System.out.println("   added: " + command);
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("      " + dl.printTask(index));
+                    System.out.println(DukeFormatting.DIVIDER);
+                    break;
+
+                default:
+                    dl.addToList(line);
+                    System.out.println(DukeFormatting.DIVIDER);
+                    System.out.println("   added: " + line);
                     System.out.println(DukeFormatting.DIVIDER);
                     break;
             }
