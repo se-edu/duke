@@ -30,17 +30,26 @@ public class Duke {
                     System.out.println(i + ". [" + task.getStatus() + "]" + task);
                 }
             } else if (input.contains ("done")) {
-                int taskNum = sc.nextInt() - 1;
-                sc.nextLine();
-                if (taskNum > lst.size()) {
-                    System.out.println ("No such task!\n");
-                } else {
-                    Task completedTask = lst.get(taskNum);
-                    completedTask.markAsDone();
-                    pendingTask--;
-                    if (pendingTask == 0) {
-                        System.out.println ("No task remaining! You are free:)\n");
+                try {
+                    int taskNum = sc.nextInt() - 1;
+                    sc.nextLine();
+                    if (taskNum > lst.size()) {
+                        System.out.println("No such task!\n");
+                    } else {
+                        Task completedTask = lst.get(taskNum);
+                        if (!completedTask.isItDone()) {
+                            completedTask.markAsDone();
+                            pendingTask--;
+                        } else {
+                            System.out.println ("This task has already been done!");
+                        }
+                        if (pendingTask == 0) {
+                            System.out.println("No task remaining! You are free:)\n");
+                        }
                     }
+                } catch (Exception e){
+                    sc.nextLine();
+                    System.out.println ("Please type in a task number:(");
                 }
             } else {
                 Task task = new Task (input);

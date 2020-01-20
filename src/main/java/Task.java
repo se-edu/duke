@@ -12,6 +12,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public boolean isItDone() {
+        return this.isDone;
+    }
+
     public String getStatus() {
         return (isDone ? checkMark : cross);
     }
