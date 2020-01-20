@@ -1,14 +1,20 @@
 class DukeFormatting {
-    static final String LOGO =  "        8888888b.           888\n"
-            + "        888  \"Y88b          888\n"
-            + "        888    888          888\n"
-            + "        888    888 888  888 888  888  .d88b.\n"
-            + "        888    888 888  888 888 .88P d8P  Y8b\n"
-            + "        888    888 888  888 888888K  88888888\n"
-            + "        888  .d88P Y88b 888 888 \"88b Y8b.\n"
-            + "        8888888P\"   \"Y88888 888  888  \"Y8888=\n\n";
-    static final String DIVIDER = "______________________________________________________\n";
+    static final String LOGO =
+            "             M\"\"\"\"\"\"\"`YM\"\"MMMMM\"\"MP\"\"\"\"\"\"`MM \n" +
+            "             M  mmmm.  M  MMMMM  M  mmmmm..M \n" +
+            "     .d8888b.M  MMMMM  M  MMMMM  M.      `YM \n" +
+            "     88'  `88M  MMMMM  M  MMMMM  MMMMMMM.  M \n" +
+            "     88.  .88M  MMMMM  M  `MMM'  M. .MMM'  M \n" +
+            "     `88888P'M  MMMMM  Mb       dMb.     .dM \n" +
+            "             MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM \n";
+
+    static final String DIVIDER = "____________________________________________________________\n";
+    static final String HELLO = DukeFormatting.DIVIDER + DukeFormatting.LOGO
+                + "   Hello!" +
+                        "\n   The oNUS is on me to help you be productive!\n" + DukeFormatting.DIVIDER;
+
     static final String LIST = "list\n";
     static final String BLAH = "blah\n";
+    static final String ADDED = "   Got it. I've added this task:\n";
     static final String BYE = "   Bye. Hope to see you again soon!\n";
 }
