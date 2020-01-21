@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 /**
  * Duke Program for CS2103T 2020.
  */
@@ -28,16 +27,18 @@ public class Duke {
         while ( !finished ){
             String input = sc.nextLine().toLowerCase();
 
-            System.out.println("**********************************");
-
-            if( input.equals("bye")  ){
-                finished = true;
-            } else {
-                bot.res(input);
+            try {
                 System.out.println("**********************************");
+
+                if( input.equals("bye")  ){
+                    finished = true;
+                } else {
+                    bot.res(input);
+                    System.out.println("**********************************");
+                }
+            } catch( Exception e){
+                System.out.println("I didn't get that. Would you mind repeating once more?");
             }
-
-
 
         }
 
