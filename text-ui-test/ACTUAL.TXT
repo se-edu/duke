@@ -36,12 +36,12 @@ Hello from
 
     ____________________________________________________________
      Nice! I've marked this task as done:
-[T][✓] read book
+       [T][✓] read book
     ____________________________________________________________
 
     ____________________________________________________________
      Nice! I've marked this task as done:
-[T][✓] join sports club
+       [T][✓] join sports club
     ____________________________________________________________
 
     ____________________________________________________________
@@ -69,5 +69,20 @@ Hello from
      Got it. I've added this task:
        [E][✗] project meeting  (at: Mon 2-4pm)
      Now you have 7 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1. [T][✓] read book
+     2. [D][✗] return book  (by: June 6th)
+     3. [E][✗] project meeting  (at: Aug 6th 2-4pm)
+     4. [T][✓] join sports club
+     5. [T][✗] borrow book
+     6. [D][✗] return book  (by: Sunday)
+     7. [E][✗] project meeting  (at: Mon 2-4pm)
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Bye. Hope to see you again soon!
     ____________________________________________________________
 
