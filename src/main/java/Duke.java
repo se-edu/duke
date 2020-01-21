@@ -1,5 +1,5 @@
 import java.util.*;
-import task.Task;
+import task.*;
 
 /**
  * main class of Duke program
@@ -10,6 +10,7 @@ public class Duke {
     public static final String LINE = "____________________________________________________________";
     public static String markAsDone = "Nice! I've marked this task as done:";
     public static String showList = "Here are the tasks in your list:";
+    public static String gotIt = "Got it. I've added this task:";
 
     public static void main(String[] args) {
 
@@ -26,28 +27,50 @@ public class Duke {
 
         ArrayList<Task> list = new ArrayList<>();
 
+        String keyword = "";
         while(scanner.hasNextLine()) {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
                 exit();
-            } else if (input.length() > 4 && input.substring(0,4).equals("done")) {
-                int thisIndex = Integer.valueOf(input.substring(5)) - 1;
-                System.out.println(LINE);
-                if(thisIndex >= list.size() || thisIndex < 0){
-                    continue;
-                } else {
+            } else { //not bye
+                String[] words = input.split(" ");
+                keyword = words[0];
+                if (keyword.equals("done")) { // case done
+                    int thisIndex = Integer.valueOf(input.substring(5)) - 1;
+                    System.out.println(LINE);
+                    if(thisIndex >= list.size() || thisIndex < 0){
+                        continue;
+                    }
                     System.out.println(markAsDone);
                     list.get(thisIndex).markAsDone();
                     System.out.println(list.get(thisIndex).toString());
                     System.out.println(LINE + "\n");
+                } else if (input.equalsIgnoreCase("list")) { //case list
+                    displayList(list);
+                } else { // case tasks
+                    Task thisTask;
+                    String[] stamps = input.split("/");
+                    switch(keyword){
+                        case "todo":
+                            thisTask = new Todo(input.substring(5));
+                            break;
+
+                        case "event":
+                            thisTask = new Event(stamps[0].substring(6), stamps[1]);
+                            break;
+
+                        default:
+                            thisTask = new Deadline(stamps[0].substring(9), stamps[1]);
+                            break;
+
+                    }
+
+                    addItem(list, thisTask);
+                    echo(thisTask);
+                    System.out.println("Now you have " + list.size() + " tasks in the list.\n" + LINE + "\n");
                 }
-            } else if (input.equalsIgnoreCase("list")) {
-                displayList(list);
-            } else {
-                Task thisTask = new Task(input);
-                addItem(list, thisTask);
-                echo(input);
             }
+
         }
     }
 
@@ -74,9 +97,11 @@ public class Duke {
     /**
      * This method echos whatever the user inputs.
      */
-    public static void echo(String input){
-        String directAnswer = LINE + "\n" + " added: " + input + "\n" + LINE;
-        System.out.println(directAnswer + "\n");
+    public static void echo(Task thisTask){
+        System.out.println(LINE);
+        System.out.println(gotIt);
+        String directAnswer = " " + thisTask.toString();
+        System.out.println("  " + directAnswer);
     }
 
     /**
@@ -99,7 +124,6 @@ public class Duke {
         if(list.isEmpty()){
             System.out.println(LINE + "\n");
         } else {
-            System.out.println(LINE);
             for(int i = 0; i < list.size(); i++){
                 System.out.println(" " + (i + 1) + ". " + list.get(i).toString());
             }
