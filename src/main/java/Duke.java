@@ -35,7 +35,7 @@ public class Duke {
 
                         dl = dl.setDone(index);
                         System.out.println(DukeFormatting.DIVIDER);
-                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println(DukeFormatting.DONE);
                         System.out.println("      " + dl.printTask(index));
                         System.out.println(DukeFormatting.DIVIDER);
                     } catch (DukeListIndexOutOfBoundsException e) {
@@ -87,6 +87,32 @@ public class Duke {
                     }
                     break;
 
+                case "delete":
+                    String delete = sc.nextLine().trim();
+
+                    try {
+                        int index = Integer.parseInt(delete) - 1;
+
+                        if (index >= dl.listSize()) {
+                            throw new DukeListIndexOutOfBoundsException(
+                                    "   (✖╭╮✖) There are only " + dl.listSize() + " items in the list!");
+                        }
+
+                        System.out.println(DukeFormatting.DIVIDER
+                                + DukeFormatting.DELETED + "      " + dl.printTask(index)
+                                + "\n   Now you have " + (dl.listSize() - 1)
+                                + (dl.listSize() - 1 == 1 ? " task" : " tasks")
+                                + " in the list.\n"
+                                + DukeFormatting.DIVIDER);
+                        dl = dl.deleteTask(index);
+
+                    } catch (DukeListIndexOutOfBoundsException e) {
+                        System.out.println(DukeFormatting.DIVIDER
+                                + e.getMessage() +"\n"
+                                + DukeFormatting.DIVIDER);
+                    }
+
+                    break;
                 default:
                     try {
                         throw new InvalidCommandArgumentException("(つ╥﹏╥)つ Hey, I can't do that for you. " +

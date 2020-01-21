@@ -37,4 +37,10 @@ class DukeList {
     int listSize() {
          return this.list.size();
     }
+
+    DukeList deleteTask(int index) {
+        DukeList dl = new DukeList(this);
+        dl.list.remove(index);
+        return dl;
+    }
 }

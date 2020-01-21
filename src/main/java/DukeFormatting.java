@@ -15,5 +15,7 @@ class DukeFormatting {
             + DukeFormatting.DIVIDER;
 
     static final String ADDED = "   Got it. I've added this task:\n";
+    static final String DONE = "   Nice! I've marked this task as done:\n";
+    static final String DELETED = "   Alright, I've removed this task:\n";
     static final String BYE = "   Bye. Hope to see you again soon!\n";
 }
