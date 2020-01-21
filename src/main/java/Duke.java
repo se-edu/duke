@@ -17,12 +17,16 @@ public class Duke {
 
         greet();
 
+        ArrayList<String> list = new ArrayList<>();
+
         while(scanner.hasNextLine()) {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
-                echo("Bye. Hope to see you again soon!");
-                System.exit(0);
+                exit();
+            } else if (input.equalsIgnoreCase("list")) {
+                displayList(list);
             } else {
+                addItem(list, input);
                 echo(input);
             }
         }
@@ -36,8 +40,31 @@ public class Duke {
         System.out.println(firstGreet);
     }
 
-    public static void echo(String input){
-        String directAnswer = LINE + "\n" + " " + input + "\n" + LINE;
+    public static void exit(){
+        String directAnswer = LINE + "\n" + " Bye. Hope to see you again soon!" + "\n" + LINE;
         System.out.println(directAnswer + "\n");
+        System.exit(0);
+    }
+
+    public static void echo(String input){
+        String directAnswer = LINE + "\n" + " added: " + input + "\n" + LINE;
+        System.out.println(directAnswer + "\n");
+    }
+
+    public static void addItem(ArrayList<String> list, String newItem){
+        list.add(newItem);
+    }
+
+    public static void displayList(ArrayList<String> list){
+        int marker = 1;
+        if(list.isEmpty()){
+            System.out.println(LINE + "\n\n" + LINE + "\n");
+        } else {
+            System.out.println(LINE);
+            for(int i = 0; i < list.size(); i++){
+                System.out.println(" " + (i + 1) + ". " + list.get(i));
+            }
+            System.out.println(LINE + "\n");
+        }
     }
 }
