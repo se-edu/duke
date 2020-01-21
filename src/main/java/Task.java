@@ -5,7 +5,7 @@ public class Task {
     private String description;
     private boolean completed;
 
-    public Task( String description) {
+    public Task(String description) {
         this.description = description;
         this.completed = false;
 
@@ -24,7 +24,7 @@ public class Task {
         if (this.completed) {
             return ("[✓] " + this.description);
         } else {
-            return ("[✗]" + this.description);
+            return ("[✗] " + this.description);
         }
     }
 
