@@ -27,16 +27,65 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println("  " + tasks[completedTask - 1].obtainTaskInfo());
             } else {
-                tasks[numTasks] = new Task(input);
+                addTask(inputs, tasks, numTasks);
                 numTasks++;
 
-                System.out.println("added: " + input);
+                if (numTasks == 1) {
+                    System.out.println("Now you have " + numTasks + " task in the list.");
+                } else {
+                    System.out.println("Now you have " + numTasks + " tasks in the list.");
+                }
             }
 
             input = scanner.nextLine();
         }
 
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    /**
+     * Adds a task to the list of saved tasks.
+     *
+     * @param inputs Components of task to be added.
+     * @param tasks List of saved tasks.
+     * @param num Id of task to be added.
+     */
+    private static void addTask(String[] inputs, Task[] tasks, int num) {
+        String task = inputs[1];
+
+        if (inputs[0].equals("todo")) {
+            for (int i = 2; i < inputs.length; i++) {
+                task = task.concat(" " + inputs[i]);
+            }
+
+            tasks[num] = new ToDo(task, "T");
+        } else {
+            int j = 2;
+
+            while (inputs[j].charAt(0) != '/') {
+                task = task.concat(" " + inputs[j]);
+                j++;
+            }
+
+            String timing = "";
+            j++;
+
+            while (j < inputs.length) {
+                timing = timing.concat(" " + inputs[j]);
+                j++;
+            }
+
+            if (inputs[0].equals("event")) {
+                timing = "(at:" + timing + ")";
+                tasks[num] = new Event(task, "E", timing);
+            } else {
+                timing = "(by:" + timing + ")";
+                tasks[num] = new Deadline(task, "D", timing);
+            }
+        }
+
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + tasks[num].obtainTaskInfo());
     }
 
     /**
