@@ -20,18 +20,23 @@ public class Duke {
 
         while (true) {
             String next = scanner.nextLine();
-
             if (next.equals("bye")) {
                 respond("Bye. Hope to see you again soon!");
                 break;
             } else {
-                process(next);
+                try {
+                    process(next);
+                } catch (DukeException dd) {
+                    System.out.println(dd.getMessage());
+                }
             }
         }
-
     }
 
-    public static void process(String next) {
+
+
+
+    public static void process(String next) throws DukeException {
         StringTokenizer st = new StringTokenizer(next);
         String first_token = st.nextToken();
 
@@ -44,18 +49,38 @@ public class Duke {
 
         } else {
             Task itemToAdd = null;
+
             if (first_token.equals("deadline")) {
-                next = next.substring(9);
-                String[] temp = next.split(" /by ");
-                itemToAdd = new Deadline(temp[0], temp[1]);
+                try {
+                    next = next.substring(9);
+                    String[] temp = next.split(" /by ");
+                    itemToAdd = new Deadline(temp[0], temp[1]);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new DukeException("OOPS!!! Wrong input format for deadline");
+                }
+
+
             } else if (first_token.equals("event")) {
-                next = next.substring(6);
-                String[] temp = next.split(" /at ");
-                itemToAdd = new Event(temp[0], temp[1]);
+                try {
+                    next = next.substring(6);
+                    String[] temp = next.split(" /at ");
+                    itemToAdd = new Event(temp[0], temp[1]);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new DukeException("OOPS!!! Wrong input format for event");
+                }
+
             } else if (first_token.equals("todo")) {
-                next = next.substring(5);
-                itemToAdd = new Todo(next);
+                try {
+                    next = next.substring(5);
+                    itemToAdd = new Todo(next);
+                    if (next.equals("")) {
+                        throw new Exception("empty todo");
+                    }
+                } catch (Exception e) {
+                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                }
             }
+
             if (itemToAdd != null) {
                 tasks[count] = itemToAdd;
                 String out = line + "\n" + space + "Got it. I've added this task: " + "\n" + space
@@ -63,6 +88,8 @@ public class Duke {
                         " tasks in your list." + "\n" + line;
                 System.out.println(out);
                 count++;
+            } else {
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
