@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+        System.out.println("What can I do for you?\n");
 
         Scanner scanner = new Scanner(System.in);
 
@@ -25,15 +25,15 @@ public class Duke {
                 tasks[completedTask - 1].markAsDone();
 
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println("  " + tasks[completedTask - 1].obtainTaskInfo());
+                System.out.println("  " + tasks[completedTask - 1].obtainTaskInfo() + "\n");
             } else {
                 addTask(inputs, tasks, numTasks);
                 numTasks++;
 
                 if (numTasks == 1) {
-                    System.out.println("Now you have " + numTasks + " task in the list.");
+                    System.out.println("Now you have " + numTasks + " task in the list.\n");
                 } else {
-                    System.out.println("Now you have " + numTasks + " tasks in the list.");
+                    System.out.println("Now you have " + numTasks + " tasks in the list.\n");
                 }
             }
 
@@ -100,5 +100,6 @@ public class Duke {
         for (int i = 1; i < numTasks + 1; i++) {
             System.out.println(i + "." + tasks[i - 1].obtainTaskInfo());
         }
+        System.out.println();
     }
 }
