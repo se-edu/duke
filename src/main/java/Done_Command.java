@@ -17,7 +17,7 @@ public class Done_Command extends UserCommand {
     }
 
     @Override
-    public boolean action(){
+    public boolean action() throws DukeException {
         MyList.markDone(id);
         return true;
     }

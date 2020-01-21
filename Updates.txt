@@ -10,7 +10,7 @@ Created Invoker to invoke the commands
 Used interface to define usercommands
 
 21/1/20
-Level 2-1:
+Level 2
 Created:
 Your basic level 2 code
 Added list
@@ -18,7 +18,12 @@ Made task as objects
 Commandhub now returns add as default
 Added list as a valid command to commandhub
 
-Level 3-1:
+MyList:
+Added additem function
+Changed strings to tasks
+Print list made static
+
+Level 3
 Created:
 Done command
 Edited commandhub to notice done events
@@ -32,5 +37,32 @@ Mylist:
 Added markdone function
 Added delete function (Incomplete)
 Added push function (Incomplete)
+
+Level 4
+Added events, todo, deadline undertask
+
+Changes:
+CommandHub:
+Allow seperation of commands
+
+
+Add_Commands:
+Added types
+
+Level 5
+Created DukeException
+
+Changes:
+Main:
+Added catching of exception
+CommandHUb:
+Throw Exception for empty todo and invalid command
+Throws Exception for empty or missing /by or /at command
+Possible: Check for missing desc for event and deadline commands
+
+
+
+
+
 
 

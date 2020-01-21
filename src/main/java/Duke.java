@@ -14,8 +14,14 @@ public class Duke {
 
         while(!CommandInvoker.checkOff()){
             String userInput = getUserInput();
-            UserCommand c = CommandHub.FetchCommand(userInput);
-            invoker.Invoke(c);
+            try {
+                UserCommand c = CommandHub.FetchCommand(userInput);
+                invoker.Invoke(c);
+            }
+            catch(DukeException e){
+                System.out.println(e.getMessage());
+            }
+
         }
 
     }

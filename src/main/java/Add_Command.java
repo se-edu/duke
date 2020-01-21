@@ -1,20 +1,38 @@
 public class Add_Command extends UserCommand {
 
-    private String toDo;
+    private String desc;
+    private String type;
+    private Task t;
     Add_Command(String s) {
         super(2);
-        toDo = s;
+        desc = s;
+    }
+
+    Add_Command(String type, String desc){
+        super(2);
+        this.desc = desc;
+        this.type = type;
     }
 
     @Override
     public void reply(){
         System.out.println("Sighhssss...I am your slave again?");
-        System.out.println("added: " + toDo);
+        System.out.println("added: " + t);
     }
 
     @Override
-    public boolean action() {
-        MyList.addItem(toDo);
+    public boolean action() throws DukeException {
+        if(type.equals("todo")){
+            t = new ToDos(desc);
+        }
+        else if(type.equals("event")){
+            t= new Event(desc);
+        }
+        else{
+            t = new Deadlines(desc);
+        }
+
+        MyList.addItem(t);
         return true;
     }
 

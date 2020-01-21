@@ -1,7 +1,12 @@
 import java.util.HashMap;
-public class CommandHub {
+/*
+*  CommandHub is for creation and initialisation of all commands. Inclusive of setting up command specifics
+*   ie. setting up task to be removed
+*
+* */
 
-    //idea: Perhaps use dictionary to store the different events
+
+public class CommandHub {
     private static HashMap<String,UserCommand> commandList = new HashMap();
 
     CommandHub(){
@@ -9,26 +14,40 @@ public class CommandHub {
 
     public static void initCreator(){
         commandList.put("null",null);
-        commandList.put("bye",new Bye());
+        commandList.put("bye",new Bye_Command());
         commandList.put("list",new List_Command());
     }
 
-    private static String parseString(String userInput){
+    private static String[] parseString(String userInput){
         userInput.toLowerCase();
-
-        return userInput;
+        String[] parsedCommand = userInput.split(" ", 2);
+        return parsedCommand;
     }
 
-    public static UserCommand FetchCommand(String userInput){
-        String ID = parseString(userInput);
-        if(commandList.containsKey(ID)) {
+    public static UserCommand FetchCommand(String userInput) throws DukeException{
+        String parsedCommand[] = parseString(userInput);
+        String ID = parsedCommand[0];
+        String desc = "null";
+        if(parsedCommand.length>1) {
+            desc = parsedCommand[1];
+        }
+
+        if(commandList.containsKey(ID)) { //gets generic commands
             return commandList.get(ID);
         }
-        if(ID.contains("done")){
-            String[] splited = ID.split(" ");
-            return new Done_Command(Integer.parseInt(splited[1]));
+        else if(ID.contains("done")){
+            if(desc.equals("null")||desc.equals("")){
+                throw new DukeException("Done with what? Your life is it?");
+            }
+            return new Done_Command(Integer.parseInt(desc));
+        }
+        else if(ID.contains("todo")||ID.contains("deadline")||ID.contains("event")){
+            if(desc.equals("null")||desc.equals("null")){
+                throw new DukeException("BAKA! Your not suppose to leave "+ID+" field empty!");
+            }
+            return new Add_Command(ID, desc);
         }
         else{
-            return new Add_Command(userInput);
+            throw new DukeException("Hello? You stupid? Wrong command lah please!");
         }
     }}

@@ -18,7 +18,7 @@ public class UserCommand implements Commands{
     }
 
     @Override
-    public boolean action() {
+    public boolean action() throws DukeException {
         return true;
     }
 

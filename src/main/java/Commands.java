@@ -1,5 +1,5 @@
 public interface Commands {
-    public void reply();
-    public boolean action();
+    public void reply() throws DukeException;
+    public boolean action() throws DukeException;
     public int getID();
 }

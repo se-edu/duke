@@ -1,25 +1,28 @@
 public class Task {
 
-    private String Title ="";
     private String Description = "";
-    private String Datedue = "";
-    protected boolean isDone;
+    protected boolean isDone = false;
 
     public Task(String description) {
         this.Description = description;
-        this.isDone = false;
     }
 
-    public void markDone(){
+    protected void resetDesc(String desc){
+        Description = desc;
+    }
+
+    public void markDone() throws DukeException{
+        if(isDone){
+            throw new DukeException("Its done already!");
+        }
         isDone = true;
     }
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-
     @Override
     public String toString() {
-        return getStatusIcon() +" " +Description;
+        return "["+getStatusIcon() +"] " +Description;
     }
 }

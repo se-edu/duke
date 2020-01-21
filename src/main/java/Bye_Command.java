@@ -1,6 +1,6 @@
-public class Bye extends UserCommand{
+public class Bye_Command extends UserCommand{
 
-    Bye() {
+    Bye_Command() {
      super(1);
     }
 

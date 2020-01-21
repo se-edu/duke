@@ -8,9 +8,15 @@ public class CommandInvoker {
 
 
     public void Invoke(UserCommand c){
-        int ID = c.getID();
-        c.reply();
-        c.action();
+        try {
+            int ID = c.getID();
+            c.action();
+            c.reply();
+        }
+        catch(DukeException e){
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public static void stop(){
