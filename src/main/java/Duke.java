@@ -7,10 +7,10 @@ import task.*;
  */
 public class Duke {
 
-    public static final String LINE = "____________________________________________________________";
-    public static String markAsDone = "Nice! I've marked this task as done:";
-    public static String showList = "Here are the tasks in your list:";
-    public static String gotIt = "Got it. I've added this task:";
+    public static final String LINE = "    ____________________________________________________________";
+    public static String markAsDone = "     Nice! I've marked this task as done:";
+    public static String showList = "     Here are the tasks in your list:";
+    public static String gotIt = "     Got it. I've added this task:";
 
     public static void main(String[] args) {
 
@@ -56,18 +56,18 @@ public class Duke {
                             break;
 
                         case "event":
-                            thisTask = new Event(stamps[0].substring(6), stamps[1]);
+                            thisTask = new Event(stamps[0].substring(6), stamps[1].substring(3));
                             break;
 
                         default:
-                            thisTask = new Deadline(stamps[0].substring(9), stamps[1]);
+                            thisTask = new Deadline(stamps[0].substring(9), stamps[1].substring(3));
                             break;
 
                     }
 
                     addItem(list, thisTask);
                     echo(thisTask);
-                    System.out.println("Now you have " + list.size() + " tasks in the list.\n" + LINE + "\n");
+                    System.out.println("     Now you have " + list.size() + " tasks in the list.\n" + LINE + "\n");
                 }
             }
 
@@ -79,8 +79,8 @@ public class Duke {
      */
     public static void greet(){
         String firstGreet = LINE
-                + "\n Hello! I'm Duke \n"
-                + " What can I do for you? \n"
+                + "\n     Hello! I'm Duke \n"
+                + "     What can I do for you? \n"
                 + LINE;
         System.out.println(firstGreet + "\n");
     }
@@ -89,7 +89,7 @@ public class Duke {
      * This method says goodbye to the user and quit the system.
      */
     public static void exit(){
-        String directAnswer = LINE + "\n" + " Bye. Hope to see you again soon!" + "\n" + LINE;
+        String directAnswer = LINE + "\n" + "     Bye. Hope to see you again soon!" + "\n" + LINE;
         System.out.println(directAnswer + "\n");
         System.exit(0);
     }
@@ -100,7 +100,7 @@ public class Duke {
     public static void echo(Task thisTask){
         System.out.println(LINE);
         System.out.println(gotIt);
-        String directAnswer = " " + thisTask.toString();
+        String directAnswer = "     " + thisTask.toString();
         System.out.println("  " + directAnswer);
     }
 
@@ -125,7 +125,7 @@ public class Duke {
             System.out.println(LINE + "\n");
         } else {
             for(int i = 0; i < list.size(); i++){
-                System.out.println(" " + (i + 1) + ". " + list.get(i).toString());
+                System.out.println("     " + (i + 1) + ". " + list.get(i).toString());
             }
             System.out.println(LINE + "\n");
         }
