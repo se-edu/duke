@@ -2,6 +2,8 @@ public class Task {
     private String description;
     private boolean isDone;
 
+    protected String time = ""; //empty: not available
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -17,6 +19,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "]" + " " + description;
+        return "[" + getStatusIcon() + "]" + " " + description + time;
     }
 }
