@@ -24,12 +24,26 @@ public class Duke {
 
                 case "done":
                     String str = sc.nextLine().trim();
-                    int index = Integer.parseInt(str) - 1;
-                    dl = dl.setDone(index);
-                    System.out.println(DukeFormatting.DIVIDER);
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println("      " + dl.printTask(index));
-                    System.out.println(DukeFormatting.DIVIDER);
+
+                    try {
+                        int index = Integer.parseInt(str) - 1;
+
+                        if (index >= dl.listSize()) {
+                            throw new DukeListIndexOutOfBoundsException(
+                                    "   (✖╭╮✖) There are only " + dl.listSize() + " items in the list!");
+                        }
+
+                        dl = dl.setDone(index);
+                        System.out.println(DukeFormatting.DIVIDER);
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println("      " + dl.printTask(index));
+                        System.out.println(DukeFormatting.DIVIDER);
+                    } catch (DukeListIndexOutOfBoundsException e) {
+                        System.out.println(DukeFormatting.DIVIDER
+                                + e.getMessage() +"\n"
+                                + DukeFormatting.DIVIDER);
+                    }
+
                     break;
 
                 case "todo":
