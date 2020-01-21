@@ -1,4 +1,4 @@
-public enum StaticResponse {
+public enum StaticReq {
     SAYHELLO,
     SAYGOODBYE
 }

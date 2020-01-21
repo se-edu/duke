@@ -23,7 +23,7 @@ public class Duke {
         Bot bot = new Bot();
         boolean finished = false;
 
-        bot.staticResponse(StaticResponse.SAYHELLO);
+        bot.staticResponse(StaticReq.SAYHELLO);
 
         while ( !finished ){
             String input = sc.nextLine();
@@ -33,7 +33,7 @@ public class Duke {
             if( input.equals("bye")  ){
                 finished = true;
             } else {
-                bot.echo(input);
+                bot.res(input);
                 System.out.println("**********************************");
             }
 
@@ -41,7 +41,7 @@ public class Duke {
 
         }
 
-        bot.staticResponse(StaticResponse.SAYGOODBYE);
+        bot.staticResponse(StaticReq.SAYGOODBYE);
 
 
     }
