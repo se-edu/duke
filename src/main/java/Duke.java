@@ -15,18 +15,20 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        firstGreeting();
+        greet();
 
         while(scanner.hasNextLine()) {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
+                echo("Bye. Hope to see you again soon!");
                 System.exit(0);
+            } else {
+                echo(input);
             }
-            System.out.println(input);
         }
     }
 
-    public static void firstGreeting(){
+    public static void greet(){
         String firstGreet = LINE
                 + "\n Hello! I'm Duke \n"
                 + " What can I do for you? \n"
@@ -34,8 +36,8 @@ public class Duke {
         System.out.println(firstGreet);
     }
 
-    public static void directAnswering(String input){
+    public static void echo(String input){
         String directAnswer = LINE + "\n" + " " + input + "\n" + LINE;
-        System.out.println(directAnswer);
+        System.out.println(directAnswer + "\n");
     }
 }
