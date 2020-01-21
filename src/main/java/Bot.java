@@ -94,6 +94,7 @@ public class Bot {
     public void res(String req) throws DukeException{
 
         String command = getCommand(req);
+        int index;
 
         try{
             switch( command ) {
@@ -101,8 +102,12 @@ public class Bot {
                     System.out.println(taskList);
                     break;
                 case "done":
-                    int index = getFirstInteger(req);
+                    index = getFirstInteger(req);
                     taskList.markTask(index);
+                    break;
+                case "delete":
+                    index = getFirstInteger(req);
+                    taskList.deleteTask(index);
                     break;
                 default:
                     String taskDesc = getTaskDesc(req);

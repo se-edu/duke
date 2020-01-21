@@ -38,6 +38,22 @@ public class TaskList {
         }
     }
 
+    public void deleteTask(int taskIndex) throws DukeException{
+        try {
+
+            Task task = list.get(taskIndex - 1);
+
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(task);
+            this.list.remove(task);
+
+            System.out.println("\nNow you have " + list.size() + "task(s) in the list");
+
+        } catch ( IndexOutOfBoundsException e){
+            throw new DukeException("No task found for index " + taskIndex + "!");
+        }
+    }
+
     public void addTask(String taskDesc, String taskType) throws DukeException{
 
         try {
