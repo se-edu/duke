@@ -1,5 +1,10 @@
-import java.util.*;
-import task.*;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * main class of Duke program
@@ -28,6 +33,7 @@ public class Duke {
         ArrayList<Task> list = new ArrayList<>();
 
         String keyword = "";
+
         while(scanner.hasNextLine()) {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
@@ -36,6 +42,13 @@ public class Duke {
                 String[] words = input.split(" ");
                 keyword = words[0];
                 if (keyword.equals("done")) { // case done
+                    try{
+                        if(words.length !=2){
+                            throw new DukeException("The done message is not valid.");
+                        }
+                    } catch(DukeException exp){
+                        System.out.println(exp.toString() + "\n");
+                    }
                     int thisIndex = Integer.valueOf(input.substring(5)) - 1;
                     System.out.println(LINE);
                     if(thisIndex >= list.size() || thisIndex < 0){
@@ -50,19 +63,51 @@ public class Duke {
                 } else { // case tasks
                     Task thisTask;
                     String[] stamps = input.split("/");
+
                     switch(keyword){
                         case "todo":
+                            try{
+                                if(words.length <2){
+                                    throw new DukeException("The description of a todo cannot be empty.");
+                                }
+                            } catch (DukeException exp){
+                                System.out.println(exp.toString() + "\n");
+                                continue;
+                            }
                             thisTask = new Todo(input.substring(5));
                             break;
 
                         case "event":
+                            try{
+                                if(words.length < 4 || stamps.length < 2){
+                                    throw new DukeException("The content of an event must be complete.");
+                                }
+                            } catch (DukeException exp){
+                                System.out.println(exp.toString() + "\n");
+                                continue;
+                            }
                             thisTask = new Event(stamps[0].substring(6), stamps[1].substring(3));
                             break;
 
-                        default:
+                        case "deadline":
+                            try{
+                                if(words.length < 4 || stamps.length < 2){
+                                    throw new DukeException("The content of a deadline must be complete.");
+                                }
+                            } catch (DukeException exp){
+                                System.out.println(exp.toString() + "\n");
+                                continue;
+                            }
                             thisTask = new Deadline(stamps[0].substring(9), stamps[1].substring(3));
                             break;
 
+                        default:
+                            try{
+                                throw new DukeException ("I'm sorry, but I don't know what that means :-(");
+                            } catch(DukeException exp){
+                                System.out.println(exp.toString() + "\n");
+                                continue;
+                            }
                     }
 
                     addItem(list, thisTask);

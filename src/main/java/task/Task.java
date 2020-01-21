@@ -10,6 +10,9 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * This method marks the isDone status of the object as true.
+     */
     public void markAsDone(){
         this.isDone = true;
     }
