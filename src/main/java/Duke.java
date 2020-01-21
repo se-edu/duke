@@ -25,7 +25,7 @@ public class Duke {
         bot.staticResponse(StaticReq.SAYHELLO);
 
         while ( !finished ){
-            String input = sc.nextLine().toLowerCase();
+            String input = sc.nextLine().toLowerCase().trim();
 
             try {
                 System.out.println("**********************************");
@@ -36,8 +36,8 @@ public class Duke {
                     bot.res(input);
                     System.out.println("**********************************");
                 }
-            } catch( Exception e){
-                System.out.println("I didn't get that. Would you mind repeating once more?");
+            } catch( DukeException e ){
+                System.out.println(e);
             }
 
         }

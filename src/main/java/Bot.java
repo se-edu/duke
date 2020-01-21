@@ -1,5 +1,3 @@
-import java.util.Optional;
-
 public class Bot {
 
     TaskList taskList;
@@ -20,44 +18,50 @@ public class Bot {
         }
     }
 
-    /**
-     * removes all non-alphabetical characters from a string.
-     * @param string
-     * @return string with no spaces
-     */
-    private static String removeNonAlphabetical(String string){
-
-        String _string = "";
-
-        char[] charArray = string.toCharArray();
-
-        for( char c : charArray ){
-
-            if( (int)c > 97 && (int)c < 123 ){
-                _string += c;
-            }
-        }
-
-        return _string;
-
-    }
+//    /**
+//     * removes all non-alphabetical characters from a string.
+//     * @param string
+//     * @return string with no spaces
+//     */
+//    private static String removeNonAlphabetical(String string){
+//
+//        String _string = "";
+//
+//        char[] charArray = string.toCharArray();
+//
+//        for( char c : charArray ){
+//
+//            if( (int)c > 97 && (int)c < 123 ){
+//                _string += c;
+//            }
+//        }
+//
+//        return _string;
+//
+//    }
 
     /**
      * gets first integer
      * @param string
      * @return first integer encountered
      */
-    private static int getFirstInteger(String string){
+    private static int getFirstInteger(String string) throws DukeException{
+
+        int firstInteger = 0;
 
         char[] charArray = string.toCharArray();
 
         for( char c: charArray ){
             if((int)c > 47 && (int)c < 58){
-                return Character.getNumericValue(c);
+                firstInteger = Character.getNumericValue(c);
             }
         }
 
-        return 0;
+        if( firstInteger < 1 ){
+            throw new DukeException("Task index must be more than 0!");
+        } else {
+            return firstInteger;
+        }
 
     }
 
@@ -72,33 +76,41 @@ public class Bot {
 
     }
 
-    private static String getTaskDesc(String string){
-        int commandLength = getCommand(string).length();
+    private static String getTaskDesc(String string) throws DukeException{
+        try{
 
-        return string.substring(commandLength + 1).trim();
+            int commandLength = getCommand(string).length();
+            return string.substring(commandLength + 1).trim();
+
+        } catch( StringIndexOutOfBoundsException e ){
+            throw new DukeException("Task description cannot be empty!");
+        }
     }
 
     public void echo(String string){
         System.out.println(string);
     }
 
-    public void res(String req){
+    public void res(String req) throws DukeException{
 
         String command = getCommand(req);
 
-        switch( command ){
-            case "list":
-                System.out.println(taskList);
-                break;
-            case "done":
-                int index = getFirstInteger(req);
-                taskList.markTask(index);
-                break;
-            default:
-                String taskDesc = getTaskDesc(req);
-                taskList.addTask(taskDesc, command);
+        try{
+            switch( command ) {
+                case "list":
+                    System.out.println(taskList);
+                    break;
+                case "done":
+                    int index = getFirstInteger(req);
+                    taskList.markTask(index);
+                    break;
+                default:
+                    String taskDesc = getTaskDesc(req);
+                    taskList.addTask(taskDesc, command);
+            }
+        } catch( DukeException e ){
+            throw e;
         }
-
 
     }
 

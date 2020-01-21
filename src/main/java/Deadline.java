@@ -2,9 +2,9 @@ public class Deadline extends Task {
 
     String date;
 
-    public Deadline(String desc, int index){
+    public Deadline(String desc, int index, String date){
         super(desc, index);
-        this.date = desc.split("/by ")[1];
+        this.date = date;
     }
 
     @Override
