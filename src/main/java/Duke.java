@@ -28,6 +28,7 @@ public class Duke {
                     System.out.println((i + 1) + ". " + lst.get(i));
                 }
             } else if (input.contains ("done")) {
+                //Mark task as done with keyword "done" followed by task number
                 try {
                     int taskNum = Integer.parseInt(input.substring(5));
                     if (taskNum <= lst.size()) {
@@ -44,12 +45,30 @@ public class Duke {
                             System.out.println ("You have " + pendingTask + " tasks remaining!");
                         }
                     } else {
-                        System.out.println ("There is no such task!");
+                        System.out.println ("Sorry, there is no such task!");
                     }
                 } catch (Exception e){
                     System.out.println ("Sorry, I dont understand you request!");
                 }
+            } else if (input.contains ("delete")) {
+                try {
+                    int taskNum = Integer.parseInt(input.substring(7));
+                    if (taskNum <= lst.size()) {
+                        Task deletedTask = lst.get(taskNum - 1);
+                        String status = deletedTask.getStatus();
+                        if (status.equals ("Not Done")) {
+                            //Pending task count drops only if deleted task not completed
+                            pendingTask--;
+                        }
+                        System.out.println ("Noted. I've removed this task:\n" + deletedTask
+                                + "\nNow you have " + pendingTask + " tasks in the list.");
+                        lst.remove (taskNum -1);
+                    }
+                } catch (Exception e) {
+                    System.out.println ("Sorry, there is no such task!");
+                }
             } else {
+                //Create task using key words: "todo", "deadline", "event"
                 if (input.contains ("todo")) {
                     //todo request format: todo<space><task>
                     try {
