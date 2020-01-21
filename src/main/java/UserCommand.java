@@ -4,10 +4,9 @@ public class UserCommand implements Commands{
     private int ID = 0;
 
 
-  /*  UserCommand(String s){
-        myWords =s;
+    UserCommand(){
     };
-*/
+
     UserCommand(int id){
         ID = id;
     };

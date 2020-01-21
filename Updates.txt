@@ -1,0 +1,36 @@
+Here is the list of updates written for each commit:
+
+20/1/20 Level 1-1:
+Created:
+Your basic level 1 echo
+Added personality
+Added Dictionary for commands(Hash)
+Created CommandHub
+Created Invoker to invoke the commands
+Used interface to define usercommands
+
+21/1/20
+Level 2-1:
+Created:
+Your basic level 2 code
+Added list
+Made task as objects
+Commandhub now returns add as default
+Added list as a valid command to commandhub
+
+Level 3-1:
+Created:
+Done command
+Edited commandhub to notice done events
+Set tasks to have done ticks
+
+Changes:
+Commandhub:
+notice done events now
+
+Mylist:
+Added markdone function
+Added delete function (Incomplete)
+Added push function (Incomplete)
+
+

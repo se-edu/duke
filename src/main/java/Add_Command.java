@@ -1,7 +1,7 @@
-public class listHandler extends UserCommand {
+public class Add_Command extends UserCommand {
 
     private String toDo;
-    listHandler(String s) {
+    Add_Command(String s) {
         super(2);
         toDo = s;
     }

@@ -10,21 +10,19 @@ public class Duke {
         System.out.println("I am a very angry bot and I hate you");
         System.out.println("Now what you want?");
         CommandInvoker invoker = new CommandInvoker();
-        CommandCreator.initCreator();
+        CommandHub.initCreator();
 
-        while(true){
+        while(!CommandInvoker.checkOff()){
             String userInput = getUserInput();
-            UserCommand c = CommandCreator.getCommand(userInput);
+            UserCommand c = CommandHub.FetchCommand(userInput);
             invoker.Invoke(c);
-            if(CommandInvoker.checkOff()){
-                break;
-            }
         }
 
     }
 
     private static String getUserInput(){
         Scanner sc = new Scanner(System.in);
+        System.out.print(">");
         String input = sc.nextLine();
 
         return input;

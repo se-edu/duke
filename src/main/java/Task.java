@@ -3,14 +3,23 @@ public class Task {
     private String Title ="";
     private String Description = "";
     private String Datedue = "";
-    private boolean status = true;
+    protected boolean isDone;
 
-    Task(String s){
-        Title = s;
+    public Task(String description) {
+        this.Description = description;
+        this.isDone = false;
     }
+
+    public void markDone(){
+        isDone = true;
+    }
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
 
     @Override
     public String toString() {
-        return Title;
+        return getStatusIcon() +" " +Description;
     }
 }
