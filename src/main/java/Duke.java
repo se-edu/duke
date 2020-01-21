@@ -48,9 +48,17 @@ public class Duke {
                         }
                     } catch(DukeException exp){
                         System.out.println(exp.toString() + "\n");
+                        continue;
                     }
-                    int thisIndex = Integer.valueOf(input.substring(5)) - 1;
+                    int thisIndex = -1;
+                    try{
+                        thisIndex = Integer.valueOf(input.substring(5)) - 1;
+                    } catch (Exception exp){
+                        System.out.println(new DukeException ("Index is not detected.").toString() + "\n");
+                        continue;
+                    }
                     System.out.println(LINE);
+                    thisIndex = Integer.valueOf(input.substring(5)) - 1;
                     if(thisIndex >= list.size() || thisIndex < 0){
                         continue;
                     }
@@ -58,6 +66,8 @@ public class Duke {
                     list.get(thisIndex).markAsDone();
                     System.out.println("       " + list.get(thisIndex).toString());
                     System.out.println(LINE + "\n");
+                } else if (keyword.equals("delete")){ // case delete
+
                 } else if (input.equalsIgnoreCase("list")) { //case list
                     displayList(list);
                 } else { // case tasks
