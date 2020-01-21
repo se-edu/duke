@@ -51,29 +51,52 @@ public class Duke {
                 }
             } else {
                 if (input.contains ("todo")) {
-                    Todo todo = new Todo (input.substring(5));
-                    lst.add (todo);
-                    pendingTask ++;
-                    System.out.println ("Got it. I've added the following task:\n" +
-                            todo + "\nYou now have " + pendingTask + " task in the list");
+                    //todo request format: todo<space><task>
+                    try {
+                        String task1 = input.substring(5);
+                        if (task1.isEmpty()) {
+                            System.out.println ("OOOPS!! Cannot have empty todo request!!!");
+                        } else {
+                            Todo todo = new Todo(task1);
+                            lst.add(todo);
+                            pendingTask++;
+                            System.out.println("Got it. I've added the following task:\n" +
+                                    todo + "\nYou now have " + pendingTask + " task in the list");
+                        }
+                    } catch (Exception e) {
+                        System.out.println ("Huh? I do not understand this todo request:/");
+                    }
                 } else if (input.contains ("deadline")) {
-                    int taskIndex = input.indexOf("/");
-                    int byIndex   = taskIndex + 4;
-                    Deadline deadline = new Deadline (input.substring (9, taskIndex),
-                            input.substring (byIndex));
-                    lst.add (deadline);
-                    pendingTask++;
-                    System.out.println ("Got it. I've added the following task:\n" +
-                            deadline + "\nYou now have " + pendingTask + " task in the list");
+                    //deadline request format: deadline<space><task><space></><by when>"
+                    try {
+                        int taskIndex = input.indexOf("/");
+                        int byIndex = taskIndex + 4;
+                        Deadline deadline = new Deadline(input.substring(9, taskIndex),
+                                input.substring(byIndex));
+                        lst.add(deadline);
+                        pendingTask++;
+                        System.out.println("Got it. I've added the following task:\n" +
+                                deadline + "\nYou now have " + pendingTask + " task in the list");
+                    } catch (Exception e) {
+                        System.out.println ("Huh? This deadline request does not make sense");
+                    }
                 } else if (input.contains ("event")) {
-                    int taskIndex = input.indexOf("/");
-                    int atIndex   = taskIndex + 4;
-                    Event event = new Event (input.substring (6, taskIndex),
-                            input.substring (atIndex));
-                    lst.add (event);
-                    pendingTask++;
-                    System.out.println ("Got it. I've added the following task:\n" +
-                            event + "\nYou now have " + pendingTask + " task in the list");
+                    //event request format: event<space><task><space></><at when>
+                    try {
+                        int taskIndex = input.indexOf("/");
+                        int atIndex = taskIndex + 4;
+                        Event event = new Event(input.substring(6, taskIndex),
+                                input.substring(atIndex));
+                        lst.add(event);
+                        pendingTask++;
+                        System.out.println("Got it. I've added the following task:\n" +
+                                event + "\nYou now have " + pendingTask + " task in the list");
+                    } catch (Exception e) {
+                        System.out.println ("What? What event is this??");
+                    }
+                } else {
+                    //must have todo/deadline/event request format
+                    System.out.println ("Im sorry, but I do not understand what this means:-(");
                 }
             }
         }
