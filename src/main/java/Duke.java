@@ -1,10 +1,12 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class Duke {
     static String space = "     ";
     static String line = space + "_____________________________________________";
-    static Task[] tasks = new Task[100];
+    static List<Task> tasks = new ArrayList<>();
     static int count = 0;
 
     public static void main(String[] args) {
@@ -40,12 +42,28 @@ public class Duke {
         StringTokenizer st = new StringTokenizer(next);
         String first_token = st.nextToken();
 
+
         if (next.equals("list")){
-            print_list(tasks, count);
-        } else if (first_token.equals("done")) {
-            int index = Integer.parseInt(st.nextToken()) - 1;
-            Task temp = tasks[index];
-            markDone(temp);
+            print_list();
+        } else if (first_token.equals("delete")) {
+            try {
+                int index = Integer.parseInt(next.substring(7)) - 1;
+                markRemove(index);
+            } catch (DukeException d) {
+                throw d;
+            } catch (Exception e) {
+                throw new DukeException("OOPS! delete should follow by a number");
+            }
+        }
+
+        else if (first_token.equals("done")) {
+            try {
+                int index = Integer.parseInt(next.substring(5)) - 1;
+                Task temp = tasks.get(index);
+                markDone(temp);
+            } catch (Exception e) {
+                throw new DukeException("OOPS! done should follow by a number");
+            }
 
         } else {
             Task itemToAdd = null;
@@ -82,7 +100,7 @@ public class Duke {
             }
 
             if (itemToAdd != null) {
-                tasks[count] = itemToAdd;
+                tasks.add(itemToAdd);
                 String out = line + "\n" + space + "Got it. I've added this task: " + "\n" + space
                         + "  " + itemToAdd + "\n" + space + "Now you have " + (count+1) +
                         " tasks in your list." + "\n" + line;
@@ -103,11 +121,11 @@ public class Duke {
         String intro_message = "Hello! I'm Duke" + "\n" + space + "What can I do for you?";
         respond(intro_message);
     }
-    public static void print_list(Task[] t, int count) {
+    public static void print_list() {
         String output = line + "\n" + space + "Here are the tasks in your list: ";
         for (int i = 0; i < count; i++) {
             int index = i+1;
-            output += "\n" + space + index + ". " + t[i];
+            output += "\n" + space + index + ". " + tasks.get(i);
         }
         output += "\n" + line;
         System.out.println(output);
@@ -117,6 +135,18 @@ public class Duke {
         t.markAsDone();
         String output = line + "\n" + space + "Nice! I've marked this task as done: "
                 + "\n" + space + t + "\n" + line;
+        System.out.println(output);
+    }
+
+    public static void markRemove(int index) throws DukeException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new DukeException("OOPS!!! Invalid task index to delete");
+        }
+        Task i = tasks.remove(index);
+        count--;
+        String output = line + "\n" + space + "Noted. I've removed this task: "
+                + "\n" + space + "  " + i + "\n" + space + "Now you have " + count +
+                " tasks in your list." + "\n" + line;
         System.out.println(output);
     }
 }
