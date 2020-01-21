@@ -43,7 +43,7 @@ public class Duke {
                     }
                     System.out.println(markAsDone);
                     list.get(thisIndex).markAsDone();
-                    System.out.println(list.get(thisIndex).toString());
+                    System.out.println("       " + list.get(thisIndex).toString());
                     System.out.println(LINE + "\n");
                 } else if (input.equalsIgnoreCase("list")) { //case list
                     displayList(list);
