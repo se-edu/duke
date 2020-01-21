@@ -13,7 +13,7 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toString() {
-        return "[T] [" + super.getStatusIcon() + "] " + this.description
+        return "[D] [" + super.getStatusIcon() + "] " + this.description
                 + " (" + this.deadline + ")";
     }
 }

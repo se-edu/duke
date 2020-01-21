@@ -23,8 +23,8 @@ public class Duke {
                     break;
 
                 case "done":
-                    int index = sc.nextInt() - 1;
-                    sc.nextLine();
+                    String str = sc.nextLine().trim();
+                    int index = Integer.parseInt(str) - 1;
                     dl = dl.setDone(index);
                     System.out.println(DukeFormatting.DIVIDER);
                     System.out.println("Nice! I've marked this task as done:");
@@ -33,50 +33,49 @@ public class Duke {
                     break;
 
                 case "todo":
+                case "deadline":
+                case "event":
                     String description = sc.nextLine();
-                    ToDoTask tTask = new ToDoTask(description, false);
-                    dl = dl.addToList(tTask);
+                    try {
+                        if (description.replace("\n", "").replace(" ", "").length() == 0) {
+                            throw new MissingCommandArgument("༼ つ◕_◕ ༽つ The description of a todo cannot be empty.\n   Please try again! ");
+                        } else {
+                            Task task;
+                            if (command.equals("todo")) {
+                                task = new ToDoTask(description, false);
+                            } else {
+                                String[] arr = description.split(" /");
+                                task = command.equals("deadline")
+                                        ? new DeadlineTask(arr[0], false, arr[1])
+                                        : new EventTask(arr[0], false, arr[1]);
+                            }
 
-                    System.out.println(DukeFormatting.DIVIDER
-                            + DukeFormatting.ADDED
-                            + "      " + tTask.toString()
-                            + "\n   Now you have " + dl.listSize()
-                            + (dl.listSize() == 1 ? " task" : " tasks")
-                            + " in the list.\n"
-                            + DukeFormatting.DIVIDER);
+                            dl = dl.addToList(task);
+
+                            System.out.println(DukeFormatting.DIVIDER
+                                    + DukeFormatting.ADDED
+                                    + "      " + task.toString()
+                                    + "\n   Now you have " + dl.listSize()
+                                    + (dl.listSize() == 1 ? " task" : " tasks")
+                                    + " in the list.\n"
+                                    + DukeFormatting.DIVIDER);
+                        }
+                    } catch (MissingCommandArgument e) {
+                        System.out.println(DukeFormatting.DIVIDER
+                                + "   " + e.getMessage() + "\n"
+                                + DukeFormatting.DIVIDER);
+                    }
                     break;
 
-                case "deadline":
-                    String line = sc.nextLine();
-                    String[] lineArr = line.split(" /");
-                    DeadlineTask dTask = new DeadlineTask(lineArr[0], false, lineArr[1]);
-                    dl = dl.addToList(dTask);
+                default:
+                    try {
+                        throw new InvalidCommandArgument("(つ╥﹏╥)つ Hey, I can't do that for you. \n   I don't know that command.");
+                    } catch (InvalidCommandArgument e) {
+                        System.out.println(DukeFormatting.DIVIDER
+                                + "   " + e.getMessage() + "\n"
+                                + DukeFormatting.DIVIDER);
+                }
 
-                    System.out.println(DukeFormatting.DIVIDER
-                            + DukeFormatting.ADDED
-                            + "      " + dTask.toString()
-                            + "\n   Now you have " + dl.listSize()
-                            + (dl.listSize() == 1 ? " task" : " tasks")
-                            + " in the list.\n"
-                            + DukeFormatting.DIVIDER);
-
-                case "event":
-                    String text = sc.nextLine();
-                    String[] textArr = text.split(" /");
-                    DeadlineTask eTask = new DeadlineTask(textArr[0], false, textArr[1]);
-                    dl = dl.addToList(eTask);
-
-                    System.out.println(DukeFormatting.DIVIDER
-                            + DukeFormatting.ADDED
-                            + "      " + eTask.toString()
-                            + "\n   Now you have " + dl.listSize()
-                            + (dl.listSize() == 1 ? " task" : " tasks")
-                            + " in the list.\n"
-                            + DukeFormatting.DIVIDER);
-            }
-
-            if (command.equals("bye")) {
-                break;
             }
         }
     }

@@ -1,7 +1,7 @@
 public class EventTask extends Task {
     private String deadline;
 
-    private EventTask(String description, boolean isDone, String deadline) {
+    EventTask(String description, boolean isDone, String deadline) {
         super(description, isDone);
         this.deadline = deadline;
     }

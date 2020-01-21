@@ -10,7 +10,7 @@ class ToDoTask extends Task {
 
     @Override
     public String toString() {
-        return "[D] [" + super.getStatusIcon() + "] "
+        return "[T] [" + super.getStatusIcon() + "] "
                 + this.description;
     }
 }
