@@ -33,6 +33,14 @@ public class Duke {
                     for (int i = 0; i < tasks.size(); i++) {
                         System.out.println((i + 1) + "." + tasks.get(i));
                     }
+                } else if (input.split(" ")[0].equals("delete")) {
+                    int idx = Integer.parseInt((input.split(" ")[1])) - 1;
+                    Task toDelete = tasks.get(idx);
+                    tasks.remove(idx);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(toDelete);
+                    System.out.println("Now you have " + tasks.size()
+                            + " " + (tasks.size() > 1 ? "tasks" : "task") + " in the list");
                 } else if (input.split(" ")[0].equals("done")) {
                     int idx = Integer.parseInt((input.split(" ")[1])) - 1;
                     tasks.get(idx).setDone();
@@ -69,13 +77,13 @@ public class Duke {
                     System.out.println("OOPS! The description of a deadline cannot be empty.");
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("OOPS! The time of this task is invalid");
+                System.out.println("OOPS! The time of this event is invalid");
             } catch (IndexOutOfBoundsException e) {
                 if (tasks.size() == 0) {
                     System.out.println("No tasks. Why not create one?");
                 } else {
                     System.out.println("OOPS! Invalid task number. You only have " + tasks.size()
-                            + " " + (tasks.size() > 1 ? "tasks" : "task") + " in the list");
+                            + (tasks.size() > 1 ? " tasks" : " task") + " in the list");
                 }
             }
         }
