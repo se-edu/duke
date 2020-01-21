@@ -50,10 +50,31 @@ public class Duke {
                     System.out.println ("Sorry, I dont understand you request!");
                 }
             } else {
-                Task task = new Task (input);
-                lst.add (task);
-                pendingTask++;
-                System.out.println ("added: " + task);
+                if (input.contains ("todo")) {
+                    Todo todo = new Todo (input.substring(5));
+                    lst.add (todo);
+                    pendingTask ++;
+                    System.out.println ("Got it. I've added the following task:\n" +
+                            todo + "\nYou now have " + pendingTask + " task in the list");
+                } else if (input.contains ("deadline")) {
+                    int taskIndex = input.indexOf("/");
+                    int byIndex   = taskIndex + 4;
+                    Deadline deadline = new Deadline (input.substring (9, taskIndex),
+                            input.substring (byIndex));
+                    lst.add (deadline);
+                    pendingTask++;
+                    System.out.println ("Got it. I've added the following task:\n" +
+                            deadline + "\nYou now have " + pendingTask + " task in the list");
+                } else if (input.contains ("event")) {
+                    int taskIndex = input.indexOf("/");
+                    int atIndex   = taskIndex + 4;
+                    Event event = new Event (input.substring (6, taskIndex),
+                            input.substring (atIndex));
+                    lst.add (event);
+                    pendingTask++;
+                    System.out.println ("Got it. I've added the following task:\n" +
+                            event + "\nYou now have " + pendingTask + " task in the list");
+                }
             }
         }
     }
