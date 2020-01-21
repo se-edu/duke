@@ -39,7 +39,7 @@ public class Duke {
                     try {
                         if (description.replace("\n", "").replace(" ", "").length() == 0) {
                             throw new MissingDescriptionException("༼ つ◕_◕ ༽つ The description of a " + command
-                                    + " cannot be empty.\n   Please try again! ");
+                                    + " cannot be empty.\n   Please try again!");
                         } else {
                             Task task;
                             if (command.equals("todo")) {
