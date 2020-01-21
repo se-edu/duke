@@ -21,17 +21,53 @@ public class Bot {
         }
     }
 
+    private static String removeNonAlphabetical(String string){
+
+        String _string = "";
+
+        char[] charArray = string.toCharArray();
+
+        for( char c : charArray ){
+
+            if( (int)c > 97 && (int)c < 123 ){
+                _string += c;
+            }
+        }
+
+        return _string;
+
+    }
+
+    private static int getFirstInteger(String string){
+
+        char[] charArray = string.toCharArray();
+
+        for( char c: charArray ){
+            if((int)c > 47 && (int)c < 58){
+                return Character.getNumericValue(c);
+            }
+        }
+
+        return 0;
+
+    }
+
     public void echo(String string){
         System.out.println(string);
     }
 
     public void res(String req){
 
-        switch( req ){
+        String command = removeNonAlphabetical(req);
+
+        switch( command ){
             case "list":
                 System.out.println(todo);
                 break;
             case "done":
+                int index = getFirstInteger(req);
+                this.todo.markTask(index);
+                break;
             default:
                 this.todo.addTask(req);
         }

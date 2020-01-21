@@ -13,8 +13,12 @@ public class Task {
     @Override
     public String toString() {
 
-        String checkbox = this.done?"COMPLETE": "INCOMPLETE";
+        String done = this.done?"Y": "N";
 
-        return index + ". " + this.desc;
+        return index + ".[" + done + "] " + this.desc;
+    }
+
+    public void markAsDone(){
+        this.done = true;
     }
 }

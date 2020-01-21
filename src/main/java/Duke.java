@@ -26,7 +26,7 @@ public class Duke {
         bot.staticResponse(StaticReq.SAYHELLO);
 
         while ( !finished ){
-            String input = sc.nextLine();
+            String input = sc.nextLine().toLowerCase();
 
             System.out.println("**********************************");
 
