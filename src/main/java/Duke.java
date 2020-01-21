@@ -16,6 +16,7 @@ public class Duke {
     public static String markAsDone = "     Nice! I've marked this task as done:";
     public static String showList = "     Here are the tasks in your list:";
     public static String gotIt = "     Got it. I've added this task:";
+    public static String deleteIt = "     Noted. I've removed this task: ";
 
     public static void main(String[] args) {
 
@@ -57,16 +58,43 @@ public class Duke {
                         System.out.println(new DukeException ("Index is not detected.").toString() + "\n");
                         continue;
                     }
-                    System.out.println(LINE);
+
                     thisIndex = Integer.valueOf(input.substring(5)) - 1;
                     if(thisIndex >= list.size() || thisIndex < 0){
                         continue;
                     }
+                    System.out.println(LINE);
                     System.out.println(markAsDone);
                     list.get(thisIndex).markAsDone();
                     System.out.println("       " + list.get(thisIndex).toString());
                     System.out.println(LINE + "\n");
                 } else if (keyword.equals("delete")){ // case delete
+                    try{
+                        if(words.length !=2){
+                            throw new DukeException("The delete message is not valid.");
+                        }
+                    } catch(DukeException exp){
+                        System.out.println(exp.toString() + "\n");
+                        continue;
+                    }
+                    int thatIndex = -1;
+                    try{
+                        thatIndex = Integer.valueOf(input.substring(7)) - 1;
+                    } catch (Exception exp){
+                        System.out.println(new DukeException ("Index is not detected.").toString() + "\n");
+                        continue;
+                    }
+
+                    thatIndex = Integer.valueOf(input.substring(7)) - 1;
+                    if(thatIndex >= list.size() || thatIndex < 0){
+                        continue;
+                    }
+                    System.out.println(LINE);
+                    System.out.println(deleteIt);
+                    System.out.println("       " + list.get(thatIndex).toString());
+                    list.remove(thatIndex);
+                    System.out.println("     Now you have " + list.size() + " tasks in the list. ");
+                    System.out.println(LINE + "\n");
 
                 } else if (input.equalsIgnoreCase("list")) { //case list
                     displayList(list);
