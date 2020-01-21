@@ -72,11 +72,17 @@ public class ChatBot {
                         System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
                     }
                 } else if (userInput.startsWith("delete")) {
-                    int taskNumber = -1 + Integer.parseInt(userInput.split(" ")[1]);
-                    System.out.println("Noted. I've removed this task: ");
-                    System.out.println(history.get(taskNumber));
-                    history.remove(taskNumber);
-                    System.out.println("Now you have " + history.size() + " tasks in the list.");
+                    try {
+                        int taskNumber = -1 + Integer.parseInt(userInput.split(" ")[1]);
+                        history.get(taskNumber); //try
+                        System.out.println("Noted. I've removed this task: ");
+                        System.out.println(history.get(taskNumber));
+                        history.remove(taskNumber);
+                        System.out.println("Now you have " + history.size() + " tasks in the list.");
+                    }
+                    catch (IndexOutOfBoundsException error) {
+                        System.out.println("This item is not valid to remove.");
+                    }
                 } else {
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
