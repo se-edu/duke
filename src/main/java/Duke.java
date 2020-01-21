@@ -38,20 +38,25 @@ public class Duke {
                     String description = sc.nextLine();
                     try {
                         if (description.replace("\n", "").replace(" ", "").length() == 0) {
-                            throw new MissingCommandArgument("༼ つ◕_◕ ༽つ The description of a todo cannot be empty.\n   Please try again! ");
+                            throw new MissingDescriptionException("༼ つ◕_◕ ༽つ The description of a " + command
+                                    + " cannot be empty.\n   Please try again! ");
                         } else {
                             Task task;
                             if (command.equals("todo")) {
                                 task = new ToDoTask(description, false);
                             } else {
                                 String[] arr = description.split(" /");
+
+                                if (arr.length == 1) {
+                                    throw new MissingDateTimeException("(''⊙＿⊙) The date and time of the "
+                                            + command + " is missing.\n   Please try again!");
+                                }
                                 task = command.equals("deadline")
                                         ? new DeadlineTask(arr[0], false, arr[1])
                                         : new EventTask(arr[0], false, arr[1]);
                             }
 
                             dl = dl.addToList(task);
-
                             System.out.println(DukeFormatting.DIVIDER
                                     + DukeFormatting.ADDED
                                     + "      " + task.toString()
@@ -60,7 +65,8 @@ public class Duke {
                                     + " in the list.\n"
                                     + DukeFormatting.DIVIDER);
                         }
-                    } catch (MissingCommandArgument e) {
+
+                    } catch (MissingDescriptionException | MissingDateTimeException e) {
                         System.out.println(DukeFormatting.DIVIDER
                                 + "   " + e.getMessage() + "\n"
                                 + DukeFormatting.DIVIDER);
@@ -69,13 +75,18 @@ public class Duke {
 
                 default:
                     try {
-                        throw new InvalidCommandArgument("(つ╥﹏╥)つ Hey, I can't do that for you. \n   I don't know that command.");
-                    } catch (InvalidCommandArgument e) {
+                        throw new InvalidCommandArgumentException("(つ╥﹏╥)つ Hey, I can't do that for you. " +
+                                "\n   I don't know " + command + "...");
+                    } catch (InvalidCommandArgumentException e) {
                         System.out.println(DukeFormatting.DIVIDER
                                 + "   " + e.getMessage() + "\n"
                                 + DukeFormatting.DIVIDER);
-                }
+                    }
+                    break;
+            }
 
+            if (command.equals("bye")) {
+                break;
             }
         }
     }

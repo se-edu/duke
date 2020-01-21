@@ -1,11 +1,11 @@
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 class DukeList {
     private List<Task> list;
 
      DukeList() {
-        this.list = new LinkedList<>();
+        this.list = new ArrayList<>();
      }
 
      private DukeList(DukeList dl) {
