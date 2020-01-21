@@ -1,5 +1,5 @@
 /**
- * Each object of class Task represents a task to be saved
+ * Each object of class Task represents a task to be saved.
  */
 public class Task {
     private String description;
@@ -7,9 +7,10 @@ public class Task {
     private boolean isDone;
 
     /**
-     * Class constructor
-     * @param description Task description
-     * @param taskType Type of task: deadline, event, to-do
+     * Class constructor.
+     *
+     * @param description Task description.
+     * @param taskType Type of task: deadline, event, to-do.
      */
     public Task(String description, String taskType) {
         this.description = description;
@@ -18,8 +19,9 @@ public class Task {
     }
 
     /**
-     * Returns symbol representing status of task
-     * @return If task is done, return tick symbol, else return X symbol
+     * Returns symbol representing status of task.
+     *
+     * @return If task is done, return tick symbol, else return X symbol.
      */
     public String getStatusIcon() {
         if (isDone) {
@@ -30,31 +32,34 @@ public class Task {
     }
 
     /**
-     * Returns description of task
-     * @return description
+     * Returns description of task.
+     *
+     * @return description.
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * Returns the type of the task
-     * @return Type of task
+     * Returns the type of the task.
+     *
+     * @return Type of task.
      */
     public String getTaskType() {
         return taskType;
     }
 
     /**
-     * Mark task as done
+     * Mark task as done.
      */
     public void markAsDone() {
         isDone = true;
     }
 
     /**
-     * Returns all information about the task formatted in a single string
-     * @return Information about task
+     * Returns all information about the task formatted in a single string.
+     *
+     * @return Information about task.
      */
     public String obtainTaskInfo() {
         return "[" + this.getTaskType() + "]["

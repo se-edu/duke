@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Duke is a Personal Assistant Chatbot that helps a person keep track of various things
+ * Duke is a Personal Assistant Chatbot that helps a person keep track of various things.
  */
 public class Duke {
     public static void main(String[] args) {
@@ -70,9 +70,10 @@ public class Duke {
     }
 
     /**
-     * Adds a task to the list of saved tasks
-     * @param inputs Components of task to be added
-     * @param tasks List of saved tasks
+     * Adds a task to the list of saved tasks.
+     *
+     * @param inputs Components of task to be added.
+     * @param tasks List of saved tasks.
      */
     private static void addTask(String[] inputs, ArrayList<Task> tasks) throws DukeException {
         String task;
@@ -127,8 +128,9 @@ public class Duke {
     }
 
     /**
-     * Prints the list of tasks currently saved
-     * @param tasks List of tasks that are saved
+     * Prints the list of tasks currently saved.
+     *
+     * @param tasks List of tasks that are saved.
      */
     private static void printList(ArrayList<Task> tasks) {
         System.out.println("Here are the tasks in your list:");
