@@ -6,7 +6,7 @@ public class Task {
 
     public Task ( String desc, int index ){
         this.index = index;
-        this.desc = desc;
+        this.desc = desc.split("/")[0].trim();
         this.done = false;
     }
 
@@ -15,7 +15,7 @@ public class Task {
 
         String done = this.done?"Y": "N";
 
-        return index + ".[" + done + "] " + this.desc;
+        return "[" + done + "] " + this.desc;
     }
 
     public void markAsDone(){

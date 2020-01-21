@@ -1,11 +1,12 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Optional;
 
-public class TodoList {
+public class TaskList {
 
     List<Task> list;
 
-    public TodoList(){
+    public TaskList(){
         this.list = new ArrayList<>();
     }
 
@@ -24,11 +25,25 @@ public class TodoList {
         return str;
     }
 
-    public void addTask(String taskDesc){
-        Task task = new Task(taskDesc, this.list.size() + 1 );
-        this.list.add(task);
+    public void addTask(String taskDesc, String taskType){
 
-        System.out.println("added: " + taskDesc);
+        int index = this.list.size() + 1;
+
+        Task task;
+
+        switch( taskType ){
+            case "event":
+                task = new Event(taskDesc, index);
+                break;
+            case "deadline":
+                task = new Deadline(taskDesc, index);
+                break;
+            default:
+                task = new Todo(taskDesc, index);
+        }
+
+        this.list.add(task);
+        System.out.println(task.desc);
     }
 
     public void markTask(int taskIndex){

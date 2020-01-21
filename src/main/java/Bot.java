@@ -1,12 +1,11 @@
-import java.util.List;
-import java.util.ArrayList;
+import java.util.Optional;
 
 public class Bot {
 
-    TodoList todo;
+    TaskList taskList;
 
     public Bot(){
-        this.todo = new TodoList();
+        this.taskList = new TaskList();
     }
 
     public void staticResponse(StaticReq reqType){
@@ -21,6 +20,11 @@ public class Bot {
         }
     }
 
+    /**
+     * removes all non-alphabetical characters from a string.
+     * @param string
+     * @return string with no spaces
+     */
     private static String removeNonAlphabetical(String string){
 
         String _string = "";
@@ -38,6 +42,11 @@ public class Bot {
 
     }
 
+    /**
+     * gets first integer
+     * @param string
+     * @return first integer encountered
+     */
     private static int getFirstInteger(String string){
 
         char[] charArray = string.toCharArray();
@@ -52,24 +61,42 @@ public class Bot {
 
     }
 
+    /**
+     * parses command
+     * @param string
+     * @return first word of string
+     */
+    private static String getCommand(String string){
+
+        return string.split(" ")[0];
+
+    }
+
+    private static String getTaskDesc(String string){
+        int commandLength = getCommand(string).length();
+
+        return string.substring(commandLength + 1).trim();
+    }
+
     public void echo(String string){
         System.out.println(string);
     }
 
     public void res(String req){
 
-        String command = removeNonAlphabetical(req);
+        String command = getCommand(req);
 
         switch( command ){
             case "list":
-                System.out.println(todo);
+                System.out.println(taskList);
                 break;
             case "done":
                 int index = getFirstInteger(req);
-                this.todo.markTask(index);
+                taskList.markTask(index);
                 break;
             default:
-                this.todo.addTask(req);
+                String taskDesc = getTaskDesc(req);
+                taskList.addTask(taskDesc, command);
         }
 
 
