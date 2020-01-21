@@ -4,9 +4,7 @@ import java.util.List;
 
 public class Duke {
     public static void main(String[] args) {
-
         List<String> history = new ArrayList<>();
-
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
