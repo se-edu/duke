@@ -24,7 +24,7 @@ public class Duke {
     }
     
     public static void main(String[] args) {
-        print("Wussup! I'm Dukeee\nWhat you want me do?");
+        print("Wussup Dawggg! I'm Dukeee\nWhat you want me do?");
         boolean is_running = true;
 
         while (is_running) {
@@ -35,10 +35,14 @@ public class Duke {
                 String input = scanner.nextLine();
                 switch (input) {
                 case "bye":
-                    print("Bye! See you never! (((:");
+                    print("Bye! Don't wan 2 see u again! (((:");
                     is_running = false;
                     break;
                 case "list":
+                    if (tasks.size() == 0) {
+                        print("Add something lahh");
+                        break;
+                    }
                     StringBuilder sb = new StringBuilder();
                     for (int i = 0; i < tasks.size(); i++) {
                         sb.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
