@@ -1,11 +1,31 @@
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
 
 public class Duke {
     public static final int MAX_STRING_LENGTH = 60;
     public static final int MAX_TASKS = 100;
+    public static final String WELCOME_MESSAGE = "Wussup Dawggg! I'm Dukeee\nWhat you want me do?";
+    public static final String GOODBYE_MESSAGE = "Bye!\nStay cool bruh! (((:";
+    
+    public static void main(String[] args) {
+        print(WELCOME_MESSAGE);
 
+        Scanner scanner = new Scanner(System.in);
+        TaskManager taskManager = new TaskManager(MAX_TASKS);
+          
+        while (scanner.hasNextLine()) {
+            String input = scanner.nextLine();
+
+            if (input.equals("bye"))            break;
+            else if (input.equals("list"))      print(taskManager.toString());
+            else                                print(taskManager.add(input));
+        }
+
+        scanner.close();
+        print(GOODBYE_MESSAGE);
+    }
+
+    // -----------------------------------------------------------------------------------------
+    // Helper Methods
     private static void print(String message) {
         System.out.println("    ____________________________________________________________");
 
@@ -21,42 +41,5 @@ public class Duke {
         }
         
         System.out.println("    ____________________________________________________________");
-    }
-    
-    public static void main(String[] args) {
-        print("Wussup Dawggg! I'm Dukeee\nWhat you want me do?");
-        boolean is_running = true;
-
-        while (is_running) {
-            Scanner scanner = new Scanner(System.in);
-            List<String> tasks = new ArrayList<>(MAX_TASKS);
-            
-            while (is_running && scanner.hasNextLine()) {
-                String input = scanner.nextLine();
-                switch (input) {
-                case "bye":
-                    print("Bye! Don't wan 2 see u again! (((:");
-                    is_running = false;
-                    break;
-                case "list":
-                    if (tasks.size() == 0) {
-                        print("Add something lahh");
-                        break;
-                    }
-                    StringBuilder sb = new StringBuilder();
-                    for (int i = 0; i < tasks.size(); i++) {
-                        sb.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
-                    }
-                    print(sb.toString());
-                    break;
-                default:
-                    tasks.add(input);
-                    print(String.format("added: %s", input));
-                    break;
-                }
-            }
-
-            scanner.close();
-        }
     }
 }
