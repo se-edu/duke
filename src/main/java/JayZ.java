@@ -10,15 +10,24 @@ public class JayZ {
      * @return boolean used to inform other function if user wants to quit
      *     true -> continue using bot, false -> quit bot.
      */
-    public boolean parseMessage(String message, ArrayList<String> lis) {
-        if (message.equals("bye")) {
-            printGoodBye();
-            return false;
-        } else if (message.equals("list")) {
-            printMessagesStored(lis);
-            return true;
-        } else {
-            storeMessageInList(message, lis);
+    public boolean parseMessage(String message, Task tasks) {
+        try {
+            if (message.equals("bye")) {
+                printGoodBye();
+                return false;
+            } else if (message.equals("list")) {
+                tasks.printStoredTask();
+                return true;
+            } else if (message.substring(0,4).equals("done")) {
+                tasks.doneTask(Integer.parseInt(message.split(" ",2)[1]));
+                return true;
+            } else {
+                tasks.addTask(message);
+                return true;
+            }
+
+        } catch (Exception e) {
+            tasks.addTask(message);
             return true;
         }
     }
@@ -47,32 +56,6 @@ public class JayZ {
     }
 
     /**
-     * Store message in arraylist for later use.
-     * @param message stored in list.
-     * @param lis Used to store message.
-     */
-    public void storeMessageInList(String message, ArrayList<String> lis) {
-        lis.add(message);
-        printMessageInBox(String.format("Added: \"%s\" to your history", message));
-    }
-
-    /**
-     * Loop the arrayList containing all the stored messages and print it out in a text box.
-     * @param lis Arraylist containing Strings that the user typed
-     */
-    public void printMessagesStored(ArrayList<String> lis) {
-        int counter = 1;
-        System.out.println(String.format("%80s",' ').replace(' ','*'));
-        System.out.println(String.format("* %-77s*",' '));
-        for (String message:lis) {
-            System.out.println(String.format("* %d.%-75s*",counter, message));
-            counter++;
-        }
-        System.out.println(String.format("* %-77s*",' '));
-        System.out.println(String.format("%80s",' ').replace(' ','*'));
-    }
-
-    /**
      * Chat bot function, run infinitely until user types "bye".
      */
     public void runChatBot() {
@@ -81,8 +64,9 @@ public class JayZ {
         System.out.print("All messages typed in this chatbot will be saved,");
         System.out.println("use the \"list\" command to review the Chat History");
         ArrayList<String> lis = new ArrayList<>();
+        Task tasks = new Task();
         while (true) {
-            if (!parseMessage(scanner.nextLine(), lis)) {
+            if (!parseMessage(scanner.nextLine(), tasks)) {
                 break;
             }
         }
