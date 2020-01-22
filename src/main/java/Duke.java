@@ -1,7 +1,10 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
     public static final int MAX_STRING_LENGTH = 60;
+    public static final int MAX_TASKS = 100;
 
     private static void print(String message) {
         System.out.println("    ____________________________________________________________");
@@ -26,15 +29,26 @@ public class Duke {
 
         while (is_running) {
             Scanner scanner = new Scanner(System.in);
+            List<String> tasks = new ArrayList<>(MAX_TASKS);
             
-            while (scanner.hasNextLine()) {
+            while (is_running && scanner.hasNextLine()) {
                 String input = scanner.nextLine();
-                if (input.equals("bye")) {
+                switch (input) {
+                case "bye":
                     print("Bye! See you never! (((:");
                     is_running = false;
                     break;
-                } else {
-                    print(input);
+                case "list":
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < tasks.size(); i++) {
+                        sb.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
+                    }
+                    print(sb.toString());
+                    break;
+                default:
+                    tasks.add(input);
+                    print(String.format("added: %s", input));
+                    break;
                 }
             }
 
