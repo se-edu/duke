@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n\t"
@@ -14,6 +17,7 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
 
         Scanner in = new Scanner(System.in);
+        ArrayList<String> list = new ArrayList<>(100);
 
         //accepting input
         String input = in.nextLine();
@@ -21,8 +25,16 @@ public class Duke {
         while(!input.equalsIgnoreCase("Bye")) {
 
             System.out.println("\t____________________________________________________________");
-            //echo-ing
-            System.out.println("\t" + input);
+            //checking input and giving appropriate responses
+            if (input.equalsIgnoreCase("list")) {
+                int size = list.size();
+                for (int i = 0; i < size; ++i) {
+                    System.out.println("\t" + (i + 1) + ". " + list.get(i));
+                }
+            } else {
+                System.out.println("\tadded: " + input);
+                list.add(input);
+            }
             System.out.println("\t____________________________________________________________");
 
             input = in.nextLine();
