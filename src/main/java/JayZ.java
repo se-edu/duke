@@ -47,7 +47,7 @@ public class JayZ {
      */
     public void runChatBot() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Hello! I'm JayZ-Bot");
+        System.out.println("Hello! I'm JayZ-Bot\nWhat can i do for you?");
         while (true) {
             if (!parseMessage(scanner.nextLine())) {
                 break;
