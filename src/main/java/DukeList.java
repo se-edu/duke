@@ -19,6 +19,9 @@ class DukeList {
     }
 
     void printList() {
+         if (this.list.size() == 0) {
+             System.out.println("   The list is empty.");
+         }
          for (int i = 1; i <= list.size(); i++) {
              System.out.println("   " + i + ". " + list.get(i - 1));
          }

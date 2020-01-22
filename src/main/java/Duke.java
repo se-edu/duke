@@ -9,6 +9,7 @@ public class Duke {
             String command = sc.next();
 
             switch (command) {
+                // Prints current list of tasks
                 case "list":
                     sc.nextLine();
                     System.out.println(DukeFormatting.DIVIDER);
@@ -65,9 +66,12 @@ public class Duke {
                                     throw new MissingDateTimeException("(''⊙＿⊙) The date and time of the "
                                             + command + " is missing.\n   Please try again!");
                                 }
+
+                                String[] splitting = arr[1].split(" ");
+                                String parameter = splitting[0] + ": " + splitting[1];
                                 task = command.equals("deadline")
-                                        ? new DeadlineTask(arr[0], false, arr[1])
-                                        : new EventTask(arr[0], false, arr[1]);
+                                        ? new DeadlineTask(arr[0], false, parameter)
+                                        : new EventTask(arr[0], false, parameter);
                             }
 
                             dl = dl.addToList(task);
@@ -113,8 +117,10 @@ public class Duke {
                     }
 
                     break;
+
                 default:
                     try {
+                        command = command + sc.nextLine();
                         throw new InvalidCommandArgumentException("(つ╥﹏╥)つ Hey, I can't do that for you. " +
                                 "\n   I don't know " + command + "...");
                     } catch (InvalidCommandArgumentException e) {
