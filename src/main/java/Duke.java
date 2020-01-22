@@ -94,6 +94,7 @@ public class Duke {
             System.out.println("     Got it. I've added this task:");
             System.out.println("       " + newTask);
             System.out.printf("     Now you have %d tasks in the list.\n", mylist.size());
+            printFormatting();
 
 
         } else if (messageType.equals("deadline")) {
@@ -106,6 +107,7 @@ public class Duke {
             System.out.println("     Got it. I've added this task:");
             System.out.println("       " + newTask);
             System.out.printf("     Now you have %d tasks in the list.\n", mylist.size());
+            printFormatting();
 
 
         } else if (messageType.equals("event")) {
@@ -118,6 +120,7 @@ public class Duke {
             System.out.println("     Got it. I've added this task:");
             System.out.println("       " + newTask);
             System.out.printf("      Now you have %d tasks in the list.\n", mylist.size());
+            printFormatting();
 
         } else {
             Task newTask = new Task(response);
