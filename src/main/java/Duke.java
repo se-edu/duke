@@ -13,11 +13,18 @@ public class Duke {
         TaskManager taskManager = new TaskManager(MAX_TASKS);
           
         while (scanner.hasNextLine()) {
-            String input = scanner.nextLine();
+            try {
+                String input = scanner.nextLine();
+                String[] parsedInput = input.split(" ");
+                String command = parsedInput[0];
 
-            if (input.equals("bye"))            break;
-            else if (input.equals("list"))      print(taskManager.toString());
-            else                                print(taskManager.add(input));
+                if (command.equals("bye"))            break;
+                else if (command.equals("list"))      print(taskManager.toString());
+                else if (command.equals("done"))      print(taskManager.setDone(Integer.parseInt(parsedInput[1])));
+                else                                  print(taskManager.add(input));
+            } catch (Exception e) {
+                print("YOU MADE SOME STUPID MISTAKE BOOOHOOO");
+            }
         }
 
         scanner.close();
