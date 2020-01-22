@@ -17,7 +17,6 @@ public class Add_Command extends UserCommand {
     @Override
     public void reply(){
         System.out.println("Sighhssss...I am your slave again?");
-        System.out.println("added: " + t);
     }
 
     @Override
@@ -33,6 +32,7 @@ public class Add_Command extends UserCommand {
         }
 
         MyList.addItem(t);
+        MyList.printCount();
         return true;
     }
 

@@ -58,8 +58,12 @@ Added catching of exception
 CommandHUb:
 Throw Exception for empty todo and invalid command
 Throws Exception for empty or missing /by or /at command
-Possible: Check for missing desc for event and deadline commands
+Possible: Check for missing desc for event and deadline commands and non integer for delete and done
 
+Level 6
+Added Delete function
+
+Changes:
 
 
 

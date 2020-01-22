@@ -28,24 +28,30 @@ public class CommandHub {
         String parsedCommand[] = parseString(userInput);
         String ID = parsedCommand[0];
         String desc = "null";
-        if(parsedCommand.length>1) {
+        if(parsedCommand.length>1) {//check if exist second line
             desc = parsedCommand[1];
         }
 
         if(commandList.containsKey(ID)) { //gets generic commands
             return commandList.get(ID);
         }
-        else if(ID.contains("done")){
+        else if(ID.contains("done")){ //done command
             if(desc.equals("null")||desc.equals("")){
                 throw new DukeException("Done with what? Your life is it?");
             }
             return new Done_Command(Integer.parseInt(desc));
         }
-        else if(ID.contains("todo")||ID.contains("deadline")||ID.contains("event")){
-            if(desc.equals("null")||desc.equals("null")){
+        else if(ID.contains("todo")||ID.contains("deadline")||ID.contains("event")){ //list add
+            if(desc.equals("null")){
                 throw new DukeException("BAKA! Your not suppose to leave "+ID+" field empty!");
             }
             return new Add_Command(ID, desc);
+        }
+        else if(ID.contains("delete")){
+            if(desc.equals("null")||desc.equals("")){
+                throw new DukeException("Delete yourself!");
+            }
+            return new Del_Command(Integer.parseInt(desc));
         }
         else{
             throw new DukeException("Hello? You stupid? Wrong command lah please!");
