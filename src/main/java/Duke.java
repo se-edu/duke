@@ -67,6 +67,10 @@ public class Duke {
             return "event";
         }
 
+        if (response.contains("delete")) {
+            return "delete";
+        }
+
         throw new DukeException("    ____________________________________________________________\n" +
                 "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                 "    ____________________________________________________________\n");
@@ -105,12 +109,10 @@ public class Duke {
 
             createEvent(response, mylist);
 
-        } else {
-            Task newTask = new Task(response);
-            mylist.add(newTask);
-            printFormatting();
-            System.out.println("     added: " + newTask.getDescription());
-            printFormatting();
+        } else if (messageType.equals("delete")) {
+
+            delete(response, mylist);
+
         }
 
     }
@@ -186,6 +188,35 @@ public class Duke {
                     "\n");
 
         }
+
+    }
+
+    public static void delete(String response, ArrayList<Task> mylist) throws DukeException {
+
+        int numberToDelete = Integer.parseInt(response.replace("delete" , "").trim());
+
+        if (numberToDelete <= 0) {
+            throw new DukeException("    ____________________________________________________________\n" +
+                    "     ☹ OOPS!!! Please key in value bigger than 0.\n" +
+                    "    ____________________________________________________________\n" +
+                    "\n");
+        }
+
+        if (mylist.size() < numberToDelete) {
+            throw new DukeException("    ____________________________________________________________\n" +
+                    "     ☹ OOPS!!! number does not exist in the list.\n" +
+                    "    ____________________________________________________________\n" +
+                    "\n");
+        }
+
+
+        Task removed = mylist.remove(numberToDelete - 1 );
+
+        printFormatting();
+        System.out.println("      Noted. I've removed this task: ");
+        System.out.println("       " + removed);
+        System.out.printf("      Now you have %d tasks in the list.\n", mylist.size());
+        printFormatting();
 
 
     }
