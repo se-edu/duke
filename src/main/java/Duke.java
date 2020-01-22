@@ -9,6 +9,7 @@ public class Duke {
 
     /**
      * Main method.
+     *
      * @param args arguments
      */
     public static void main(String[] args) {
@@ -21,24 +22,28 @@ public class Duke {
 
         while (true) {
             String response = sc.nextLine();
-            String messageType = checkMessageType(response);
+            try {
+                String messageType = checkMessageType(response);
+                if (messageType.equals("bye")) {
+                    System.out.println("     ____________________________________________________________");
+                    System.out.println("     Bye. Hope to see you again soon!");
+                    System.out.println("     ____________________________________________________________");
+                    break;
 
-            if (messageType.equals("bye")) {
-                System.out.println("     ____________________________________________________________");
-                System.out.println("     Bye. Hope to see you again soon!");
-                System.out.println("     ____________________________________________________________");
-                break;
-
-            } else {
-                printAction(messageType, mylist, response);
+                } else {
+                    printAction(messageType, mylist, response);
+                }
+            } catch (DukeException ex) {
+                System.out.println(ex.getMessage());
             }
+
 
         }
 
     }
 
 
-    public static String checkMessageType(String response) {
+    public static String checkMessageType(String response) throws DukeException {
         if (response.contains("bye")) {
             return "bye";
         }
@@ -62,12 +67,14 @@ public class Duke {
             return "event";
         }
 
-        return response; // does not contain any keyword, return the response.
+        throw new DukeException("    ____________________________________________________________\n" +
+                "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                "    ____________________________________________________________\n");
     }
 
 
-    public static void printAction(String messageType, ArrayList<Task> mylist, String response) {
-        if (messageType.equals("list")){
+    public static void printAction(String messageType, ArrayList<Task> mylist, String response) throws DukeException {
+        if (messageType.equals("list")) {
 
             printFormatting();
             System.out.println("     Here are the tasks in your list:");
@@ -86,41 +93,17 @@ public class Duke {
             System.out.println("        " + doneTask);
             printFormatting();
 
-
         } else if (messageType.equals("todo")) {
-            Task newTask = new Todo(response.replace("todo ", ""));
-            mylist.add(newTask);
-            printFormatting();
-            System.out.println("     Got it. I've added this task:");
-            System.out.println("       " + newTask);
-            System.out.printf("     Now you have %d tasks in the list.\n", mylist.size());
-            printFormatting();
 
+            createTodo(response, mylist);
 
         } else if (messageType.equals("deadline")) {
 
-            String deadline = response.split("/")[1];
-            String description = response.split("/")[0].replace("deadline ", "");
-            Task newTask = new Deadline(description, deadline);
-            mylist.add(newTask);
-            printFormatting();
-            System.out.println("     Got it. I've added this task:");
-            System.out.println("       " + newTask);
-            System.out.printf("     Now you have %d tasks in the list.\n", mylist.size());
-            printFormatting();
-
+            createDeadline(response, mylist);
 
         } else if (messageType.equals("event")) {
 
-            String eventTiming = response.split("/")[1];
-            String description = response.split("/")[0].replace("event ", "");
-            Task newTask = new Event(description, eventTiming);
-            mylist.add(newTask);
-            printFormatting();
-            System.out.println("     Got it. I've added this task:");
-            System.out.println("       " + newTask);
-            System.out.printf("      Now you have %d tasks in the list.\n", mylist.size());
-            printFormatting();
+            createEvent(response, mylist);
 
         } else {
             Task newTask = new Task(response);
@@ -134,6 +117,77 @@ public class Duke {
 
     public static void printFormatting() {
         System.out.println("     ____________________________________________________________");
+    }
+
+    public static void createTodo(String response, ArrayList<Task> mylist) throws DukeException {
+
+        String description = response.replace("todo", "").trim();
+
+        if (!description.equals("")) {
+            Task newTask = new Todo(description);
+            mylist.add(newTask);
+            printFormatting();
+            System.out.println("     Got it. I've added this task:");
+            System.out.println("       " + newTask);
+            System.out.printf("     Now you have %d tasks in the list.\n", mylist.size());
+            printFormatting();
+        } else {
+            throw new DukeException("    ____________________________________________________________\n" +
+                    "     ☹ OOPS!!! The description of a todo cannot be empty.\n" +
+                    "    ____________________________________________________________\n" +
+                    "\n");
+        }
+    }
+
+    public static void createDeadline(String response, ArrayList<Task> mylist) throws DukeException {
+
+        try {
+
+            String deadline = response.split("/")[1];
+            String description = response.split("/")[0].replace("deadline ", "");
+            Task newTask = new Deadline(description, deadline);
+            mylist.add(newTask);
+            printFormatting();
+            System.out.println("     Got it. I've added this task:");
+            System.out.println("       " + newTask);
+            System.out.printf("     Now you have %d tasks in the list.\n", mylist.size());
+            printFormatting();
+
+        } catch (Exception ex) {
+
+            throw new DukeException("    ____________________________________________________________\n" +
+                    "     ☹ OOPS!!! The description or deadline of a deadline cannot be empty.\n" +
+                    "    ____________________________________________________________\n" +
+                    "\n");
+
+        }
+
+    }
+
+    public static void createEvent(String response, ArrayList<Task> mylist) throws DukeException {
+
+        try {
+
+            String eventTiming = response.split("/")[1];
+            String description = response.split("/")[0].replace("event ", "");
+            Task newTask = new Event(description, eventTiming);
+            mylist.add(newTask);
+            printFormatting();
+            System.out.println("     Got it. I've added this task:");
+            System.out.println("       " + newTask);
+            System.out.printf("      Now you have %d tasks in the list.\n", mylist.size());
+            printFormatting();
+
+        } catch (Exception ex) {
+
+            throw new DukeException("    ____________________________________________________________\n" +
+                    "     ☹ OOPS!!! The description or event timing of a event cannot be empty.\n" +
+                    "    ____________________________________________________________\n" +
+                    "\n");
+
+        }
+
+
     }
 
 
