@@ -63,6 +63,8 @@ public class Duke {
                         System.out.println ("Noted. I've removed this task:\n" + deletedTask
                                 + "\nNow you have " + pendingTask + " tasks in the list.");
                         lst.remove (taskNum -1);
+                    } else {
+                        System.out.println ("Sorry, there is no such task!");
                     }
                 } catch (Exception e) {
                     System.out.println ("Sorry, there is no such task!");
