@@ -102,8 +102,17 @@ public class Duke {
                     Task thisTask;
                     String[] stamps = input.split("/");
 
-                    switch(keyword){
-                        case "todo":
+                    TaskEnum taskEnum = TaskEnum.OTHERS;
+                    if(keyword.equals("todo") || keyword.equals("TODO") || keyword.equals("Todo")){
+                        taskEnum = TaskEnum.TODO;
+                    } else if (keyword.equals("event") || keyword.equals("EVENT") || keyword.equals("Event")) {
+                        taskEnum = TaskEnum.EVENT;
+                    } else if(keyword.equals("deadline") || keyword.equals("DEADLINE") || keyword.equals("Deadline")){
+                        taskEnum = TaskEnum.DEADLINE;
+                    }
+
+                    switch(taskEnum){
+                        case TODO:
                             try{
                                 if(words.length <2){
                                     throw new DukeException("The description of a todo cannot be empty.");
@@ -115,7 +124,7 @@ public class Duke {
                             thisTask = new Todo(input.substring(5));
                             break;
 
-                        case "event":
+                        case EVENT:
                             try{
                                 if(words.length < 4 || stamps.length < 2){
                                     throw new DukeException("The content of an event must be complete.");
@@ -127,7 +136,7 @@ public class Duke {
                             thisTask = new Event(stamps[0].substring(6), stamps[1].substring(3));
                             break;
 
-                        case "deadline":
+                        case DEADLINE:
                             try{
                                 if(words.length < 4 || stamps.length < 2){
                                     throw new DukeException("The content of a deadline must be complete.");
