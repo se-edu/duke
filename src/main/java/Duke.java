@@ -31,20 +31,38 @@ public class Duke {
                 int taskNumber = Integer.parseInt(words[1]);
                 Duke.markAsDone(taskNumber, tasks);
                 break;
+            case "todo":
+                Task newTodo = Todo.createTodo(input, false);
+                Duke.addToList(newTodo, tasks);
+                break;
+            case "deadline":
+                String[] deadlineParts = combine(words).split(" /by ");
+                Task newDeadline = Deadline.createDeadline(deadlineParts[0], false, deadlineParts[1]);
+                Duke.addToList(newDeadline, tasks);
+                break;
+            case "event":
+                String[] eventParts = combine(words).split(" /at ");
+                Task newEvent = Event.createEvent(eventParts[0], false, eventParts[1]);
+                Duke.addToList(newEvent, tasks);
+                break;
             default:
-                // add a new task to the listte
-                Task newTask = Task.createTask(input, false);
-                Duke.addToList(newTask, tasks);
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 break;
         }
     }
-
+    public static String combine(String[] parts) {
+        String result = parts[1];
+        for (int i = 2; i < parts.length; i++) {
+            result += " " + parts[i];
+        }
+        return result;
+    }
     // Mark a task as done by substituting the current task with a completed task in the list
     public static void markAsDone(int taskNumber, List<Task> tasks) {
         // the index of a task in the list is one less than the taskNumber
         int index = taskNumber - 1;
         Task currentTask = tasks.get(index);
-        Task completedTask = Task.createTask(currentTask.getName(), true);
+        Task completedTask = currentTask.complete();
         tasks.set(index, completedTask);
         System.out.println("Nice! I've marked this task as done:\n "
                 + completedTask);
@@ -60,7 +78,9 @@ public class Duke {
 
     public static void addToList(Task newTask, List<Task> tasks) {
         tasks.add(newTask);
-        System.out.println("added: " + newTask.getName());
+        System.out.println("Got it. I've added this task:\n"
+                + newTask + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.");
     }
 
     public static void printGreeting() {

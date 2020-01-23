@@ -2,7 +2,7 @@ class Task {
     String name;
     boolean isDone;
 
-    private Task(String name, boolean isDone) {
+    Task(String name, boolean isDone) {
         this.name = name;
         this.isDone = isDone;
     }
@@ -17,6 +17,10 @@ class Task {
 
     public boolean getIsDone() {
         return isDone;
+    }
+
+    public Task complete() {
+        return createTask(this.getName(), true);
     }
 
     @Override
