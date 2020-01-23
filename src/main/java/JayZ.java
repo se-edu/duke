@@ -34,12 +34,23 @@ public class JayZ {
                 tasks.addTask(message, Symbol.D);
                 return true;
             } else {
-                System.out.println("Unknown input, type \"i\" for the list of instructions.");
-                return true;
+                throw new IllegalArgumentException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-        } catch (Exception e) {
-            System.out.println("Unknown input, type \"i\" for the list of instructions.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(String.format("%80s",' ').replace(' ','*'));
+            System.out.println(String.format("* %-77s*",' '));
+            System.out.println(String.format("* %-77s*",e.getMessage()));
+            System.out.println(String.format("* %-77s*",' '));
+            System.out.println(String.format("%80s",' ').replace(' ','*'));
             return true;
+        } catch (StringIndexOutOfBoundsException ex) {
+            System.out.println(String.format("%80s",' ').replace(' ','*'));
+            System.out.println(String.format("* %-77s*",' '));
+            System.out.println(String.format("* %-77s*","☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
+            System.out.println(String.format("* %-77s*",' '));
+            System.out.println(String.format("%80s",' ').replace(' ','*'));
+            return true;
+
         }
     }
 

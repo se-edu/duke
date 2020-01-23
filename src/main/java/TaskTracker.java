@@ -38,7 +38,7 @@ public class TaskTracker {
      * Adds task into the tasks list.
      * @param message use to store it in the tasks.
      */
-    public void addTask(String message, Symbol symbol) {
+    public void addTask(String message, Symbol symbol) throws IllegalArgumentException {
         String[] arrMessage = message.split(" ");
         Task task;
         if (symbol == Symbol.T) {
@@ -53,6 +53,9 @@ public class TaskTracker {
                     break;
                 }
             }
+            if (landmark == arrMessage.length) {
+                throw new IllegalArgumentException("  ☹ OOPS!!! The description of a deadline cannot be empty.");
+            }
             String[] tempArr = Arrays.copyOfRange(arrMessage, 1, landmark);
             String[] tempArr2 = Arrays.copyOfRange(arrMessage, landmark + 1, arrMessage.length);
             String newMessage = String.join(" ", tempArr);
@@ -65,6 +68,9 @@ public class TaskTracker {
                     landmark = i;
                     break;
                 }
+            }
+            if (landmark == arrMessage.length) {
+                throw new IllegalArgumentException("  ☹ OOPS!!! The description of a event cannot be empty.");
             }
             String[] tempArr = Arrays.copyOfRange(arrMessage, 1, landmark);
             String[] tempArr2 = Arrays.copyOfRange(arrMessage, landmark + 1, arrMessage.length);
