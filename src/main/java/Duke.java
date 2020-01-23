@@ -73,6 +73,22 @@ public class Duke {
                 } catch (DukeException ex) {
                     ex.printStackTrace();
                 }
+            } else if (nextString.contains("delete")) {
+                try {
+                    if (nextString.equals("delete")) {
+                        throw new DukeException("OOPS!!! There's no event to be deleted :(");
+                    }
+                    String[] temp = nextString.split(" ");
+                    int index = Integer.parseInt(temp[1]) - 1;
+                    System.out.println("Noted! I've removed this task: ");
+                    Task current = tasklist.get(index);
+                    tasklist.remove(index);
+                    System.out.println(current.toString());
+                    counter--;
+                    System.out.println("Now you have " + (counter) + " tasks in your list.");
+                } catch (DukeException ex) {
+                    ex.printStackTrace();
+                }
             } else {
                 try {
                     throw new DukeException("I'm sorry, I don't understand :(");
