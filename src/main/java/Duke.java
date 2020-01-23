@@ -32,16 +32,16 @@ public class Duke {
                 Duke.markAsDone(taskNumber, tasks);
                 break;
             case "todo":
-                Task newTodo = Todo.createTodo(input, false);
+                Task newTodo = Todo.createTodo(Duke.combine(words), false);
                 Duke.addToList(newTodo, tasks);
                 break;
             case "deadline":
-                String[] deadlineParts = combine(words).split(" /by ");
+                String[] deadlineParts = Duke.combine(words).split(" /by ");
                 Task newDeadline = Deadline.createDeadline(deadlineParts[0], false, deadlineParts[1]);
                 Duke.addToList(newDeadline, tasks);
                 break;
             case "event":
-                String[] eventParts = combine(words).split(" /at ");
+                String[] eventParts = Duke.combine(words).split(" /at ");
                 Task newEvent = Event.createEvent(eventParts[0], false, eventParts[1]);
                 Duke.addToList(newEvent, tasks);
                 break;
@@ -69,6 +69,7 @@ public class Duke {
     }
 
     public static void printList(List<Task> tasks) {
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             Task currentTask = tasks.get(i);
             int taskNumber = i + 1;

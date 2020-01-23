@@ -1,4 +1,4 @@
-class Event extends Task {
+public class Event extends Task {
     String date;
 
     Event(String name, boolean isDone, String date) {
