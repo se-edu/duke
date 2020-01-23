@@ -27,36 +27,58 @@ public class Duke {
                 current.isDone = true;
                 System.out.println(current.toString());
             } else if (nextString.contains("todo")){
-                String name = nextString.substring(5);
-                Task task = new Todo(name);
-                tasklist.add(counter, task);
-                counter++;
-                System.out.println("Got it. I've added this task: ");
-                System.out.println("  " + task.toString());
-                System.out.println("Now you have " + (counter) + " tasks in your list.");
-            } else if (nextString.contains("deadline")){
-                String name = nextString.substring(9);
-                String[] temp = name.split(" /by ");
-                Task task = new Deadline(temp[0], temp[1]);
-                tasklist.add(counter, task);
-                counter++;
-                System.out.println("Got it. I've added this task: ");
-                System.out.println("  " + task.toString());
-                System.out.println("Now you have " + (counter) + " tasks in your list.");
+                try {
+                    if(nextString.equals("todo")) {
+                        throw new DukeException("OOPS!!! The description of a todo cannot be empty :(");
+                    }
+                    String name = nextString.substring(5);
+                    Task task = new Todo(name);
+                    tasklist.add(counter, task);
+                    counter++;
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println("  " + task.toString());
+                    System.out.println("Now you have " + (counter) + " tasks in your list.");
+                } catch(DukeException ex) {
+                    ex.printStackTrace();
+                }
+            } else if (nextString.contains("deadline")) {
+                try {
+                    if (nextString.equals("deadline")) {
+                        throw new DukeException("OOPS!!! The description of a deadline cannot be empty :(");
+                    }
+                    String name = nextString.substring(9);
+                    String[] temp = name.split(" /by ");
+                    Task task = new Deadline(temp[0], temp[1]);
+                    tasklist.add(counter, task);
+                    counter++;
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println("  " + task.toString());
+                    System.out.println("Now you have " + (counter) + " tasks in your list.");
+                } catch (DukeException ex) {
+                    ex.printStackTrace();
+                }
             } else if (nextString.contains("event")){
-                String name = nextString.substring(5);
-                String[] temp = name.split(" /at ");
-                Task task = new Event(temp[0], temp[1]);
-                tasklist.add(counter, task);
-                counter++;
-                System.out.println("Got it. I've added this task: ");
-                System.out.println("  " + task.toString());
-                System.out.println("Now you have " + (counter) + " tasks in your list.");
+                try {
+                    if (nextString.equals("event")) {
+                        throw new DukeException("OOPS!!! The description of an event cannot be empty :(");
+                    }
+                    String name = nextString.substring(5);
+                    String[] temp = name.split(" /at ");
+                    Task task = new Event(temp[0], temp[1]);
+                    tasklist.add(counter, task);
+                    counter++;
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println("  " + task.toString());
+                    System.out.println("Now you have " + (counter) + " tasks in your list.");
+                } catch (DukeException ex) {
+                    ex.printStackTrace();
+                }
             } else {
-                Task t = new Task(nextString);
-                tasklist.add(counter, t);
-                System.out.println("added: " + nextString);
-                counter++;
+                try {
+                    throw new DukeException("I'm sorry, I don't understand :(");
+                } catch (DukeException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
