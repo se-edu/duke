@@ -33,6 +33,9 @@ public class JayZ {
             } else if (message.substring(0,8).equals("deadline")) {
                 tasks.addTask(message, Symbol.D);
                 return true;
+            } else if (message.substring(0,6).equals("delete")) {
+                tasks.deleteTask(message);
+                return true;
             } else {
                 throw new IllegalArgumentException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
@@ -50,7 +53,13 @@ public class JayZ {
             System.out.println(String.format("* %-77s*",' '));
             System.out.println(String.format("%80s",' ').replace(' ','*'));
             return true;
-
+        } catch (NullPointerException ex) {
+            System.out.println(String.format("%80s",' ').replace(' ','*'));
+            System.out.println(String.format("* %-77s*",' '));
+            System.out.println(String.format("* %-77s*",ex.getMessage()));
+            System.out.println(String.format("* %-77s*",' '));
+            System.out.println(String.format("%80s",' ').replace(' ','*'));
+            return true;
         }
     }
 

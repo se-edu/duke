@@ -7,6 +7,7 @@ public class TaskTracker {
     private TreeMap<Integer, Task> tasks;
     private HashSet<Task> tasksDone;
     private int index;
+    private int removed;
 
     /**
      * Constructor for Task object initializing with 2 attribute.
@@ -16,6 +17,7 @@ public class TaskTracker {
         this.tasks = new TreeMap<>();
         this.tasksDone = new HashSet<>();
         this.index = 1;
+        this.removed = 0;
     }
 
     /**
@@ -32,6 +34,27 @@ public class TaskTracker {
         System.out.println(String.format("* [✓] %-73s*",temp.toString()));
         System.out.println(String.format("* %-77s*",' '));
         System.out.println(String.format("%80s",' ').replace(' ','*'));
+    }
+
+    /**
+     * Delete the tasks from the task list.
+     * @param message whole command use to parse.
+     */
+    public void deleteTask(String message) throws NumberFormatException {
+        try {
+            int num = Integer.parseInt(message.split(" ")[1]);
+            num = num - removed;
+            final Task temp = this.tasks.remove(num);
+            num++;
+            System.out.println(String.format("%80s", ' ').replace(' ', '*'));
+            System.out.println(String.format("* %-77s*", ' '));
+            System.out.println(String.format("* %-77s*", "Noted. I've removed this task:"));
+            System.out.println(String.format("* [✓] %-73s*", temp.toString()));
+            System.out.println(String.format("* %-77s*", ' '));
+            System.out.println(String.format("%80s", ' ').replace(' ', '*'));
+        } catch (NullPointerException ex) {
+            throw new NumberFormatException("Number provided does not exist in the list, please try again.");
+        }
     }
 
     /**
@@ -94,10 +117,11 @@ public class TaskTracker {
     public void printStoredTask() {
         System.out.println(String.format("%80s",' ').replace(' ','*'));
         System.out.println(String.format("* %-77s*",' '));
+        int counter = 1;
         for (Map.Entry<Integer, Task> entry : tasks.entrySet()) {
-            int counter = entry.getKey();
             Task message = entry.getValue();
             System.out.println(String.format("* %d.%-75s*", counter, message));
+            counter++;
         }
         System.out.println(String.format("* %-77s*",' '));
         System.out.println(String.format("%80s",' ').replace(' ','*'));
