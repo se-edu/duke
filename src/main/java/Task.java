@@ -3,31 +3,28 @@
  */
 public class Task {
     private String description;
-    private String taskType;
     private boolean isDone;
 
     /**
      * Class constructor.
      *
      * @param description Task description.
-     * @param taskType Type of task: deadline, event, to-do.
      */
-    public Task(String description, String taskType) {
+    public Task(String description) {
         this.description = description;
-        this.taskType = taskType;
         this.isDone = false;
     }
 
     /**
      * Returns symbol representing status of task.
      *
-     * @return If task is done, return tick symbol, else return X symbol.
+     * @return If task is done, return "Y", else return "X".
      */
     public String getStatusIcon() {
         if (isDone) {
-            return ("\u2713");
+            return ("Y");
         } else {
-            return ("\u2718");
+            return ("X");
         }
     }
 
@@ -41,15 +38,6 @@ public class Task {
     }
 
     /**
-     * Returns the type of the task.
-     *
-     * @return Type of task.
-     */
-    public String getTaskType() {
-        return taskType;
-    }
-
-    /**
      * Mark task as done.
      */
     public void markAsDone() {
@@ -59,10 +47,9 @@ public class Task {
     /**
      * Returns all information about the task formatted in a single string.
      *
-     * @return Information about task.
+     * @return return information about task.
      */
     public String obtainTaskInfo() {
-        return "[" + this.getTaskType() + "]["
-                + this.getStatusIcon() + "] " + this.getDescription();
+        return "[" + this.getStatusIcon() + "] " + this.getDescription();
     }
 }
