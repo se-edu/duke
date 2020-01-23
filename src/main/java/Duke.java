@@ -5,35 +5,61 @@ import java.util.List;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        List<String> list = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
 
         Duke.printGreeting();
 
+        //prompt, parse and respond to input
         String input = "";
         while (!(input = sc.nextLine()).equals("bye")) {
-            Duke.respond(input, list);
+            Duke.respond(input, tasks);
         }
 
         Duke.printExit();
     }
 
-    public static void respond(String input, List<String> list) {
-        if (input.equals("list")) {
-            Duke.printList(list);
-        } else {
-            Duke.addToList(input, list);
+    // Print a response according to the input, update list of task if necessary
+    public static void respond(String input, List<Task> tasks) {
+        String[] words = input.split(" ");
+        String firstWord = words[0];
+        switch (firstWord) {
+            case "list":
+                Duke.printList(tasks);
+                break;
+            case "done":
+                // complete the task at number given by user
+                int taskNumber = Integer.parseInt(words[1]);
+                Duke.markAsDone(taskNumber, tasks);
+                break;
+            default:
+                // add a new task to the list
+                int newNumber = tasks.size() + 1;
+                Task newTask = Task.createTask(newNumber, input, false);
+                Duke.addToList(newTask, tasks);
+                break;
         }
     }
 
-    public static void printList(List<String> list) {
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1) + ". " + list.get(i));
+    // Mark a task as done by substituting the current task with a completed task in the list
+    public static void markAsDone(int taskNumber, List<Task> tasks) {
+        // the index of a task in the list is one less than the taskNumber
+        int index = taskNumber - 1;
+        Task currentTask = tasks.get(index);
+        Task completedTask = Task.createTask(currentTask.getNumber(), currentTask.getName(), true);
+        tasks.set(index, completedTask);
+        System.out.println("Nice! I've marked this task as done:\n "
+                + currentTask.updatedDetails());
+    }
+
+    public static void printList(List<Task> tasks) {
+        for (Task entry : tasks) {
+            System.out.println(entry);
         }
     }
 
-    public static void addToList(String input, List<String> list) {
-        list.add(input);
-        System.out.println("added: " + input);
+    public static void addToList(Task newTask, List<Task> tasks) {
+        tasks.add(newTask);
+        System.out.println("added: " + newTask.getName());
     }
 
     public static void printGreeting() {
