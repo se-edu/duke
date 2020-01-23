@@ -21,26 +21,53 @@ public class Duke {
             String userInput = sc.nextLine();
 
             if (userInput.equals("bye")) {
+                // Exit Duke
                 System.out.println("Bye! Come back soon!");
                 break;
             } else if (userInput.equals("list")) {
+                // Print out list of all tasks
                 System.out.println("This is your list of tasks");
                 for (int i = 0; i < list.size(); i++) {
                     Task t = list.get(i);
-                    System.out.print((i+1) + ".[" + t.getStatusIcon() + "] ");
-                    System.out.println(t.getDescription());
+                    System.out.println((i+1) + "." + t);
                 }
             } else if (userInput.contains("done")) {
+                // Mark one task as complete
                 int taskNumber =  userInput.charAt(5);
                 Task t = list.get(taskNumber - 1);
                 t.markAsDone();
                 System.out.println("This task is mark as completed!");
-                System.out.print("[" + t.getStatusIcon() + "] ");
-                System.out.println(t.getDescription());
+                System.out.println(t);
             } else {
-                System.out.println("added: " + userInput);
-                Task t = new Task(userInput);
+                // Add new task
+                String taskDescription = "";
+                Task t;
+                if (userInput.contains("todo")) {
+                    // add Todo task
+                    taskDescription = userInput.substring(5); // removes todo word
+                    t = new Todo(taskDescription);
+                } else if (userInput.contains("deadline")) {
+                    // add Deadline task
+                    taskDescription = userInput.substring((9)); // removes deadline word
+                    int slashIdx = taskDescription.indexOf("/");
+                    String taskTitle = taskDescription.substring(0, slashIdx);
+                    String deadline = taskDescription.substring(slashIdx + 4);
+                    t = new Deadline(taskTitle, deadline);
+                } else {
+                    // add Event task
+                    taskDescription = userInput.substring(6); // removes event word
+                    int slashIdx = taskDescription.indexOf("/");
+                    String taskTitle = taskDescription.substring(0, slashIdx);
+                    String location = taskDescription.substring(slashIdx + 4);
+                    t = new Event(taskTitle, location);
+                }
+
+                //Task t = new Task(taskDescription);
                 list.add(t);
+                System.out.println("This task has been added successfully:");
+                System.out.println(t);
+                System.out.println("Now you have " + list.size() + " tasks in the list");
+
             }
         }
     }
