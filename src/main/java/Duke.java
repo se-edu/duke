@@ -32,9 +32,8 @@ public class Duke {
                 Duke.markAsDone(taskNumber, tasks);
                 break;
             default:
-                // add a new task to the list
-                int newNumber = tasks.size() + 1;
-                Task newTask = Task.createTask(newNumber, input, false);
+                // add a new task to the listte
+                Task newTask = Task.createTask(input, false);
                 Duke.addToList(newTask, tasks);
                 break;
         }
@@ -45,15 +44,17 @@ public class Duke {
         // the index of a task in the list is one less than the taskNumber
         int index = taskNumber - 1;
         Task currentTask = tasks.get(index);
-        Task completedTask = Task.createTask(currentTask.getNumber(), currentTask.getName(), true);
+        Task completedTask = Task.createTask(currentTask.getName(), true);
         tasks.set(index, completedTask);
         System.out.println("Nice! I've marked this task as done:\n "
-                + currentTask.updatedDetails());
+                + completedTask);
     }
 
     public static void printList(List<Task> tasks) {
-        for (Task entry : tasks) {
-            System.out.println(entry);
+        for (int i = 0; i < tasks.size(); i++) {
+            Task currentTask = tasks.get(i);
+            int taskNumber = i + 1;
+            System.out.println(taskNumber + ". " + currentTask);
         }
     }
 
