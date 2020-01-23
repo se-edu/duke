@@ -42,6 +42,17 @@ public class Duke {
                             tasks.get(n - 1).markAsDone();
                             System.out.println("\t" + tasks.get(n - 1));
                         }
+                    } else if (input.startsWith("delete")) {
+                        String[] tempArray = input.split(" ");
+                        int n = Integer.parseInt(tempArray[1]);
+                        if (n > tasks.size()) {
+                            System.out.println("\tThere is no such task");
+                        } else {
+                            System.out.println("\tNoted. I have removed this task:");
+                            System.out.println("\t" + tasks.get(n - 1));
+                            tasks.remove(n-1);
+                            System.out.println("\tYou now have " + tasks.size() + " tasks in the list.");
+                        }
                     } else {
 
                         Task temp;

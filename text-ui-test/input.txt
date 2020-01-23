@@ -1,4 +1,9 @@
 todo hi
 deadline watch lecture videos /by 21st Jan
 event go clubbing /at 25th Jan 2PM
+deadline
+todo
+event
+delete 3
+delete 2
 bye
