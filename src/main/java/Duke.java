@@ -22,32 +22,39 @@ public class Duke {
     public static void respond(String input, List<Task> tasks) {
         String[] words = input.split(" ");
         String firstWord = words[0];
-        switch (firstWord) {
-            case "list":
-                Duke.printList(tasks);
-                break;
-            case "done":
-                // complete the task at number given by user
-                int taskNumber = Integer.parseInt(words[1]);
-                Duke.markAsDone(taskNumber, tasks);
-                break;
-            case "todo":
-                Task newTodo = Todo.createTodo(Duke.combine(words), false);
-                Duke.addToList(newTodo, tasks);
-                break;
-            case "deadline":
-                String[] deadlineParts = Duke.combine(words).split(" /by ");
-                Task newDeadline = Deadline.createDeadline(deadlineParts[0], false, deadlineParts[1]);
-                Duke.addToList(newDeadline, tasks);
-                break;
-            case "event":
-                String[] eventParts = Duke.combine(words).split(" /at ");
-                Task newEvent = Event.createEvent(eventParts[0], false, eventParts[1]);
-                Duke.addToList(newEvent, tasks);
-                break;
-            default:
-                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                break;
+        try {
+            switch (firstWord) {
+                case "list":
+                    Duke.printList(tasks);
+                    break;
+                case "done":
+                    // complete the task at number given by user
+                    int taskNumber = Integer.parseInt(words[1]);
+                    Duke.markAsDone(taskNumber, tasks);
+                    break;
+                case "todo":
+                    if (words.length == 1) {
+                        throw new DukeException("The description of a todo cannot be empty.");
+                    } else {
+                        Task newTodo = Todo.createTodo(Duke.combine(words), false);
+                        Duke.addToList(newTodo, tasks);
+                        break;
+                    }
+                case "deadline":
+                    String[] deadlineParts = Duke.combine(words).split(" /by ");
+                    Task newDeadline = Deadline.createDeadline(deadlineParts[0], false, deadlineParts[1]);
+                    Duke.addToList(newDeadline, tasks);
+                    break;
+                case "event":
+                    String[] eventParts = Duke.combine(words).split(" /at ");
+                    Task newEvent = Event.createEvent(eventParts[0], false, eventParts[1]);
+                    Duke.addToList(newEvent, tasks);
+                    break;
+                default:
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            }
+        } catch(DukeException e) {
+            System.out.println("OOPS!!! " + e.getMessage());
         }
     }
     public static String combine(String[] parts) {
