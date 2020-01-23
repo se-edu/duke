@@ -9,6 +9,7 @@ Now you have 2 tasks in the list.
 Here are the tasks in your list:
 1. [T][?] borrow book
 2. [D][?] return book (by: June 6th)
-OOPS!!! The description of a todo cannot be empty.
-OOPS!!! I'm sorry, but I don't know what that means :-(
+Noted. I've removed this task:
+[D][?] return book (by: June 6th)
+Now you have 1 tasks in the list.
 Bye. Hope to see you again soon!

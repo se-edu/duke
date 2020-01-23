@@ -29,8 +29,12 @@ public class Duke {
                     break;
                 case "done":
                     // complete the task at number given by user
-                    int taskNumber = Integer.parseInt(words[1]);
-                    Duke.markAsDone(taskNumber, tasks);
+                    int taskNumberToComplete = Integer.parseInt(words[1]);
+                    Duke.markAsDone(taskNumberToComplete, tasks);
+                    break;
+                case "delete":
+                    int taskNumberToDelete = Integer.parseInt(words[1]);
+                    Duke.delete(taskNumberToDelete, tasks);
                     break;
                 case "todo":
                     if (words.length == 1) {
@@ -57,6 +61,16 @@ public class Duke {
             System.out.println("OOPS!!! " + e.getMessage());
         }
     }
+
+    public static void delete(int taskNumber, List<Task> tasks) {
+        int index = taskNumber - 1;
+        Task removedTask = tasks.remove(index);
+        System.out.println("Noted. I've removed this task:\n"
+                + removedTask + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.");
+    }
+
+    // combines a String array from index 1 to (length - 1)
     public static String combine(String[] parts) {
         String result = parts[1];
         for (int i = 2; i < parts.length; i++) {
@@ -64,6 +78,7 @@ public class Duke {
         }
         return result;
     }
+
     // Mark a task as done by substituting the current task with a completed task in the list
     public static void markAsDone(int taskNumber, List<Task> tasks) {
         // the index of a task in the list is one less than the taskNumber
@@ -71,8 +86,9 @@ public class Duke {
         Task currentTask = tasks.get(index);
         Task completedTask = currentTask.complete();
         tasks.set(index, completedTask);
-        System.out.println("Nice! I've marked this task as done:\n "
-                + completedTask);
+        System.out.println("Nice! I've marked this task as done:\n"
+                + completedTask + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.");
     }
 
     public static void printList(List<Task> tasks) {
