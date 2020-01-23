@@ -43,7 +43,16 @@ public class Duke {
                 System.out.println("Got it. I've added this task: ");
                 System.out.println("  " + task.toString());
                 System.out.println("Now you have " + (counter) + " tasks in your list.");
-            }else {
+            } else if (nextString.contains("event")){
+                String name = nextString.substring(5);
+                String[] temp = name.split(" /at ");
+                Task task = new Event(temp[0], temp[1]);
+                tasklist.add(counter, task);
+                counter++;
+                System.out.println("Got it. I've added this task: ");
+                System.out.println("  " + task.toString());
+                System.out.println("Now you have " + (counter) + " tasks in your list.");
+            } else {
                 Task t = new Task(nextString);
                 tasklist.add(counter, t);
                 System.out.println("added: " + nextString);
