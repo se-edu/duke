@@ -10,24 +10,35 @@ public class JayZ {
      * @return boolean used to inform other function if user wants to quit
      *     true -> continue using bot, false -> quit bot.
      */
-    public boolean parseMessage(String message, Task tasks) {
+    public boolean parseMessage(String message, TaskTracker tasks) {
         try {
             if (message.equals("bye")) {
                 printGoodBye();
                 return false;
+            } else if (message.equals("i")) {
+                botInstruction();
+                return true;
             } else if (message.equals("list")) {
                 tasks.printStoredTask();
                 return true;
             } else if (message.substring(0,4).equals("done")) {
                 tasks.doneTask(Integer.parseInt(message.split(" ",2)[1]));
                 return true;
+            } else if (message.substring(0,4).equals("todo")) {
+                tasks.addTask(message, Symbol.T);
+                return true;
+            } else if (message.substring(0,5).equals("event")) {
+                tasks.addTask(message, Symbol.E);
+                return true;
+            } else if (message.substring(0,8).equals("deadline")) {
+                tasks.addTask(message, Symbol.D);
+                return true;
             } else {
-                tasks.addTask(message);
+                System.out.println("Unknown input, type \"i\" for the list of instructions.");
                 return true;
             }
-
         } catch (Exception e) {
-            tasks.addTask(message);
+            System.out.println("Unknown input, type \"i\" for the list of instructions.");
             return true;
         }
     }
@@ -61,15 +72,26 @@ public class JayZ {
     public void runChatBot() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Hello! I'm JayZ-Bot\nWhat can i do for you?");
-        System.out.print("All messages typed in this chatbot will be saved,");
-        System.out.println("use the \"list\" command to review the Chat History");
+        botInstruction();
         ArrayList<String> lis = new ArrayList<>();
-        Task tasks = new Task();
+        TaskTracker tasks = new TaskTracker();
         while (true) {
             if (!parseMessage(scanner.nextLine(), tasks)) {
                 break;
             }
         }
+    }
+
+    /**
+     * Print instruction of the commands in JayZbot.
+     */
+    public void botInstruction() {
+        System.out.println("Use the list command to see your tasks.");
+        System.out.println("Set up tasks by using the command shown below:");
+        System.out.println("todo {your task}");
+        System.out.println("deadline {your task} /by {date/time}");
+        System.out.println("event {your task} /at {date/time}");
+        System.out.println("Use the bye command to quit.");
     }
 
     /**
