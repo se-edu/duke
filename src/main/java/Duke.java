@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -14,8 +15,7 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-        String[] list = new String[100];
-        int listCount = 0;
+        ArrayList<Task> list = new ArrayList<Task>();
 
         while (true) {
             String userInput = sc.nextLine();
@@ -24,13 +24,23 @@ public class Duke {
                 System.out.println("Bye! Come back soon!");
                 break;
             } else if (userInput.equals("list")) {
-                for (int i = 0; i < listCount; i++) {
-                    System.out.println((i+1) + ". " + list[i]);
+                System.out.println("This is your list of tasks");
+                for (int i = 0; i < list.size(); i++) {
+                    Task t = list.get(i);
+                    System.out.print((i+1) + ".[" + t.getStatusIcon() + "] ");
+                    System.out.println(t.getDescription());
                 }
+            } else if (userInput.contains("done")) {
+                int taskNumber =  userInput.charAt(5);
+                Task t = list.get(taskNumber - 1);
+                t.markAsDone();
+                System.out.println("This task is mark as completed!");
+                System.out.print("[" + t.getStatusIcon() + "] ");
+                System.out.println(t.getDescription());
             } else {
                 System.out.println("added: " + userInput);
-                list[listCount] = userInput;
-                listCount++;
+                Task t = new Task(userInput);
+                list.add(t);
             }
         }
     }
