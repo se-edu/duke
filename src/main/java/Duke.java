@@ -17,7 +17,7 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
 
         Scanner in = new Scanner(System.in);
-        ArrayList<String> list = new ArrayList<>(100);
+        ArrayList<Task> tasks = new ArrayList<Task>(100);
 
         //accepting input
         String input = in.nextLine();
@@ -27,13 +27,24 @@ public class Duke {
             System.out.println("\t____________________________________________________________");
             //checking input and giving appropriate responses
             if (input.equalsIgnoreCase("list")) {
-                int size = list.size();
+                int size = tasks.size();
+                System.out.println("\tHere are the tasks in your list:");
                 for (int i = 0; i < size; ++i) {
-                    System.out.println("\t" + (i + 1) + ". " + list.get(i));
+                    System.out.println("\t" + (i + 1) + ". " + tasks.get(i));
+                }
+            } else if(input.startsWith("done")) {
+                String[] tempArray = input.split(" ");
+                int n = Integer.parseInt(tempArray[1]);
+                if(n > tasks.size()) {
+                    System.out.println("\tThere is no such task");
+                } else {
+                    System.out.println("\tNice! I've marked this task as done:");
+                    tasks.get(n-1).markAsDone();
+                    System.out.println("\t" + tasks.get(n-1));
                 }
             } else {
                 System.out.println("\tadded: " + input);
-                list.add(input);
+                tasks.add(new Task(input));
             }
             System.out.println("\t____________________________________________________________");
 
