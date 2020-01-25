@@ -1,6 +1,6 @@
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
+import exceptions.WrongCommandException;
+import exceptions.WrongUsageException;
 
 public class Duke {
     public static final int MAX_STRING_LENGTH = 60;
@@ -25,9 +25,11 @@ public class Duke {
                 else if (command.equals("todo"))                print(taskManager.addTodoTask(nextArgs));
                 else if (command.equals("deadline"))            print(taskManager.addDeadlineTask(nextArgs));
                 else if (command.equals("event"))               print(taskManager.addEventTask(nextArgs));
-                else                                            throw new Exception();
+                else                                            throw new WrongCommandException(String.format("The command %s is not supported", command));
+            } catch (WrongCommandException | WrongUsageException e) {
+                print(e.getMessage());
             } catch (Exception e) {
-                print("YOU MADE SOME STUPID MISTAKE BOOOHOOO");
+                System.out.println("Some other exception caught");
             }
         }
 

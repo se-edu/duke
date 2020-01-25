@@ -1,35 +1,51 @@
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
+import exceptions.WrongUsageException;
 
-public class TaskManager {
+public class TaskManager{
     private List<Task> tasks;
 
     public TaskManager(int maxTasks) {
         this.tasks = new ArrayList<>(maxTasks);
     }
 
-    public String addTodoTask(String args) {
-        Task task = new Task(args);
-        return this.add(task);
+    public String addTodoTask(String args) throws WrongUsageException {
+        if (args.equals("")) throw new WrongUsageException("Usage: todo <description>");
+        return this.add(new Task(args));
     }
 
-    public String addDeadlineTask(String args) {
+    public String addDeadlineTask(String args) throws WrongUsageException {
         String[] splitArgs = args.split("/by");
-        if (splitArgs.length != 2) System.out.println("Too many or too few arguments");
+        if (splitArgs.length != 2) throw new WrongUsageException("Usage: deadline <description> /by <deadline>");
 
-        Task task = new DeadlineTask(splitArgs[0].trim(), splitArgs[1].trim());
-        return this.add(task);
+        return this.add(new DeadlineTask(splitArgs[0].trim(), splitArgs[1].trim()));
     }
 
-    public String addEventTask(String args) {
+    public String addEventTask(String args) throws WrongUsageException {
         String[] splitArgs = args.split("/at");
-        if (splitArgs.length != 2) System.out.println("Too many or too few arguments");
+        if (splitArgs.length != 2) throw new WrongUsageException("Usage: event <description> /at <when>");
 
-        Task task = new EventTask(splitArgs[0].trim(), splitArgs[1].trim());
-        return this.add(task);
+        return this.add(new EventTask(splitArgs[0].trim(), splitArgs[1].trim()));
     }
 
+    public String setTaskDone(String args) throws WrongUsageException {
+        try {
+            int index = Integer.parseInt(args);
+            Task task = this.tasks.get(index - 1);
+            task.setDone();
+
+            return String.format(
+                "Nice! I've marked this task as done: \n%s", task
+            );
+        } catch (NumberFormatException e) {
+            throw new WrongUsageException("Usage: done <task_index>");
+        } catch (IndexOutOfBoundsException e) {
+            throw new WrongUsageException(String.format("Task index has to be a value between 1 and %d", this.tasks.size()));
+        }
+    }
+
+    // -----------------------------------------------------------------------------------------
+    // Helper Methods
     private String add(Task task) {
         this.tasks.add(task);
         return String.format(
@@ -39,27 +55,11 @@ public class TaskManager {
         );
     }
 
-    public String setDone(String args) {
-        String[] splitArgs = args.split(" ");
-        if (splitArgs.length != 1) System.out.println("Too many or too few arguemnts");;
-        
-        int index = Integer.parseInt(splitArgs[0]);
-        if (index > this.tasks.size() || index < 1) return "Choose properly leh";
-
-        Task task = this.tasks.get(index - 1);
-        task.setDone();
-        return String.format(
-            "Nice! I've marked this task as done: \n%s", task
-        );
-    }
-
     @Override
     public String toString() {
-        if (this.tasks.size() == 0) {
-            return "Add something lehh";
-        }
+        if (this.tasks.size() == 0) return "You have no tasks";
 
-        StringBuilder sb = new StringBuilder("You need to do dis lah: \n");
+        StringBuilder sb = new StringBuilder("These are your tasks: \n");
         for (int i = 0; i < this.tasks.size(); i++) {
             sb.append(String.format("%d. %s\n", i + 1, this.tasks.get(i)));
         }
