@@ -23,7 +23,7 @@ public class Duke {
         String input = "";
         while (true) {
             try {
-                input = sc.nextLine();
+                input = sc.nextLine().trim();
                 if (input.equals("bye")) {
                     System.out.println("Bye. Hope to see you again soon!");
                     sc.close();
@@ -33,7 +33,15 @@ public class Duke {
                         System.out.println((i + 1) + "." + tasks.get(i));
                     }
                 } else if (input.split(" ")[0].equals("delete")) {
+                    if (input.split(" ").length < 2) {
+                        throw new InsufficientInputException();
+                    }
                     int idx = Integer.parseInt((input.split(" ")[1])) - 1;
+                    if (idx < 0 || idx >= tasks.size()) {
+                        String message = "OOPS! Invalid task number. You only have " + tasks.size()
+                                + (tasks.size() > 1 ? " tasks" : " task") + " in the list";
+                        throw new InvalidIndexException(message);
+                    }
                     Task toDelete = tasks.get(idx);
                     tasks.remove(idx);
                     System.out.println("Noted. I've removed this task:");
@@ -41,49 +49,88 @@ public class Duke {
                     System.out.println("Now you have " + tasks.size()
                             + " " + (tasks.size() > 1 ? "tasks" : "task") + " in the list");
                 } else if (input.split(" ")[0].equals("done")) {
+                    if (input.split(" ").length < 2) {
+                        throw new InsufficientInputException();
+                    }
                     int idx = Integer.parseInt((input.split(" ")[1])) - 1;
+                    if (idx < 0 || idx >= tasks.size()) {
+                        String message = "OOPS! Invalid task number. You only have " + tasks.size()
+                                + (tasks.size() > 1 ? " tasks" : " task") + " in the list";
+                        throw new InvalidIndexException(message);
+                    }
                     tasks.get(idx).setDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(tasks.get(idx));
                 } else if (input.split(" ")[0].equals("todo")) {
+                    if (input.split(" ").length < 2) {
+                        throw new InvalidTodoException();
+                    }
                     input = input.substring(input.split(" ")[0].length() + 1, input.length());
                     Task task = new Task(input);
                     tasks.add(task);
                     addTask(task);
                 } else if (input.split(" ")[0].equals("deadline")) {
-                    input = input.substring(input.split(" ")[0].length() + 1, input.length());
+                    input = input.substring(input.split(" ")[0].length() + 1, input.length()).trim();
+                    if (input.split("/by").length == 0) {
+                        throw new InvalidDeadlineException("OOPS! The description and time is missing. " +
+                                "Format: description /by time");
+                    } else if (input.split("/by").length == 1) {
+                        if (input.split("/by")[0].equals("")) {
+                            throw new InvalidEventException("OOPS! The description and time is missing. " +
+                                    "Format: description /by time");
+                        } else {
+                            throw new InvalidEventException("OOPS! The time is missing. " +
+                                    "Format: description /by time");
+                        }
+                    }else if (input.split("/by").length == 2) {
+                        if (input.split("/by")[0].equals("")) {
+                            throw new InvalidDeadlineException("OOPS! The description is missing. " +
+                                    "Format: description /by time");
+                        }
+                    }
                     String name = input.split(" /by")[0];
                     String time = input.split(" /by")[1];
                     Deadline deadline = new Deadline(name, time);
                     tasks.add(deadline);
                     addTask(deadline);
                 } else if (input.split(" ")[0].equals("event")) {
-                    input = input.substring(input.split(" ")[0].length() + 1, input.length());
+                    input = input.substring(input.split(" ")[0].length() + 1, input.length()).trim();
+                    if (input.split("/at").length == 0) {
+                        throw new InvalidEventException("OOPS! The description and time is missing. " +
+                                "Format: description /at time");
+                    } else if (input.split("/at").length == 1) {
+                        if (input.split("/at")[0].equals("")) {
+                            throw new InvalidEventException("OOPS! The description and time is missing. " +
+                                    "Format: description /at time");
+                        } else {
+                            throw new InvalidEventException("OOPS! The time is missing. " +
+                                    "Format: description /at time");
+                        }
+                    } else if (input.split("/at").length == 2) {
+                        if (input.split("/at")[0].equals("")) {
+                            throw new InvalidEventException("OOPS! The description is missing.");
+                        }
+                    }
                     String name = input.split(" /at")[0];
                     String time = input.split(" /at")[1];
                     Event event = new Event(name, time);
                     tasks.add(event);
                     addTask(event);
                 } else {
-                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new InvalidInputException();
                 }
-            } catch (StringIndexOutOfBoundsException e) {
-                if (input.split(" ")[0].equals("todo")) {
-                    System.out.println("OOPS! The description of a task cannot be empty.");
-                } else if (input.split(" ")[0].equals("event")) {
-                    System.out.println("OOPS! The description of an event cannot be empty.");
-                } else if (input.split(" ")[0].equals("deadline")) {
-                    System.out.println("OOPS! The description of a deadline cannot be empty.");
-                }
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("OOPS! The time of this event is invalid");
-            } catch (IndexOutOfBoundsException e) {
-                if (tasks.size() == 0) {
-                    System.out.println("No tasks. Why not create one?");
-                } else {
-                    System.out.println("OOPS! Invalid task number. You only have " + tasks.size()
-                            + (tasks.size() > 1 ? " tasks" : " task") + " in the list");
-                }
+            } catch (InvalidInputException e) {
+                System.out.println(e);
+            } catch (InsufficientInputException e) {
+                System.out.println(e);
+            } catch (InvalidIndexException e) {
+                System.out.println(e);
+            } catch (InvalidTodoException e) {
+                System.out.println(e);
+            } catch (InvalidDeadlineException e) {
+                System.out.println(e);
+            } catch (InvalidEventException e) {
+                System.out.println(e);
             }
         }
     }
