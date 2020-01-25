@@ -40,7 +40,24 @@ public class TaskManager{
         } catch (NumberFormatException e) {
             throw new WrongUsageException("Usage: done <task_index>");
         } catch (IndexOutOfBoundsException e) {
-            throw new WrongUsageException(String.format("Task index has to be a value between 1 and %d", this.tasks.size()));
+            throw new WrongUsageException("Invalid task index. Please refer to the 'list' command for available indices.");
+        }
+    }
+
+    public String deleteTask(String args) throws WrongUsageException {
+        try {
+            int index = Integer.parseInt(args);
+            Task task = this.tasks.remove(index - 1);
+
+            return String.format(
+                "Noted. I've removed this task: \n" +
+                "  %s\n" +
+                "Now you have %d tasks in the list.\n", task, this.tasks.size()
+            );
+        } catch (NumberFormatException e) {
+            throw new WrongUsageException("Usage: delete <task_index>");
+        } catch (IndexOutOfBoundsException e) {
+            throw new WrongUsageException("Invalid task index. Please refer to the 'list' command for available indices.");
         }
     }
 

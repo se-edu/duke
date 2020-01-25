@@ -21,15 +21,16 @@ public class Duke {
 
                 if      (command.equals("bye"))                 break;
                 else if (command.equals("list"))                print(taskManager.toString());                
-                else if (command.equals("done"))                print(taskManager.setDone(nextArgs));
+                else if (command.equals("done"))                print(taskManager.setTaskDone(nextArgs));
                 else if (command.equals("todo"))                print(taskManager.addTodoTask(nextArgs));
                 else if (command.equals("deadline"))            print(taskManager.addDeadlineTask(nextArgs));
                 else if (command.equals("event"))               print(taskManager.addEventTask(nextArgs));
-                else                                            throw new WrongCommandException(String.format("The command %s is not supported", command));
+                else if (command.equals("delete"))              print(taskManager.deleteTask(nextArgs));
+                else                                            throw new WrongCommandException(String.format("The command '%s' is not supported", command));
             } catch (WrongCommandException | WrongUsageException e) {
                 print(e.getMessage());
             } catch (Exception e) {
-                System.out.println("Some other exception caught");
+                print("Caught some other exception! Notify developer!");
             }
         }
 
