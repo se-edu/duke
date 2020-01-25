@@ -13,4 +13,8 @@ src/main/resources/docs/
 *.iml
 bin/
 
+.classpath
+.project
+
 *.class
+**/actual.txt
