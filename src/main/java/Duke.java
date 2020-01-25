@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
     public static final int MAX_STRING_LENGTH = 60;
@@ -12,16 +14,18 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         TaskManager taskManager = new TaskManager(MAX_TASKS);
           
-        while (scanner.hasNextLine()) {
+        while (scanner.hasNext()) {
             try {
-                String input = scanner.nextLine();
-                String[] parsedInput = input.split(" ");
-                String command = parsedInput[0];
+                String command = scanner.next();
+                String nextArgs = scanner.nextLine().trim();
 
-                if (command.equals("bye"))            break;
-                else if (command.equals("list"))      print(taskManager.toString());
-                else if (command.equals("done"))      print(taskManager.setDone(Integer.parseInt(parsedInput[1])));
-                else                                  print(taskManager.add(input));
+                if      (command.equals("bye"))                 break;
+                else if (command.equals("list"))                print(taskManager.toString());                
+                else if (command.equals("done"))                print(taskManager.setDone(nextArgs));
+                else if (command.equals("todo"))                print(taskManager.addTodoTask(nextArgs));
+                else if (command.equals("deadline"))            print(taskManager.addDeadlineTask(nextArgs));
+                else if (command.equals("event"))               print(taskManager.addEventTask(nextArgs));
+                else                                            throw new Exception();
             } catch (Exception e) {
                 print("YOU MADE SOME STUPID MISTAKE BOOOHOOO");
             }
