@@ -18,7 +18,7 @@ public class Duke {
     public static String gotIt = "     Got it. I've added this task:";
     public static String deleteIt = "     Noted. I've removed this task: ";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -31,12 +31,14 @@ public class Duke {
 
         greet();
 
-        ArrayList<Task> list = new ArrayList<>();
+        Storage dukeStorage = new Storage("duke.txt");
+
+        ArrayList<Task> list = dukeStorage.readFromFile();
 
         String keyword = "";
 
         while(scanner.hasNextLine()) {
-            String input = scanner.nextLine();
+            String input = scanner.nextLine().trim();
             if (input.equals("bye")) {
                 exit();
             } else { //not bye
@@ -66,6 +68,7 @@ public class Duke {
                     System.out.println(LINE);
                     System.out.println(markAsDone);
                     list.get(thisIndex).markAsDone();
+                    dukeStorage.writeToFile(list);
                     System.out.println("       " + list.get(thisIndex).toString());
                     System.out.println(LINE + "\n");
                 } else if (keyword.equals("delete")){ // case delete
@@ -93,6 +96,7 @@ public class Duke {
                     System.out.println(deleteIt);
                     System.out.println("       " + list.get(thatIndex).toString());
                     list.remove(thatIndex);
+                    dukeStorage.writeToFile(list);
                     System.out.println("     Now you have " + list.size() + " tasks in the list. ");
                     System.out.println(LINE + "\n");
 
@@ -158,6 +162,7 @@ public class Duke {
                     }
 
                     addItem(list, thisTask);
+                    dukeStorage.writeToFile(list);
                     echo(thisTask);
                     System.out.println("     Now you have " + list.size() + " tasks in the list.\n" + LINE + "\n");
                 }
@@ -199,11 +204,12 @@ public class Duke {
     /**
      * @param list
      * @param thisTask
-     * This method add a new task object to the array list.
+     * This method adds a new task object to the array list.
      */
     public static void addItem(ArrayList<Task> list, Task thisTask){
         list.add(thisTask);
     }
+
 
     /**
      * @param list
