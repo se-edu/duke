@@ -1,5 +1,7 @@
 package task;
 
+import Parser.TimeFormatter;
+
 public class Event extends Task {
 
     protected String duration;
@@ -11,6 +13,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + duration + ")";
+        return "[E]" + super.toString() + " (at: " + new TimeFormatter(duration).processDate() + ")";
     }
 }

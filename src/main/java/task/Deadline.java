@@ -1,5 +1,7 @@
 package task;
 
+import Parser.TimeFormatter;
+
 public class Deadline extends Task {
 
     protected String by;
@@ -11,6 +13,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + new TimeFormatter(by).processDate() + ")";
     }
 }

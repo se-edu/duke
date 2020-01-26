@@ -5,7 +5,7 @@ public class Task {
     protected String name;
     protected boolean isDone;
 
-    public Task(String name){
+    public Task(String name) {
         this.name = name;
         this.isDone = false;
     }
@@ -13,13 +13,13 @@ public class Task {
     /**
      * This method marks the isDone status of the object as true.
      */
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
     }
 
-    public String toString(){
+    public String toString() {
         String mark = "";
-        if(this.isDone){
+        if (this.isDone) {
             mark = "[✓]";
         } else {
             mark = "[✗]";
