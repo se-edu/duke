@@ -10,6 +10,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String name, boolean isDone){
+        this.name = name;
+        this.isDone = isDone;
+    }
+
     /**
      * This method marks the isDone status of the object as true.
      */
@@ -25,6 +30,16 @@ public class Task {
             mark = "[✗]";
         }
         return mark + " " + this.name;
+    }
+
+    public String toStringFileFormat(){
+        int num = -1;
+        if(isDone){
+            num = 1;
+        } else {
+            num = 0;
+        }
+        return " | " + num + " | " + this.name;
     }
 
 }

@@ -11,8 +11,17 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public Deadline(String name, String by, boolean isDone) {
+        super(name, isDone);
+        this.by = by;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + new TimeFormatter(by).processDate() + ")";
+    }
+
+    public String toStringFileFormat(){
+        return "D" + super.toStringFileFormat() + " | " + this.by;
     }
 }
