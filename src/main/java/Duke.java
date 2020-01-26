@@ -58,12 +58,12 @@ public class Duke {
         Task t;
         if (userInput.contains("todo")) {
             // add Todo task
-            if (userInput.equals("todo")) throw new DukeException("no todo task");
+            if (userInput.equals("todo")) throw new DukeException("insufficient details");
             String taskDescription = userInput.substring(5); // removes todo word
             t = new Todo(taskDescription);
         } else if (userInput.contains("deadline")) {
             // add Deadline task
-            if (userInput.equals("deadline")) throw new DukeException("no deadline date");
+            if (userInput.equals("deadline")) throw new DukeException("insufficient details");
             String taskDescription = userInput.substring((9)); // removes deadline word
             int slashIdx = taskDescription.indexOf("/");
             if (slashIdx == -1) throw new DukeException("wrong format");
@@ -73,7 +73,7 @@ public class Duke {
             t = new Deadline(taskTitle, deadline);
         } else if (userInput.contains("event")) {
             // add Event task
-            if (userInput.equals("event")) throw new DukeException("no event date");
+            if (userInput.equals("event")) throw new DukeException("insufficient details");
             String taskDescription = userInput.substring(6); // removes event word
             int slashIdx = taskDescription.indexOf("/");
             if (slashIdx == -1) throw new DukeException("wrong format");

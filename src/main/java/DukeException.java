@@ -10,14 +10,8 @@ public class DukeException extends Exception {
         String reply;
 
         switch (description) {
-            case "no todo task":
-                reply = "Please enter a task to be done.";
-                break;
-            case "no deadline date":
-                reply = "Please enter a date to complete this task by.";
-                break;
-            case "no event date":
-                reply = "Please enter the date of the event.";
+            case "insufficient details":
+                reply = "Please enter more details for this task.";
                 break;
             case "done":
                 reply = "Please indicate a task number to mark as done.";
@@ -31,7 +25,7 @@ public class DukeException extends Exception {
             case "delete":
                 reply = "Please indicate a task number to mark for deletion.";
                 break;
-            case "Unrecognized":
+            default:
                 reply = "Your entry is not recognised. Please try again.";
                 break;
         }
