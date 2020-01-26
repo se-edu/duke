@@ -1,6 +1,6 @@
-C:\Users\TeikJun\WinProjects\duke\src\main\java\Deadline.java
-C:\Users\TeikJun\WinProjects\duke\src\main\java\Duke.java
-C:\Users\TeikJun\WinProjects\duke\src\main\java\DukeException.java
-C:\Users\TeikJun\WinProjects\duke\src\main\java\Event.java
-C:\Users\TeikJun\WinProjects\duke\src\main\java\Task.java
-C:\Users\TeikJun\WinProjects\duke\src\main\java\Todo.java
+../src/main/java/Deadline.java
+../src/main/java/Duke.java
+../src/main/java/DukeException.java
+../src/main/java/Event.java
+../src/main/java/Task.java
+../src/main/java/Todo.java
