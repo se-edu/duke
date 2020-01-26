@@ -58,32 +58,32 @@ public class Duke {
         Task t;
         if (userInput.contains("todo")) {
             // add Todo task
-            if (userInput.equals("todo")) throw new DukeException(userInput);
+            if (userInput.equals("todo")) throw new DukeException("no todo task");
             String taskDescription = userInput.substring(5); // removes todo word
             t = new Todo(taskDescription);
         } else if (userInput.contains("deadline")) {
             // add Deadline task
-            if (userInput.equals("deadline")) throw new DukeException(userInput);
+            if (userInput.equals("deadline")) throw new DukeException("no deadline date");
             String taskDescription = userInput.substring((9)); // removes deadline word
             int slashIdx = taskDescription.indexOf("/");
-            if (slashIdx == -1) throw new DukeException("Format");
+            if (slashIdx == -1) throw new DukeException("wrong format");
 
             String taskTitle = taskDescription.substring(0, slashIdx);
             String deadline = taskDescription.substring(slashIdx + 4);
             t = new Deadline(taskTitle, deadline);
         } else if (userInput.contains("event")) {
             // add Event task
-            if (userInput.equals("event")) throw new DukeException(userInput);
+            if (userInput.equals("event")) throw new DukeException("no event date");
             String taskDescription = userInput.substring(6); // removes event word
             int slashIdx = taskDescription.indexOf("/");
-            if (slashIdx == -1) throw new DukeException("Format");
+            if (slashIdx == -1) throw new DukeException("wrong format");
 
             String taskTitle = taskDescription.substring(0, slashIdx);
             String location = taskDescription.substring(slashIdx + 4);
             t = new Event(taskTitle, location);
         } else {
             t = null;
-            throw new DukeException("Unrecognised");
+            throw new DukeException("Unrecognized");
         }
 
         if (t != null) {
