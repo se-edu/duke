@@ -9,7 +9,13 @@ Now you have 2 tasks in the list.
 Here are the tasks in your list:
 1. [T][✘] borrow book
 2. [D][✘] return book (by: June 6th)
+Nice! I've marked this task as done:
+[D][✓] return book (by: June 6th)
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+1. [T][✘] borrow book
+2. [D][✓] return book (by: June 6th)
 Noted. I've removed this task:
-[D][✘] return book (by: June 6th)
+[D][✓] return book (by: June 6th)
 Now you have 1 tasks in the list.
 Bye. Hope to see you again soon!
