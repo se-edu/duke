@@ -1,6 +1,9 @@
 public class DukeException extends Exception {
 
     protected String description;
+    private static final String indent = "    ";
+    private static final String horLine = "___________________________" +
+            "_________________________________";
 
     public DukeException(String e) {
         this.description = e;
@@ -26,10 +29,12 @@ public class DukeException extends Exception {
                 reply = "Please indicate a task number to mark for deletion.";
                 break;
             default:
-                reply = "Your entry is not recognised. Please try again.";
+                reply = "Your entry is not recognized. Please try again.";
                 break;
         }
 
-        System.out.println(reply);
+        System.out.println(indent + horLine);
+        System.out.println(indent + reply);
+        System.out.println(indent + horLine);
     }
 }

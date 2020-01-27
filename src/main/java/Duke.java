@@ -1,7 +1,13 @@
+import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
+    private static final String indent = "    ";
+    private static final String horLine = "___________________________" +
+            "_________________________________";
+
     public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -10,11 +16,12 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        System.out.println("Hello! I'm Duke!");
-        System.out.println("What can I do for you?");
+        System.out.println(indent + horLine);
+        System.out.println(indent + "Hello! I'm Duke!");
+        System.out.println(indent + "What can I do for you?");
+        System.out.println(indent + horLine);
 
         Scanner sc = new Scanner(System.in);
-
         ArrayList<Task> list = new ArrayList<Task>();
 
         while (true) {
@@ -22,7 +29,9 @@ public class Duke {
 
             if (userInput.equals("bye")) {
                 // Exit Duke
-                System.out.println("Bye! Come back soon!");
+                System.out.println(indent + horLine);
+                System.out.println(indent + "Bye! Come back soon!");
+                System.out.println(indent + horLine);
                 break;
             } else if (userInput.equals("list")) {
                 // Print out list of all tasks
@@ -45,8 +54,6 @@ public class Duke {
                 // Add new task
                 try {
                     addTask(list, userInput);
-
-
                 } catch (DukeException e) {
                     e.print();
                 }
@@ -88,38 +95,58 @@ public class Duke {
 
         if (t != null) {
             list.add(t);
-            System.out.println("This task has been added successfully:");
-            System.out.println(t);
-            System.out.println("Now you have " + list.size() + " tasks in the list");
+            System.out.println(indent + horLine);
+            System.out.println(indent + "This task has been added successfully:");
+            System.out.println(indent + "  " + t);
+            System.out.println(indent + "Now you have " + list.size() + " tasks in the list");
+            System.out.println(indent + horLine);
         }
     }
 
     private static void deleteTask(ArrayList<Task> list, String userInput) throws DukeException {
-        if (userInput.equals("delete")) throw new DukeException(userInput);
+        if (userInput.equals("delete")) {
+            throw new DukeException(userInput);
+        }
         int taskNumber = Character.getNumericValue(userInput.charAt(7));
-        if (taskNumber > list.size()) throw new DukeException("List size");
+        if (taskNumber > list.size()) {
+            throw new DukeException("List size");
+        }
         Task t = list.get(taskNumber - 1);
         list.remove(taskNumber - 1);
-        System.out.println("This task has successfully been deleted!");
-        System.out.println(t);
-        System.out.println("You have " + list.size() + " tasks remaining.");
+        System.out.println(indent + horLine);
+        System.out.println(indent + "This task has successfully been deleted:");
+        System.out.println(indent + "  " + t);
+        System.out.println(indent + "You have " + list.size() + " tasks remaining.");
+        System.out.println(indent + horLine);
     }
 
     private static void completeTask(ArrayList<Task> list, String userInput) throws DukeException {
-        if (userInput.equals("done")) throw new DukeException(userInput);
+        if (userInput.equals("done")) {
+            throw new DukeException(userInput);
+        }
         int taskNumber = Character.getNumericValue(userInput.charAt(5));
-        if (taskNumber > list.size()) throw new DukeException("List size");
+        if (taskNumber > list.size()) {
+            throw new DukeException("List size");
+        }
         Task t = list.get(taskNumber - 1);
         t.markAsDone();
-        System.out.println("This task is marked as completed!");
-        System.out.println(t);
+        System.out.println(indent + horLine);
+        System.out.println(indent + "This task is marked as completed:");
+        System.out.println(indent + "  " + t);
+        System.out.println(indent + horLine);
     }
 
     private static void printList(ArrayList<Task> list) {
-        System.out.println("This is your list of tasks");
+        System.out.println(indent + horLine);
+        System.out.println(indent + "This is your list of tasks:");
+
+        if (list.size() == 0) {
+            System.out.println(indent + "Your list is currently empty.");
+        }
         for (int i = 0; i < list.size(); i++) {
             Task t = list.get(i);
-            System.out.println((i+1) + "." + t);
+            System.out.println(indent + (i+1) + "." + t);
         }
+        System.out.println(indent + horLine);
     }
 }

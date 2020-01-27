@@ -4,4 +4,14 @@ event project meeting /at Aug 6th 2-4pm
 todo join sports club
 todo borrow book
 list
+todo
+deadline
+event
+deadline return book
+event meet up
+hello
+done 3
+done 7
+done
+delete
 bye
