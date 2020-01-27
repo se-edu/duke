@@ -63,7 +63,18 @@ Possible: Check for missing desc for event and deadline commands and non integer
 Level 6
 Added Delete function
 
-Changes:
+26/1/20
+Level 7:
+Added load command
+Added botmemory
+Now bot has init
+
+Level 7-1:
+Fixed markdone
+May have issues with formatting
+
+Git Note:
+Bot does not check commit tags.
 
 
 
