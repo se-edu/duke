@@ -70,7 +70,6 @@ public class TaskTracker {
         for (Map.Entry<Integer, Task> entry : tasks.entrySet()) {
             Task task = entry.getValue();
             String message = task.getInfo();
-            System.out.println(message);
             writer.write(message + "\n");
         }
         writer.close();
