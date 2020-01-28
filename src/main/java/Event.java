@@ -1,6 +1,10 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
     private String date;
-
+    private LocalDate date1;
+    
     /**
      * SubClass of Task that tracks date/time.
      * @param title Title of the event
@@ -12,6 +16,7 @@ public class Event extends Task {
         super(title,index);
         this.symbol = "E";
         this.date = date;
+        this.date1 = LocalDate.parse(date);
     }
 
     /**
@@ -49,6 +54,7 @@ public class Event extends Task {
         } else {
             crosstick = "✗";
         }
-        return String.format("[%s][%s] %s (at: %s)", this.symbol, crosstick, this.title, this.date);
+        String dateFormatted = this.date1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return String.format("[%s][%s] %s (at: %s)", this.symbol, crosstick, this.title, dateFormatted);
     }
 }
