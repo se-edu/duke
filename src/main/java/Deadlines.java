@@ -15,6 +15,33 @@ public class Deadlines extends Task {
         this.date = date;
     }
 
+    /**
+     * Second constructor that does not preset "Done".
+     * User provide if task is done.
+     * @param title title of the event.
+     * @param index index of the event in task tracker.
+     * @param don boolean tracking if the task is done.
+     * @param symbol Symbol D to signify Deadline events.
+     * @param date date and time in the form of strings.
+     */
+    public Deadlines(String title,int index, boolean don, Symbol symbol,String date) {
+        super(title,index, don);
+        this.symbol = "D";
+        this.date = date;
+    }
+
+    /**
+     * Get the a String output to be stored in a txt file.
+     * @return formated String to be stored in a txt file.
+     */
+    public String getInfo() {
+        int binary = 0;
+        if (this.done) {
+            binary = 1;
+        }
+        return String.format("%s|%d|%s|%s", this.symbol, binary, this.title,this.date);
+    }
+
     @Override
     public String toString() {
         String crosstick = "";
