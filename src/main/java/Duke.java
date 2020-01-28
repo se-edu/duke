@@ -1,13 +1,15 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Duke {
-    static List<String> list = new ArrayList<>(100);
+    static List<Task> list = new ArrayList<>(100);
     static int longest = 0;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String logo = " _____     _                          \n"
                 + "|     |___| |_ ___ ___ ___ ___ ___ ___ \n"
                 + "|   --| .'|  _| . | -_|  _|_ -| . |   |\n"
@@ -15,32 +17,48 @@ public class Duke {
                 + "              |_|                      \n"
                 + "how may i sewve u today nya?";
         System.out.println("hewwo fwom\n" + logo);
-        String line = sc.nextLine();
-        while (!line.equals("bye")) {
-            if (line.equals("list")) {
-                System.out.print(formatList());
-            } else {
-                if (line.length() > longest) {
-                    longest = line.length() + 3;
-                }
-                list.add(line);
-                System.out.print(formatReply("added: " + line));
+        String[] line = br.readLine().split(" ");
+        String cmd = line[0];
+        while (!cmd.equals("bye")) {
+            switch (cmd) {
+                case "list":
+                    System.out.print(formatList());
+                    break;
+                case "done":
+                    Task task = list.get(Integer.parseInt(line[1]) - 1);
+                    task.markDone();
+                    System.out.print(formatReply("Nyice ;;w;;  I've mawked this task as donye: \n\t"
+                                    + task,
+                            (task.getDescription().length() + 4 < 45 ? 45 : task.getDescription().length() + 4)));
+                    break;
+                default:
+                    StringBuilder description = new StringBuilder("");
+                    for (String word : line) {
+                        description.append(word + " ");
+                    }
+                    if (description.length() > longest) {
+                        longest = description.length() + 7;
+                    }
+                    list.add(new Task(description.toString()));
+                    System.out.print(formatReply("added: "
+                            + description.toString(), 7 + description.length()));
+                    break;
             }
-
-            line = sc.nextLine();
+            line = br.readLine().split(" ");
+            cmd = line[0];
         }
-        System.out.print(formatReply("Bye. Hope to see you again soon >w<"));
+        System.out.print(formatReply("Bye. Hope to see you again soon >w<", 35));
     }
 
-    private static String formatReply(String line) {
+    private static String formatReply(String line, int borderLength) {
         StringBuilder sb = new StringBuilder("\t");
-        for (int i = 0; i < line.length(); i++) {
+        for (int i = 0; i < borderLength; i++) {
             sb.append("*");
         }
         sb.append("\n\t");
         sb.append(line);
         sb.append("\n\t");
-        for (int i = 0; i < line.length(); i++) {
+        for (int i = 0; i < borderLength; i++) {
             sb.append("*");
         }
         sb.append("\n");
