@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,6 +13,7 @@ public class Duke {
      */
     public boolean parseMessage(String message, TaskTracker tasks) {
         try {
+            tasks.loadTask();
             if (message.equals("bye")) {
                 printGoodBye();
                 return false;
@@ -23,6 +25,7 @@ public class Duke {
                 return true;
             } else if (message.substring(0,4).equals("done")) {
                 tasks.doneTask(Integer.parseInt(message.split(" ",2)[1]));
+                tasks.saveTask();
                 return true;
             } else if (message.substring(0,4).equals("todo")) {
                 tasks.addTask(message, Symbol.T);
@@ -35,6 +38,7 @@ public class Duke {
                 return true;
             } else if (message.substring(0,6).equals("delete")) {
                 tasks.deleteTask(message);
+                tasks.saveTask();
                 return true;
             } else {
                 throw new IllegalArgumentException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -59,6 +63,13 @@ public class Duke {
             System.out.println(String.format("* %-77s*",ex.getMessage()));
             System.out.println(String.format("* %-77s*",' '));
             System.out.println(String.format("%80s",' ').replace(' ','*'));
+            return true;
+        } catch (IOException ex) {
+            System.out.println(String.format("%80s", ' ').replace(' ', '*'));
+            System.out.println(String.format("* %-77s*", ' '));
+            System.out.println(String.format("* %-77s*", ex.getMessage()));
+            System.out.println(String.format("* %-77s*", ' '));
+            System.out.println(String.format("%80s", ' ').replace(' ', '*'));
             return true;
         }
     }
@@ -95,6 +106,7 @@ public class Duke {
         botInstruction();
         ArrayList<String> lis = new ArrayList<>();
         TaskTracker tasks = new TaskTracker();
+
         while (true) {
             if (!parseMessage(scanner.nextLine(), tasks)) {
                 break;

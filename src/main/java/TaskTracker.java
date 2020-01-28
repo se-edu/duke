@@ -1,6 +1,10 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.TreeMap;
 
 public class TaskTracker {
@@ -8,6 +12,7 @@ public class TaskTracker {
     private HashSet<Task> tasksDone;
     private int index;
     private int removed;
+    private java.nio.file.Path path;
 
     /**
      * Constructor for Task object initializing with 2 attribute.
@@ -18,6 +23,57 @@ public class TaskTracker {
         this.tasksDone = new HashSet<>();
         this.index = 1;
         this.removed = 0;
+        String home = System.getProperty("user.home");
+        this.path = java.nio.file.Paths.get(home, "Desktop", "GitHub", "duke","data","data.txt");
+    }
+
+    /**
+     * Load task from a txt file.
+     * @throws IOException Throw exception if no file detected.
+     */
+    public void loadTask() throws IOException {
+        File file = this.path.toFile();
+        Scanner scanner = new Scanner(file);
+        TreeMap<Integer, Task> tasksTemp = new TreeMap<>();
+        int counter = 1;
+        while (scanner.hasNextLine()) {
+            Task task;
+            boolean don = false;
+            String data = scanner.nextLine();
+            String[] arrMessage = data.split("\\|");
+            if (arrMessage[1].equals("1")) {
+                don = true;
+            }
+            if (arrMessage[0].equals("T")) {
+                task = new Todo(arrMessage[2], counter, don, Symbol.T);
+                tasksTemp.put(counter, task);
+            } else if (arrMessage[0].equals("D")) {
+                task = new Deadlines(arrMessage[2], counter, don, Symbol.D, arrMessage[3]);
+                tasksTemp.put(counter, task);
+            } else if (arrMessage[0].equals("E")) {
+                task = new Event(arrMessage[2], counter, don, Symbol.E, arrMessage[3]);
+                tasksTemp.put(counter, task);
+            }
+            counter++;
+        }
+        this.index = counter;
+        this.tasks = tasksTemp;
+    }
+
+    /**
+     * save tasks to a data.txt file.
+     * @throws IOException throws exception if no such file.
+     */
+    public void saveTask() throws IOException {
+        File file = this.path.toFile();
+        FileWriter writer = new FileWriter(file);
+        for (Map.Entry<Integer, Task> entry : tasks.entrySet()) {
+            Task task = entry.getValue();
+            String message = task.getInfo();
+            System.out.println(message);
+            writer.write(message + "\n");
+        }
+        writer.close();
     }
 
     /**
@@ -55,14 +111,16 @@ public class TaskTracker {
         } catch (NullPointerException ex) {
             throw new NullPointerException("Number provided does not exist in the list, please try again.");
         }
+
     }
 
     /**
      * Adds task into the tasks list.
      * @param message use to store it in the tasks.
      */
-    public void addTask(String message, Symbol symbol) throws DukeException {
+    public void addTask(String message, Symbol symbol) throws DukeException,IOException {
         String[] arrMessage = message.split(" ");
+        System.out.println(this.index);
         Task task;
         if (symbol == Symbol.T) {
             String[] tempArr = Arrays.copyOfRange(arrMessage,1,arrMessage.length);
@@ -83,7 +141,7 @@ public class TaskTracker {
             String[] tempArr2 = Arrays.copyOfRange(arrMessage, landmark + 1, arrMessage.length);
             String newMessage = String.join(" ", tempArr);
             String newDate = String.join(" ", tempArr2);
-            task = new Deadlines(newMessage, index, symbol, newDate);
+            task = new Deadlines(newMessage, this.index, symbol, newDate);
         } else {
             int landmark = arrMessage.length;
             for (int i = 1; i < arrMessage.length; i++) {
@@ -99,7 +157,7 @@ public class TaskTracker {
             String[] tempArr2 = Arrays.copyOfRange(arrMessage, landmark + 1, arrMessage.length);
             String newMessage = String.join(" ", tempArr);
             String newDate = String.join(" ", tempArr2);
-            task = new Event(newMessage, index, symbol, newDate);
+            task = new Event(newMessage, this.index, symbol, newDate);
         }
         this.tasks.put(this.index, task);
         System.out.println(String.format("%80s",' ').replace(' ','*'));
@@ -109,6 +167,7 @@ public class TaskTracker {
         System.out.println(String.format("* %-77s*",' '));
         System.out.println(String.format("%80s",' ').replace(' ','*'));
         this.index++;
+        this.saveTask();
     }
 
     /**

@@ -1,4 +1,4 @@
-public class Task {
+abstract class Task {
     protected String title;
     protected int index;
     protected boolean done;
@@ -14,6 +14,12 @@ public class Task {
         this.done = false;
     }
 
+    public Task(String title, int index, boolean don) {
+        this.title = title;
+        this.index = index;
+        this.done = don;
+    }
+
     public void done() {
         this.done = true;
     }
@@ -21,5 +27,7 @@ public class Task {
     public String getSymbol() {
         return this.symbol;
     }
+
+    abstract String getInfo();
 
 }
