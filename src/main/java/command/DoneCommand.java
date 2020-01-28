@@ -16,6 +16,7 @@ public class DoneCommand extends Command {
     }
 
     public void execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
+        //System.out.println("this index: " +  this.index + " size: " + tasks.getList().size());
         if(this.index >= tasks.getList().size() || this.index < 0){
             textUi.showError(Message.MESSAGE_INVALIDCOMMAND);
             return;

@@ -18,7 +18,7 @@ public class Storage {
 
     public ArrayList<Task> readFromFile() throws DukeException {
         try {
-            String thisLine = "";
+            String thisLine;
             ArrayList<Task> builtList = new ArrayList<>();
             File f = new File(this.filePath);
             Scanner fileScanner = new Scanner(f);
@@ -28,7 +28,7 @@ public class Storage {
             }
             return builtList;
         } catch (IOException IOExp) {
-            return new ArrayList<Task>();
+            return new ArrayList<>();
         }
     }
 

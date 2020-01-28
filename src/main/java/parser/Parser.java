@@ -17,7 +17,7 @@ public class Parser {
         if (input.equalsIgnoreCase("list")) {
             return new DisplayCommand();
         }
-        int thisIndex = -1;
+        int thisIndex;
         if (keyword.equalsIgnoreCase("done")) {
             try {
                 if (words.length != 2) {
