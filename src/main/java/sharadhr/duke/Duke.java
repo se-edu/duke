@@ -1,7 +1,8 @@
 package sharadhr.duke;
 
-import sharadhr.duke.IO.Input;
-import sharadhr.duke.IO.Output;
+import sharadhr.duke.exception.DukeException;
+import sharadhr.duke.io.Input;
+import sharadhr.duke.io.Output;
 
 /**
  * 
@@ -26,7 +27,14 @@ public class Duke
             switch (command)
             {
                 case TODO:
-                    Task.addTask(new Todo(reader.inputWithoutFirstToken()));
+                    try
+                    {
+                        Task.addTask(new Todo(reader.inputWithoutFirstToken()));
+                    }
+                    catch (DukeException e)
+                    {
+                        System.err.println("todo detail cannot be empty.");
+                    }
                     break;
                 case DEADLINE:
                     Task.addTask(new Deadline(reader.getDetail(), reader.getTime()));
@@ -40,10 +48,19 @@ public class Duke
                 case DONE:
                     Task.getTaskAtPosition(Integer.parseInt(reader.inputWithoutFirstToken())).markComplete();
                     break;
+                case DELETE:
+                    Task.deleteTaskAtPosition(Integer.parseInt(reader.inputWithoutFirstToken()));
                 case EMPTY:
                     continue;
                 case INVALID:
-                    continue;
+                    try
+                    {
+                        throw new DukeException();
+                    }
+                    catch (DukeException e)
+                    {
+                        writer.say("Invalid command; try again.");
+                    }
                 case BYE:
                     break;
                 default:

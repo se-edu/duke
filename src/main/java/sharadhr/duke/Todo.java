@@ -1,5 +1,7 @@
 package sharadhr.duke;
 
+import sharadhr.duke.exception.DukeException;
+
 /**
  * A To-Do; effectively the same as the inherited abstract class, {@link Task}.
  */
@@ -9,9 +11,13 @@ public class Todo extends Task
      * Creates a To-Do with some detail.
      * @param detail What is to be done
      */
-    public Todo(String detail)
+    public Todo(String detail) throws DukeException
     {
-        super(detail);
+        if (detail.isBlank())
+        {
+            throw new DukeException();
+        }
+        this.detail = detail;
     }
 
     @Override

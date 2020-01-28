@@ -1,4 +1,4 @@
-package sharadhr.duke.IO;
+package sharadhr.duke.io;
 
 import java.io.BufferedReader;
 import java.io.IOException;

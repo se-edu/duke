@@ -1,4 +1,4 @@
-package sharadhr.duke.IO;
+package sharadhr.duke.io;
 
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
@@ -12,7 +12,7 @@ import sharadhr.duke.Task;
  */
 public class Output
 {
-    static BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
+    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
     
     static final String logo = 
             "\n ____        _        \n"
@@ -39,8 +39,8 @@ public class Output
     {
         try
         {
-            writer.append(string);
-            writer.newLine();
+            this.writer.append(string);
+            this.writer.newLine();
         }
         catch (Exception e)
         {
@@ -48,16 +48,16 @@ public class Output
         }
     }
     
-    void appendAllWithNewline(String... strings)
+    void appendWithNewline(String... strings)
     {
         Arrays.asList(strings).forEach(this::appendWithNewline);
     }
     
-    public void addMessage(String message)
+    public void add(String message)
     {
         try
         {
-            writer.append(message);
+            this.writer.append(message);
         }
         catch (Exception e)
         {
@@ -65,11 +65,14 @@ public class Output
         }
     }
 
+    /**
+     * Flushes the contents of this writer's buffer to the standard output.
+     */
     public void say()
     {
         try
         {
-            writer.flush();
+            this.writer.flush();
         }
         catch (Exception e)
         {
@@ -83,12 +86,12 @@ public class Output
      * 
      * @param message The message to be written
      */
-    public void sayMessage(String message)
+    public void say(String message)
     {
         try
         {
             this.appendWithNewline(message);
-            writer.flush();
+            this.writer.flush();
         }
         catch (Exception e)
         {
@@ -98,16 +101,15 @@ public class Output
     
     /**
      * Writes multiple messages to the standard output. These messages are given as
-     * a
-     * comma-separated list.
+     * a comma-separated list of {@link String}s.
      * 
      * @param messages The list of messages to be written to standard output
      */
-    public void sayAll(String... messages)
+    public void say(String... messages)
     {
         try
         {
-            appendAllWithNewline(messages);
+            this.appendWithNewline(messages);
             writer.flush();
         }
         catch (Exception e)
@@ -121,7 +123,7 @@ public class Output
      */
     public void sayHello()
     {
-        this.sayMessage("Hello, this is" + logo + "How can I help?");
+        this.say("Hello, this is" + logo + "How can I help?");
     }
     
     /**
@@ -129,7 +131,7 @@ public class Output
      */
     public void sayGoodBye()
     {
-        this.sayMessage("Goodbye, then; see you soon!");
+        this.say("Goodbye, then; see you soon!");
     }
     
     /**
@@ -140,7 +142,7 @@ public class Output
      */
     public void sayTaskAdded(Task task)
     {
-        this.sayAll("This task was added: ", task.toString());
+        this.say("This task was added: ", task.toString());
     }
     
     /**
@@ -151,7 +153,12 @@ public class Output
      */
     public void sayTaskMarkedComplete(Task task)
     {
-        this.sayAll("This task has been marked done:", task.toString());
+        this.say("This task has been marked done:", task.toString());
+    }
+
+    public void sayTaskDeleted(Task task)
+    {
+        this.say("This task has been deleted:", task.toString());
     }
 
     public void close()
