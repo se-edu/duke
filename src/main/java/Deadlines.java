@@ -1,5 +1,9 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadlines extends Task {
     private String date;
+    private LocalDate date1;
 
     /**
      * Deadline that extends task and tracks date/time.
@@ -13,6 +17,7 @@ public class Deadlines extends Task {
         super(title,index);
         this.symbol = "D";
         this.date = date;
+        this.date1 = LocalDate.parse(date);
     }
 
     @Override
@@ -23,6 +28,7 @@ public class Deadlines extends Task {
         } else {
             crosstick = "✗";
         }
-        return String.format("[%s][%s] %s (by: %s)", this.symbol, crosstick, this.title, this.date);
+        String dateFormatted = this.date1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return String.format("[%s][%s] %s (by: %s)", this.symbol, crosstick, this.title, dateFormatted);
     }
 }
