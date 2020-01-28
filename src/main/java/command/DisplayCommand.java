@@ -1,12 +1,9 @@
 package command;
 
-import common.Message;
+import common.Storage;
 import task.*;
 import exception.DukeException;
-import common.Storage;
 import ui.TextUi;
-
-import java.util.ArrayList;
 
 public class DisplayCommand extends Command{
 

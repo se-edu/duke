@@ -1,14 +1,10 @@
 import common.Storage;
+import command.Command;
 import exception.DukeException;
-import task.Task;
 import task.TaskList;
-import command.*;
 import parser.*;
 
-import common.Message;
 import ui.TextUi;
-
-import java.util.ArrayList;
 
 /**
  * main class of Duke program
@@ -128,13 +124,13 @@ public class Duke {
                     Task thisTask;
                     String[] stamps = input.split("/");
 
-                    TaskEnum taskEnum = TaskEnum.OTHERS;
+                    duke.TaskEnum taskEnum = duke.TaskEnum.OTHERS;
                     if (keyword.equalsIgnoreCase("todo")) {
-                        taskEnum = TaskEnum.TODO;
+                        taskEnum = duke.TaskEnum.TODO;
                     } else if (keyword.equalsIgnoreCase("event")) {
-                        taskEnum = TaskEnum.EVENT;
+                        taskEnum = duke.TaskEnum.EVENT;
                     } else if (keyword.equalsIgnoreCase("deadline")) {
-                        taskEnum = TaskEnum.DEADLINE;
+                        taskEnum = duke.TaskEnum.DEADLINE;
                     }
 
                     switch (taskEnum) {

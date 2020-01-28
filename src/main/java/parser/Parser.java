@@ -1,10 +1,8 @@
 package parser;
 
-import task.*;
 import command.*;
-import ui.TextUi;
+import task.*;
 import common.Message;
-import common.Storage;
 import exception.DukeException;
 
 public class Parser {
@@ -51,24 +49,24 @@ public class Parser {
             //System.out.println("it is a todo task, i am adding it.");
             return new AddCommand(new Todo(words[1]));
         } else if (keyword.equalsIgnoreCase("event")) {
+            String[] eventWords = input.split("/at ");
             try {
-                if (words.length < 4 || stamps.length < 2) {
+                if (words.length < 4 || stamps.length < 2 || eventWords.length < 2) {
                     throw new DukeException(Message.MESSAGE_INVALIDCOMMAND);
                 }
             } catch (DukeException exp) {
                 return new ErrorCommand();
             }
-            String[] eventWords = input.split("/at ");
             return new AddCommand(new Event(stamps[0].substring(6), eventWords[1]));
         } else if (keyword.equalsIgnoreCase("deadline")) {
+            String[] ddlWords = input.split("/by ");
             try {
-                if (words.length < 4 || stamps.length < 2) {
+                if (words.length < 4 || stamps.length < 2 || ddlWords.length < 2) {
                     throw new DukeException("The content of a deadline must be complete.");
                 }
             } catch (DukeException exp) {
                 return new ErrorCommand();
             }
-            String[] ddlWords = input.split("/by ");
             return new AddCommand(new Deadline(stamps[0].substring(9), ddlWords[1]));
         } else {
             return new ErrorCommand();

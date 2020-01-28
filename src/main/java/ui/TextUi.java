@@ -8,7 +8,6 @@ import task.TaskList;
 
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TextUi {
