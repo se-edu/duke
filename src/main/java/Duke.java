@@ -45,8 +45,6 @@ public class Duke {
                 try {
                     if (nextString.equals("deadline")) {
                         throw new DukeException("OOPS!!! The description of a deadline cannot be empty :(");
-                    } else if (!nextString.contains("/by")) {
-                        throw new DukeException("Did you mistype something?");
                     }
                     String name = nextString.substring(9);
                     String[] temp = name.split(" /by ");
@@ -63,8 +61,6 @@ public class Duke {
                 try {
                     if (nextString.equals("event")) {
                         throw new DukeException("OOPS!!! The description of an event cannot be empty :(");
-                    } else if (!nextString.contains("/at")) {
-                        throw new DukeException("Did you mistype something?");
                     }
                     String name = nextString.substring(5);
                     String[] temp = name.split(" /at ");
