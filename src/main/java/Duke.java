@@ -1,40 +1,62 @@
-import task.Deadline;
-import task.Event;
+import common.Storage;
+import exception.DukeException;
 import task.Task;
-import task.Todo;
+import task.TaskList;
+import command.*;
+import parser.*;
+
+import common.Message;
+import ui.TextUi;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * main class of Duke program
  * controlling the main logic
  */
 public class Duke {
-    public static final String LINE = "    ____________________________________________________________";
-    public static String markAsDone = "     Nice! I've marked this task as done:";
-    public static String showList = "     Here are the tasks in your list:";
-    public static String gotIt = "     Got it. I've added this task:";
-    public static String deleteIt = "     Noted. I've removed this task: ";
+
+    private TextUi textUi;
+    private Storage dukeStorage;
+    private TaskList tasks;
+
+    public Duke(String filePath) {
+        textUi = new TextUi();
+        dukeStorage = new Storage(filePath);
+        try {
+            tasks = new TaskList(dukeStorage.readFromFile());
+        } catch (exception.DukeException e) {
+            textUi.showError(e.getMessage());
+            tasks = new TaskList();
+        }
+    }
+
+    public void run(){
+        textUi.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                //System.out.println("Prepare to take in commands.");
+                String fullCommand = textUi.readCommand();
+                //System.out.println("fullCommand : " + fullCommand);
+                //textUi.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, textUi, dukeStorage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                textUi.showError(e.getMessage());
+            }
+        }
+        exit();
+    }
+
+    public static void main(String[] args) {
+        new Duke("tasks.txt").run();
+    }
 
 
-    public static void main(String[] args) throws DukeException {
+    /*public static void main(String[] args) throws DukeException {
 
-        Scanner scanner = new Scanner(System.in);
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        greet();
-
-        Storage dukeStorage = new Storage("duke.txt");
-
-        ArrayList<Task> list = dukeStorage.readFromFile();
-
-        String keyword = "";
 
         while(scanner.hasNextLine()) {
 
@@ -55,22 +77,22 @@ public class Duke {
                     }
                     int thisIndex = -1;
                     try {
-                        thisIndex = Integer.valueOf(input.substring(5)) - 1;
+                        thisIndex = Integer.parseInt(input.substring(5)) - 1;
                     } catch (Exception exp) {
                         System.out.println(new DukeException("Index is not detected.").toString() + "\n");
                         continue;
                     }
 
-                    thisIndex = Integer.valueOf(input.substring(5)) - 1;
+                    thisIndex = Integer.parseInt(input.substring(5)) - 1;
                     if (thisIndex >= list.size() || thisIndex < 0) {
                         continue;
                     }
-                    System.out.println(LINE);
-                    System.out.println(markAsDone);
+                    System.out.println(Message.MESSAGE_LINE);
+                    System.out.println(Message.MESSAGE_MARKASDONE);
                     list.get(thisIndex).markAsDone();
                     dukeStorage.writeToFile(list);
                     System.out.println("       " + list.get(thisIndex).toString());
-                    System.out.println(LINE + "\n");
+                    System.out.println(Message.MESSAGE_LINE + "\n");
                 } else if (keyword.equals("delete")) { // case delete
                     try {
                         if (words.length != 2) {
@@ -82,23 +104,23 @@ public class Duke {
                     }
                     int thatIndex = -1;
                     try {
-                        thatIndex = Integer.valueOf(input.substring(7)) - 1;
+                        thatIndex = Integer.parseInt(input.substring(7)) - 1;
                     } catch (Exception exp) {
                         System.out.println(new DukeException("Index is not detected.").toString() + "\n");
                         continue;
                     }
 
-                    thatIndex = Integer.valueOf(input.substring(7)) - 1;
+                    thatIndex = Integer.parseInt(input.substring(7)) - 1;
                     if (thatIndex >= list.size() || thatIndex < 0) {
                         continue;
                     }
-                    System.out.println(LINE);
-                    System.out.println(deleteIt);
+                    System.out.println(Message.MESSAGE_LINE);
+                    System.out.println(Message.MESSAGE_DELETEIT);
                     System.out.println("       " + list.get(thatIndex).toString());
                     list.remove(thatIndex);
                     dukeStorage.writeToFile(list);
                     System.out.println("     Now you have " + list.size() + " tasks in the list. ");
-                    System.out.println(LINE + "\n");
+                    System.out.println(Message.MESSAGE_LINE + "\n");
 
                 } else if (input.equalsIgnoreCase("list")) { //case list
                     displayList(list);
@@ -166,42 +188,31 @@ public class Duke {
                     addItem(list, thisTask);
                     dukeStorage.writeToFile(list);
                     echo(thisTask);
-                    System.out.println("     Now you have " + list.size() + " tasks in the list.\n" + LINE + "\n");
+                    System.out.println("     Now you have " + list.size() + " tasks in the list.\n" + Message.MESSAGE_LINE + "\n");
                 }
             }
 
         }
-    }
-
-    /**
-     * This method greet the users at the beginning of the conversation.
-     */
-    public static void greet() {
-        String firstGreet = LINE
-                + "\n     Hello! I'm Duke \n"
-                + "     What can I do for you? \n"
-                + LINE;
-        System.out.println(firstGreet + "\n");
-    }
+    }*/
 
     /**
      * This method says goodbye to the user and quit the system.
      */
-    public static void exit() {
-        String directAnswer = LINE + "\n" + "     Bye. Hope to see you again soon!" + "\n" + LINE;
-        System.out.println(directAnswer + "\n");
+    public void exit() {
+        textUi.showGoodBye();
         System.exit(0);
     }
 
     /**
      * This method echos whatever the user inputs.
      */
-    public static void echo(Task thisTask) {
-        System.out.println(LINE);
-        System.out.println(gotIt);
+    /**
+    public void echo(Task thisTask) {
+        System.out.println(Message.MESSAGE_LINE);
+        System.out.println(Message.MESSAGE_GOTIT);
         String directAnswer = "     " + thisTask.toString();
         System.out.println("  " + directAnswer);
-    }
+    }*/
 
     /**
      * @param list
@@ -212,25 +223,26 @@ public class Duke {
      * This method adds a new task object to the array list.
 >>>>>>> branch-Level-7
      */
-    public static void addItem(ArrayList<Task> list, Task thisTask) {
+    /**
+    public void addItem(ArrayList<Task> list, Task thisTask) {
         list.add(thisTask);
-    }
-
+    }*/
 
     /**
      * @param list This method displays the list of tasks.
      */
-    public static void displayList(ArrayList<Task> list) {
-        System.out.println(LINE);
-        System.out.println(showList);
+    /**
+    public void displayList(ArrayList<Task> list) {
+        System.out.println(Message.MESSAGE_LINE);
+        System.out.println(Message.MESSAGE_SHOWLIST);
         int marker = 1;
         if (list.isEmpty()) {
-            System.out.println(LINE + "\n");
+            System.out.println(Message.MESSAGE_LINE + "\n");
         } else {
             for (int i = 0; i < list.size(); i++) {
                 System.out.println("     " + (i + 1) + ". " + list.get(i).toString());
             }
-            System.out.println(LINE + "\n");
+            System.out.println(Message.MESSAGE_LINE + "\n");
         }
-    }
+    }*/
 }

@@ -1,7 +1,11 @@
+package common;
+
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import parser.FileParser;
+import exception.DukeException;
 import task.*;
 
 public class Storage {
@@ -20,15 +24,11 @@ public class Storage {
             Scanner fileScanner = new Scanner(f);
             while (fileScanner.hasNext()) {
                 thisLine = fileScanner.nextLine();
-                builtList.add(new Parser(thisLine).lineToTask());
+                builtList.add(new FileParser(thisLine).lineToTask());
             }
             return builtList;
         } catch (IOException IOExp) {
-            if(IOExp instanceof FileNotFoundException){
-                return new ArrayList<Task>();
-            } else {
-                throw new DukeException("IOException detected.");
-            }
+            return new ArrayList<Task>();
         }
     }
 
@@ -36,13 +36,13 @@ public class Storage {
 
         try {
             FileWriter fw = new FileWriter(this.filePath);
-            for (int i = 0; i < existedList.size(); i++) {
-                fw.write(existedList.get(i).toStringFileFormat() + "\n");
+            for (Task task : existedList) {
+                fw.write(task.toStringFileFormat() + "\n");
             }
             fw.close();
         } catch (IOException IOExp){
             System.out.println(IOExp);
-            throw new DukeException ("IOException detected");
+            throw new DukeException("IOException detected");
         }
 
     }

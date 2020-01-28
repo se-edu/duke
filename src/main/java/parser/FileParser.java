@@ -1,11 +1,12 @@
-import task.*;
-import java.util.ArrayList;
+package parser;
 
-public class Parser {
+import task.*;
+
+public class FileParser {
 
     private String thisLine;
 
-    public Parser(String str){
+    public FileParser(String str){
         this.thisLine = str.trim();
     }
 

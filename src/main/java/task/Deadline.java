@@ -1,6 +1,6 @@
 package task;
 
-import Parser.TimeFormatter;
+import parser.TimeFormatter;
 
 public class Deadline extends Task {
 
