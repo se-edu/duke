@@ -18,11 +18,7 @@ public abstract class Task
     protected String detail;
     protected boolean complete;
 
-    /**
-     * Initialises an empty {@link Task} that has an empty {@link String} as the detail,
-     * and is set incomplete.
-     */
-    public Task()
+    Task()
     {
         this.detail = "";
         this.complete = false;
@@ -85,6 +81,17 @@ public abstract class Task
     }
 
     /**
+     * 
+     * @param parseInt
+     * @return
+     */
+    public static void deleteTaskAtPosition(int position)
+    {
+        Duke.writer.sayTaskDeleted(getTaskAtPosition(position));
+        tasks.remove(position - 1);
+    }
+
+    /**
      * Prints the tasks in the list.
      * 
      * @throws IOException
@@ -93,12 +100,12 @@ public abstract class Task
     {
         if (!Task.tasks.isEmpty())
         {
-            Duke.writer.sayMessage("Here are the tasks in your list:");
+            Duke.writer.say("Here are the tasks in your list:");
 
             int listNumber = 1;
             for (Task task : Task.tasks)
             {
-                Duke.writer.addMessage(String.format("%d.%s%n", listNumber++, task));
+                Duke.writer.add(String.format("%d.%s%n", listNumber++, task));
             }
             Duke.writer.say();
         }

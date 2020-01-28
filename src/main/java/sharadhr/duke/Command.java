@@ -6,7 +6,7 @@ package sharadhr.duke;
 public enum Command
 {
     TODO, DEADLINE, EVENT, 
-    LIST, DONE, 
+    LIST, DONE, DELETE,
     BY, AT, ON, 
     EMPTY, INVALID, BYE;
     
