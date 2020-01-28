@@ -1,15 +1,22 @@
 package sharadhr.duke;
 
+/**
+ * A possible command to the Duke program.
+ */
 public enum Command
 {
-    LIST, DONE, BYE, EMPTY;
+    TODO, DEADLINE, EVENT, 
+    LIST, DONE, 
+    BY, AT, ON, 
+    EMPTY, INVALID, BYE;
     
     public static Command whichCommand(String input)
     {
         for (Command command : Command.values())
             if (input.equalsIgnoreCase(command.toString()))
                 return command;
-            
-        return EMPTY;
+            else if (input.isBlank())
+                return EMPTY;
+        return INVALID;
     }
 }

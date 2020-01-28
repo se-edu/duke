@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Also allows initialising an instance of a Task, which come with appropriate
  * instance methods.
  */
-public class Task
+public abstract class Task
 {
     // A list of tasks.
     protected static ArrayList<Task> tasks;
@@ -32,10 +32,10 @@ public class Task
      * Initialises a {@link Task} with some specified detail, and is set to incomplete.
      * @param name the task detail
      */
-    public Task(String name)
+    public Task(String detail)
     {
-        this.detail = name;
-        this.complete = false;
+        this();
+        this.detail = detail;
     }
 
     /**
@@ -58,15 +58,12 @@ public class Task
      *         {@link ArrayList#add})
      * @throws IOException
      */
-    public static boolean addTask(Task task) throws IOException
+    public static boolean addTask(Task task)
     {
         // Was the task successfully added to the list?
         boolean added = Task.tasks.add(task);
-        
-        if (added)
-        {
-            Duke.writer.append(String.format("added: %s%n", task)).flush();
-        }
+
+        Duke.writer.sayTaskAdded(task);
         return added;
     }
     
@@ -80,6 +77,7 @@ public class Task
      * @param position The 1-indexed position of the task in the list
      * @return The task at the specified {@code position}
      * @throws IndexOutOfBoundsException if {@code position} 
+     * ≥ size of tasks list + 1
      */
     public static Task getTaskAtPosition(int position) throws IndexOutOfBoundsException
     {
@@ -91,20 +89,18 @@ public class Task
      * 
      * @throws IOException
      */
-    public static void listTasks() throws IOException
+    public static void listTasks()
     {
         if (!Task.tasks.isEmpty())
         {
-            Duke.writer.append("Here are the tasks in your list:");
-            Duke.writer.newLine();
-            //Duke.writer.newLine();
-            
+            Duke.writer.sayMessage("Here are the tasks in your list:");
+
             int listNumber = 1;
             for (Task task : Task.tasks)
             {
-                Duke.writer.append(String.format("%d.%s%n", listNumber++, task));
+                Duke.writer.addMessage(String.format("%d.%s%n", listNumber++, task));
             }
-            Duke.writer.flush();
+            Duke.writer.say();
         }
     }
     
@@ -129,16 +125,20 @@ public class Task
      * @return {@code true} if complete
      * @throws IOException
      */
-    public boolean markComplete() throws IOException
+    public boolean markComplete()
     {
         this.complete = true;
+        Duke.writer.sayTaskMarkedComplete(this);
 
-        Duke.writer.append("This task has been marked as done:" + 
-                System.getProperty("line.separator")).append(this.toString());
-        Duke.writer.newLine();
-        Duke.writer.flush();
         return complete;
     }
+    
+    /**
+     * Returns a character representing the type of Task (To-Do, Deadline, or Event)
+     * 
+     * @return the character representing the task type
+     */
+    public abstract char getTaskTypeIcon();
     
     @Override
     public String toString()
