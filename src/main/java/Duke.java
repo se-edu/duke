@@ -39,7 +39,7 @@ public class Duke {
             } else {
                 throw new IllegalArgumentException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-        } catch (IllegalArgumentException e) {
+        } catch (DukeException e) {
             System.out.println(String.format("%80s",' ').replace(' ','*'));
             System.out.println(String.format("* %-77s*",' '));
             System.out.println(String.format("* %-77s*",e.getMessage()));

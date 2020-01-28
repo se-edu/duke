@@ -40,7 +40,7 @@ public class TaskTracker {
      * Delete the tasks from the task list.
      * @param message whole command use to parse.
      */
-    public void deleteTask(String message) throws NumberFormatException {
+    public void deleteTask(String message) throws NullPointerException {
         try {
             int num = Integer.parseInt(message.split(" ")[1]);
             num = num - removed;
@@ -53,7 +53,7 @@ public class TaskTracker {
             System.out.println(String.format("* %-77s*", ' '));
             System.out.println(String.format("%80s", ' ').replace(' ', '*'));
         } catch (NullPointerException ex) {
-            throw new NumberFormatException("Number provided does not exist in the list, please try again.");
+            throw new NullPointerException("Number provided does not exist in the list, please try again.");
         }
     }
 
@@ -61,13 +61,13 @@ public class TaskTracker {
      * Adds task into the tasks list.
      * @param message use to store it in the tasks.
      */
-    public void addTask(String message, Symbol symbol) throws IllegalArgumentException {
+    public void addTask(String message, Symbol symbol) throws DukeException {
         String[] arrMessage = message.split(" ");
         Task task;
         if (symbol == Symbol.T) {
             String[] tempArr = Arrays.copyOfRange(arrMessage,1,arrMessage.length);
             String newMessage = String.join(" ", tempArr);
-            task = new Todo(message, this.index, symbol);
+            task = new Todo(newMessage, this.index, symbol);
         } else if (symbol == Symbol.D) {
             int landmark = arrMessage.length;
             for (int i = 1; i < arrMessage.length; i++) {
@@ -77,7 +77,7 @@ public class TaskTracker {
                 }
             }
             if (landmark == arrMessage.length) {
-                throw new IllegalArgumentException("  ☹ OOPS!!! The description of a deadline cannot be empty.");
+                throw new DukeException("  ☹ OOPS!!! The description of a deadline cannot be empty.");
             }
             String[] tempArr = Arrays.copyOfRange(arrMessage, 1, landmark);
             String[] tempArr2 = Arrays.copyOfRange(arrMessage, landmark + 1, arrMessage.length);
@@ -93,7 +93,7 @@ public class TaskTracker {
                 }
             }
             if (landmark == arrMessage.length) {
-                throw new IllegalArgumentException("  ☹ OOPS!!! The description of a event cannot be empty.");
+                throw new DukeException("  ☹ OOPS!!! The description of a event cannot be empty.");
             }
             String[] tempArr = Arrays.copyOfRange(arrMessage, 1, landmark);
             String[] tempArr2 = Arrays.copyOfRange(arrMessage, landmark + 1, arrMessage.length);
