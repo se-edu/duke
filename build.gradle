@@ -42,7 +42,7 @@ test {
 
 application {
     // Change this to your main class.
-    mainClassName = "JayZ"
+    mainClassName = "Duke"
 }
 
 run {
