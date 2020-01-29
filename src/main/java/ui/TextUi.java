@@ -6,7 +6,6 @@ import common.Message;
 import task.Task;
 import task.TaskList;
 
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -18,11 +17,6 @@ public class TextUi {
     public TextUi(){
         this.sc = new Scanner(System.in);
         this.out = new PrintStream(System.out);
-    }
-
-    public TextUi(InputStream in, PrintStream out) {
-        this.sc = new Scanner(in);
-        this.out = out;
     }
 
     /** Shows (lines of) message(s) to the user */
@@ -63,7 +57,8 @@ public class TextUi {
                 Message.MESSAGE_LINE,
                 Message.MESSAGE_GOTIT,
                 "     " + givenTask.toString(),
-                "     Now you have " + tasks.getList().size() + " tasks in the list.",
+                "     Now you have " + tasks.getList().size()
+                        + " tasks in the list.",
                 Message.MESSAGE_LINE
         );
     }
@@ -73,7 +68,8 @@ public class TextUi {
                 Message.MESSAGE_LINE,
                 Message.MESSAGE_DELETEIT,
                 "     " + tasks.getList().get(index).toString(),
-                "     Now you have " + (tasks.getList().size() - 1)+ " tasks in the list.",
+                "     Now you have " + (tasks.getList().size() - 1)
+                        + " tasks in the list.",
                 Message.MESSAGE_LINE
         );
     }
@@ -97,8 +93,6 @@ public class TextUi {
     /** Takes in the user input line */
     public String readCommand(){
         String input = sc.nextLine().trim();
-        ///System.out.println("I am taking the input.");
-        //System.out.println("This input is: " + input);
         while(input.equals("")){
             input = sc.nextLine();
         }
@@ -110,7 +104,6 @@ public class TextUi {
                 Message.MESSAGE_LINE,
                 Message.MESSAGE_SHOWLIST
         );
-        int marker = 1;
         if(tasks.getList().isEmpty()){
             showToUser(
                     Message.MESSAGE_EMPTYLIST,

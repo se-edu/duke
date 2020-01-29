@@ -41,5 +41,4 @@ public class Task {
         }
         return " | " + num + " | " + this.name;
     }
-
 }
