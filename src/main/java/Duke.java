@@ -1,13 +1,12 @@
-import common.Storage;
 import command.Command;
+import common.Storage;
 import exception.DukeException;
-import task.TaskList;
 import parser.Parser;
+import task.TaskList;
 import ui.TextUi;
 
 /**
- * main class of Duke program
- * controlling the main logic
+ * Control class of Duke, including the logic of Duke.
  */
 public class Duke {
 
