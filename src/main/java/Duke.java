@@ -25,13 +25,21 @@ public class Duke {
                         System.out.print(formatList());
                         break;
                     case "done":
-                        Task task = list.get(Integer.parseInt(line[1]) - 1);
+                        int index = Integer.parseInt(line[1]) - 1;
+                        if (index >= list.size() || index < 0) {
+                            throw new DukeException(formatReply("Tasks out of bounds cannyot be donye >w<"));
+                        }
+                        Task task = list.get(index);
                         task.markDone();
                         System.out.print(formatReply("Nyice ;;w;;  I've mawked this task as donye: \n\t"
                                 + task));
                         break;
                     case "delete":
-                        task = list.get(Integer.parseInt(line[1]) - 1);
+                        index = Integer.parseInt(line[1]) - 1;
+                        if (index >= list.size() || index < 0) {
+                            throw new DukeException(formatReply("Nyooooo ;;w;; You cannyot dewete beyond the wist size!"));
+                        }
+                        task = list.get(index);
                         list.remove(task);
                         System.out.print(formatReply("Nyoted (・`ω´・)  I've wemuvd this task: \n\t"
                                 + task + "\n\t" + countList()));
