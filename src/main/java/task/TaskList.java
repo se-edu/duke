@@ -14,6 +14,8 @@ public class TaskList {
         this.list = passedList;
     }
 
+    public void renewList(ArrayList<Task> newList) { this.list = newList; }
+
     public ArrayList<Task> getList(){
         return this.list;
     }

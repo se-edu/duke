@@ -2,8 +2,8 @@ package task;
 
 public class Task {
 
-    protected String name;
-    protected boolean isDone;
+    public String name;
+    public boolean isDone;
 
     public Task(String name) {
         this.name = name;
@@ -41,5 +41,4 @@ public class Task {
         }
         return " | " + num + " | " + this.name;
     }
-
 }

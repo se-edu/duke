@@ -17,4 +17,6 @@ public class Message {
     public static final String MESSAGE_DELETEIT = "     Noted. I've removed this task: ";
     public static final String MESSAGE_INVALIDCOMMAND = "The done message is not valid.";
     public static final String MESSAGE_EMPTYLIST = "     The list is currently empty.";
+    public static final String MESSAGE_FIND = "     Here are the matching tasks in your list:";
+    public static final String MESSAGE_NULL = "     Sorry, but I cannot find matching items.";
 }

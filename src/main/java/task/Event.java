@@ -18,10 +18,12 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + new TimeFormatter(duration).processDate() + ")";
+        return "[E]" + super.toString() + " (at: "
+                + new TimeFormatter(duration).processDate() + ")";
     }
 
     public String toStringFileFormat(){
-        return "E" + super.toStringFileFormat() + " | " + this.duration;
+        return "E" + super.toStringFileFormat()
+                + " | " + this.duration;
     }
 }
