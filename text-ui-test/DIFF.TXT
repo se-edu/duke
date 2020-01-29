@@ -74,10 +74,21 @@ Comparing files ACTUAL.TXT and EXPECTED.TXT
 *****
 
 ***** ACTUAL.TXT
+        ************************************************************
+        Nyoted (・`ω´・)  I've wemuvd this task: 
+        [D][?] refill catfood  (by: 6pm)
+        Nyow you have 2 tasks in the wist.
+***** EXPECTED.TXT
+        ************************************************************
+        Nyoted (・`ω´・)  I've wemuvd this task:
+        [D][✓] refill catfood  (by: 6pm)
+        Nyow you have 2 tasks in the wist.
+*****
+
+***** ACTUAL.TXT
         Hewe awe the tasks in youw wist:
         1. [T][?] take care of kyaru 
-        2. [D][?] refill catfood  (by: 6pm)
-        3. [E][?] kishi-san meeting  (at: Friday 7pm)
+        2. [E][?] kishi-san meeting  (at: Friday 7pm)
         ************************************************************
 ***** EXPECTED.TXT
         Hewe awe the tasks in youw wist:

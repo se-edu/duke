@@ -42,10 +42,14 @@ DukeException: 	************************************************************
 	[D][?] refill catfood  (by: 6pm)
 	************************************************************
 	************************************************************
+	Nyoted (・`ω´・)  I've wemuvd this task: 
+	[D][?] refill catfood  (by: 6pm)
+	Nyow you have 2 tasks in the wist.
+	************************************************************
+	************************************************************
 	Hewe awe the tasks in youw wist:
 	1. [T][?] take care of kyaru 
-	2. [D][?] refill catfood  (by: 6pm)
-	3. [E][?] kishi-san meeting  (at: Friday 7pm)
+	2. [E][?] kishi-san meeting  (at: Friday 7pm)
 	************************************************************
 	************************************************************
 	Bye. Hope to see you again soon >w<

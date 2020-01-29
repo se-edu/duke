@@ -30,6 +30,12 @@ public class Duke {
                         System.out.print(formatReply("Nyice ;;w;;  I've mawked this task as donye: \n\t"
                                 + task));
                         break;
+                    case "delete":
+                        task = list.get(Integer.parseInt(line[1]) - 1);
+                        list.remove(task);
+                        System.out.print(formatReply("Nyoted (・`ω´・)  I've wemuvd this task: \n\t"
+                                + task + "\n\t" + countList()));
+                        break;
                     default:
                         StringBuilder description = new StringBuilder("");
                         Task newTask = null;

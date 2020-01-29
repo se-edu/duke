@@ -6,5 +6,6 @@ this should pop an error
 list
 done 1
 done 2
+delete 2
 list
 bye
