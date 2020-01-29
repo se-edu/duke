@@ -1,0 +1,89 @@
+Comparing files ACTUAL.TXT and EXPECTED.TXT
+***** ACTUAL.TXT
+        ************************************************************
+        Got it UwU I've added this task: 
+        [T][?] take care of kyaru 
+        Nyow you have 1 tasks in the wist.
+***** EXPECTED.TXT
+        ************************************************************
+        Got it UwU I've added this task:
+        [T][✘] take care of kyaru
+        Nyow you have 1 tasks in the wist.
+*****
+
+***** ACTUAL.TXT
+        ************************************************************
+        Got it UwU I've added this task: 
+        [D][?] refill catfood  (by: 6pm)
+        Nyow you have 2 tasks in the wist.
+***** EXPECTED.TXT
+        ************************************************************
+        Got it UwU I've added this task:
+        [D][✘] refill catfood  (by: 6pm)
+        Nyow you have 2 tasks in the wist.
+*****
+
+***** ACTUAL.TXT
+        ************************************************************
+        Got it UwU I've added this task: 
+        [E][?] kishi-san meeting  (at: Friday 7pm)
+        Nyow you have 3 tasks in the wist.
+***** EXPECTED.TXT
+        ************************************************************
+        Got it UwU I've added this task:
+        [E][✘] kishi-san meeting  (at: Friday 7pm)
+        Nyow you have 3 tasks in the wist.
+*****
+
+***** ACTUAL.TXT
+        Hewe awe the tasks in youw wist:
+        1. [T][?] take care of kyaru 
+        2. [D][?] refill catfood  (by: 6pm)
+        3. [E][?] kishi-san meeting  (at: Friday 7pm)
+        ************************************************************
+***** EXPECTED.TXT
+        Hewe awe the tasks in youw wist:
+        1. [T][✘] take care of kyaru
+        2. [D][✘] refill catfood  (by: 6pm)
+        3. [E][✘] kishi-san meeting  (at: Friday 7pm)
+        ************************************************************
+*****
+
+***** ACTUAL.TXT
+        ************************************************************
+        Nyice ;;w;;  I've mawked this task as donye: 
+        [T][?] take care of kyaru 
+        ************************************************************
+***** EXPECTED.TXT
+        ************************************************************
+        Nyice ;;w;;  I've mawked this task as donye:
+        [T][✓] take care of kyaru
+        ************************************************************
+*****
+
+***** ACTUAL.TXT
+        ************************************************************
+        Nyice ;;w;;  I've mawked this task as donye: 
+        [D][?] refill catfood  (by: 6pm)
+        ************************************************************
+***** EXPECTED.TXT
+        ************************************************************
+        Nyice ;;w;;  I've mawked this task as donye:
+        [D][✓] refill catfood  (by: 6pm)
+        ************************************************************
+*****
+
+***** ACTUAL.TXT
+        Hewe awe the tasks in youw wist:
+        1. [T][?] take care of kyaru 
+        2. [D][?] refill catfood  (by: 6pm)
+        3. [E][?] kishi-san meeting  (at: Friday 7pm)
+        ************************************************************
+***** EXPECTED.TXT
+        Hewe awe the tasks in youw wist:
+        1. [T][✓] take care of kyaru
+        2. [D][✓] refill catfood  (by: 6pm)
+        3. [E][✘] kishi-san meeting  (at: Friday 7pm)
+        ************************************************************
+*****
+

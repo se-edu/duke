@@ -1,0 +1,10 @@
+list
+todo take care of kyaru
+deadline refill catfood /by 6pm
+event kishi-san meeting /at Friday 7pm
+this should pop an error
+list
+done 1
+done 2
+list
+bye

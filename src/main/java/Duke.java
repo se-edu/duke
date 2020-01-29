@@ -6,83 +6,100 @@ import java.util.List;
 
 public class Duke {
     static List<Task> list = new ArrayList<>(100);
-    static int longest = 0;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String logo = " _____     _                          \n"
-                + "|     |___| |_ ___ ___ ___ ___ ___ ___ \n"
+        String logo = " _____     _\n"
+                + "|     |___| |_ ___ ___ ___ ___ ___ ___\n"
                 + "|   --| .'|  _| . | -_|  _|_ -| . |   |\n"
                 + "|_____|__,|_| |  _|___|_| |___|___|_|_|\n"
-                + "              |_|                      \n"
+                + "              |_|\n"
                 + "how may i sewve u today nya?";
         System.out.println("hewwo fwom\n" + logo);
         String[] line = br.readLine().split(" ");
         String cmd = line[0];
         while (!cmd.equals("bye")) {
-            switch (cmd) {
-                case "list":
-                    System.out.print(formatList());
-                    break;
-                case "done":
-                    Task task = list.get(Integer.parseInt(line[1]) - 1);
-                    task.markDone();
-                    System.out.print(formatReply("Nyice ;;w;;  I've mawked this task as donye: \n\t"
-                                    + task));
-                    break;
-                default:
-                    StringBuilder description = new StringBuilder("");
-                    Task newTask;
-                    boolean option = false;
-                    switch (cmd) {
-                        case "deadline":
-                            StringBuilder by = new StringBuilder("");
-                            for (int i = 1; i < line.length; i++) {
-                                if (option) {
-                                    if (i != line.length - 1) {
-                                        by.append(line[i]).append(" ");
+            try {
+                switch (cmd) {
+                    case "list":
+                        System.out.print(formatList());
+                        break;
+                    case "done":
+                        Task task = list.get(Integer.parseInt(line[1]) - 1);
+                        task.markDone();
+                        System.out.print(formatReply("Nyice ;;w;;  I've mawked this task as donye: \n\t"
+                                + task));
+                        break;
+                    default:
+                        StringBuilder description = new StringBuilder("");
+                        Task newTask = null;
+                        boolean option = false;
+                        switch (cmd) {
+                            case "deadline":
+                                StringBuilder by = new StringBuilder("");
+                                for (int i = 1; i < line.length; i++) {
+                                    if (option) {
+                                        if (i != line.length - 1) {
+                                            by.append(line[i]).append(" ");
+                                        } else {
+                                            by.append(line[i]);
+                                        }
+                                    } else if (line[i].equals("/by")) {
+                                        option = true;
                                     } else {
-                                        by.append(line[i]);
+                                        description.append(line[i]).append(" ");
                                     }
-                                } else if (line[i].equals("/by")) {
-                                    option = true;
-                                } else {
+                                }
+                                if (description.toString().equals("")) {
+                                    throw new DukeException(formatReply("OOPS ;;w;;  The descwiption of a deadwinye cannyot be empty."));
+                                }
+                                if (by.toString().equals("")) {
+                                    throw new DukeException(formatReply("OOPS ;;w;;  The deadwinye of a deadwinye cannyot be empty, did you use /by to state the deadwinye?"));
+                                }
+                                newTask = new Deadline(description.toString(), by.toString());
+                                break;
+                            case "event":
+                                StringBuilder at = new StringBuilder("");
+                                for (int i = 1; i < line.length; i++) {
+                                    if (option) {
+                                        if (i != line.length - 1) {
+                                            at.append(line[i]).append(" ");
+                                        } else {
+                                            at.append(line[i]);
+                                        }
+                                    } else if (line[i].equals("/at")) {
+                                        option = true;
+                                    } else {
+                                        description.append(line[i]).append(" ");
+                                    }
+                                }
+                                if (description.toString().equals("")) {
+                                    throw new DukeException(formatReply("OOPS owo  The descwiption of a event cannyot be empty."));
+                                }
+                                if (at.toString().equals("")) {
+                                    throw new DukeException(formatReply("OOPS ;;w;;  The timing fow an event cannyot be empty, did you use /at to state the timing?"));
+                                }
+                                newTask = new Event(description.toString(), at.toString());
+                                break;
+                            case "todo":
+                                if (line.length == 1) {
+                                    throw new DukeException(formatReply("OOPS (・`ω´・)  The descwiption of a todo cannyot be empty."));
+                                }
+                                for (int i = 1; i < line.length; i++) {
                                     description.append(line[i]).append(" ");
                                 }
-                            }
-                            newTask = new Deadline(description.toString(), by.toString());
-                            break;
-                        case "event":
-                            StringBuilder at = new StringBuilder("");
-                            for (int i = 1; i < line.length; i++) {
-                                if (option) {
-                                    if (i != line.length - 1) {
-                                        at.append(line[i]).append(" ");
-                                    } else {
-                                        at.append(line[i]);
-                                    }
-                                } else if (line[i].equals("/at")) {
-                                    option = true;
-                                } else {
-                                    description.append(line[i]).append(" ");
-                                }
-                            }
-                            newTask = new Event(description.toString(), at.toString());
-                            break;
-                        default:
-                            for (int i = 1; i < line.length; i++) {
-                                description.append(line[i]).append(" ");
-                            }
-                            if (description.length() > longest) {
-                                longest = description.length() + 10;
-                            }
-                            newTask = new Todo(description.toString());
-                            break;
-                    }
+                                newTask = new Todo(description.toString());
+                                break;
+                            default:
+                                throw new DukeException(formatReply("OOPS owo  I'm sowwy, but I don't knyow what that means :-("));
+                        }
                         list.add(newTask);
                         System.out.print(formatReply("Got it UwU I've added this task: \n\t"
                                 + newTask + "\n\t" + countList()));
-                    break;
+                        break;
+                }
+            } catch (DukeException e) {
+                System.out.print(e);
             }
             line = br.readLine().split(" ");
             cmd = line[0];
