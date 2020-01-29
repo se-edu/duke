@@ -28,68 +28,91 @@ public class Duke {
                     Task task = list.get(Integer.parseInt(line[1]) - 1);
                     task.markDone();
                     System.out.print(formatReply("Nyice ;;w;;  I've mawked this task as donye: \n\t"
-                                    + task,
-                            (task.getDescription().length() + 4 < 45 ? 45 : task.getDescription().length() + 4)));
+                                    + task));
                     break;
                 default:
                     StringBuilder description = new StringBuilder("");
-                    for (String word : line) {
-                        description.append(word + " ");
+                    Task newTask;
+                    boolean option = false;
+                    switch (cmd) {
+                        case "deadline":
+                            StringBuilder by = new StringBuilder("");
+                            for (int i = 1; i < line.length; i++) {
+                                if (option) {
+                                    if (i != line.length - 1) {
+                                        by.append(line[i]).append(" ");
+                                    } else {
+                                        by.append(line[i]);
+                                    }
+                                } else if (line[i].equals("/by")) {
+                                    option = true;
+                                } else {
+                                    description.append(line[i]).append(" ");
+                                }
+                            }
+                            newTask = new Deadline(description.toString(), by.toString());
+                            break;
+                        case "event":
+                            StringBuilder at = new StringBuilder("");
+                            for (int i = 1; i < line.length; i++) {
+                                if (option) {
+                                    if (i != line.length - 1) {
+                                        at.append(line[i]).append(" ");
+                                    } else {
+                                        at.append(line[i]);
+                                    }
+                                } else if (line[i].equals("/at")) {
+                                    option = true;
+                                } else {
+                                    description.append(line[i]).append(" ");
+                                }
+                            }
+                            newTask = new Event(description.toString(), at.toString());
+                            break;
+                        default:
+                            for (int i = 1; i < line.length; i++) {
+                                description.append(line[i]).append(" ");
+                            }
+                            if (description.length() > longest) {
+                                longest = description.length() + 10;
+                            }
+                            newTask = new Todo(description.toString());
+                            break;
                     }
-                    if (description.length() > longest) {
-                        longest = description.length() + 7;
-                    }
-                    list.add(new Task(description.toString()));
-                    System.out.print(formatReply("added: "
-                            + description.toString(), 7 + description.length()));
+                        list.add(newTask);
+                        System.out.print(formatReply("Got it UwU I've added this task: \n\t"
+                                + newTask + "\n\t" + countList()));
                     break;
             }
             line = br.readLine().split(" ");
             cmd = line[0];
         }
-        System.out.print(formatReply("Bye. Hope to see you again soon >w<", 35));
+        System.out.print(formatReply("Bye. Hope to see you again soon >w<"));
     }
 
-    private static String formatReply(String line, int borderLength) {
+    private static String formatReply(String line) {
         StringBuilder sb = new StringBuilder("\t");
-        for (int i = 0; i < borderLength; i++) {
-            sb.append("*");
-        }
-        sb.append("\n\t");
-        sb.append(line);
-        sb.append("\n\t");
-        for (int i = 0; i < borderLength; i++) {
-            sb.append("*");
-        }
-        sb.append("\n");
+        sb.append("*".repeat(60)).append("\n\t");
+        sb.append(line).append("\n\t");
+        sb.append("*".repeat(60)).append("\n");
         return sb.toString();
     }
 
     private static String formatList() {
         StringBuilder sb = new StringBuilder("\t");
+        sb.append("*".repeat(60)).append("\n\tHewe awe the tasks in youw wist:\n\t");
         if (list.size() == 0) {
-            for (int i = 0; i < 17; i++) {
-                sb.append("*");
-            }
-            sb.append("\n\t");
             sb.append("list is empty qwq\n\t");
-            for (int i = 0; i < 17; i++) {
-                sb.append("*");
-            }
-            sb.append("\n");
         } else {
-            for (int i = 0; i < longest; i++) {
-                sb.append("*");
-            }
-            sb.append("\n\t");
             for (int i = 1; i <= list.size(); i++) {
-                sb.append(i + ". " + list.get(i - 1) + "\n\t");
+                sb.append(i).append(". ").append(list.get(i - 1)).append("\n\t");
             }
-            for (int i = 0; i < longest; i++) {
-                sb.append("*");
-            }
-            sb.append("\n");
         }
+        sb.append("*".repeat(60)).append("\n");
         return sb.toString();
+    }
+
+    private static String countList() {
+        return "Nyow you have " + list.size() + " tasks in the wist.";
     }
 }
