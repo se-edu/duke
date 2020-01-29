@@ -1,27 +1,46 @@
 package task;
 
+/**
+ * Represents a task.
+ */
 public class Task {
 
     public String name;
     public boolean isDone;
 
+    /**
+     * Constructor for Task.
+     *
+     * @param name the name of the task
+     */
     public Task(String name) {
         this.name = name;
         this.isDone = false;
     }
 
+    /**
+     * Constructor for Task.
+     *
+     * @param name the name of the task
+     * @param isDone the boolean value representing the status of the task
+     */
     public Task(String name, boolean isDone){
         this.name = name;
         this.isDone = isDone;
     }
 
     /**
-     * This method marks the isDone status of the object as true.
+     * Marks the isDone status of the object as true.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
+    /**
+     * Returns a summary of the task.
+     *
+     * @return Returns a summary of the task, including description and the status icon
+     */
     public String toString() {
         String mark = "";
         if (this.isDone) {
@@ -32,6 +51,11 @@ public class Task {
         return mark + " " + this.name;
     }
 
+    /**
+     * Returns a summary of the task in the file format.
+     *
+     * @return Returns a summary of the task in the file format
+     */
     public String toStringFileFormat(){
         int num = -1;
         if(isDone){

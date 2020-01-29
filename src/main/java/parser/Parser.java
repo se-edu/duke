@@ -5,8 +5,18 @@ import task.*;
 import common.Message;
 import exception.DukeException;
 
+/**
+ * Represents a parser between command input and command objects.
+ */
 public class Parser {
 
+    /**
+     * Converts user inputs to command objects.
+     *
+     * @param input the input string of the user
+     * @return a command object
+     * @throws DukeException when input is not valid
+     */
     public static Command parse(String input) throws DukeException {
         String[] words = input.split(" ");
         String[] stamps = input.split("/");

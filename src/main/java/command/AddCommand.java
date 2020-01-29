@@ -5,6 +5,9 @@ import task.*;
 import exception.DukeException;
 import ui.TextUi;
 
+/**
+ * Represents a command that adds a Task to TaskList.
+ */
 public class AddCommand extends Command{
 
     protected Task thisTask;

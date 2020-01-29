@@ -5,6 +5,9 @@ import task.*;
 import exception.DukeException;
 import ui.TextUi;
 
+/**
+ * Represents a command that finds matching items for the user.
+ */
 public class FindCommand extends Command{
 
     protected String searchingItem;

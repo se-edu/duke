@@ -2,14 +2,27 @@ package parser;
 
 import task.*;
 
+/**
+ * Represents a file parser that converts between strings and command objects.
+ */
 public class FileParser {
 
     private String thisLine;
 
+    /**
+     * Constructor of the file parser.
+     *
+     * @param str the string stored in the file
+     */
     public FileParser(String str){
         this.thisLine = str.trim();
     }
 
+    /**
+     * Converts a string in the file to command objects.
+     *
+     * @return a task object depending on the content of the string
+     */
     public Task lineToTask(){
 
         String[] words = this.thisLine.split(" \\| ");

@@ -14,6 +14,9 @@ public class Duke {
     private Storage dukeStorage;
     private TaskList tasks;
 
+    /**
+     * Initializes ui and storage.
+     */
     public Duke(String filePath) {
         textUi = new TextUi();
         dukeStorage = new Storage(filePath);
@@ -25,6 +28,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Takes in the user inputs and excutes each command.
+     */
     public void run(){
         textUi.showWelcome();
         boolean isExit = false;
@@ -45,6 +51,9 @@ public class Duke {
         new Duke("tasks.txt").run();
     }
 
+    /**
+     * Ends the conversation and exits the system.
+     */
     public void exit() {
         textUi.showGoodBye();
         System.exit(0);

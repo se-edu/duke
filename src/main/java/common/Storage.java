@@ -8,14 +8,28 @@ import parser.FileParser;
 import exception.DukeException;
 import task.*;
 
+/**
+ * Represents a storage object.
+ */
 public class Storage {
 
     private String filePath;
 
+    /**
+     * Constructor of the class Storage.
+     *
+     * @param filePath the file path of the storage file
+     */
     public Storage (String filePath){
         this.filePath = filePath;
     }
 
+    /**
+     * Reads from the storage file and generates an array list of task objects.
+     *
+     * @return an array list of tasks based on the file content
+     * @throws DukeException when file can not be located or written on
+     */
     public ArrayList<Task> readFromFile() throws DukeException {
         try {
             String thisLine;
@@ -32,6 +46,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes to the file based on the content of the array list of tasks.
+     *
+     * @param existedList the task list
+     * @throws DukeException when the storage file cannot be accessed
+     */
     public void writeToFile(ArrayList<Task> existedList) throws DukeException {
         try {
             FileWriter fw = new FileWriter(this.filePath);
@@ -43,6 +63,5 @@ public class Storage {
             System.out.println(IOExp);
             throw new DukeException("IOException detected");
         }
-
     }
 }

@@ -8,6 +8,9 @@ import task.*;
 
 public class ErrorCommand extends Command{
 
+    /**
+     * Represents a wrong command which should be ignored with an error message.
+     */
     public ErrorCommand(){
         super();
     }

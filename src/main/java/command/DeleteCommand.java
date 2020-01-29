@@ -6,6 +6,9 @@ import ui.TextUi;
 import exception.DukeException;
 import task.*;
 
+/**
+ * Represents a command that deletes a Task from TaskList.
+ */
 public class DeleteCommand extends Command {
 
     protected int index;

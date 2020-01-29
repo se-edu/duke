@@ -6,6 +6,9 @@ import ui.TextUi;
 import exception.DukeException;
 import task.*;
 
+/**
+ * Represents a done command that set a Task to done.
+ */
 public class DoneCommand extends Command {
 
     protected int index;

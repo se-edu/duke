@@ -5,6 +5,9 @@ import task.*;
 import exception.DukeException;
 import ui.TextUi;
 
+/**
+ * Represents a command that displays the task list.
+ */
 public class DisplayCommand extends Command{
 
     public DisplayCommand(){

@@ -5,6 +5,9 @@ import ui.TextUi;
 import exception.DukeException;
 import task.*;
 
+/**
+ * Represents a command that terminates the program.
+ */
 public class ExitCommand extends Command{
 
     public ExitCommand(){
