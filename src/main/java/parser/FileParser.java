@@ -12,20 +12,19 @@ public class FileParser {
 
     public Task lineToTask(){
 
-        String[] words = this.thisLine.split(" | ");
+        String[] words = this.thisLine.split(" \\| ");
 
         boolean isDone = false;
-        if(words[1] == "1"){
+        if(words[1].trim().equals("1")){
             isDone = true;
         } else {
             isDone = false;
         }
-
-        String name = words[2];
+       // D | 0 | return book | June 6th
+        String name = words[2].trim();
         String duration = "";
 
-        String category = words[0];
-
+        String category = words[0].trim();
         switch(category) {
             case "T":
                 return new Todo(name, isDone);

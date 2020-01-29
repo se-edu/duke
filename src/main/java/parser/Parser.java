@@ -11,6 +11,13 @@ public class Parser {
         String[] words = input.split(" ");
         String[] stamps = input.split("/");
         String keyword = words[0];
+        if(keyword.equalsIgnoreCase("find")){
+            if(words.length < 2){
+                return new ErrorCommand();
+            }
+            String searchingItem = input.substring(5).trim();
+            return new FindCommand(searchingItem);
+        }
         if (keyword.equalsIgnoreCase("bye")) {
             return new ExitCommand();
         }
@@ -46,8 +53,7 @@ public class Parser {
             } catch (DukeException exp) {
                 return new ErrorCommand();
             }
-            //System.out.println("it is a todo task, i am adding it.");
-            return new AddCommand(new Todo(words[1]));
+            return new AddCommand(new Todo(input.substring(5).trim()));
         } else if (keyword.equalsIgnoreCase("event")) {
             String[] eventWords = input.split("/at ");
             try {

@@ -33,7 +33,6 @@ public class Storage {
     }
 
     public void writeToFile(ArrayList<Task> existedList) throws DukeException {
-
         try {
             FileWriter fw = new FileWriter(this.filePath);
             for (Task task : existedList) {
