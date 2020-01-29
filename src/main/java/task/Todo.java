@@ -18,5 +18,4 @@ public class Todo extends Task {
     public String toStringFileFormat() {
         return "T" + super.toStringFileFormat();
     }
-
 }

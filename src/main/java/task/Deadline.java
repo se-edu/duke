@@ -18,10 +18,12 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + new TimeFormatter(by).processDate() + ")";
+        return "[D]" + super.toString() + " (by: "
+                + new TimeFormatter(by).processDate() + ")";
     }
 
     public String toStringFileFormat(){
-        return "D" + super.toStringFileFormat() + " | " + this.by;
+        return "D" + super.toStringFileFormat()
+                + " | " + this.by;
     }
 }

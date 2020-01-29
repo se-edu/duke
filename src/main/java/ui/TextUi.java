@@ -68,7 +68,7 @@ public class TextUi {
                 Message.MESSAGE_LINE,
                 Message.MESSAGE_DELETEIT,
                 "     " + tasks.getList().get(index).toString(),
-                "     Now you have " + (tasks.getList().size() - 1)+ " tasks in the list.",
+                "     Now you have " + (tasks.getList().size() - 1) + " tasks in the list.",
                 Message.MESSAGE_LINE
         );
     }

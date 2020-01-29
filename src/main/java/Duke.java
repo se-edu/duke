@@ -2,8 +2,7 @@ import common.Storage;
 import command.Command;
 import exception.DukeException;
 import task.TaskList;
-import parser.*;
-
+import parser.Parser;
 import ui.TextUi;
 
 /**
@@ -32,10 +31,7 @@ public class Duke {
         boolean isExit = false;
         while (!isExit) {
             try {
-                //System.out.println("Prepare to take in commands.");
                 String fullCommand = textUi.readCommand();
-                //System.out.println("fullCommand : " + fullCommand);
-                //textUi.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, textUi, dukeStorage);
                 isExit = c.isExit();
@@ -54,5 +50,4 @@ public class Duke {
         textUi.showGoodBye();
         System.exit(0);
     }
-
 }
