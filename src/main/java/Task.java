@@ -2,7 +2,8 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-    public String getDescription(){
+    public String getDescription() {
+
         return description;
     }
 
@@ -12,15 +13,15 @@ public class Task {
     }
 
     public void markIt() {
+
         this.isDone = true;
     }
 
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718");
     }
-
-
 
 
 }
