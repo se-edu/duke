@@ -36,7 +36,7 @@ public class Parser {
         String[] splitArray = input.split("/");
 
         if( splitArray.length < 2 ){
-            return input.split(" ")[1].trim();
+            return input.substring(getCommand().length() + 1).trim();
         } else {
             return input.substring( getCommand().length() + 1 ).split("/")[0].trim();
         }

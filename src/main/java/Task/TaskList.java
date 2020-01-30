@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    List<Task> list;
+    public List<Task> list;
 
     public TaskList(){
         this.list = new ArrayList<>();

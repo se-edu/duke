@@ -1,3 +1,3 @@
-1.[T][Y] fuck
-2.[D][N] go home (by: 2020-01-31)
-3.[E][N] bday (at: 2020-02-15)
+1.[T][N] go home
+2.[D][N] duke project (by: 2020-01-31)
+3.[E][N] no sleep (at: 2020-01-30)
