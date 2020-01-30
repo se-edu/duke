@@ -16,7 +16,7 @@ A JavaFX application is like a play you are directing. Instead of creating props
 
 1. Import the `libs` folder from the SDK into your project (note: `JAVAFX_HOME` is the directory in which you have unzipped the JavaFX SDK). 
 
-   `File` > `Project Structure` > `Libraries` > `+` > `Java` > `{JAVAFX_HOME}/lib`
+   `FileManager` > `Project Structure` > `Libraries` > `+` > `Java` > `{JAVAFX_HOME}/lib`
 
 1. From `Run` > `Edit Configurations`, add the following line into your `VM options` for each of the `main` classes.
 

@@ -1,14 +1,18 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+
 public class Deadline extends Task {
 
-    String date;
 
-    public Deadline(String desc, int index, String date){
-        super(desc, index);
-        this.date = date;
+    public Deadline(String desc, int index, LocalDate date){
+
+        super(desc, index, Optional.of(date));
+
     }
 
     @Override
     public String toString() {
-        return index + "." + "[D]" + super.toString() + "(by: " + date + ")";
+        return index + "." + "[D]" + super.toString() + "(by: " + getDateString(date) + ")";
     }
 }

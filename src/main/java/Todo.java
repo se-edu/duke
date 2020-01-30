@@ -1,7 +1,7 @@
 public class Todo extends Task {
 
     public Todo(String desc, int index){
-        super(desc, index);
+        super(desc, index, null);
     }
 
     @Override

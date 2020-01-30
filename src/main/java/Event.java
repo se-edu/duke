@@ -1,15 +1,14 @@
+import java.time.LocalDate;
+import java.util.Optional;
+
 public class Event extends Task {
 
-    String date;
-
-    public Event(String desc, int index, String date){
-        super(desc, index);
-//        this.date = desc.split("/at ")[1];
-        this.date = date;
+    public Event(String desc, int index, LocalDate date){
+        super(desc, index, Optional.of(date));
     }
 
     @Override
     public String toString() {
-        return index + "." + "[E]" + super.toString() + "(at: " + date + ")";
+        return index + "." + "[E]" + super.toString() + "(at: " + getDateString(date) + ")";
     }
 }

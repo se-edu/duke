@@ -97,6 +97,7 @@ public class Bot {
         }
     }
 
+
     /**
      * echos input string
      * @param string input string
@@ -126,6 +127,9 @@ public class Bot {
             case "delete":
                 index = getFirstInteger(req);
                 taskList.deleteTask(index);
+                break;
+            case "date":
+                taskList.printTasksOn(req);
                 break;
             default:
                 String taskDesc = getTaskDesc(req);
