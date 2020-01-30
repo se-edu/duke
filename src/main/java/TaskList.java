@@ -30,6 +30,13 @@ public class TaskList {
         return str;
     }
 
+    /**
+     * parses date from task description
+     * @param taskDesc task description
+     * @param splitBy substring before date to be parsed
+     * @return date
+     * @throws DukeException if no date
+     */
     private static String getDate(String taskDesc, String splitBy) throws DukeException{
         try {
             return taskDesc.split(splitBy)[1];
@@ -38,6 +45,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * deletes task
+     * @param taskIndex index of task to be deleted
+     * @throws DukeException if no task found for index
+     */
     public void deleteTask(int taskIndex) throws DukeException{
         try {
 
@@ -54,34 +66,41 @@ public class TaskList {
         }
     }
 
+    /**
+     * adds task to list
+     * @param taskDesc task description
+     * @param taskType type of task - event, deadline, todo (optional)
+     * @throws DukeException if no date
+     */
     public void addTask(String taskDesc, String taskType) throws DukeException{
 
-        try {
-            int index = this.list.size() + 1;
+        int index = this.list.size() + 1;
 
-            Task task;
-            String date;
+        Task task;
+        String date;
 
-            switch( taskType ){
-                case "event":
-                    date = this.getDate(taskDesc, "/at ");
-                    task = new Event(taskDesc, index, date);
-                    break;
-                case "deadline":
-                    date = this.getDate(taskDesc, "/by ");
-                    task = new Deadline(taskDesc, index, date);
-                    break;
-                default:
-                    task = new Todo(taskDesc, index);
-            }
-
-            this.list.add(task);
-            System.out.println(task.desc);
-        } catch(DukeException e){
-            throw e;
+        switch( taskType ){
+            case "event":
+                date = getDate(taskDesc, "/at ");
+                task = new Event(taskDesc, index, date);
+                break;
+            case "deadline":
+                date = getDate(taskDesc, "/by ");
+                task = new Deadline(taskDesc, index, date);
+                break;
+            default:
+                task = new Todo(taskDesc, index);
         }
+
+        this.list.add(task);
+        System.out.println(task.desc);
     }
 
+    /**
+     * marks task as done
+     * @param taskIndex index of task to be marked as done
+     * @throws DukeException if index out of bounds
+     */
     public void markTask(int taskIndex) throws DukeException{
 
         try {
