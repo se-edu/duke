@@ -48,8 +48,11 @@ public class TaskList {
 
     }
 
-    public void printTasks() {
 
+    /**
+     * prints all tasks
+     */
+    public void printTasks(){
         if( this.list.size() == 0 ){
             System.out.println("You have no tasks in your list.");
         } else {
@@ -59,7 +62,12 @@ public class TaskList {
         }
     }
 
-    public void printTasksOn( String req ) throws DukeException {
+    /**
+     * prints task on certain date. command: date /on YYYY-MM-DD
+     * @param req
+     * @throws DukeException
+     */
+    public void printTasksOn(String req) throws DukeException {
 
         try {
             Parser parser = new Parser( req );

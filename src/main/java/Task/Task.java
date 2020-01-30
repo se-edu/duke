@@ -29,6 +29,9 @@ public class Task {
         return "[" + done + "] " + this.content;
     }
 
+    /**
+     * marks task as done
+     */
     public void markAsDone(){
         this.done = true;
     }

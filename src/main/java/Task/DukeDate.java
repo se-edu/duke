@@ -19,19 +19,37 @@ public class DukeDate {
         this.dateString = dateString;
     }
 
-    public static LocalDate convertToDate( String dateString ) {
-        return LocalDate.parse( dateString, DateTimeFormatter.ISO_LOCAL_DATE );
+    /**
+     * converts String to LocalDate object
+     * @param dateString
+     * @return LocalDate object
+     */
+    public static LocalDate convertToDate(String dateString){
+        return LocalDate.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
-    public static String convertToString( LocalDate date ) {
-        return date.format( DateTimeFormatter.ofLocalizedDate( FormatStyle.FULL ) );
+    /**
+     * converts LocalDate object to String
+     * @param date LocalDate object
+     * @return date string in format YYYY-MM-DD
+     */
+    public static String convertToString(LocalDate date){
+        return date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
     }
 
-    public LocalDate getDate() {
+    /**
+     * getter for LocalDate object
+     * @return LocalDate object
+     */
+    public LocalDate getDate(){
         return this.date;
     }
 
-    public String getDateString() {
+    /**
+     * getter for datestring
+     * @return dateString
+     */
+    public String getDateString(){
         return this.dateString;
     }
 
