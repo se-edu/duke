@@ -140,15 +140,16 @@ public class Duke {
 
         StringBuilder textToPrint = new StringBuilder();
         for (Task t: tasklist) {
-            textToPrint.append(t);
+            textToPrint.append(t.printToFile());
         }
-
         try {
-            FileOutputStream file1 = new FileOutputStream("data/duke.txt");
-            ObjectOutputStream file2 = new ObjectOutputStream(file1);
-            file2.writeObject(tasklist);
-            file2.close();
-            file1.close();
+            char buffer[] = new char[textToPrint.length()];
+            textToPrint.getChars(0, textToPrint.length(), buffer, 0);
+            FileWriter f0 = new FileWriter("data/duke.txt");
+            for (int i=0; i < buffer.length; i += 2) {
+                f0.write(buffer[i]);
+            }
+            f0.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
