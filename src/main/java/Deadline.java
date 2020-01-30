@@ -1,8 +1,8 @@
 public class Deadline extends Task {
 
-    protected String by;
+    protected java.time.LocalDate by;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, java.time.LocalDate by) {
         super(description);
         this.by = by;
         type = "D";
