@@ -15,6 +15,9 @@ public class Duke {
 //        System.out.println("file exists?: " + f.exists());
 //        System.out.println("is Directory?: " + f.isDirectory());
 
+//        System.out.println(counter);
+//        System.out.println(tasklist.size());
+
         try { //read file
             FileReader fileReader = new FileReader("data/duke.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -25,14 +28,23 @@ public class Duke {
                     Task task = new Todo(temp[2]);
                     tasklist.add(counter, task);
                     counter++;
+                    if (Integer.parseInt(temp[1]) == 1) {
+                        task.isDone = true;
+                    }
                 } else if (temp[0].equals("D")) {
                     Task task = new Deadline(temp[2], temp[3]);
                     tasklist.add(counter, task);
                     counter++;
+                    if (Integer.parseInt(temp[1]) == 1) {
+                        task.isDone = true;
+                    }
                 } else if (temp[0].equals("E")) {
                     Task task = new Event(temp[2], temp[3]);
                     tasklist.add(counter, task);
                     counter++;
+                    if (Integer.parseInt(temp[1]) == 1) {
+                        task.isDone = true;
+                    }
                 }
             }
         } catch (IOException e) {
@@ -44,6 +56,7 @@ public class Duke {
             String nextString = scanner.nextLine();
             if (nextString.equals("bye")) {
                 System.out.println("Bye.");
+                break;
             } else if (nextString.equals("list")) {
                 System.out.println("Here are the tasks in your list: ");
                 for (Task t : tasklist) {
@@ -129,29 +142,15 @@ public class Duke {
         }
 
         try { //write file
-            FileOutputStream file3 = new FileOutputStream("data/duke.txt");
-            ObjectOutputStream file4 = new ObjectOutputStream(file3);
-            file4.writeObject(tasklist);
-            file4.close();
-            file3.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            FileWriter fileWriter = new FileWriter("data/duke.txt", false);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-        StringBuilder textToPrint = new StringBuilder();
-        for (Task t: tasklist) {
-            textToPrint.append(t.printToFile());
-        }
-        try {
-            char buffer[] = new char[textToPrint.length()];
-            textToPrint.getChars(0, textToPrint.length(), buffer, 0);
-            FileWriter f0 = new FileWriter("data/duke.txt");
-            for (int i=0; i < buffer.length; i += 2) {
-                f0.write(buffer[i]);
+            String content = "";
+            for (Task task : tasklist) {
+                content = content + task.printToFile() + "\n";
             }
-            f0.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            fileWriter.write(content);
+            fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
