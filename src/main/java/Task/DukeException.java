@@ -2,7 +2,7 @@ package Task;
 
 public class DukeException extends Exception {
 
-    public DukeException(String err){
+    public DukeException( String err ){
         super(err);
     }
 
@@ -10,4 +10,5 @@ public class DukeException extends Exception {
     public String toString() {
         return super.toString();
     }
+
 }
