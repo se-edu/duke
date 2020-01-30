@@ -2,7 +2,6 @@ package Task;
 
 public class Deadline extends Task {
 
-
     public Deadline(String desc, int index, DukeDate date){
 
         super(desc, index, date);

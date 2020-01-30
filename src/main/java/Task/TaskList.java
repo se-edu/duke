@@ -47,6 +47,9 @@ public class TaskList {
 
     }
 
+    /**
+     *
+     */
     public void printTasks(){
         if( this.list.size() == 0 ){
             System.out.println("You have no tasks in your list.");
@@ -59,6 +62,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * prints task on certain date. command: date /on YYYY-MM-DD
+     * @param req
+     * @throws DukeException
+     */
     public void printTasksOn(String req) throws DukeException {
 
         try {
