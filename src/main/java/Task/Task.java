@@ -1,9 +1,11 @@
+package Task;
+
 public class Task {
 
     int index;
-    String content;
+    public String content;
     boolean done;
-    DukeDate date;
+    public DukeDate date;
 
 
     public Task ( String content, int index, DukeDate date ){

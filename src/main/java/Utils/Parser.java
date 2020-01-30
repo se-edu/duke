@@ -1,10 +1,18 @@
+package Utils;
+
 import java.util.Optional;
+
+import Task.Task;
+import Task.Todo;
+import Task.Event;
+import Task.Deadline;
+import Task.DukeDate;
 
 public class Parser {
 
     private String input;
     /**
-     * Parser
+     * Utils.Parser
      * Each input starts with a COMMAND, followed by the CONTENT and optionally, the DATE
      */
     public Parser( String input ){
@@ -62,6 +70,43 @@ public class Parser {
             return Optional.empty();
         }
 
+    }
+
+    public static Task parseTask(String line, int index){
+
+        //get type
+        char taskChar = line.charAt(3);
+        char doneChar = line.charAt(6);
+
+        String subString = line.substring(8);
+
+        String dateString = null;
+
+        if( subString.split(":").length > 1 ){
+            dateString = subString.split(":")[1].substring(0, subString.split(":")[1].length() - 1).trim();
+        }
+
+        Task task;
+
+        switch (taskChar){
+            case 'T':
+                String content = subString.trim();
+                task = new Todo(content, index);
+                break;
+            case 'D':
+                content = subString.split("\\(")[0].trim();
+                task =  new Deadline(content, index, new DukeDate(dateString));
+                break;
+            default:
+                content = subString.split("\\(")[0].trim();
+                task =  new Event(content, index, new DukeDate(dateString));
+        }
+
+        if( doneChar == 'Y' ){
+            task.markAsDone();
+        }
+
+        return task;
     }
 
 }

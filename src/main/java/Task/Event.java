@@ -1,3 +1,5 @@
+package Task;
+
 public class Event extends Task {
 
     public Event(String desc, int index, DukeDate date){
@@ -6,6 +8,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return index + "." + "[E]" + super.toString() + "(at: " + date.getDateString() + ")";
+        return index + "." + "[E]" + super.toString() + " (at: " + date.getDateString() + ")";
     }
 }

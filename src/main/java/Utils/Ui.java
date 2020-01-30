@@ -1,3 +1,5 @@
+package Utils;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -8,11 +10,11 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
-    static void printDivider(){
+    public static void printDivider(){
         System.out.println("-------------------------------------------------------------");
     }
 
-    static boolean isFinished(String input){
+    public static boolean isFinished(String input){
         return input.equals("bye");
     }
 

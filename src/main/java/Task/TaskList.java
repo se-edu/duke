@@ -1,3 +1,8 @@
+package Task;
+
+import Utils.Parser;
+import Utils.Storage;
+
 import java.time.format.DateTimeParseException;
 
 import java.util.List;
@@ -13,17 +18,24 @@ public class TaskList {
 
     public TaskList(String data){
         this.list = new ArrayList<>();
-        restoreFromExisting(list, data);
+        restoreFromExisting(data);
     }
 
 
-    private void restoreFromExisting(List list, String data){
+    private void restoreFromExisting(String data){
 
+        String[] dataArray = data.split("\n");
 
+        int i = 1;
+        for( String line : dataArray ){
+            Task task = Parser.parseTask(line, i);
+            list.add(task);
+            i++;
+        }
 
     }
 
-    private void saveList() throws DukeException{
+    private void saveList() throws DukeException {
 
         String data = "";
 
@@ -72,7 +84,7 @@ public class TaskList {
      * @param taskIndex index of task to be deleted
      * @throws DukeException if no task found for index
      */
-    public void deleteTask(int taskIndex) throws DukeException{
+    public void deleteTask(int taskIndex) throws DukeException {
         try {
 
             Task task = list.get(taskIndex - 1);
@@ -93,7 +105,7 @@ public class TaskList {
      * @param req user input
      * @throws DukeException if no date
      */
-    public void addTask(String req) throws DukeException{
+    public void addTask(String req) throws DukeException {
 
         Parser parser = new Parser(req);
 
@@ -127,7 +139,7 @@ public class TaskList {
      * @param taskIndex index of task to be marked as done
      * @throws DukeException if index out of bounds
      */
-    public void markTask(int taskIndex) throws DukeException{
+    public void markTask(int taskIndex) throws DukeException {
 
         try {
             Task task = this.list.get(taskIndex - 1);
@@ -136,8 +148,11 @@ public class TaskList {
 
             System.out.println("Nice! I've marked this task as done:");
             System.out.println(task);
+
+            saveList();
+
         } catch( IndexOutOfBoundsException e){
-            throw new DukeException("Task Index is invalid");
+            throw new DukeException("Task.Task Index is invalid");
         }
 
 

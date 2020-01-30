@@ -1,3 +1,7 @@
+package Utils;
+
+import Task.DukeException;
+
 import java.io.*;
 
 public class Storage {
@@ -7,7 +11,7 @@ public class Storage {
 
     public Storage(){}
 
-    public static String loadFromFile() throws DukeException{
+    public static String loadFromFile() throws DukeException {
         try {
 
             FileReader fileReader = new FileReader(pathname);
@@ -35,7 +39,7 @@ public class Storage {
 
     }
 
-    public static void writeToFile( String data ) throws DukeException{
+    public static void writeToFile( String data ) throws DukeException {
 
         //make directory
         File dir = new File(dirname);

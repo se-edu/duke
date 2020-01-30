@@ -1,3 +1,8 @@
+package Utils;
+
+import Task.TaskList;
+import Task.DukeException;
+
 import java.util.Optional;
 
 public class Bot {
@@ -18,7 +23,7 @@ public class Bot {
      * @param req user input
      * @throws DukeException
      */
-    public void res(String req) throws DukeException{
+    public void res(String req) throws DukeException {
 
 
         Parser parser = new Parser(req);
