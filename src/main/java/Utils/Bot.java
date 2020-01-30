@@ -49,6 +49,9 @@ public class Bot {
                 case "delete":
                     taskList.deleteTask(index);
                     break;
+                case "find":
+                    taskList.findTask(req);
+                    break;
                 default:
                     taskList.addTask(req);
             }

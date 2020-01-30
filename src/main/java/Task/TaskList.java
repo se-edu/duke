@@ -7,6 +7,8 @@ import java.time.format.DateTimeParseException;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class TaskList {
 
@@ -132,6 +134,35 @@ public class TaskList {
         this.list.add(task);
         this.saveList();
         System.out.println(task.content);
+    }
+
+    public void findTask(String req){
+
+        Parser parser = new Parser(req);
+
+        String searchTerm = parser.getContent();
+
+        Pattern p = Pattern.compile( searchTerm );
+
+        System.out.println("Here's what I found my lord:");
+
+        for ( Task task : list ){
+
+            String[] wordArray = task.content.split(" ");
+
+            for (String word : wordArray ){
+
+                Matcher m = p.matcher( word.trim() );
+
+                if( m.matches() ){
+                    System.out.println(task.toString());
+                    break;
+                }
+
+            }
+
+        }
+
     }
 
     /**
