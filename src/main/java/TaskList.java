@@ -1,14 +1,7 @@
-import java.io.FileWriter;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
+
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Optional;
-
-import java.io.File;
-import java.io.IOException;
 
 public class TaskList {
 
@@ -18,96 +11,52 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
-    @Override
-    public String toString() {
-
-        if( this.list.size() == 0 ){
-            return "You have no tasks in your list.";
-        }
-
-        String str = "Here are the tasks in your list:\n";
-
-        for( int i = 0; i < this.list.size(); i++ ){
-            str = str + this.list.get(i);
-
-            if( i < this.list.size() - 1){
-                str = str + "\n";
-            }
-        }
-
-        return str;
+    public TaskList(String data){
+        this.list = new ArrayList<>();
+        restoreFromExisting(list, data);
     }
 
 
-    /**
-     * parses date from task description
-     * @param taskDesc task description
-     * @param splitBy substring before date to be parsed
-     * @return date
-     * @throws DukeException if no date
-     */
-    private static LocalDate getDate(String taskDesc, String splitBy) throws DukeException{
-        try {
-
-            String dateString = taskDesc.split(splitBy)[1];
-
-            try {
-                return LocalDate.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE);
-            } catch (DateTimeParseException e){
-                throw new DukeException("Date must be in the form YYYY-MM-DD!");
-            }
+    private void restoreFromExisting(List list, String data){
 
 
-        } catch ( IndexOutOfBoundsException e ){
-            throw new DukeException(taskDesc.split(splitBy)[0] + " must have a date!");
-        }
+
     }
 
     private void saveList() throws DukeException{
 
-        String dirname = "./data";
-        String pathname = dirname + "/duke.txt";
+        String data = "";
 
-        //make directory
-        File dir = new File(dirname);
-        dir.mkdir();
-
-        //write to file
-        File saveFile = new File(pathname);
-        FileWriter fileWriter = null;
-
-        try {
-
-            fileWriter = new FileWriter(saveFile);
-            fileWriter.write("SAVED TASKS\n\n");
-
-            for ( Task task : this.list ){
-                fileWriter.write(task.toString() + "\n");
-            }
-
-        } catch (IOException e) {
-            throw new DukeException("Error writing to file. Your changes were not saved.");
-        } finally {
-            try {
-                fileWriter.close();
-            } catch ( IOException e ) {
-                throw new DukeException("Error closing file");
-            }
+        for ( Task task : this.list ){
+            data += task.toString() + "\n";
         }
+
+        Storage.writeToFile(data);
 
     }
 
-    public void printTasksOn(String command) throws DukeException {
-
-        String dateString = command.split(" ")[1];
-
-        try {
-            LocalDate date = LocalDate.parse(dateString);
-
-            System.out.println("Here are your tasks for " + Task.getDateString(Optional.of(date)));
+    public void printTasks(){
+        if( this.list.size() == 0 ){
+            System.out.println("You have no tasks in your list.");
+        } else {
 
             for( Task task: list ){
-                if( task.date.isPresent() && task.date.get().equals(date) ){
+                System.out.println(task);
+            }
+
+        }
+    }
+
+    public void printTasksOn(String req) throws DukeException {
+
+        try {
+            Parser parser = new Parser(req);
+            DukeDate date = new DukeDate(parser.getDateString());
+
+            System.out.println("Here are your tasks for " + date.getDateString());
+
+            for( Task task: list ){
+                if(task.date != null && task.date.getDateString().equals(date.getDateString())){
                     System.out.println(task);
                 }
             }
@@ -141,33 +90,36 @@ public class TaskList {
 
     /**
      * adds task to list
-     * @param taskDesc task description
-     * @param taskType type of task - event, deadline, todo (optional)
+     * @param req user input
      * @throws DukeException if no date
      */
-    public void addTask(String taskDesc, String taskType) throws DukeException{
+    public void addTask(String req) throws DukeException{
+
+        Parser parser = new Parser(req);
 
         int index = this.list.size() + 1;
 
         Task task;
-        LocalDate date;
 
-        switch( taskType ){
+        String command = parser.getCommand();
+        String content = parser.getContent();
+
+        switch( command ){
             case "event":
-                date = getDate(taskDesc, "/at ");
-                task = new Event(taskDesc, index, date);
+                DukeDate date = new DukeDate(parser.getDateString());
+                task = new Event(content, index, date);
                 break;
             case "deadline":
-                date = getDate(taskDesc, "/by ");
-                task = new Deadline(taskDesc, index, date);
+                date = new DukeDate(parser.getDateString());
+                task = new Deadline(content, index, date);
                 break;
             default:
-                task = new Todo(taskDesc, index);
+                task = new Todo(content, index);
         }
 
         this.list.add(task);
         this.saveList();
-        System.out.println(task.desc);
+        System.out.println(task.content);
     }
 
     /**

@@ -1,14 +1,11 @@
-import java.time.LocalDate;
-import java.util.Optional;
-
 public class Event extends Task {
 
-    public Event(String desc, int index, LocalDate date){
-        super(desc, index, Optional.of(date));
+    public Event(String desc, int index, DukeDate date){
+        super(desc, index, date);
     }
 
     @Override
     public String toString() {
-        return index + "." + "[E]" + super.toString() + "(at: " + getDateString(date) + ")";
+        return index + "." + "[E]" + super.toString() + "(at: " + date.getDateString() + ")";
     }
 }

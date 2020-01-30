@@ -1,23 +1,22 @@
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.format.FormatStyle;
-import java.util.Optional;
-
 public class Task {
 
     int index;
-    String desc;
+    String content;
     boolean done;
-    Optional<LocalDate> date;
+    DukeDate date;
 
 
-    public Task ( String desc, int index, Optional<LocalDate> date ){
+    public Task ( String content, int index, DukeDate date ){
         this.index = index;
-        this.desc = desc.split("/")[0].trim();
+        this.content = content;
         this.done = false;
         this.date = date;
+    }
+
+    public Task( String content, int index ){
+        this.index = index;
+        this.content = content;
+        this.done = false;
     }
 
     @Override
@@ -25,11 +24,7 @@ public class Task {
 
         String done = this.done?"Y": "N";
 
-        return "[" + done + "] " + this.desc;
-    }
-
-    public static String getDateString(Optional<LocalDate> date){
-        return date.map(localDate -> localDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL))).orElse("");
+        return "[" + done + "] " + this.content;
     }
 
     public void markAsDone(){

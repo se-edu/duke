@@ -1,4 +1,1 @@
-SAVED TASKS
-
-1.[E][N] (at: Saturday, 2 February 2019)
-2.[E][N] bday(at: Saturday, 2 February 2019)
+1.[D][N] go home(by: 2010-01-01)

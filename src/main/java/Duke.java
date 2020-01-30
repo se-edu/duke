@@ -1,13 +1,15 @@
-import java.util.Scanner;
 /**
  * Duke Program for CS2103T 2020.
  */
 public class Duke {
-    /**
-     * The main method.
-     * @param args args
-     */
-    public static void main(String[] args) {
+
+    private Ui ui;
+
+    public Duke(String filepath){
+        this.ui = new Ui();
+    }
+
+    public void run() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -18,23 +20,21 @@ public class Duke {
         /**
          * initialize variables
          */
-        Scanner sc = new Scanner(System.in);
         Bot bot = new Bot();
         boolean finished = false;
 
-        bot.staticResponse(StaticReq.SAYHELLO);
+        ui.enter();
 
         while ( !finished ){
-            String input = sc.nextLine().toLowerCase().trim();
+            String input = ui.sc.nextLine().toLowerCase().trim();
 
             try {
-                System.out.println("**********************************");
-
-                if( input.equals("bye")  ){
+                Ui.printDivider();
+                if( Ui.isFinished(input)  ){
                     finished = true;
                 } else {
                     bot.res(input);
-                    System.out.println("**********************************");
+                    Ui.printDivider();
                 }
             } catch( DukeException e ){
                 System.out.println(e);
@@ -42,8 +42,15 @@ public class Duke {
 
         }
 
-        bot.staticResponse(StaticReq.SAYGOODBYE);
+        ui.exit();
+    }
+    /**
+     * The main method.
+     * @param args args
+     */
+    public static void main(String[] args) {
 
+        new Duke("./data/tasks.txt").run();
 
     }
 }
