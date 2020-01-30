@@ -9,13 +9,13 @@ public class DukeDate {
     LocalDate date;
     String dateString;
 
-    public DukeDate(LocalDate date){
+    public DukeDate( LocalDate date ) {
         this.date = date;
-        this.dateString = convertToString(date);
+        this.dateString = convertToString( date );
     }
 
-    public DukeDate(String dateString){
-        this.date = convertToDate(dateString);
+    public DukeDate( String dateString ) {
+        this.date = convertToDate( dateString );
         this.dateString = dateString;
     }
 

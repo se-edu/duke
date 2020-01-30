@@ -16,20 +16,21 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
-    public TaskList(String data){
+    public TaskList( String data ){
         this.list = new ArrayList<>();
-        restoreFromExisting(data);
+        restoreFromExisting( data );
     }
 
 
-    private void restoreFromExisting(String data){
+    private void restoreFromExisting( String data ){
 
         String[] dataArray = data.split("\n");
 
         int i = 1;
+
         for( String line : dataArray ){
-            Task task = Parser.parseTask(line, i);
-            list.add(task);
+            Task task = Parser.parseTask( line, i );
+            list.add( task );
             i++;
         }
 
@@ -43,22 +44,21 @@ public class TaskList {
             data += task.toString() + "\n";
         }
 
-        Storage.writeToFile(data);
+        Storage.writeToFile( data );
 
     }
 
+
     /**
-     *
+     * prints all tasks
      */
     public void printTasks(){
         if( this.list.size() == 0 ){
             System.out.println("You have no tasks in your list.");
         } else {
-
             for( Task task: list ){
                 System.out.println(task);
             }
-
         }
     }
 
@@ -70,18 +70,18 @@ public class TaskList {
     public void printTasksOn(String req) throws DukeException {
 
         try {
-            Parser parser = new Parser(req);
-            DukeDate date = new DukeDate(parser.getDateString());
+            Parser parser = new Parser( req );
+            DukeDate date = new DukeDate( parser.getDateString() );
 
             System.out.println("Here are your tasks for " + date.getDateString());
 
-            for( Task task: list ){
-                if(task.date != null && task.date.getDateString().equals(date.getDateString())){
-                    System.out.println(task);
+            for( Task task: list ) {
+                if( task.date != null && task.date.getDateString().equals(date.getDateString()) ) {
+                    System.out.println( task );
                 }
             }
 
-        } catch (DateTimeParseException e){
+        } catch ( DateTimeParseException e ) {
             throw new DukeException("Date must be in the form YYYY-MM-DD!");
         }
 
@@ -124,20 +124,20 @@ public class TaskList {
         String command = parser.getCommand();
         String content = parser.getContent();
 
-        switch( command ){
+        switch( command ) {
             case "event":
                 DukeDate date = new DukeDate(parser.getDateString());
-                task = new Event(content, index, date);
+                task = new Event( content, index, date );
                 break;
             case "deadline":
                 date = new DukeDate(parser.getDateString());
                 task = new Deadline(content, index, date);
                 break;
             default:
-                task = new Todo(content, index);
+                task = new Todo( content, index );
         }
 
-        this.list.add(task);
+        this.list.add( task );
         this.saveList();
         System.out.println(task.content);
     }

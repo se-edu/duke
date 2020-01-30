@@ -2,20 +2,20 @@ package Task;
 
 public class Task {
 
-    int index;
     public String content;
-    boolean done;
     public DukeDate date;
+    int index;
+    boolean done;
 
 
-    public Task ( String content, int index, DukeDate date ){
-        this.index = index;
+    public Task ( String content, int index, DukeDate date ) {
         this.content = content;
-        this.done = false;
         this.date = date;
+        this.index = index;
+        this.done = false;
     }
 
-    public Task( String content, int index ){
+    public Task( String content, int index ) {
         this.index = index;
         this.content = content;
         this.done = false;
