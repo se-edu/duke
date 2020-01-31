@@ -1,3 +1,7 @@
+/*
+*  "UI"
+* */
+
 public class CommandInvoker {
 
     private static boolean endProgram = false;
@@ -7,7 +11,7 @@ public class CommandInvoker {
     }
 
 
-    public void Invoke(UserCommand c){
+    public static void Invoke(UserCommand c){
         try {
             int ID = c.getID();
             c.action();

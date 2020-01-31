@@ -1,11 +1,10 @@
 public class Add_Command extends UserCommand {
 
-    private String desc;
-    private String type;
+    private static String desc;
+    private static String type;
     private Task t;
-    Add_Command(String s) {
+    Add_Command() {
         super(2);
-        desc = s;
     }
 
     Add_Command(String type, String desc){

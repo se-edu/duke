@@ -22,7 +22,7 @@ public class Event extends Task {
     //format project meeting (at: Mon 2-4pm)
     @Override
     public String toString() {
-        return "[E]" +super.toString() + " (by: " + endDate+ ")";
+        return "[E] " +super.toString() + " (at: " + endDate+ ")";
     }
 
 

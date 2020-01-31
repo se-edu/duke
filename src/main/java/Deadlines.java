@@ -22,6 +22,6 @@ public class Deadlines extends Task {
     //format return book (by: Sunday)
     @Override
     public String toString() {
-        return "[D]" +super.toString() + " (by: " + deadline+ ")";
+        return "[D] " +super.toString() + " (by: " + deadline+ ")";
     }
 }
