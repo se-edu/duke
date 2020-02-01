@@ -1,0 +1,17 @@
+abstract class Command {
+    private boolean isExit;
+
+    public Command(boolean isExit) {
+        this.isExit = isExit;
+    }
+
+    public Command() {
+        this.isExit = false;
+    }
+
+    public boolean getIsExit() {
+        return this.isExit;
+    }
+
+    abstract CommandResult execute(TaskList taskList, Ui ui, Storage storage);
+}
