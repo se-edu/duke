@@ -1,12 +1,10 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected String type;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.type = "";
     }
 
     public String getStatusIcon() {
@@ -18,6 +16,6 @@ public class Task {
     }
 
     public String printToFile() {
-        return type + " - " + getStatusIcon() + " " + description;
+        return " - " + getStatusIcon() + " " + description;
     }
 }

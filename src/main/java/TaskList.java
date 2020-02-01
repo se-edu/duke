@@ -3,12 +3,14 @@ import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks;
+    private int counter;
 
-    public TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks, int counter) {
         this.tasks = tasks;
+        this.counter = counter;
     }
 
-    public void addTodo(String nextString, int counter) {
+    public void addTodo(String nextString) {
         Ui ui = new Ui();
         try {
             if (nextString.equals("todo")) {
@@ -18,15 +20,15 @@ public class TaskList {
             String name = nextString.substring(5);
             Task task = new Todo(name);
             tasks.add(counter, task);
-            counter++;
             System.out.println("  " + task.toString());
+            counter++;
             ui.showCounterMsg(counter);
         } catch (DukeException ex) {
             ex.printStackTrace();
         }
     }
 
-    public void addDeadline(String nextString, int counter){
+    public void addDeadline(String nextString){
         Ui ui = new Ui();
         try {
             if (nextString.equals("deadline")) {
@@ -48,15 +50,15 @@ public class TaskList {
             Task task = new Deadline(taskName, date);
 
             tasks.add(counter, task);
-            counter++;
             System.out.println("  " + task.toString());
+            counter++;
             ui.showCounterMsg(counter);
         } catch (DukeException ex) {
             ex.printStackTrace();
         }
     }
 
-    public void addEvent(String nextString, int counter) {
+    public void addEvent(String nextString) {
         Ui ui = new Ui();
         try {
             if (nextString.equals("event")) {
@@ -78,15 +80,15 @@ public class TaskList {
             Task task = new Event(taskName, date);
 
             tasks.add(counter, task);
-            counter++;
             System.out.println("  " + task.toString());
+            counter++;
             ui.showCounterMsg(counter);
         } catch (DukeException ex) {
             ex.printStackTrace();
         }
     }
 
-    public void deleteTask(String nextString, int counter) {
+    public void deleteTask(String nextString) {
         Ui ui = new Ui();
         try {
             if (nextString.equals("delete")) {
