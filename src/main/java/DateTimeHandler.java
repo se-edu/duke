@@ -65,4 +65,11 @@ public class DateTimeHandler{
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
         return dateTime.format(formatter);
     }
+
+    public static String revertDateTime(String dateTime){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy hh:mma");
+        DateTimeFormatter formatterSave = DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm");
+        return LocalDateTime.parse(dateTime, formatter).format(formatterSave);
+    }
+
 }

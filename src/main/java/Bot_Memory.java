@@ -20,7 +20,6 @@ public class Bot_Memory {
             else{
                 System.out.println("\nPrevious data found, Loading memory...\n");
                 loadMemory();
-
             }
         }
         catch (IOException e){
@@ -105,7 +104,7 @@ public class Bot_Memory {
         String typeSpecific = str.substring(str.indexOf("(")+1,str.indexOf(":"));
         String desc = str.substring(0,str.indexOf("(") -1 );
         String datedesc = str.substring(str.indexOf(":")+2,str.indexOf(")"));
-        return desc + "/" + typeSpecific + " " + datedesc;
+        return  desc + "/"+typeSpecific+ " "+DateTimeHandler.revertDateTime(datedesc);
 
     }
 

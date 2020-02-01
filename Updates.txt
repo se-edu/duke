@@ -86,13 +86,16 @@ Changed event/deadline tasks strings to localdatetime class objects
 Change event/deadline tostring method to print localdatetime objects
 
 Issues:
+Memory does not sync
 
 Updates:
 - Possible for duke to accept non time/date sentences? (Not implemented)
 
+Level 8-2:
+Merged master with branch 8 and 7
 
-
-
+Issues
+Memory does not print properly - editied parsedesc
 
 
 
