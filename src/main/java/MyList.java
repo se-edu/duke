@@ -47,4 +47,8 @@ public class MyList {
         //Dalist[ID].markDone();
         System.out.println(DaList.get(ID));
     }
+
+    public static ArrayList getList(){
+        return DaList;
+    }
 }

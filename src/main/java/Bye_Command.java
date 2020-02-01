@@ -11,7 +11,8 @@ public class Bye_Command extends UserCommand{
     }
 
     @Override
-    public boolean action() {
+    public boolean action() throws DukeException {
+        Bot_Memory.saveMemory();
         CommandInvoker.stop();
         return true;
     }
