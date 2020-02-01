@@ -6,7 +6,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.type = null;
+        this.type = "";
     }
 
     public String getStatusIcon() {

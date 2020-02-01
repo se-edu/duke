@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,14 +10,6 @@ public class Duke {
     public static void main(String[] args) {
         System.out.println("Hey, I'm Duke");
         System.out.println("What's up");
-
-//        File f = new File("data/duke.txt");
-//        System.out.println("full path: " + f.getAbsolutePath());
-//        System.out.println("file exists?: " + f.exists());
-//        System.out.println("is Directory?: " + f.isDirectory());
-
-//        System.out.println(counter);
-//        System.out.println(tasklist.size());
 
         try { //read file
             FileReader fileReader = new FileReader("data/duke.txt");
@@ -32,14 +25,22 @@ public class Duke {
                         task.isDone = true;
                     }
                 } else if (temp[0].equals("D")) {
-                    Task task = new Deadline(temp[2], temp[3]);
+                    int day = Integer.parseInt(temp[3].split("-")[2]);
+                    int month = Integer.parseInt(temp[3].split("-")[1]);
+                    int year = Integer.parseInt(temp[3].split("-")[0]);
+                    LocalDate date = LocalDate.of(year, month, day);
+                    Task task = new Deadline(temp[2], date);
                     tasklist.add(counter, task);
                     counter++;
                     if (Integer.parseInt(temp[1]) == 1) {
                         task.isDone = true;
                     }
                 } else if (temp[0].equals("E")) {
-                    Task task = new Event(temp[2], temp[3]);
+                    int day = Integer.parseInt(temp[3].split("-")[2]);
+                    int month = Integer.parseInt(temp[3].split("-")[1]);
+                    int year = Integer.parseInt(temp[3].split("-")[0]);
+                    LocalDate date = LocalDate.of(year, month, day);
+                    Task task = new Deadline(temp[2], date);
                     tasklist.add(counter, task);
                     counter++;
                     if (Integer.parseInt(temp[1]) == 1) {
@@ -60,6 +61,9 @@ public class Duke {
             } else if (nextString.equals("list")) {
                 System.out.println("Here are the tasks in your list: ");
                 for (Task t : tasklist) {
+//                    if(t.type.equals("D")) {
+//                        System.out.println((tasklist.indexOf(t) + 1) + ". " + t.printInList());
+//                    }
                     System.out.println((tasklist.indexOf(t) + 1) + ". " + t.toString());
                 }
             } else if (nextString.contains("done")) {
@@ -90,8 +94,16 @@ public class Duke {
                         throw new DukeException("OOPS!!! The description of a deadline cannot be empty :(");
                     }
                     String name = nextString.substring(9);
-                    String[] temp = name.split(" /by ");
-                    Task task = new Deadline(temp[0], temp[1]);
+                    String taskName = name.split(" /by ")[0];
+                    String dateTime = name.split(" /by ")[1];
+
+                    String[] tempDate = dateTime.split(" ");
+                    int day = Integer.parseInt(tempDate[0].split("/")[0]);
+                    int month = Integer.parseInt(tempDate[0].split("/")[1]);
+                    int year = Integer.parseInt(tempDate[0].split("/")[2]);
+                    LocalDate date = LocalDate.of(year, month, day);
+                    Task task = new Deadline(taskName, date);
+
                     tasklist.add(counter, task);
                     counter++;
                     System.out.println("Got it. I've added this task: ");
@@ -106,8 +118,17 @@ public class Duke {
                         throw new DukeException("OOPS!!! The description of an event cannot be empty :(");
                     }
                     String name = nextString.substring(5);
-                    String[] temp = name.split(" /at ");
-                    Task task = new Event(temp[0], temp[1]);
+
+                    String taskName = name.split(" /at ")[0];
+                    String dateTime = name.split(" /at ")[1];
+
+                    String[] tempDate = dateTime.split(" ");
+                    int day = Integer.parseInt(tempDate[0].split("/")[0]);
+                    int month = Integer.parseInt(tempDate[0].split("/")[1]);
+                    int year = Integer.parseInt(tempDate[0].split("/")[2]);
+                    LocalDate date = LocalDate.of(year, month, day);
+                    Task task = new Event(taskName, date);
+
                     tasklist.add(counter, task);
                     counter++;
                     System.out.println("Got it. I've added this task: ");
