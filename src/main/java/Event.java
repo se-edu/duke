@@ -1,14 +1,14 @@
+import java.time.LocalDateTime;
 public class Event extends Task {
 
-    private String endDate;
+    private LocalDateTime endDate;
     public Event(String description)throws DukeException {
         super("default");
 
 
             String[] parsed = getParse(description);
-            endDate = parsed[1];
+            endDate = DateTimeHandler.getLocalDateTime(parsed[1]);
             super.resetDesc(parsed[0]);
-
     }
 
     private String[] getParse(String desc) throws DukeException{
@@ -22,7 +22,7 @@ public class Event extends Task {
     //format project meeting (at: Mon 2-4pm)
     @Override
     public String toString() {
-        return "[E] " +super.toString() + " (at: " + endDate+ ")";
+        return "[E]" +super.toString() + " (by: " + DateTimeHandler.printsLocalDateTime(endDate)+ ")";
     }
 
 
