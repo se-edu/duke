@@ -77,6 +77,21 @@ Git Note:
 Bot does not check commit tags.
 
 
+Level 8-1:
+Added dateTime class - Returns date/time objects
+Added dateTime handler -handles parsing of data and time, able to print and return proper datetime objects.. returns null if not correct
+
+Changes:
+Changed event/deadline tasks strings to localdatetime class objects
+Change event/deadline tostring method to print localdatetime objects
+
+Issues:
+
+Updates:
+- Possible for duke to accept non time/date sentences? (Not implemented)
+
+
+
 
 
 

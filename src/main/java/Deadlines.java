@@ -1,13 +1,12 @@
-import com.sun.tools.attach.AgentInitializationException;
-
+import java.time.LocalDateTime;
 public class Deadlines extends Task {
 
-    private String deadline;
+    private LocalDateTime deadline;
     public Deadlines(String description) throws DukeException{
         super("default");
 
             String[] parsed = getParse(description);
-            deadline = parsed[1];
+            deadline = DateTimeHandler.getLocalDateTime(parsed[1]);
             super.resetDesc(parsed[0]);
     }
 
@@ -22,6 +21,6 @@ public class Deadlines extends Task {
     //format return book (by: Sunday)
     @Override
     public String toString() {
-        return "[D]" +super.toString() + " (by: " + deadline+ ")";
+        return "[D]" +super.toString() + " (by: " + DateTimeHandler.printsLocalDateTime(deadline)+ ")";
     }
 }

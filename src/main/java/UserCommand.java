@@ -1,4 +1,4 @@
-public class UserCommand implements Commands{
+public class UserCommand implements Command {
 
    // private  String myWords;
     private int ID = 0;
