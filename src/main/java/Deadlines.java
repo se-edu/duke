@@ -29,7 +29,7 @@ public class Deadlines extends Task {
      * @param symbol Symbol D to signify Deadline events.
      * @param date date and time in the form of strings.
      */
-    public Deadlines(String title,int index, boolean don, Symbol symbol,String date) {
+    public Deadlines(String title,int index, boolean don,String date) {
         super(title,index, don);
         this.symbol = "D";
         this.date = date;

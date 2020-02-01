@@ -1,11 +1,11 @@
 public class Todo extends Task {
 
-    public Todo(String title,int index, Symbol symbol) {
+    public Todo(String title,int index) {
         super(title,index);
         this.symbol = "T";
     }
 
-    public Todo(String title,int index, Boolean don, Symbol symbol) {
+    public Todo(String title,int index, Boolean don) {
         super(title,index, don);
         this.symbol = "T";
     }

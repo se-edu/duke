@@ -32,13 +32,13 @@ public class Storage {
                     don = true;
                 }
                 if (arrMessage[0].equals("T")) {
-                    task = new Todo(arrMessage[2], counter, don, Symbol.T);
+                    task = new Todo(arrMessage[2], counter, don);
                     tasksTemp.put(counter, task);
                 } else if (arrMessage[0].equals("D")) {
-                    task = new Deadlines(arrMessage[2], counter, don, Symbol.D, arrMessage[3]);
+                    task = new Deadlines(arrMessage[2], counter, don, arrMessage[3]);
                     tasksTemp.put(counter, task);
                 } else if (arrMessage[0].equals("E")) {
-                    task = new Event(arrMessage[2], counter, don, Symbol.E, arrMessage[3]);
+                    task = new Event(arrMessage[2], counter, don, arrMessage[3]);
                     tasksTemp.put(counter, task);
                 }
                 counter++;

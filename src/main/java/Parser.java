@@ -51,7 +51,7 @@ public class Parser {
         if (symbol == Symbol.T) {
             String[] tempArr = Arrays.copyOfRange(arrMessage,1,arrMessage.length);
             String newMessage = String.join(" ", tempArr);
-            task = new Todo(newMessage, TaskList.index, symbol);
+            task = new Todo(newMessage, TaskList.index);
         } else if (symbol == Symbol.D) {
             int landmark = arrMessage.length;
             for (int i = 1; i < arrMessage.length; i++) {
@@ -83,7 +83,7 @@ public class Parser {
             String[] tempArr2 = Arrays.copyOfRange(arrMessage, landmark + 1, arrMessage.length);
             String newMessage = String.join(" ", tempArr);
             String newDate = String.join(" ", tempArr2);
-            task = new Event(newMessage, TaskList.index, symbol, newDate);
+            task = new Event(newMessage, TaskList.index, newDate);
         }
         TaskList.index++;
         return task;

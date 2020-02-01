@@ -12,7 +12,7 @@ public class Event extends Task {
      * @param symbol Symbol/enum E
      * @param date Date of the event scheduled.
      */
-    public Event(String title,int index, Symbol symbol,String date) {
+    public Event(String title,int index,String date) {
         super(title,index);
         this.symbol = "E";
         this.date = date;
@@ -28,7 +28,7 @@ public class Event extends Task {
      * @param symbol Symbol E to signify Deadline events.
      * @param date date and time in the form of strings.
      */
-    public Event(String title,int index, boolean don, Symbol symbol,String date) {
+    public Event(String title,int index, boolean don,String date) {
         super(title,index, don);
         this.symbol = "E";
         this.date = date;
