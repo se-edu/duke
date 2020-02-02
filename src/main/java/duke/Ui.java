@@ -6,16 +6,12 @@ public class Ui {
         System.out.println("What's up");
     }
 
-    public void showLoadingError() {
-        System.out.println("It seems there are some problems with loading your file.");
+    public String sayBye() {
+        return "Bye." ;
     }
 
-    public void sayBye() {
-        System.out.println("Bye.");
-    }
-
-    public void showListMsg() {
-        System.out.println("Here are the tasks in your list: ");
+    public String showListMsg() {
+        return "Here are the tasks in your list: ";
     }
 
     public void showDoneMsg() {

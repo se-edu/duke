@@ -1,0 +1,34 @@
+import duke.Task;
+import duke.TaskList;
+import duke.Todo;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class TaskListTest {
+    @Test
+    public void endTaskTest(){
+        ArrayList<Task> tasklist = new ArrayList<>();
+        tasklist.add(new Todo("test 1"));
+        tasklist.add(new Todo("test 2"));
+        tasklist.add(new Todo("test 3"));
+        TaskList tasks = new TaskList(tasklist, 3);
+        tasks.endTask("done 2");
+        String finished = String.valueOf(tasklist.get(1));
+        assertEquals("[T][✓] test 2", finished);
+    }
+
+    @Test
+    public void deleteTaskTest(){
+        ArrayList<Task> tasklist = new ArrayList<>();
+        tasklist.add(new Todo("test 1"));
+        tasklist.add(new Todo("test 2"));
+        tasklist.add(new Todo("test 3"));
+        TaskList tasks = new TaskList(tasklist, 3);
+        String deleted = String.valueOf(tasklist.get(1));
+        tasks.deleteTask("delete 2");
+        assertEquals("[T][✘] test 2", deleted);
+    }
+}
