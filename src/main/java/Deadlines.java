@@ -18,10 +18,8 @@ public class Deadlines extends Task {
         return parsed;
     }
 
-    //format return book (by: Sunday)
     @Override
     public String toString() {
         return "[D] " +super.toString() + " (by: " + DateTimeHandler.printsLocalDateTime(deadline)+ ")";
-
     }
 }

@@ -108,7 +108,6 @@ public class Bot_Memory {
 
     }
 
-//Load_Command(String type, boolean setDone,String desc)
     private static void loadMemory(){
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;

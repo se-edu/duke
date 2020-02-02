@@ -91,11 +91,27 @@ Memory does not sync
 Updates:
 - Possible for duke to accept non time/date sentences? (Not implemented)
 
+
+2/2/20
+
 Level 8-2:
 Merged master with branch 8 and 7
 
 Issues
 Memory does not print properly - editied parsedesc
+Does not accepts date with no time (memory  save error
+     -Error messgae:
+	       Exception in thread "main" java.time.format.DateTimeParseException: Text '20 Mar 2040' could not be parsed at index 11
+	at java.base/java.time.format.DateTimeFormatter.parseResolved0(DateTimeFormatter.java:2046)
+	at java.base/java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:1948)
+	at java.base/java.time.LocalDateTime.parse(LocalDateTime.java:492)
+	at DateTimeHandler.revertDateTime(DateTimeHandler.java:72)
+	at Bot_Memory.parseDesc(Bot_Memory.java:107)
+	at Bot_Memory.saveMemory(Bot_Memory.java:65)
+	at Bye_Command.action(Bye_Command.java:15)
+	at CommandInvoker.Invoke(CommandInvoker.java:17)
+	at Duke.main(Duke.java:12)
+     - Fixed by return localdate due to function not acceepting non time (LocalDateTime)
 
 
 

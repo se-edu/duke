@@ -1,4 +1,5 @@
 import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
@@ -37,7 +38,9 @@ public class DateTimeHandler{
     //understands 2/12/2019 1800
     private static boolean containsTime(String desc){
         String pattern = "[0-9]{2}/[0-9]{2}/[0-9]{4} [0-9]{4}";
-        return Pattern.matches(pattern, desc);
+        String patternEng = "[0-9]{2} [a-zA-Z]{3} [0-9]{4} [0-9]{2}:[0-9]{2}[apmAPM]{2}";
+        String patternEng2 = "[0-9]{1} [a-zA-Z]{3} [0-9]{4} [0-9]{2}:[0-9]{2}[apmAPM]{2}";
+        return Pattern.matches(pattern, desc)||Pattern.matches(patternEng, desc) || Pattern.matches(patternEng2, desc);
     }
 
     private static boolean isValidDate(String date){
@@ -67,8 +70,15 @@ public class DateTimeHandler{
     }
 
     public static String revertDateTime(String dateTime){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy hh:mma");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy hh:mma");;
         DateTimeFormatter formatterSave = DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm");
+        if(!containsTime(dateTime)) {
+            formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+            formatterSave = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            System.out.println("Counts as not time");
+            return LocalDate.parse(dateTime, formatter).format(formatterSave);
+        }
+        System.out.println("tried to parse" + dateTime);
         return LocalDateTime.parse(dateTime, formatter).format(formatterSave);
     }
 
