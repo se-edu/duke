@@ -10,6 +10,9 @@ repositories {
     mavenCentral()
 }
 
+/**
+ * Configures class path for running gradle.
+ */
 application {
     // Change this to your main class.
     mainClassName = "Duke"
