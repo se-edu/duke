@@ -70,6 +70,11 @@ public class TaskList {
         return this.tasks;
     }
 
+    /**
+     * Find tasks that has the keyword.
+     * @param find find is the keyword used to find the tasks.
+     * @return returns a Treemap of the tasks found.
+     */
     public TreeMap<Integer, Task> findTask(String find) {
         int newIndex = 1;
         TreeMap<Integer, Task> newTasks = new TreeMap<>();
