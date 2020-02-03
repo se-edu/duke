@@ -13,6 +13,8 @@ public class MyList {
     private static ArrayList<Task> DaList = new ArrayList<>();
 
 
+
+
     /**
      * Add tasks.
      *
@@ -83,4 +85,38 @@ public class MyList {
     public static ArrayList getList(){
         return DaList;
     }
+
+    /**
+     * Find existing objects and prints
+     *
+     * @param keyword takes in keyword
+     * @return String stating number of items find
+     */
+    public static String find(String keyword) throws DukeException{
+        ArrayList<Task> localList = populateFindList(keyword);
+        boolean isFirst = true;
+        int count = 1;
+
+        for(Task t: localList){
+            if(isFirst){
+                System.out.println("Found these tasks: ");
+                isFirst = false;
+            }
+            System.out.println(count+ ". "+ t);
+            count++;
+        }
+        return "Found in total of " + localList.size() + " items";
+    }
+
+
+    private static ArrayList populateFindList(String str){
+        ArrayList<Task> localList = new ArrayList<>();
+        for(Task t: DaList){
+            if(t.toString().contains(str)){
+                localList.add(t);
+            }
+        }
+        return localList;
+    }
+
 }
