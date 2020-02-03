@@ -16,7 +16,9 @@ public class Parser {
         if (nextString.equals("list")) {
             tasks.listTasks();
         } else if (nextString.contains("done")) {
-            tasks.endTask(nextString);
+            tasks.markComplete(nextString);
+        } else if (nextString.contains("find")) {
+            tasks.findTask(nextString);
         } else if (nextString.contains("todo")) {
             tasks.addTodo(nextString);
             counter++;

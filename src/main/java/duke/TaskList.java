@@ -18,13 +18,13 @@ public class TaskList {
             if (nextString.equals("todo")) {
                 throw new DukeException(ui.showEmptyTaskMsg());
             }
-            ui.showAddTaskMsg();
+            System.out.println(ui.showAddTaskMsg());
             String name = nextString.substring(5);
             Task task = new Todo(name);
             tasks.add(counter, task);
             System.out.println("  " + task.toString());
             counter++;
-            ui.showCounterMsg(counter);
+            System.out.println(ui.showCounterMsg(counter));
         } catch (DukeException ex) {
             ex.printStackTrace();
         }
@@ -38,7 +38,7 @@ public class TaskList {
             } else if (!nextString.contains("/by")) {
                 throw new DukeException(ui.showWrongFormat());
             }
-            ui.showAddTaskMsg();
+            System.out.println(ui.showAddTaskMsg());
 
             String name = nextString.substring(9);
             String taskName = name.split(" /by ")[0];
@@ -54,7 +54,7 @@ public class TaskList {
             tasks.add(counter, task);
             System.out.println("  " + task.toString());
             counter++;
-            ui.showCounterMsg(counter);
+            System.out.println(ui.showCounterMsg(counter));
         } catch (DukeException ex) {
             ex.printStackTrace();
         }
@@ -68,7 +68,7 @@ public class TaskList {
             } else if (!nextString.contains("/at")) {
                 throw new DukeException(ui.showWrongFormat());
             }
-            ui.showAddTaskMsg();
+            System.out.println(ui.showAddTaskMsg());
             String name = nextString.substring(5);
 
             String taskName = name.split(" /at ")[0];
@@ -84,7 +84,7 @@ public class TaskList {
             tasks.add(counter, task);
             System.out.println("  " + task.toString());
             counter++;
-            ui.showCounterMsg(counter);
+            System.out.println(ui.showCounterMsg(counter));
         } catch (DukeException ex) {
             ex.printStackTrace();
         }
@@ -98,20 +98,20 @@ public class TaskList {
             }
             String[] temp = nextString.split(" ");
             int index = Integer.parseInt(temp[1]) - 1;
-            ui.showRemoveTaskMsg();
+            System.out.println(ui.showRemoveTaskMsg());
             Task current = tasks.get(index);
             tasks.remove(index);
             System.out.println(current.toString());
             counter--;
-            ui.showCounterMsg(counter);
+            System.out.println(ui.showCounterMsg(counter));
         } catch (DukeException ex) {
             ex.printStackTrace();
         }
     }
 
-    public void endTask(String nextString) {
+    public void markComplete(String nextString) {
         Ui ui = new Ui();
-        ui.showDoneMsg();
+        System.out.println(ui.showDoneMsg());
         String[] temp = nextString.split(" ");
         int index = Integer.parseInt(temp[1]) - 1;
         Task current = tasks.get(index);
@@ -119,9 +119,21 @@ public class TaskList {
         System.out.println(current.toString());
     }
 
+    public void findTask(String nextString) {
+        Ui ui = new Ui();
+        System.out.println(ui.showFindTaskMsg());
+        String[] temp = nextString.split(" ");
+        String keyword = temp[1];
+        for (Task t: tasks) {
+            if (t.description.contains(keyword)) {
+                System.out.println((tasks.indexOf(t) + 1) + ". " + t.toString());
+            }
+        }
+    }
+
     public void listTasks() {
         Ui ui = new Ui();
-        ui.showListMsg();
+        System.out.println(ui.showListMsg());
         for (Task t : tasks) {
             System.out.println((tasks.indexOf(t) + 1) + ". " + t.toString());
         }

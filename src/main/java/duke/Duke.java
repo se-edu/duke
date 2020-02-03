@@ -27,7 +27,7 @@ public class Duke {
         while (scanner.hasNext()) {
             nextString = scanner.nextLine();
             if (nextString.equals("bye")) {
-                ui.sayBye();
+                System.out.println(ui.sayBye());
                 break;
             } else {
                 parser.parseCommand(nextString, tasks);

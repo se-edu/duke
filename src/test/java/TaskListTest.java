@@ -9,13 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
     @Test
-    public void endTaskTest(){
+    public void markCompleteTest(){
         ArrayList<Task> tasklist = new ArrayList<>();
         tasklist.add(new Todo("test 1"));
         tasklist.add(new Todo("test 2"));
         tasklist.add(new Todo("test 3"));
         TaskList tasks = new TaskList(tasklist, 3);
-        tasks.endTask("done 2");
+        tasks.markComplete("done 2");
         String finished = String.valueOf(tasklist.get(1));
         assertEquals("[T][✓] test 2", finished);
     }
