@@ -1,3 +1,8 @@
+package Commands;
+
+import Database.MyList;
+import Exceptions.DukeException;
+
 /**
  * Loads the memory back into list
  */
@@ -13,7 +18,7 @@ public class LoadCommand extends AddCommand {
      * @param setDone the set done status of tasks
      * @param desc    the description of the task
      */
-    LoadCommand(String type, boolean setDone, String desc){
+    public LoadCommand(String type, boolean setDone, String desc){
         super(type, desc);
         this.isDone = setDone;
     }

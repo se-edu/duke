@@ -1,5 +1,12 @@
+package Commands;
+
+import Database.MyList;
+import Duke.UI;
+import Resources.*;
+import Exceptions.DukeException;
+
 /**
- * AddCommand is a Command that handles the adding of items
+ * Commands.AddCommand is a Commands.Command that handles the adding of items
  * into the list when user calls.
  */
 public class AddCommand extends UserCommand {
@@ -33,7 +40,7 @@ public class AddCommand extends UserCommand {
     }
 
     @Override
-    public boolean action() throws DukeException {
+    public boolean action() throws DukeException, DukeException {
         if(type.equals("todo")){
             t = new ToDos(desc);
         }

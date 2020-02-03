@@ -1,6 +1,11 @@
+package Commands;
+
+import Duke.UI;
+import Exceptions.DukeException;
 import java.util.HashMap;
+
 /**
- * CommandHub class is for creation and initialisation of all commands.
+ * Commands.CommandHub class is for creation and initialisation of all commands.
  * Inclusive of setting up command specifics
  * ie. setting up task to be removed
  * "Parser"
@@ -10,7 +15,7 @@ public class CommandHub {
     private static HashMap<String,UserCommand> commandList = new HashMap();
 
     /**
-     * Instantiates a new Command hub.
+     * Instantiates a new Commands.Command hub.
      */
     CommandHub(){
     };
@@ -24,7 +29,7 @@ public class CommandHub {
         commandList.put("list",new ListCommand());
     }
     /**
-     * Parses the UserCommand
+     * Parses the Commands.UserCommand
      *
      * @param userInput the user input
      * @return String Array parsedCommand
@@ -42,7 +47,7 @@ public class CommandHub {
      * @return the user command
      * @throws DukeException the duke exception
      */
-    public static UserCommand FetchCommand(String userInput) throws DukeException{
+    public static UserCommand FetchCommand(String userInput) throws DukeException {
         String parsedCommand[] = parseString(userInput);
         String ID = parsedCommand[0];
         String desc = "null";

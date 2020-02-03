@@ -1,7 +1,13 @@
+package Database;
+
+import Duke.UI;
+import Exceptions.DukeException;
+import Resources.Task;
+
 import java.util.ArrayList;
 
 /**
- * MyList handles everything to do with the list
+ * Database.MyList handles everything to do with the list
  */
 public class MyList {
     private static ArrayList<Task> DaList = new ArrayList<>();
@@ -60,7 +66,7 @@ public class MyList {
      * @param ID the id
      * @throws DukeException the duke exception
      */
-    public static void markDone(int ID) throws DukeException{
+    public static void markDone(int ID) throws DukeException {
         ID = ID-1;
         if(ID>=DaList.size()|| ID<0){
             throw new DukeException(UI.getReply("imaginary"));

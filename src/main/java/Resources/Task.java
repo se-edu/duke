@@ -1,5 +1,10 @@
+package Resources;
+
+import Duke.UI;
+import Exceptions.DukeException;
+
 /**
- * The type Task.
+ * The type Resources.Task.
  */
 public class Task {
 
@@ -7,7 +12,7 @@ public class Task {
     protected boolean isDone = false;
 
     /**
-     * Instantiates a new Task.
+     * Instantiates a new Resources.Task.
      *
      * @param description the description
      */

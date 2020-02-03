@@ -1,3 +1,8 @@
+package Duke;
+
+import Commands.CommandHub;
+import Database.Storage;
+
 /**
  * Initialises the bot
  */

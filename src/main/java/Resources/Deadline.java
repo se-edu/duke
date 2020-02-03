@@ -1,3 +1,7 @@
+package Resources;
+
+import Exceptions.DukeException;
+
 import java.time.LocalDateTime;
 
 /**
@@ -8,7 +12,7 @@ public class Deadline extends Task {
     private LocalDateTime deadline;
 
     /**
-     * Instantiates a new Deadline.
+     * Instantiates a new Resources.Deadline.
      *
      * @param description the description
      * @throws DukeException the duke exception

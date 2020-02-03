@@ -1,14 +1,18 @@
+package Resources;
+
+import Exceptions.DukeException;
+
 import java.time.LocalDateTime;
 
 /**
- * Event is a type of task that accepts /at statements only
+ * Resources.Event is a type of task that accepts /at statements only
  */
 public class Event extends Task {
 
     private LocalDateTime endDate;
 
     /**
-     * Instantiates a new Event.
+     * Instantiates a new Resources.Event.
      *
      * @param description the description
      * @throws DukeException the duke exception
@@ -29,7 +33,7 @@ public class Event extends Task {
      * @throws DukeException the duke exception
      * @return A string array containing the parsed split desc and time
      */
-    private String[] getParse(String desc) throws DukeException{
+    private String[] getParse(String desc) throws DukeException {
         if(!desc.contains("/at ")){
             throw new DukeException("Hello? Missing your /at command!");
         }

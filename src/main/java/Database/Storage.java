@@ -1,6 +1,13 @@
-/**
- * The class Storage handles the memory segment of the Bot
+package Database; /**
+ * The class Database.Storage handles the memory segment of the Bot
  */
+import Commands.CommandInvoker;
+import Commands.LoadCommand;
+import Duke.UI;
+import Exceptions.DukeException;
+import Resources.DateTimeHandler;
+import Resources.Task;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -77,6 +84,9 @@ public class Storage {
         ArrayList<Task> mylist = MyList.getList();
         boolean first = true;
 
+        if(mylist.size()==0){
+            overwrite("Wow..much emptiness");
+        }
         for(Task t: mylist){
             String splitted[] = t.toString().split(" ", 3);
             String type = parseType(splitted[0]);
@@ -98,7 +108,7 @@ public class Storage {
      * @return a String containing the type parsed for memory storage
      * @throws DukeException the duke exception
      */
-    private static String parseType(String s) throws DukeException{
+    private static String parseType(String s) throws DukeException {
         if(s.equals("[D]")){
             return "deadline";
         }
@@ -139,7 +149,7 @@ public class Storage {
         String typeSpecific = str.substring(str.indexOf("(")+1,str.indexOf(":"));
         String desc = str.substring(0,str.indexOf("(") -1 );
         String datedesc = str.substring(str.indexOf(":")+2,str.indexOf(")"));
-        return  desc + "/"+typeSpecific+ " "+DateTimeHandler.revertDateTime(datedesc);
+        return  desc + "/"+typeSpecific+ " "+ DateTimeHandler.revertDateTime(datedesc);
 
     }
 
@@ -150,7 +160,9 @@ public class Storage {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
-               // System.out.println(line);
+               if(line.equals("Wow..much emptiness")){
+                   return;
+               }
                 boolean markdone;
                 String splitted[] = line.split("~");
                 if(splitted[1].equals("false")){

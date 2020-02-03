@@ -1,5 +1,11 @@
+package Commands;
+
+import Database.MyList;
+import Duke.UI;
+import Exceptions.DukeException;
+
 /**
- * The class DeleteCommand handles the deletion of tasks
+ * The class Commands.DeleteCommand handles the deletion of tasks
  */
 public class DeleteCommand extends UserCommand {
 

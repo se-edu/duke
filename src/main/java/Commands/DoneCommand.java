@@ -1,5 +1,11 @@
+package Commands;
+
+import Database.MyList;
+import Duke.UI;
+import Exceptions.DukeException;
+
 /**
- * The class DoneCommand handles done commands when user has completed the task
+ * The class Commands.DoneCommand handles done commands when user has completed the task
  */
 public class DoneCommand extends UserCommand {
     /**

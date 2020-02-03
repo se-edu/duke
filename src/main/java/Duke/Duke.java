@@ -1,3 +1,10 @@
+package Duke;
+
+import Commands.CommandHub;
+import Commands.CommandInvoker;
+import Commands.UserCommand;
+import Exceptions.DukeException;
+
 import java.util.Scanner;
 
 public class Duke {

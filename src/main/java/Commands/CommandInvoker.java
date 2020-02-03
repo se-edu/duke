@@ -1,18 +1,20 @@
-/*
-*  "UI"
+package Commands;/*
+*  "Duke.UI"
 * */
 
+import Exceptions.DukeException;
+
 /**
- * The type Command invoker.
+ * The type Commands.Command invoker.
  */
 public class CommandInvoker {
 
     private static boolean isProgramEnd = false;
 
     /**
-     * Instantiates a new Command invoker.
+     * Instantiates a new Commands.Command invoker.
      */
-    CommandInvoker(){};
+    public CommandInvoker(){};
 
     /**
      * Invoke userCommand
@@ -27,7 +29,7 @@ public class CommandInvoker {
     /**
      * Invoke the Usercommand.
      *
-     * @param c the UserCommand
+     * @param c the Commands.UserCommand
      */
     public static void Invoke(UserCommand c){
         try {

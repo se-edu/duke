@@ -1,5 +1,11 @@
+package Commands;
+
+import Database.Storage;
+import Duke.UI;
+import Exceptions.DukeException;
+
 /**
- * The class ByeCommand exit the bot swiftly by saving memory and stopping Invoker.
+ * The class Commands.ByeCommand exit the bot swiftly by saving memory and stopping Invoker.
  */
 public class ByeCommand extends UserCommand{
 

@@ -1,3 +1,7 @@
+package Commands;
+
+import Exceptions.DukeException;
+
 /**
  * An interface skeleton for all UserCommands
  */
@@ -10,12 +14,12 @@ public interface Command {
     public void reply() throws DukeException;
 
     /**
-     * Executes the Action of the Command
+     * Executes the Action of the Commands.Command
      *
      * @return the boolean
      * @throws DukeException the duke exception
      */
-    public boolean action() throws DukeException;
+    public boolean action() throws DukeException, DukeException;
 
     /**
      * Returns the ID of the command

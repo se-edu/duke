@@ -5,7 +5,7 @@ Created:
 Your basic level 1 echo
 Added personality
 Added Dictionary for commands(Hash)
-Created CommandHub
+Created Commands.CommandHub
 Created Invoker to invoke the commands
 Used interface to define usercommands
 
@@ -18,7 +18,7 @@ Made task as objects
 Commandhub now returns add as default
 Added list as a valid command to commandhub
 
-MyList:
+Database.MyList:
 Added additem function
 Changed strings to tasks
 Print list made static
@@ -42,7 +42,7 @@ Level 4
 Added events, todo, deadline undertask
 
 Changes:
-CommandHub:
+Commands.CommandHub:
 Allow seperation of commands
 
 
@@ -50,7 +50,7 @@ Add_Commands:
 Added types
 
 Level 5
-Created DukeException
+Created Exceptions.DukeException
 
 Changes:
 Main:
@@ -105,12 +105,12 @@ Does not accepts date with no time (memory  save error
 	at java.base/java.time.format.DateTimeFormatter.parseResolved0(DateTimeFormatter.java:2046)
 	at java.base/java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:1948)
 	at java.base/java.time.LocalDateTime.parse(LocalDateTime.java:492)
-	at DateTimeHandler.revertDateTime(DateTimeHandler.java:72)
+	at Resources.DateTimeHandler.revertDateTime(Resources.DateTimeHandler.java:72)
 	at Bot_Memory.parseDesc(Bot_Memory.java:107)
 	at Bot_Memory.saveMemory(Bot_Memory.java:65)
 	at Bye_Command.action(Bye_Command.java:15)
-	at CommandInvoker.Invoke(CommandInvoker.java:17)
-	at Duke.main(Duke.java:12)
+	at Commands.CommandInvoker.Invoke(Commands.CommandInvoker.java:17)
+	at Duke.Duke.main(Duke.Duke.java:12)
      - Fixed by return localdate due to function not acceepting non time (LocalDateTime)
 	 - Fixed by accepting single digit numbers
 	
@@ -119,13 +119,21 @@ Datetime does not recognise if user type in single digit dates (3/03/2020)
 
 3/2/20
 A-More OOP
-Added UI class
+Added Duke.UI class
 
 
 
 A-JavaDocs
 Added Java Docs
-	 
+
+
+A-Packages
+Sorted files based on packages
+
+Issues:
+Does not update file if list is empty 
+    - Edited the savememory function to append "wow much empty" to file if lsit is empty
+	- Edited the load memory to ignore "wow much emptiness"
 	 
 	
 

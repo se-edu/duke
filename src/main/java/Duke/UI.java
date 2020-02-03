@@ -1,5 +1,7 @@
+package Duke;
+
 /**
- * Class UI handles all UI interaction with user
+ * Class Duke.UI handles all Duke.UI interaction with user
  * Includes normal replies and exception replies
  */
 public class UI {
