@@ -115,7 +115,7 @@ public class TaskList {
         String[] temp = nextString.split(" ");
         int index = Integer.parseInt(temp[1]) - 1;
         Task current = tasks.get(index);
-        current.isDone = true;
+        current.setIsDone();
         System.out.println(current.toString());
     }
 
@@ -125,7 +125,7 @@ public class TaskList {
         String[] temp = nextString.split(" ");
         String keyword = temp[1];
         for (Task t: tasks) {
-            if (t.description.contains(keyword)) {
+            if (t.getDescription().contains(keyword)) {
                 System.out.println((tasks.indexOf(t) + 1) + ". " + t.toString());
             }
         }

@@ -30,6 +30,13 @@ public class Task {
         return isDone = true;
     }
 
+    /** Returns the description of the task
+     * @return a string representation of the description of the task
+     */
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * @return a string that represents the task.
      */
