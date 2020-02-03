@@ -76,6 +76,9 @@ public class CommandHub {
             }
             return new DeleteCommand(Integer.parseInt(desc));
         }
+        else if(ID.contains("find")){
+            return new FindCommand(desc);
+        }
         else{
             throw new DukeException(UI.getReply("wrongCommand"));
         }
