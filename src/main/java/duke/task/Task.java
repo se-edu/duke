@@ -30,6 +30,10 @@ public abstract class Task {
         return this.symbol;
     }
 
+    public String getTitle() {
+        return this.title;
+    }
+
     public abstract String getInfo();
 
 }

@@ -117,4 +117,22 @@ public class Ui {
         System.out.println(String.format("* %-77s*",' '));
         System.out.println(String.format("%80s",' ').replace(' ','*'));
     }
+
+    /**
+     * Prints all the found tasks stored.
+     */
+    public void printFoundTask(TreeMap<Integer, Task> foundTasks) {
+        String matching = " Here are the matching tasks in your list:";
+        System.out.println(String.format("%80s",' ').replace(' ','*'));
+        System.out.println(String.format("* %-77s*",' '));
+        System.out.println(String.format("* %-77s*",matching));
+        int counter = 1;
+        for (Map.Entry<Integer, Task> entry : foundTasks.entrySet()) {
+            Task message = entry.getValue();
+            System.out.println(String.format("* %d.%-75s*", counter, message));
+            counter++;
+        }
+        System.out.println(String.format("* %-77s*",' '));
+        System.out.println(String.format("%80s",' ').replace(' ','*'));
+    }
 }

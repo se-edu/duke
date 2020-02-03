@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.util.Map;
 import java.util.TreeMap;
 
 public class TaskList {
@@ -67,5 +68,19 @@ public class TaskList {
 
     public TreeMap<Integer, Task> getList() {
         return this.tasks;
+    }
+
+    public TreeMap<Integer, Task> findTask(String find) {
+        int newIndex = 1;
+        TreeMap<Integer, Task> newTasks = new TreeMap<>();
+        for (Map.Entry<Integer, Task> entry : tasks.entrySet()) {
+            Task task = entry.getValue();
+            String message = task.getTitle();
+            if (message.contains(find)) {
+                newTasks.put(newIndex, task);
+                newIndex++;
+            }
+        }
+        return newTasks;
     }
 }

@@ -6,6 +6,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DisplayTaskCommand;
 import duke.command.DoneCommand;
+import duke.command.FindCommand;
 import duke.command.IncorrectCommand;
 import duke.command.InstructionCommand;
 import duke.exception.DukeException;
@@ -42,6 +43,9 @@ public class Parser {
             } else if (message.substring(0, 4).equals("todo")) {
                 temp = createTask(message, Symbol.T);
                 return new AddCommand(temp);
+            } else if (message.substring(0, 4).equals("find")) {
+                String find = message.split(" ",2)[1];
+                return new FindCommand(find);
             } else if (message.substring(0, 5).equals("event")) {
                 temp = createTask(message, Symbol.T);
                 return new AddCommand(temp);
@@ -52,7 +56,7 @@ public class Parser {
                 int taskIndex = Integer.parseInt(message.split(" ", 2)[1]);
                 return new DeleteCommand(taskIndex);
             } else {
-                throw new IllegalArgumentException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (StringIndexOutOfBoundsException ex) {
             return new IncorrectCommand("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
