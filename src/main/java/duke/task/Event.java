@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -9,7 +11,7 @@ public class Event extends Task {
      * SubClass of Task that tracks date/time.
      * @param title Title of the event
      * @param index Index of the event.
-     * @param symbol Symbol/enum E
+     * @param symbol duke.task.Symbol/enum E
      * @param date Date of the event scheduled.
      */
     public Event(String title,int index,String date) {
@@ -25,7 +27,7 @@ public class Event extends Task {
      * @param title title of the event.
      * @param index index of the event in task tracker.
      * @param don boolean tracking if the task is done.
-     * @param symbol Symbol E to signify Deadline events.
+     * @param symbol duke.task.Symbol E to signify Deadline events.
      * @param date date and time in the form of strings.
      */
     public Event(String title,int index, boolean don,String date) {

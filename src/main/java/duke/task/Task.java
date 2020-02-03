@@ -1,11 +1,13 @@
-abstract class Task {
+package duke.task;
+
+public abstract class Task {
     protected String title;
     protected int index;
     protected boolean done;
     protected String symbol;
 
     /**
-     * Constructor for Task object initializing with 2 attribute.
+     * Constructor for duke.task.Task object initializing with 2 attribute.
      * Tracks Tasks and completed Tasks.
      */
     public Task(String title, int index) {
@@ -28,6 +30,6 @@ abstract class Task {
         return this.symbol;
     }
 
-    abstract String getInfo();
+    public abstract String getInfo();
 
 }

@@ -1,3 +1,7 @@
+package duke.ui;
+
+import duke.task.Task;
+import duke.task.TaskList;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;

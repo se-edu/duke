@@ -1,3 +1,21 @@
+package duke.parser;
+
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DisplayTaskCommand;
+import duke.command.DoneCommand;
+import duke.command.IncorrectCommand;
+import duke.command.InstructionCommand;
+import duke.exception.DukeException;
+import duke.task.Deadlines;
+import duke.task.Symbol;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.task.Event;
+
 import java.util.Arrays;
 
 public class Parser {
@@ -9,7 +27,7 @@ public class Parser {
      * @return boolean used to inform other function if user wants to quit
      *     true -> continue using bot, false -> quit bot.
      */
-    static Command parseMessage(String message) throws DukeException {
+    public static Command parseMessage(String message) throws DukeException {
         try {
             Task temp;
             if (message.equals("bye")) {
@@ -45,7 +63,7 @@ public class Parser {
      * Creates task.
      * @param message use to store it in the tasks.
      */
-    static Task createTask(String message, Symbol symbol) throws DukeException {
+    public static Task createTask(String message, Symbol symbol) throws DukeException {
         String[] arrMessage = message.split(" ");
         Task task;
         if (symbol == Symbol.T) {
@@ -85,7 +103,6 @@ public class Parser {
             String newDate = String.join(" ", tempArr2);
             task = new Event(newMessage, TaskList.index, newDate);
         }
-        TaskList.index++;
         return task;
     }
 }

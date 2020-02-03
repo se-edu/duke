@@ -1,17 +1,19 @@
+package duke.task;
+
 import java.util.TreeMap;
 
 public class TaskList {
     private TreeMap<Integer, Task> tasks;
-    static int index;
+    public static int index;
     private int removed;
 
     /**
-     * Constructor for Task object initializing with 2 attribute.
+     * Constructor for duke.task.Task object initializing with 2 attribute.
      * Tracks Tasks and completed Tasks.
      */
     public TaskList(TreeMap<Integer, Task> tasks) {
         this.tasks = tasks;
-        this.index = 1;
+        this.index = tasks.size() + 1;
         this.removed = 0;
     }
 
@@ -38,13 +40,13 @@ public class TaskList {
     /**
      * Deletes task from the task List.
      * @param taskIndex taskIndex use to retrieve task.
-     * @return returns the deleted Task.
+     * @return returns the deleted duke.task.Task.
      * @throws NullPointerException if taskIndex not available.
      */
     public Task deleteTask(int taskIndex) throws NullPointerException {
         try {
-            taskIndex = taskIndex - removed;
-            final Task temp = this.tasks.remove(taskIndex);
+            final Task temp = this.tasks.remove(taskIndex + removed);
+            this.removed++;
             return temp;
         } catch (NullPointerException ex) {
             throw new NullPointerException("Number provided does not exist in the list, please try again.");
@@ -54,6 +56,7 @@ public class TaskList {
 
     public void addTask(Task task) {
         this.tasks.put(this.index, task);
+        this.index++;
     }
 
 
