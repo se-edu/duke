@@ -8,7 +8,7 @@
 import java.io.*;
 import java.util.ArrayList;
 
-public class Bot_Memory {
+public class Storage {
     private static File file;
 
     public static void memory_Init(){
@@ -84,7 +84,7 @@ public class Bot_Memory {
             return "todo";
         }
         else{
-            throw new DukeException("Invalid file parsed error! Please delete the memory file..");
+            throw new DukeException(UI.getReply("memParsedError"));
         }
     }
 
@@ -121,7 +121,7 @@ public class Bot_Memory {
                 else{
                     markdone = true;
                 }
-                CommandInvoker.Invoke(new Load_Command(splitted[0],markdone,splitted[2]));
+                CommandInvoker.Invoke(new LoadCommand(splitted[0],markdone,splitted[2]));
 
             }
         } catch (IOException e) {

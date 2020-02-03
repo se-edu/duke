@@ -8,7 +8,7 @@ public class Del_Command extends UserCommand {
 
     @Override
     public void reply(){
-        System.out.println("Erasing your tracks are you?");
+        System.out.println(UI.getReply("delete"));
     }
 
 

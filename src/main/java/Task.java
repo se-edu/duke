@@ -13,7 +13,7 @@ public class Task {
 
     public void markDone() throws DukeException{
         if(isDone){
-            throw new DukeException("Its done already!");
+            throw new DukeException(UI.getReply("doneAlready"));
         }
         isDone = true;
     }

@@ -1,13 +1,13 @@
-public class Add_Command extends UserCommand {
+public class AddCommand extends UserCommand {
 
     private static String desc;
     private static String type;
     private Task t;
-    Add_Command() {
+    AddCommand() {
         super(2);
     }
 
-    Add_Command(String type, String desc){
+    AddCommand(String type, String desc){
         super(2);
         this.desc = desc;
         this.type = type;
@@ -15,7 +15,7 @@ public class Add_Command extends UserCommand {
 
     @Override
     public void reply(){
-        System.out.println("Sighhssss...I am your slave again?");
+        System.out.println(UI.getReply("add"));
     }
 
     @Override

@@ -1,7 +1,7 @@
 import java.util.HashMap;
 
-public class List_Command extends UserCommand {
-    List_Command() {
+public class ListCommand extends UserCommand {
+    ListCommand() {
         super(3);
     }
     @Override

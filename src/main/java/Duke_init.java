@@ -10,8 +10,7 @@ public class Duke_init {
         System.out.println("Hello from\n" + logo);
         System.out.println("I am a very angry bot and I hate you");
         CommandHub.initCreator(); //init commands
-        Bot_Memory.memory_Init(); //init memory
+        Storage.memory_Init(); //init memory
         System.out.println("Now what you want?");
-
     }
 }

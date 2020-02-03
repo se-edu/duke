@@ -15,8 +15,8 @@ public class CommandHub {
 
     public static void initCreator(){
         commandList.put("null",null);
-        commandList.put("bye",new Bye_Command());
-        commandList.put("list",new List_Command());
+        commandList.put("bye",new ByeCommand());
+        commandList.put("list",new ListCommand());
     }
 
     private static String[] parseString(String userInput){
@@ -38,7 +38,7 @@ public class CommandHub {
         }
         else if(ID.contains("done")){ //done command
             if(desc.equals("null")||desc.equals("")){
-                throw new DukeException("Done with what? Your life is it?");
+                throw new DukeException(UI.getReply("doneFieldEmpty"));
             }
             return new Done_Command(Integer.parseInt(desc));
         }
@@ -46,15 +46,15 @@ public class CommandHub {
             if(desc.equals("null")){
                 throw new DukeException("BAKA! Your not suppose to leave "+ID+" field empty!");
             }
-            return new Add_Command(ID, desc);
+            return new AddCommand(ID, desc);
         }
         else if(ID.contains("delete")){
             if(desc.equals("null")||desc.equals("")){
-                throw new DukeException("Delete yourself!");
+                throw new DukeException(UI.getReply("deleteFieldEmpty"));
             }
             return new Del_Command(Integer.parseInt(desc));
         }
         else{
-            throw new DukeException("Hello? You stupid? Wrong command lah please!");
+            throw new DukeException(UI.getReply("wrongCommand"));
         }
     }}

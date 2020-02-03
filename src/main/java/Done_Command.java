@@ -8,7 +8,7 @@ public class Done_Command extends UserCommand {
 
     @Override
     public void reply(){
-        System.out.println("Okay whatever.. so you have completed this item.. so what?");
+        System.out.println(UI.getReply("markedDone"));
         System.out.println("Marking item " + id +" as done");
     }
 

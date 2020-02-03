@@ -1,17 +1,11 @@
-public class Load_Command extends Add_Command {
+public class LoadCommand extends AddCommand {
 
     private static boolean done = false;
     private static int count = 0;
 
-    Load_Command(String type, boolean setDone,String desc){
+    LoadCommand(String type, boolean setDone, String desc){
         super(type, desc);
-      //  System.out.println("Discorvers " + type + " in loadcommand");
         this.done = setDone;
-    }
-
-    @Override
-    public void reply(){
-        //do nothing
     }
 
     @Override

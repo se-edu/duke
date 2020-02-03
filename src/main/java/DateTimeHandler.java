@@ -15,11 +15,11 @@ public class DateTimeHandler{
             } else if (isValidTime(desc)) {
                 return DateTime.getTime(desc);
             } else {
-                throw new DukeException("Please input a proper date/time!");
+                throw new DukeException(UI.getReply("wrongDate"));
             }
         }
         catch(DateTimeException e){
-            throw new DukeException("Invalid date/time format");
+            throw new DukeException(UI.getReply("wrongDateFormat"));
         }
     }
 
@@ -73,12 +73,10 @@ public class DateTimeHandler{
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy hh:mma");;
         DateTimeFormatter formatterSave = DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm");
         if(!containsTime(dateTime)) {
-            formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+            formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
             formatterSave = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            System.out.println("Counts as not time");
             return LocalDate.parse(dateTime, formatter).format(formatterSave);
         }
-        System.out.println("tried to parse" + dateTime);
         return LocalDateTime.parse(dateTime, formatter).format(formatterSave);
     }
 

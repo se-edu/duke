@@ -1,18 +1,18 @@
-public class Bye_Command extends UserCommand{
+public class ByeCommand extends UserCommand{
 
-    Bye_Command() {
+    ByeCommand() {
      super(1);
     }
 
 
     @Override
     public void reply() {
-        System.out.println("Bye. Have a nice day lol you shit...");
+        System.out.println(UI.getReply("bye"));
     }
 
     @Override
     public boolean action() throws DukeException {
-        Bot_Memory.saveMemory();
+        Storage.saveMemory();
         CommandInvoker.stop();
         return true;
     }
