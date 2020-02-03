@@ -24,7 +24,7 @@ public class Task {
      * @param name the name of the task
      * @param isDone the boolean value representing the status of the task
      */
-    public Task(String name, boolean isDone){
+    public Task(String name, boolean isDone) {
         this.name = name;
         this.isDone = isDone;
     }
@@ -56,9 +56,9 @@ public class Task {
      *
      * @return Returns a summary of the task in the file format
      */
-    public String toStringFileFormat(){
+    public String toStringFileFormat() {
         int num = -1;
-        if(isDone){
+        if (isDone) {
             num = 1;
         } else {
             num = 0;

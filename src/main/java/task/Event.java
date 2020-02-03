@@ -41,7 +41,7 @@ public class Event extends Task {
      *
      * @return Returns a summary of the Event task in the file format
      */
-    public String toStringFileFormat(){
+    public String toStringFileFormat() {
         return "E" + super.toStringFileFormat()
                 + " | " + this.duration;
     }

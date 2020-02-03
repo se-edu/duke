@@ -42,7 +42,7 @@ public class Deadline extends Task {
      *
      * @return Returns a summary of the Deadline task in the file format
      */
-    public String toStringFileFormat(){
+    public String toStringFileFormat() {
         return "D" + super.toStringFileFormat()
                 + " | " + this.by;
     }

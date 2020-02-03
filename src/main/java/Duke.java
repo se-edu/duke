@@ -31,7 +31,7 @@ public class Duke {
     /**
      * Takes in the user inputs and excutes each command.
      */
-    public void run(){
+    public void run() {
         textUi.showWelcome();
         boolean isExit = false;
         while (!isExit) {

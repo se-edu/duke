@@ -1,7 +1,16 @@
 package parser;
 
-import command.*;
-import task.*;
+import command.Command;
+import command.AddCommand;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.DisplayCommand;
+import command.ErrorCommand;
+import command.ExitCommand;
+import command.FindCommand;
+import task.Todo;
+import task.Event;
+import task.Deadline;
 import common.Message;
 import exception.DukeException;
 
@@ -21,8 +30,8 @@ public class Parser {
         String[] words = input.split(" ");
         String[] stamps = input.split("/");
         String keyword = words[0];
-        if(keyword.equalsIgnoreCase("find")){
-            if(words.length < 2){
+        if (keyword.equalsIgnoreCase("find")) {
+            if (words.length < 2) {
                 return new ErrorCommand();
             }
             String searchingItem = input.substring(5).trim();

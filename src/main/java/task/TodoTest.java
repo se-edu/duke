@@ -2,6 +2,12 @@ package task;
 
 public class TodoTest {
 
+    /**
+     * Main class of the TodoTest serving the purpose of testing Todo.class.
+     *
+     * @param args command line input
+     * @throws Exception thrown in terms of storage error
+     */
     public static void main(String[] args) throws Exception {
 
         //test setup

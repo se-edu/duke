@@ -1,7 +1,7 @@
 package command;
 
 import exception.DukeException;
-import task.*;
+import task.TaskList;
 import ui.TextUi;
 import common.Storage;
 
@@ -17,6 +17,7 @@ public abstract class Command {
      * @param textUi a TextUi object that handles user-system interaction
      * @throws DukeException If the execution fails.
      */
-    abstract public void execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException;
-    abstract public boolean isExit();
+    public abstract void execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException;
+
+    public abstract boolean isExit();
 }

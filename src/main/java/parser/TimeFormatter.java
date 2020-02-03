@@ -18,7 +18,7 @@ public class TimeFormatter {
      *
      * @param strDate the original string of date
      */
-    public TimeFormatter (String strDate){
+    public TimeFormatter(String strDate) {
         this.strDate = strDate.trim();
     }
 
@@ -27,22 +27,18 @@ public class TimeFormatter {
      *
      * @return a boolean value whether the format is valid
      */
-    public boolean checkValidDateFormat(){
-        if(this.strDate.trim().equals("")){
+    public boolean checkValidDateFormat() {
+        if (this.strDate.trim().equals("")) {
             return false;
         }
         SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try
-        {
+        try {
             Date javaDate = sdFormat.parse(this.strDate);
-            if(Integer.valueOf(this.strDate.substring(5,7)) > 12){
+            if (Integer.valueOf(this.strDate.substring(5,7)) > 12) {
                 return false;
             }
             return true;
-        }
-        /* Date format is invalid */
-        catch (ParseException e)
-        {
+        } catch (ParseException e) { /* Date format is invalid */
             return false;
         }
     }
@@ -52,7 +48,7 @@ public class TimeFormatter {
      *
      * @return the string of the desired format of date
      */
-    public String toDesiredFormat(){
+    public String toDesiredFormat() {
         LocalDate localDate = LocalDate.parse(this.strDate);
         return localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
@@ -62,8 +58,8 @@ public class TimeFormatter {
      *
      * @return the original or modified version of date
      */
-    public String processDate(){
-        if(!this.checkValidDateFormat()){
+    public String processDate() {
+        if (!this.checkValidDateFormat()) {
             return this.strDate;
         } else {
             return this.toDesiredFormat();

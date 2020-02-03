@@ -3,7 +3,7 @@ package exception;
 import common.Message;
 
 /**
- * Creates a self-defined exception class that deals with Duke-specific exceptions
+ * Creates a self-defined exception class that deals with Duke-specific exceptions.
  */
 public class DukeException extends Exception {
 

@@ -1,12 +1,14 @@
 package common;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 import parser.FileParser;
 import exception.DukeException;
-import task.*;
+import task.Task;
 
 /**
  * Represents a storage object.
@@ -20,7 +22,7 @@ public class Storage {
      *
      * @param filePath the file path of the storage file
      */
-    public Storage (String filePath){
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -41,7 +43,7 @@ public class Storage {
                 builtList.add(new FileParser(thisLine).lineToTask());
             }
             return builtList;
-        } catch (IOException IOExp) {
+        } catch (IOException exp) {
             return new ArrayList<>();
         }
     }
@@ -59,8 +61,8 @@ public class Storage {
                 fw.write(task.toStringFileFormat() + "\n");
             }
             fw.close();
-        } catch (IOException IOExp){
-            System.out.println(IOExp);
+        } catch (IOException exp) {
+            System.out.println(exp);
             throw new DukeException("IOException detected");
         }
     }

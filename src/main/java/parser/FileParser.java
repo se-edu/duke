@@ -1,6 +1,9 @@
 package parser;
 
-import task.*;
+import task.Task;
+import task.Todo;
+import task.Event;
+import task.Deadline;
 
 /**
  * Represents a file parser that converts between strings and command objects.
@@ -14,7 +17,7 @@ public class FileParser {
      *
      * @param str the string stored in the file
      */
-    public FileParser(String str){
+    public FileParser(String str) {
         this.thisLine = str.trim();
     }
 
@@ -23,32 +26,32 @@ public class FileParser {
      *
      * @return a task object depending on the content of the string
      */
-    public Task lineToTask(){
+    public Task lineToTask() {
 
         String[] words = this.thisLine.split(" \\| ");
 
         boolean isDone = false;
-        if(words[1].trim().equals("1")){
+        if (words[1].trim().equals("1")) {
             isDone = true;
         } else {
             isDone = false;
         }
-       // D | 0 | return book | June 6th
+
         String name = words[2].trim();
         String duration = "";
 
         String category = words[0].trim();
-        switch(category) {
-            case "T":
-                return new Todo(name, isDone);
-            case "E":
-                duration = words[3];
-                return new Event(name, duration, isDone);
-            case "D":
-                duration = words[3];
-                return new Deadline(name, duration, isDone);
-            default:
-                return new Task(name, isDone);
+        switch (category) {
+        case "T":
+            return new Todo(name, isDone);
+        case "E":
+            duration = words[3];
+            return new Event(name, duration, isDone);
+        case "D":
+            duration = words[3];
+            return new Deadline(name, duration, isDone);
+        default:
+            return new Task(name, isDone);
         }
 
     }
