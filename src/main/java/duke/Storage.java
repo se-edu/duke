@@ -29,7 +29,7 @@ public class Storage {
                     tasks.add(counter, task);
                     counter++;
                     if (Integer.parseInt(temp[1]) == 1) {
-                        task.isDone = true;
+                        task.setIsDone();
                     }
                 } else if (temp[0].equals("D")) {
                     int day = Integer.parseInt(temp[3].split("-")[2]);
@@ -40,7 +40,7 @@ public class Storage {
                     tasks.add(counter, task);
                     counter++;
                     if (Integer.parseInt(temp[1]) == 1) {
-                        task.isDone = true;
+                        task.setIsDone();
                     }
                 } else if (temp[0].equals("E")) {
                     int day = Integer.parseInt(temp[3].split("-")[2]);
@@ -51,7 +51,7 @@ public class Storage {
                     tasks.add(counter, task);
                     counter++;
                     if (Integer.parseInt(temp[1]) == 1) {
-                        task.isDone = true;
+                        task.setIsDone();
                     }
                 }
             }

@@ -23,6 +23,13 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    /** Changes task status to done
+     * @return the variable isDone to have a new value of true.
+     */
+    public boolean setIsDone() {
+        return isDone = true;
+    }
+
     /**
      * @return a string that represents the task.
      */
