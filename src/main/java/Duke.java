@@ -1,8 +1,14 @@
 import java.util.Scanner;
+
 public class Duke {
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
 
-        Duke_init.initBot();
+        DukeInit.initBot();
         CommandInvoker invoker = new CommandInvoker();
 
         while(!CommandInvoker.checkOff()){

@@ -1,18 +1,28 @@
+/**
+ * Loads the memory back into list
+ */
 public class LoadCommand extends AddCommand {
 
-    private static boolean done = false;
+    private static boolean isDone = false;
     private static int count = 0;
 
+    /**
+     * Instantiates a new Load command.
+     *
+     * @param type    the type of task
+     * @param setDone the set done status of tasks
+     * @param desc    the description of the task
+     */
     LoadCommand(String type, boolean setDone, String desc){
         super(type, desc);
-        this.done = setDone;
+        this.isDone = setDone;
     }
 
     @Override
     public boolean action() throws DukeException {
         super.action();
         count++;
-        if(done){
+        if(isDone){
             MyList.markDone(count);
         }
         return true;

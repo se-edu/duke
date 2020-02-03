@@ -1,7 +1,17 @@
+/**
+ * Class UI handles all UI interaction with user
+ * Includes normal replies and exception replies
+ */
 public class UI {
 
-    public static String getReply(String str){
-        switch(str){
+    /**
+     * Returns a reply string according to id
+     *
+     * @param id the str
+     * @return the string
+     */
+    public static String getReply(String id){
+        switch(id){
         case "delete":
             return "Erasing your tracks are you?";
         case "emptyList":
@@ -13,14 +23,18 @@ public class UI {
         case "markedDone":
             return "Okay whatever.. so you have completed this item.. so what?";
         default:
-            return getErrorMsg(str);
+            return getErrorMsg(id);
         }
     }
 
-
-
-    private static String getErrorMsg(String str){
-        switch(str){
+    /**
+     * Returns a error string according to id
+     *
+     * @param id the str
+     * @return the string
+     */
+    private static String getErrorMsg(String id){
+        switch(id){
         case "imaginary":
             return "You want to finish something imaginary??? Please.. are you stupid?";
         case "emptyList":

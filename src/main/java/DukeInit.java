@@ -1,6 +1,11 @@
-public class Duke_init {
+/**
+ * Initialises the bot
+ */
+public class DukeInit {
 
-    Duke_init(){}
+    /**
+     * Initalises bot.
+     */
     public static void initBot(){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

@@ -1,12 +1,15 @@
+/**
+ * The class UserCommand acts as a parent class for commands
+ */
 public class UserCommand implements Command {
-
-   // private  String myWords;
     private int ID = 0;
 
-
-    UserCommand(){
-    };
-
+    /**
+     * Instantiates a new User command.
+     * Set the ID
+     *
+     * @param id the id
+     */
     UserCommand(int id){
         ID = id;
     };

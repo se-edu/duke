@@ -1,12 +1,26 @@
+/**
+ * AddCommand is a Command that handles the adding of items
+ * into the list when user calls.
+ */
 public class AddCommand extends UserCommand {
 
     private static String desc;
     private static String type;
     private Task t;
+
+    /**
+     * Instantiates a new Add command.
+     */
     AddCommand() {
         super(2);
     }
 
+    /**
+     * Instantiates a new Add command.
+     *
+     * @param type the type
+     * @param desc the desc
+     */
     AddCommand(String type, String desc){
         super(2);
         this.desc = desc;
@@ -27,7 +41,7 @@ public class AddCommand extends UserCommand {
             t= new Event(desc);
         }
         else{
-            t = new Deadlines(desc);
+            t = new Deadline(desc);
         }
 
         MyList.addItem(t);

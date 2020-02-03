@@ -1,16 +1,21 @@
-/*
-*  "Memory/Storage"
-*
-* */
-
-
-
-import java.io.*;
+/**
+ * The class Storage handles the memory segment of the Bot
+ */
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.BufferedReader;
+
 
 public class Storage {
     private static File file;
 
+    /**
+     * Initialises memory
+     */
     public static void memory_Init(){
         try{
             file = new File("memory.txt");
@@ -26,7 +31,11 @@ public class Storage {
         }
     }
 
-
+    /**
+     * Overwrites the current data memory
+     *
+     * @param line the String to overwrite
+     */
     private static void overwrite(String line){
 
         try {
@@ -41,6 +50,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Appends to the current data memory in text file
+     *
+     * @param line the String to append
+     */
     private static void append(String line){
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(file,true));
@@ -54,6 +68,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the memory on close.
+     *
+     * @throws DukeException the duke exception
+     */
     public static void saveMemory() throws DukeException{
         ArrayList<Task> mylist = MyList.getList();
         boolean first = true;
@@ -73,6 +92,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses the type of task.
+     * @param s A String containing the type.
+     * @return a String containing the type parsed for memory storage
+     * @throws DukeException the duke exception
+     */
     private static String parseType(String s) throws DukeException{
         if(s.equals("[D]")){
             return "deadline";
@@ -88,6 +113,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses if the task is completed.
+     * @param s A String containing the symbol.
+     * @return a String containing the boolean parsed for memory storage
+     */
     private static String parseDone(String s){
         if(s.equals("[\u2713]")){
             return "true";
@@ -97,6 +127,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses the Description of the event
+     * @param str A String containing the description.
+     * @return a String containing the description for memory storage
+     */
     private static String parseDesc(String str){
         if(!str.contains("(")){
             return str;
@@ -108,6 +143,9 @@ public class Storage {
 
     }
 
+    /**
+     * Loads memory from available memory
+     */
     private static void loadMemory(){
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;

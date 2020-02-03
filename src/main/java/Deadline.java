@@ -1,8 +1,19 @@
 import java.time.LocalDateTime;
-public class Deadlines extends Task {
+
+/**
+ * Deadlines is a type of task that accepts /by statements only
+ */
+public class Deadline extends Task {
 
     private LocalDateTime deadline;
-    public Deadlines(String description) throws DukeException{
+
+    /**
+     * Instantiates a new Deadline.
+     *
+     * @param description the description
+     * @throws DukeException the duke exception
+     */
+    public Deadline(String description) throws DukeException{
         super("default");
 
             String[] parsed = getParse(description);
@@ -10,6 +21,13 @@ public class Deadlines extends Task {
             super.resetDesc(parsed[0]);
     }
 
+    /**
+     * Parses the command for better execution
+     *
+     * @param desc the description
+     * @throws DukeException the duke exception
+     * @return A string array containing the parsed split desc and time
+     */
     private String[] getParse(String desc) throws DukeException{
         if(!desc.contains("/by ")){
             throw new DukeException("Hello? Missing your /by command!");

@@ -2,18 +2,35 @@
 *  "UI"
 * */
 
+/**
+ * The type Command invoker.
+ */
 public class CommandInvoker {
 
-    private static boolean endProgram = false;
+    private static boolean isProgramEnd = false;
+
+    /**
+     * Instantiates a new Command invoker.
+     */
     CommandInvoker(){};
+
+    /**
+     * Invoke userCommand
+     *
+     * @param c the userCommand
+     */
     CommandInvoker(UserCommand c){
         Invoke(c);
     }
 
 
+    /**
+     * Invoke the Usercommand.
+     *
+     * @param c the UserCommand
+     */
     public static void Invoke(UserCommand c){
         try {
-            int ID = c.getID();
             c.action();
             c.reply();
         }
@@ -23,12 +40,20 @@ public class CommandInvoker {
 
     }
 
+    /**
+     * Stop the program. Sets the endProgram as true
+     */
     public static void stop(){
-        endProgram = true;
+        isProgramEnd = true;
     }
 
+    /**
+     * Check if program is quit
+     *
+     * @return the boolean
+     */
     public static boolean checkOff(){
-        return endProgram;
+        return isProgramEnd;
     }
 
 }

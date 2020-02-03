@@ -1,5 +1,11 @@
+/**
+ * The class ByeCommand exit the bot swiftly by saving memory and stopping Invoker.
+ */
 public class ByeCommand extends UserCommand{
 
+    /**
+     * Instantiates a new Bye command.
+     */
     ByeCommand() {
      super(1);
     }

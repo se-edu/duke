@@ -1,18 +1,27 @@
-
+/**
+ * The class DateTime creates LocalDateTime objects for functions
+ */
 import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
-import java.util.regex.Pattern;
 
 public class DateTime {
 
     private static LocalDateTime date;
 
+    /**
+     * Prints the time now.
+     */
     public static void printNow() {
         date = LocalDateTime.now();
         System.out.println("Today is " + date);
     }
 
+    /**
+     * Gets date time local date time.
+     *
+     * @param date the date
+     * @param time the time
+     * @return the local date time
+     */
     public static LocalDateTime getDateTime(String date, String time){
             String[] dataArr = date.split("/");
             int year = Integer.parseInt(dataArr[2]);
@@ -25,6 +34,12 @@ public class DateTime {
             return LocalDateTime.of(year,month,day,hour,mins);
     }
 
+    /**
+     * Gets date local date time.
+     *
+     * @param date the date
+     * @return the local date time
+     */
     public static LocalDateTime getDate(String date){
             String[] dataArr = date.split("/");
             int year = Integer.parseInt(dataArr[2]);
@@ -34,6 +49,12 @@ public class DateTime {
             return LocalDateTime.of(year,month,day,0,0,0,0);
     }
 
+    /**
+     * Gets time local date time.
+     *
+     * @param time the time
+     * @return the local date time
+     */
     public static LocalDateTime getTime(String time){
         String[] dataArr = time.split("/");
         int timeConverted = Integer.parseInt(time);

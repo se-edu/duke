@@ -1,7 +1,18 @@
 import java.time.LocalDateTime;
+
+/**
+ * Event is a type of task that accepts /at statements only
+ */
 public class Event extends Task {
 
     private LocalDateTime endDate;
+
+    /**
+     * Instantiates a new Event.
+     *
+     * @param description the description
+     * @throws DukeException the duke exception
+     */
     public Event(String description)throws DukeException {
         super("default");
 
@@ -11,6 +22,13 @@ public class Event extends Task {
             super.resetDesc(parsed[0]);
     }
 
+    /**
+     * Parses the command for better execution
+     *
+     * @param desc the description
+     * @throws DukeException the duke exception
+     * @return A string array containing the parsed split desc and time
+     */
     private String[] getParse(String desc) throws DukeException{
         if(!desc.contains("/at ")){
             throw new DukeException("Hello? Missing your /at command!");
@@ -19,7 +37,7 @@ public class Event extends Task {
         return parsed;
     }
 
-    //format project meeting (at: Mon 2-4pm)
+
     @Override
     public String toString() {
         return "[E] " +super.toString() + " (at: " + DateTimeHandler.printsLocalDateTime(endDate)+ ")";

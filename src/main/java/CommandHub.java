@@ -1,30 +1,47 @@
 import java.util.HashMap;
-/*
-*  CommandHub is for creation and initialisation of all commands. Inclusive of setting up command specifics
-*   ie. setting up task to be removed
-*  "Parser"
-*
-* */
-
-
+/**
+ * CommandHub class is for creation and initialisation of all commands.
+ * Inclusive of setting up command specifics
+ * ie. setting up task to be removed
+ * "Parser"
+ *
+ */
 public class CommandHub {
     private static HashMap<String,UserCommand> commandList = new HashMap();
 
+    /**
+     * Instantiates a new Command hub.
+     */
     CommandHub(){
     };
 
+    /**
+     * Initialises the basic Commands.
+     */
     public static void initCreator(){
         commandList.put("null",null);
         commandList.put("bye",new ByeCommand());
         commandList.put("list",new ListCommand());
     }
-
+    /**
+     * Parses the UserCommand
+     *
+     * @param userInput the user input
+     * @return String Array parsedCommand
+     */
     private static String[] parseString(String userInput){
         userInput.toLowerCase();
         String[] parsedCommand = userInput.split(" ", 2);
         return parsedCommand;
     }
 
+    /**
+     * Fetch user command.
+     *
+     * @param userInput the user input
+     * @return the user command
+     * @throws DukeException the duke exception
+     */
     public static UserCommand FetchCommand(String userInput) throws DukeException{
         String parsedCommand[] = parseString(userInput);
         String ID = parsedCommand[0];
@@ -40,9 +57,9 @@ public class CommandHub {
             if(desc.equals("null")||desc.equals("")){
                 throw new DukeException(UI.getReply("doneFieldEmpty"));
             }
-            return new Done_Command(Integer.parseInt(desc));
+            return new DoneCommand(Integer.parseInt(desc));
         }
-        else if(ID.contains("todo")||ID.contains("deadline")||ID.contains("event")){ //list add
+        else if(ID.contains("todo")||ID.contains("deadline")||ID.contains("event")){
             if(desc.equals("null")){
                 throw new DukeException("BAKA! Your not suppose to leave "+ID+" field empty!");
             }
@@ -52,7 +69,7 @@ public class CommandHub {
             if(desc.equals("null")||desc.equals("")){
                 throw new DukeException(UI.getReply("deleteFieldEmpty"));
             }
-            return new Del_Command(Integer.parseInt(desc));
+            return new DeleteCommand(Integer.parseInt(desc));
         }
         else{
             throw new DukeException(UI.getReply("wrongCommand"));
