@@ -14,20 +14,20 @@ public class Ui {
         return "Here are the tasks in your list: ";
     }
 
-    public void showDoneMsg() {
-        System.out.println("Nice! I've marked this task as done: ");
+    public String showDoneMsg() {
+        return "Nice! I've marked this task as done: ";
     }
 
-    public void showAddTaskMsg() {
-        System.out.println("Got it. I've added this task: ");
+    public String showAddTaskMsg() {
+        return("Got it. I've added this task: ");
     }
 
-    public void showRemoveTaskMsg() {
-        System.out.println("Noted! I've removed this task: ");
+    public String showRemoveTaskMsg() {
+        return("Noted! I've removed this task: ");
     }
 
-    public void showCounterMsg(int counter) {
-        System.out.println("Now you have " + counter + " tasks in your list.");
+    public String showCounterMsg(int counter) {
+        return("Now you have " + counter + " tasks in your list.");
     }
 
     public String showEmptyTaskMsg() {
@@ -40,5 +40,9 @@ public class Ui {
 
     public String showNoMsgToDelete() {
         return "Looks like there's no message to be deleted.";
+    }
+
+    public String showFindTaskMsg() {
+        return "Here are the matching tasks in your list: ";
     }
 }
