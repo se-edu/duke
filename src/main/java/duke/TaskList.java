@@ -3,15 +3,27 @@ package duke;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/** Represents the list of tasks.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
     private int counter;
 
+    /** Creates a list of tasks which takes in a list containing
+     *     all the tasks that have been added or were already in the list
+     *     and a counter that keeps track of the total number of tasks in the list.
+     * @param tasks represents the list of tasks
+     * @param counter represents the total number of tasks in the list.
+     */
     public TaskList(ArrayList<Task> tasks, int counter) {
         this.tasks = tasks;
         this.counter = counter;
     }
 
+    /** Adds a task of type 'Todo' to the list of tasks.
+     * @param nextString is the command entered by the user. Must contain
+     *     the keyword 'todo' and a description of the task
+     */
     public void addTodo(String nextString) {
         Ui ui = new Ui();
         try {
@@ -30,7 +42,12 @@ public class TaskList {
         }
     }
 
-    public void addDeadline(String nextString){
+    /** Adds a task of type 'Deadline' to the list of tasks.
+     * @param nextString is the command entered by the user. Must contain
+     *     the keyword 'deadline', a description of the task and the deadline
+     *     of the task.
+     */
+    public void addDeadline(String nextString) {
         Ui ui = new Ui();
         try {
             if (nextString.equals("deadline")) {
@@ -60,6 +77,11 @@ public class TaskList {
         }
     }
 
+    /** Adds a task of type 'Event' to the list of tasks.
+     * @param nextString is the command entered by the user. Must contain
+     *     the keyword 'event', a description of the task and the date
+     *     of the task.
+     */
     public void addEvent(String nextString) {
         Ui ui = new Ui();
         try {
@@ -90,6 +112,10 @@ public class TaskList {
         }
     }
 
+    /** Deletes a task from the list of tasks, given the index of a task.
+     * @param nextString is the command entered by the user. Must contain
+     *     the keyword 'delete' and the index of the task to be deleted.
+     */
     public void deleteTask(String nextString) {
         Ui ui = new Ui();
         try {
@@ -109,6 +135,10 @@ public class TaskList {
         }
     }
 
+    /** Marks a task in the list of tasks as complete, given the index of the task.
+     * @param nextString is the command entered by the user. Must contain
+     *     the keyword 'done' and the index of the task.
+     */
     public void markComplete(String nextString) {
         Ui ui = new Ui();
         System.out.println(ui.showDoneMsg());
@@ -119,6 +149,12 @@ public class TaskList {
         System.out.println(current.toString());
     }
 
+    /** Lists all the tasks in the list of tasks that contains the keyword
+     *     as inputted by the user.
+     * @param nextString is the command entered by the user. Must contain
+     *     the keyword 'find' and the keyword that the user wishes to filter
+     *     the list of tasks against.
+     */
     public void findTask(String nextString) {
         Ui ui = new Ui();
         System.out.println(ui.showFindTaskMsg());
@@ -131,6 +167,8 @@ public class TaskList {
         }
     }
 
+    /** Lists all the tasks in the list of tasks.
+     */
     public void listTasks() {
         Ui ui = new Ui();
         System.out.println(ui.showListMsg());

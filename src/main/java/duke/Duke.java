@@ -3,7 +3,7 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/** Simulates a personal assistant chatbot
+/** Simulates a personal assistant chatbot.
  * called Duke that acts as a reminder
  *
  */
@@ -14,16 +14,16 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    /** Creates a new instance of Duke
+    /** Creates a new instance of Duke.
      * @param filePath represents the file path
-     * of the file that is being read and written
+     *     of the file that is being read and written
      */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
     }
 
-    /** Runs the program
+    /** Runs the program.
      */
     public void run() {
         ui.greet();

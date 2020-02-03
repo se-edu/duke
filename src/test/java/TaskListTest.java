@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
     @Test
-    public void markCompleteTest(){
+    public void markCompleteTest() {
         ArrayList<Task> tasklist = new ArrayList<>();
         tasklist.add(new Todo("test 1"));
         tasklist.add(new Todo("test 2"));
@@ -21,7 +21,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void deleteTaskTest(){
+    public void deleteTaskTest() {
         ArrayList<Task> tasklist = new ArrayList<>();
         tasklist.add(new Todo("test 1"));
         tasklist.add(new Todo("test 2"));

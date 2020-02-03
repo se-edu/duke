@@ -8,15 +8,26 @@ import java.io.BufferedWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/** Represents a storage that has methods to load from and save to
+ *    the list of tasks from the input file.
+ */
 public class Storage {
     private String filepath;
     private ArrayList<Task> tasks = new ArrayList<>();
     private int counter = 0;
 
+    /** Creates a storage object which takes in the file path
+     *    of the file that contains the list of tasks.
+     * @param filepath is the file path of the file that
+     *     contains the list of tasks.
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /** Loads the list of tasks from the input file.
+     * @return the list of tasks already in the input file
+     */
     public ArrayList<Task> load() {
         try { //read file
             FileReader fileReader = new FileReader(filepath);
@@ -47,7 +58,7 @@ public class Storage {
                     int month = Integer.parseInt(temp[3].split("-")[1]);
                     int year = Integer.parseInt(temp[3].split("-")[0]);
                     LocalDate date = LocalDate.of(year, month, day);
-                    Task task = new Event (temp[2], date);
+                    Task task = new Event(temp[2], date);
                     tasks.add(counter, task);
                     counter++;
                     if (Integer.parseInt(temp[1]) == 1) {
@@ -63,6 +74,11 @@ public class Storage {
         return tasks;
     }
 
+    /** Replaces the list of tasks in the input file with the new list of tasks
+     *    that has been modified through the user commands.
+     * @param toSave represents the new list of tasks that is to be written back
+     *     into the input file.
+     */
     public void save(ArrayList<Task> toSave) {
         try { //write file
             FileWriter fileWriter = new FileWriter(filepath, false);

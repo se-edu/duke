@@ -10,15 +10,15 @@ public class Event extends Task {
 
     /** Creates a task of type event with the
      * specified description and the date of the event.
-     * @param description The description of the task.
-     * @param dateTime The date that the event occurs.
+     * @param description is the description of the task.
+     * @param dateTime is the date that the event occurs.
      */
     public Event(String description, LocalDate dateTime) {
         super(description);
         this.dateTime = dateTime;
     }
 
-    /**
+    /** Produces string to be printed.
      * @return a string that represents the task.
      */
     @Override
@@ -29,7 +29,7 @@ public class Event extends Task {
     /** Prints the string representation of the
      * task that is to be saved in the file.
      * @return a string representation of the
-     * task to be saved in the file.
+     *     task to be saved in the file.
      */
     @Override
     public String printToFile() {

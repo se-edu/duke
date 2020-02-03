@@ -7,7 +7,7 @@ public class Ui {
     }
 
     public String sayBye() {
-        return "Bye." ;
+        return "Bye.";
     }
 
     public String showListMsg() {
@@ -19,15 +19,15 @@ public class Ui {
     }
 
     public String showAddTaskMsg() {
-        return("Got it. I've added this task: ");
+        return ("Got it. I've added this task: ");
     }
 
     public String showRemoveTaskMsg() {
-        return("Noted! I've removed this task: ");
+        return ("Noted! I've removed this task: ");
     }
 
     public String showCounterMsg(int counter) {
-        return("Now you have " + counter + " tasks in your list.");
+        return ("Now you have " + counter + " tasks in your list.");
     }
 
     public String showEmptyTaskMsg() {
