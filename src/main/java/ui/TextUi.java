@@ -28,11 +28,13 @@ public class TextUi {
      *
      * @param message the message that is to be shown to the user
      */
+    /** The Java varargs feature has been implemented in previous levels. */
     public void showToUser(String... message) {
         for (String m : message) {
             out.println(m);
         }
     }
+
 
     /**
      * Shows welcome words to the user during the initialization.
