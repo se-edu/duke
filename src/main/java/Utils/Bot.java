@@ -23,36 +23,44 @@ public class Bot {
      * @param req user input
      * @throws DukeException
      */
-    public void res(String req) throws DukeException {
+    public String res(String req) throws DukeException {
 
+        try {
+            Parser parser = new Parser(req);
+            String command = parser.getCommand();
 
-        Parser parser = new Parser(req);
-        String command = parser.getCommand();
+            if( command.equals("list")){
+                return taskList.printTasks();
+            } else if (command.equals("date")){
+                return taskList.printTasksOn(req);
+            } else {
+                Optional<Integer> indexOptional = parser.getContentAsInt();
 
-        if( command.equals("list")){
-            taskList.printTasks();
-        } else if (command.equals("date")){
-            taskList.printTasksOn(req);
-        } else {
-            Optional<Integer> indexOptional = parser.getContentAsInt();
+                int index = 0;
 
-            int index = 0;
+                if( indexOptional.isPresent() ){
+                    index = indexOptional.get();
+                }
 
-            if( indexOptional.isPresent() ){
-                index = indexOptional.get();
+                switch( command ) {
+                    case "done":
+                        return taskList.markTask(index);
+    //                    break;
+                    case "delete":
+                        return taskList.deleteTask(index);
+    //                    break;
+                    default:
+                        return taskList.addTask(req);
+                }
             }
 
-            switch( command ) {
-                case "done":
-                    taskList.markTask(index);
-                    break;
-                case "delete":
-                    taskList.deleteTask(index);
-                    break;
-                default:
-                    taskList.addTask(req);
-            }
+        } catch (StringIndexOutOfBoundsException e){
+
+                throw new DukeException( "Invalid command!" );
+
         }
+
+
 
     }
 

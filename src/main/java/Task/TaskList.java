@@ -47,31 +47,41 @@ public class TaskList {
 
     }
 
-    public void printTasks(){
+    public String printTasks(){
+
+        String res = "";
+
         if( this.list.size() == 0 ){
-            System.out.println("You have no tasks in your list.");
+            res = "You have no tasks in your list.";
         } else {
 
             for( Task task: list ){
-                System.out.println(task);
+                res += task.toString() + "\n";
             }
 
         }
+
+        return res;
     }
 
-    public void printTasksOn(String req) throws DukeException {
+    public String printTasksOn(String req) throws DukeException {
 
         try {
+
+            String res = "";
+
             Parser parser = new Parser(req);
             DukeDate date = new DukeDate(parser.getDateString());
 
-            System.out.println("Here are your tasks for " + date.getDateString());
+            res += "Here are your tasks for " + date.getDateString();
 
             for( Task task: list ){
                 if(task.date != null && task.date.getDateString().equals(date.getDateString())){
-                    System.out.println(task);
+                    res += task.toString() + "\n";
                 }
             }
+
+            return res;
 
         } catch (DateTimeParseException e){
             throw new DukeException("Date must be in the form YYYY-MM-DD!");
@@ -84,16 +94,21 @@ public class TaskList {
      * @param taskIndex index of task to be deleted
      * @throws DukeException if no task found for index
      */
-    public void deleteTask(int taskIndex) throws DukeException {
+    public String deleteTask(int taskIndex) throws DukeException {
         try {
+
+            String res = "";
 
             Task task = list.get(taskIndex - 1);
 
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(task);
+            res += "Noted. I've removed this task:\n";
+            res += task.toString() + "\n";
             this.list.remove(task);
+            this.saveList();
 
-            System.out.println("\nNow you have " + list.size() + "task(s) in the list");
+            res += "\nNow you have " + list.size() + "task(s) in the list";
+
+            return res;
 
         } catch ( IndexOutOfBoundsException e){
             throw new DukeException("No task found for index " + taskIndex + "!");
@@ -105,7 +120,9 @@ public class TaskList {
      * @param req user input
      * @throws DukeException if no date
      */
-    public void addTask(String req) throws DukeException {
+    public String addTask(String req) throws DukeException {
+
+        String res = "";
 
         Parser parser = new Parser(req);
 
@@ -131,7 +148,9 @@ public class TaskList {
 
         this.list.add(task);
         this.saveList();
-        System.out.println(task.content);
+        res += task.content;
+
+        return res;
     }
 
     /**
@@ -139,17 +158,22 @@ public class TaskList {
      * @param taskIndex index of task to be marked as done
      * @throws DukeException if index out of bounds
      */
-    public void markTask(int taskIndex) throws DukeException {
+    public String markTask(int taskIndex) throws DukeException {
 
         try {
+
+            String res = "";
+
             Task task = this.list.get(taskIndex - 1);
 
             task.markAsDone();
 
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(task);
+            res += "Nice! I've marked this task as done:";
+            res += task.toString();
 
             saveList();
+
+            return res;
 
         } catch( IndexOutOfBoundsException e){
             throw new DukeException("Task.Task Index is invalid");

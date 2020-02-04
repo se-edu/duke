@@ -1,3 +1,9 @@
 1.[T][N] go home
 2.[D][N] duke project (by: 2020-01-31)
 3.[E][N] no sleep (at: 2020-01-30)
+4.[D][N] finish level 10 (by: 2020-02-03)
+5.[D][N] finish integration (by: 2020-02-04)
+6.[D][N] finish integration (by: 2020-02-04)
+7.[T][N] dog
+8.[T][N] is it read
+9.[T][N] shit
