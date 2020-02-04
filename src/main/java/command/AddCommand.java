@@ -26,10 +26,11 @@ public class AddCommand extends Command {
      * @param storage A Storage object which specifies the location of the data
      * @throws DukeException An exception which represents errors in duke input or storage
      */
-    public void execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
         tasks.add(this.thisTask);
         storage.writeToFile(tasks.getList());
-        textUi.showAddingTask(thisTask, tasks);
+        //textUi.showAddingTask(thisTask, tasks);
+        return textUi.showAddingTask_Str(thisTask, tasks);
     }
 
     public boolean isExit() {

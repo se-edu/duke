@@ -22,8 +22,8 @@ public class ExitCommand extends Command {
      * @param storage A Storage object which specifies the location of the data
      * @throws DukeException a duke exception representing errors in user input or storage
      */
-    public void execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
-
+    public String execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
+        return "     It is time to say goodbye :(";
     }
 
     /**

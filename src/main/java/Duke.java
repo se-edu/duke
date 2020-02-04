@@ -13,18 +13,38 @@ public class Duke {
     private TextUi textUi;
     private Storage dukeStorage;
     private TaskList tasks;
+    private boolean isFinished;
 
     /**
      * Initializes ui and storage.
      */
-    public Duke(String filePath) {
+    public Duke() {
         textUi = new TextUi();
-        dukeStorage = new Storage(filePath);
+        dukeStorage = new Storage("tasks.txt");
         try {
             tasks = new TaskList(dukeStorage.readFromFile());
         } catch (exception.DukeException e) {
             textUi.showError(e.getMessage());
             tasks = new TaskList();
+        }
+    }
+
+    /**
+     * Returns a string of duke's respond base on the user input command.
+     * @param text user input text.
+     * @return duke's response
+     */
+    public String getResponse(String text) {
+        try {
+            Command c = Parser.parse(text.trim());
+            boolean isExit = c.isExit();
+            String commandResult = c.execute(tasks, textUi, dukeStorage);
+            if(commandResult.equals("     It is time to say goodbye :(")){
+                this.isFinished = true;
+            }
+            return commandResult;
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 
@@ -38,18 +58,20 @@ public class Duke {
             try {
                 String fullCommand = textUi.readCommand();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, textUi, dukeStorage);
+                String commandResult = c.execute(tasks, textUi, dukeStorage);
+                System.out.println(commandResult);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 textUi.showError(e.getMessage());
+
             }
         }
         exit();
     }
 
     public static void main(String[] args) {
-        new Duke("tasks.txt").run();
-    }
+          new Duke().run();
+      }
 
     /**
      * Ends the conversation and exits the system.
@@ -57,5 +79,9 @@ public class Duke {
     public void exit() {
         textUi.showGoodBye();
         System.exit(0);
+    }
+
+    public boolean isFinished() {
+        return this.isFinished;
     }
 }

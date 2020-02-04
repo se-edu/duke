@@ -23,8 +23,8 @@ public class ErrorCommand extends Command {
      * @param storage A Storage object which specifies the location of the data
      * @throws DukeException a duke exception representing errors in user input or storage
      */
-    public void execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
-        textUi.showError(Message.MESSAGE_INVALIDCOMMAND);
+    public String execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
+        return textUi.showError_Str(Message.MESSAGE_INVALIDCOMMAND);
     }
 
     /**

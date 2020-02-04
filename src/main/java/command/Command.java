@@ -17,7 +17,7 @@ public abstract class Command {
      * @param textUi a TextUi object that handles user-system interaction
      * @throws DukeException If the execution fails.
      */
-    public abstract void execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException;
 
     public abstract boolean isExit();
 }

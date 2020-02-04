@@ -26,15 +26,15 @@ public class DeleteCommand extends Command {
      * @param storage A Storage object which specifies the location of the data
      * @throws DukeException a duke exception representing errors in user input or storage
      */
-    public void execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
         if (this.index >= tasks.getList().size() || this.index < 0) {
-            textUi.showError(Message.MESSAGE_INVALIDCOMMAND);
-            return;
+            return textUi.showError_Str(Message.MESSAGE_INVALIDCOMMAND);
         }
-        textUi.showDeletingTask(this.index, tasks);
+        //textUi.showDeletingTask(this.index, tasks);
+        String res = textUi.showDeletingTask_Str(this.index, tasks);
         tasks.delete(this.index);
         storage.writeToFile(tasks.getList());
-
+        return res;
     }
 
     /**

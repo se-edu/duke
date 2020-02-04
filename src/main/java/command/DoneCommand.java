@@ -26,14 +26,15 @@ public class DoneCommand extends Command {
      * @param storage A Storage object which specifies the location of the data
      * @throws DukeException a duke exception representing errors in user input or storage
      */
-    public void execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
         if (this.index >= tasks.getList().size() || this.index < 0) {
-            textUi.showError(Message.MESSAGE_INVALIDCOMMAND);
-            return;
+            return textUi.showError_Str(Message.MESSAGE_INVALIDCOMMAND);
+
         }
         tasks.done(this.index);
-        textUi.showDoneTask(this.index, tasks);
         storage.writeToFile(tasks.getList());
+        //textUi.showDoneTask(this.index, tasks);
+        return textUi.showDoneTask_Str(this.index, tasks);
     }
 
     /**

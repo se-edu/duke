@@ -30,6 +30,9 @@ public class Parser {
         String[] words = input.split(" ");
         String[] stamps = input.split("/");
         String keyword = words[0];
+        if(input.equals("")){
+            return new ErrorCommand();
+        }
         if (keyword.equalsIgnoreCase("find")) {
             if (words.length < 2) {
                 return new ErrorCommand();
