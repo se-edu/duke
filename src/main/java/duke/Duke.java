@@ -7,18 +7,30 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.nio.file.Path;
 
-public class Duke extends Application {
+public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Empty constructor so that Launcher works.
@@ -73,15 +85,39 @@ public class Duke extends Application {
     }
 
     /**
-     * Starts GUI.
-     * @param stage stage of the GUI.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+    public String getResponse(String input) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            PrintStream ps = new PrintStream(baos);
+            PrintStream old = System.out;
+            System.setOut(ps);
+            Command c = Parser.parseMessage(input);
+            CommandResult commandResult = c.execute(tasks, ui, storage);
+            System.out.flush();
+            System.setOut(old);
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+        }
+        return baos.toString();
+    }
 
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
+
+
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
     }
 
     /**

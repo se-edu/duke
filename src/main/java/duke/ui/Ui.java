@@ -38,25 +38,25 @@ public class Ui {
      * @param message provided by user, prints it.
      */
     public void printMessageInBox(String message) {
-        System.out.println(String.format("%80s",' ').replace(' ','*'));
-        System.out.println(String.format("* %-77s*",' '));
+        System.out.println(String.format("%60s",' ').replace(' ','*'));
+        System.out.println(String.format("%-57s",' '));
         String[] splited = message.split("\n");
         for (String s : splited) {
-            System.out.println(String.format("* %-77s*", s));
+            System.out.println(String.format("  %-57s", s));
         }
-        System.out.println(String.format("* %-77s*",' '));
-        System.out.println(String.format("%80s",' ').replace(' ','*'));
+        System.out.println(String.format("%-57s",' '));
+        System.out.println(String.format("%60s",' ').replace(' ','*'));
     }
 
     /**
      * Prints goodbye message.
      */
     public void printGoodBye() {
-        System.out.println(String.format("%80s",' ').replace(' ','*'));
-        System.out.println(String.format("* %-77s*",' '));
-        System.out.println(String.format("* %-77s*","Thank you for using JayZ-Bot! Hope to see you again :D"));
-        System.out.println(String.format("* %-77s*",' '));
-        System.out.println(String.format("%80s",' ').replace(' ','*'));
+        System.out.println(String.format("%60s",' ').replace(' ','*'));
+        System.out.println(String.format("* %-57s*",' '));
+        System.out.println(String.format("* %-57s*","Thank you for using JayZ-Bot! Hope to see you again :D"));
+        System.out.println(String.format("* %-57s*",' '));
+        System.out.println(String.format("%60s",' ').replace(' ','*'));
     }
 
     public String readCommand() {
@@ -106,16 +106,16 @@ public class Ui {
      */
     public void printStoredTask(TaskList tasksList) {
         TreeMap<Integer,Task> tasks = tasksList.getList();
-        System.out.println(String.format("%80s",' ').replace(' ','*'));
-        System.out.println(String.format("* %-77s*",' '));
+        System.out.println(String.format("%60s",' ').replace(' ','*'));
+        System.out.println(String.format("* %-57s*",' '));
         int counter = 1;
         for (Map.Entry<Integer, Task> entry : tasks.entrySet()) {
             Task message = entry.getValue();
-            System.out.println(String.format("* %d.%-75s*", counter, message));
+            System.out.println(String.format("* %d.%-55s*", counter, message));
             counter++;
         }
-        System.out.println(String.format("* %-77s*",' '));
-        System.out.println(String.format("%80s",' ').replace(' ','*'));
+        System.out.println(String.format("* %-57s*",' '));
+        System.out.println(String.format("%60s",' ').replace(' ','*'));
     }
 
     /**
@@ -123,16 +123,16 @@ public class Ui {
      */
     public void printFoundTask(TreeMap<Integer, Task> foundTasks) {
         String matching = " Here are the matching tasks in your list:";
-        System.out.println(String.format("%80s",' ').replace(' ','*'));
-        System.out.println(String.format("* %-77s*",' '));
-        System.out.println(String.format("* %-77s*",matching));
+        System.out.println(String.format("%60s",' ').replace(' ','*'));
+        System.out.println(String.format("* %-57s*",' '));
+        System.out.println(String.format("* %-57s*",matching));
         int counter = 1;
         for (Map.Entry<Integer, Task> entry : foundTasks.entrySet()) {
             Task message = entry.getValue();
-            System.out.println(String.format("* %d.%-75s*", counter, message));
+            System.out.println(String.format("* %d.%-55s*", counter, message));
             counter++;
         }
-        System.out.println(String.format("* %-77s*",' '));
-        System.out.println(String.format("%80s",' ').replace(' ','*'));
+        System.out.println(String.format("* %-57s*",' '));
+        System.out.println(String.format("%60s",' ').replace(' ','*'));
     }
 }
