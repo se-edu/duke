@@ -50,18 +50,10 @@ public class TaskList {
 
     }
 
-<<<<<<< HEAD
     public String printTasks(){
 
         String res = "";
 
-=======
-
-    /**
-     * prints all tasks
-     */
-    public void printTasks(){
->>>>>>> c34ef0d6afcb62c9cd22062400d2418ff58d69dc
         if( this.list.size() == 0 ){
             res = "You have no tasks in your list.";
         } else {
@@ -73,7 +65,6 @@ public class TaskList {
         return res;
     }
 
-<<<<<<< HEAD
     public String printTasksOn(String req) throws DukeException {
 
         try {
@@ -82,22 +73,9 @@ public class TaskList {
 
             Parser parser = new Parser(req);
             DukeDate date = new DukeDate(parser.getDateString());
-=======
-    /**
-     * prints task on certain date. command: date /on YYYY-MM-DD
-     * @param req
-     * @throws DukeException
-     */
-    public void printTasksOn(String req) throws DukeException {
-
-        try {
-            Parser parser = new Parser( req );
-            DukeDate date = new DukeDate( parser.getDateString() );
->>>>>>> c34ef0d6afcb62c9cd22062400d2418ff58d69dc
 
             res += "Here are your tasks for " + date.getDateString();
 
-<<<<<<< HEAD
             for( Task task: list ){
                 if(task.date != null && task.date.getDateString().equals(date.getDateString())){
                     res += task.toString() + "\n";
@@ -106,16 +84,8 @@ public class TaskList {
 
             return res;
 
-        } catch (DateTimeParseException e){
-=======
-            for( Task task: list ) {
-                if( task.date != null && task.date.getDateString().equals(date.getDateString()) ) {
-                    System.out.println( task );
-                }
-            }
 
         } catch ( DateTimeParseException e ) {
->>>>>>> c34ef0d6afcb62c9cd22062400d2418ff58d69dc
             throw new DukeException("Date must be in the form YYYY-MM-DD!");
         }
 

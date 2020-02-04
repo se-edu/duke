@@ -61,23 +61,6 @@ public class Bot {
         }
 
 
-<<<<<<< HEAD
-=======
-            switch( command ) {
-                case "done":
-                    taskList.markTask(index);
-                    break;
-                case "delete":
-                    taskList.deleteTask(index);
-                    break;
-                case "find":
-                    taskList.findTask(req);
-                    break;
-                default:
-                    taskList.addTask(req);
-            }
-        }
->>>>>>> c34ef0d6afcb62c9cd22062400d2418ff58d69dc
 
     }
 
