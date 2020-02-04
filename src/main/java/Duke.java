@@ -94,6 +94,11 @@ public class Duke extends Application {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
+//        scene.getStylesheets().add("/view/MainWindow.css");
+        scene.getStylesheets().addAll(
+                "/view/MainWindow.css",
+                "/view/DialogBox.css"
+        );
 
         stage.setScene(scene);
         stage.show();
@@ -199,6 +204,8 @@ public class Duke extends Application {
             dialogContainer.getChildren().add(
                     DialogBox.getDukeDialog( e.toString(), duke )
             );
+
+            userInput.clear();
 
         }
 

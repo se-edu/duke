@@ -29,30 +29,34 @@ public class Bot {
             Parser parser = new Parser(req);
             String command = parser.getCommand();
 
-            if( command.equals("list")){
-                return taskList.printTasks();
-            } else if (command.equals("date")){
-                return taskList.printTasksOn(req);
-            } else {
-                Optional<Integer> indexOptional = parser.getContentAsInt();
-
-                int index = 0;
-
-                if( indexOptional.isPresent() ){
-                    index = indexOptional.get();
-                }
-
-                switch( command ) {
-                    case "done":
-                        return taskList.markTask(index);
-    //                    break;
-                    case "delete":
-                        return taskList.deleteTask(index);
-    //                    break;
-                    default:
-                        return taskList.addTask(req);
-                }
+            switch( command ){
+                case "list":
+                    return taskList.printTasks();
+                case "date":
+                    return taskList.printTasksOn(req);
+                case "find":
+                    return taskList.findTask( req );
             }
+
+            Optional<Integer> indexOptional = parser.getContentAsInt();
+
+            int index = 0;
+
+            if( indexOptional.isPresent() ){
+                index = indexOptional.get();
+            }
+
+            switch( command ) {
+                case "done":
+                    return taskList.markTask(index);
+//                    break;
+                case "delete":
+                    return taskList.deleteTask(index);
+//                    break;
+                default:
+                    return taskList.addTask(req);
+            }
+
 
         } catch (StringIndexOutOfBoundsException e){
 

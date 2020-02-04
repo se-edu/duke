@@ -18,17 +18,20 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
-    public TaskList( String data ){
+    public TaskList( String data ) throws DukeException{
         this.list = new ArrayList<>();
+
         restoreFromExisting( data );
     }
 
 
-    private void restoreFromExisting( String data ){
+    private void restoreFromExisting ( String data ) throws DukeException{
 
         String[] dataArray = data.split("\n");
 
         int i = 1;
+
+
 
         for( String line : dataArray ){
             Task task = Parser.parseTask( line, i );
@@ -57,6 +60,9 @@ public class TaskList {
         if( this.list.size() == 0 ){
             res = "You have no tasks in your list.";
         } else {
+
+            res += "Here are your tasks sir:\n\n";
+
             for( Task task: list ){
                 res += task.toString() + "\n";
             }
@@ -103,12 +109,12 @@ public class TaskList {
 
             Task task = list.get(taskIndex - 1);
 
-            res += "Noted. I've removed this task:\n";
+            res += "Noted. I've removed this task:\n\n";
             res += task.toString() + "\n";
             this.list.remove(task);
             this.saveList();
 
-            res += "\nNow you have " + list.size() + "task(s) in the list";
+            res += "\nNow you have " + list.size() + " task(s) in the list";
 
             return res;
 
@@ -155,7 +161,9 @@ public class TaskList {
         return res;
     }
 
-    public void findTask(String req){
+    public String findTask(String req){
+
+        String res = "";
 
         Parser parser = new Parser(req);
 
@@ -163,7 +171,7 @@ public class TaskList {
 
         Pattern p = Pattern.compile( searchTerm );
 
-        System.out.println("Here's what I found my lord:");
+        boolean isFound = false;
 
         for ( Task task : list ){
 
@@ -174,7 +182,8 @@ public class TaskList {
                 Matcher m = p.matcher( word.trim() );
 
                 if( m.matches() ){
-                    System.out.println(task.toString());
+                    isFound = true;
+                    res += task.toString() + "\n";
                     break;
                 }
 
@@ -182,6 +191,11 @@ public class TaskList {
 
         }
 
+        if( isFound ){
+            return "Here's what I found my lord\n\n:" + res;
+        } else {
+            return "I couldn't find anything my lord. I'll try looking for it again.";
+        }
     }
 
     /**
