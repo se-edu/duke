@@ -1,6 +1,4 @@
-package Database; /**
- * The class Database.Storage handles the memory segment of the Bot
- */
+package Database;
 import Commands.CommandInvoker;
 import Commands.LoadCommand;
 import Duke.UI;
@@ -16,7 +14,9 @@ import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
-
+/**
+ * * The class Database.Storage handles the memory segment of the Bot
+ */
 public class Storage {
     private static File file;
 

@@ -108,7 +108,12 @@ public class MyList {
         return "Found in total of " + localList.size() + " items";
     }
 
-
+    /**
+     * Look through the list of objects and populate local list
+     *
+     * @param str takes in keyword
+     * @return an ArrayList containing find results
+     */
     private static ArrayList populateFindList(String str){
         ArrayList<Task> localList = new ArrayList<>();
         for(Task t: DaList){
@@ -118,5 +123,4 @@ public class MyList {
         }
         return localList;
     }
-
 }

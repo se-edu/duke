@@ -82,4 +82,5 @@ public class CommandHub {
         else{
             throw new DukeException(UI.getReply("wrongCommand"));
         }
-    }}
+    }
+}

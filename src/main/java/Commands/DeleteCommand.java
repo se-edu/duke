@@ -43,5 +43,4 @@ public class DeleteCommand extends UserCommand {
         MyList.printCount();
         return true;
     }
-
 }

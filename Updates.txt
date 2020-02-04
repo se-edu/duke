@@ -136,6 +136,13 @@ Does not update file if list is empty
 	- Edited the load memory to ignore "wow much emptiness"
 	 
 	
+Level-9
+Added findcommand
 
+Changes:
+Edited CommandHub to accept find commands
+
+Issues:
+Find command unable to detect dates in english format
 
 

@@ -37,14 +37,14 @@ public class Event extends Task {
         if(!desc.contains("/at ")){
             throw new DukeException("Hello? Missing your /at command!");
         }
-        String[] parsed= desc.split("/at ");
+        String[] parsed = desc.split("/at ");
         return parsed;
     }
 
 
     @Override
     public String toString() {
-        return "[E] " +super.toString() + " (at: " + DateTimeHandler.printsLocalDateTime(endDate)+ ")";
+        return "[E] " + super.toString() + " (at: " + DateTimeHandler.printsLocalDateTime(endDate) + ")";
     }
 
 
