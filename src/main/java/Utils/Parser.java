@@ -59,6 +59,10 @@ public class Parser {
 
     }
 
+    /**
+     * if content is integer, cast content to integer
+     * @return content as integer
+     */
     public Optional<Integer> getContentAsInt(){
 
         Integer contentAsInt;
@@ -72,6 +76,12 @@ public class Parser {
 
     }
 
+    /**
+     * parses line to derive task arguments
+     * @param line line to be parsed
+     * @param index index of task
+     * @return task
+     */
     public static Task parseTask(String line, int index){
 
         //get type

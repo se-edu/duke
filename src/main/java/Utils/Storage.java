@@ -11,6 +11,11 @@ public class Storage {
 
     public Storage(){}
 
+    /**
+     * loads file and returns contents
+     * @return data string
+     * @throws DukeException error reading file or no file exists
+     */
     public static String loadFromFile() throws DukeException {
         try {
 
@@ -39,6 +44,11 @@ public class Storage {
 
     }
 
+    /**
+     * Writes to a file
+     * @param data long string separated by newline character
+     * @throws DukeException error writing or closing file
+     */
     public static void writeToFile( String data ) throws DukeException {
 
         //make directory
