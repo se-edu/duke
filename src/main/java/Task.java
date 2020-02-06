@@ -3,7 +3,6 @@ public class Task {
     protected boolean isDone;
 
     public String getDescription() {
-
         return description;
     }
 
@@ -21,6 +20,10 @@ public class Task {
     public String getStatusIcon() {
         //return tick or X symbols
         return (isDone ? "\u2713" : "\u2718");
+    }
+
+    public String getTypeIcon() {
+        return null;
     }
 
 
