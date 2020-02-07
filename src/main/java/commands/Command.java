@@ -19,7 +19,7 @@ public interface Command {
      * @return the boolean
      * @throws DukeException the duke exception
      */
-    public boolean action() throws DukeException, DukeException;
+    public boolean action() throws DukeException;
 
     /**
      * Returns the ID of the command
