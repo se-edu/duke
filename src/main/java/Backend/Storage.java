@@ -1,6 +1,6 @@
-package Utils;
+package Backend;
 
-import Task.DukeException;
+import Backend.Exceptions.DukeException;
 
 import java.io.*;
 
@@ -35,11 +35,11 @@ public class Storage {
                 return data;
 
             } catch ( IOException e ){
-                throw new DukeException("Error reading file!");
+                throw new DukeException(e);
             }
 
         } catch ( FileNotFoundException e ) {
-            throw new DukeException("No existing file!");
+            throw new DukeException(e);
         }
 
     }
@@ -65,12 +65,12 @@ public class Storage {
             fileWriter.write(data);
 
         } catch (IOException e) {
-            throw new DukeException("Error writing to file. Your changes were not saved.");
+            throw new DukeException(e);
         } finally {
             try {
                 fileWriter.close();
             } catch ( IOException e ) {
-                throw new DukeException("Error closing file");
+                throw new DukeException(e);
             }
         }
 

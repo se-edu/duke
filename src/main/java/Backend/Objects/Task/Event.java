@@ -1,8 +1,10 @@
-package Task;
+package Backend.Objects.Task;
+
+import Backend.Parsers.DateParser;
 
 public class Event extends Task {
 
-    public Event(String desc, int index, DukeDate date){
+    public Event(String desc, int index, DateParser date){
         super(desc, index, date);
     }
 

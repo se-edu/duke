@@ -1,19 +1,18 @@
-package Utils;
+package Backend.Parsers;
 
 import java.util.Optional;
 
-import Task.Task;
-import Task.Todo;
-import Task.Event;
-import Task.Deadline;
-import Task.DukeDate;
-import Task.DukeException;
+import Backend.Exceptions.DukeException;
+import Backend.Objects.Task.Task;
+import Backend.Objects.Task.Todo;
+import Backend.Objects.Task.Event;
+import Backend.Objects.Task.Deadline;
 
 public class Parser {
 
     private String input;
     /**
-     * Utils.Parser
+     * Backend.Utils.Utils.Parser
      * Each input starts with a COMMAND, followed by the CONTENT and optionally, the DATE
      */
     public Parser( String input ){
@@ -107,11 +106,11 @@ public class Parser {
                     break;
                 case 'D':
                     content = subString.split("\\(")[0].trim();
-                    task =  new Deadline(content, index, new DukeDate(dateString));
+                    task =  new Deadline(content, index, new DateParser(dateString));
                     break;
                 default:
                     content = subString.split("\\(")[0].trim();
-                    task =  new Event(content, index, new DukeDate(dateString));
+                    task =  new Event(content, index, new DateParser(dateString));
             }
 
             if( doneChar == 'Y' ){
@@ -121,7 +120,7 @@ public class Parser {
             return task;
 
         } catch( StringIndexOutOfBoundsException e ){
-            throw new DukeException( "Invalid Command!" );
+            throw new DukeException(e);
         }
 
     }

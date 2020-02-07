@@ -1,7 +1,12 @@
-package Task;
+package Backend;
 
-import Utils.Parser;
-import Utils.Storage;
+import Backend.Exceptions.DukeException;
+import Backend.Objects.Task.Deadline;
+import Backend.Objects.Task.Event;
+import Backend.Objects.Task.Task;
+import Backend.Objects.Task.Todo;
+import Backend.Parsers.DateParser;
+import Backend.Parsers.Parser;
 
 import java.time.format.DateTimeParseException;
 
@@ -9,6 +14,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.stream.Collectors;
 
 public class TaskList {
 
@@ -18,20 +24,16 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
-    public TaskList( String data ) throws DukeException{
-        this.list = new ArrayList<>();
-
-        restoreFromExisting( data );
-    }
-
-
-    private void restoreFromExisting ( String data ) throws DukeException{
+    /**
+     * Parses a string of data into separate tasks and loads up the task list
+     * @param data data string to be parsed into tasks and loaded into the task list
+     * @throws DukeException exception rethrown from parseTask
+     */
+    public void loadTasks ( String data ) throws DukeException{
 
         String[] dataArray = data.split("\n");
 
         int i = 1;
-
-
 
         for( String line : dataArray ){
             Task task = Parser.parseTask( line, i );
@@ -41,58 +43,43 @@ public class TaskList {
 
     }
 
+    /**
+     * Saves a list of tasks as a string in a file
+     * @throws DukeException exception rethrown from writeToFile
+     */
     private void saveList() throws DukeException {
 
-        String data = "";
+        StringBuilder data = new StringBuilder();
 
         for ( Task task : this.list ){
-            data += task.toString() + "\n";
+            data.append( task.toString() ).append( "\n" );
         }
 
-        Storage.writeToFile( data );
+        Storage.writeToFile( data.toString() );
 
     }
+
 
     public String printTasks(){
-
-        String res = "";
-
-        if( this.list.size() == 0 ){
-            res = "You have no tasks in your list.";
-        } else {
-
-            res += "Here are your tasks sir:\n\n";
-
-            for( Task task: list ){
-                res += task.toString() + "\n";
-            }
-        }
-
-        return res;
+        return ChatterBox.sayTaskList( list );
     }
 
-    public String printTasksOn(String req) throws DukeException {
+
+    public String printTasks(String req) throws DukeException {
 
         try {
 
-            String res = "";
-
             Parser parser = new Parser(req);
-            DukeDate date = new DukeDate(parser.getDateString());
+            DateParser date = new DateParser(parser.getDateString());
 
-            res += "Here are your tasks for " + date.getDateString();
+            List<Task> filteredTaskList = list.stream()
+                                            .filter( task -> task.date != null && task.date.getDateString().equals(date.getDateString()))
+                                            .collect(Collectors.toList());
 
-            for( Task task: list ){
-                if(task.date != null && task.date.getDateString().equals(date.getDateString())){
-                    res += task.toString() + "\n";
-                }
-            }
-
-            return res;
-
+            return ChatterBox.sayTaskList( filteredTaskList );
 
         } catch ( DateTimeParseException e ) {
-            throw new DukeException("Date must be in the form YYYY-MM-DD!");
+            throw new DukeException(e);
         }
 
     }
@@ -102,24 +89,17 @@ public class TaskList {
      * @param taskIndex index of task to be deleted
      * @throws DukeException if no task found for index
      */
-    public String deleteTask(int taskIndex) throws DukeException {
+    public Task deleteTask(int taskIndex) throws DukeException {
         try {
-
-            String res = "";
-
             Task task = list.get(taskIndex - 1);
 
-            res += "Noted. I've removed this task:\n\n";
-            res += task.toString() + "\n";
             this.list.remove(task);
             this.saveList();
 
-            res += "\nNow you have " + list.size() + " task(s) in the list";
-
-            return res;
+            return task;
 
         } catch ( IndexOutOfBoundsException e){
-            throw new DukeException("No task found for index " + taskIndex + "!");
+            throw new DukeException(e);
         }
     }
 
@@ -128,9 +108,7 @@ public class TaskList {
      * @param req user input
      * @throws DukeException if no date
      */
-    public String addTask(String req) throws DukeException {
-
-        String res = "";
+    public Task addTask(String req) throws DukeException {
 
         Parser parser = new Parser(req);
 
@@ -143,11 +121,11 @@ public class TaskList {
 
         switch( command ) {
             case "event":
-                DukeDate date = new DukeDate(parser.getDateString());
+                DateParser date = new DateParser(parser.getDateString());
                 task = new Event( content, index, date );
                 break;
             case "deadline":
-                date = new DukeDate(parser.getDateString());
+                date = new DateParser(parser.getDateString());
                 task = new Deadline(content, index, date);
                 break;
             default:
@@ -156,22 +134,16 @@ public class TaskList {
 
         this.list.add( task );
         this.saveList();
-        res += task.content;
 
-        return res;
+        return task;
     }
 
     public String findTask(String req){
 
-        String res = "";
-
         Parser parser = new Parser(req);
-
         String searchTerm = parser.getContent();
-
         Pattern p = Pattern.compile( searchTerm );
-
-        boolean isFound = false;
+        List<Task> foundTasks = new ArrayList<>(  );
 
         for ( Task task : list ){
 
@@ -182,20 +154,19 @@ public class TaskList {
                 Matcher m = p.matcher( word.trim() );
 
                 if( m.matches() ){
-                    isFound = true;
-                    res += task.toString() + "\n";
-                    break;
+                    foundTasks.add(task);
                 }
 
             }
 
         }
 
-        if( isFound ){
-            return "Here's what I found my lord\n\n:" + res;
+        if( foundTasks.size() == 0 ){
+            return ChatterBox.sayNotFound();
         } else {
-            return "I couldn't find anything my lord. I'll try looking for it again.";
+            return ChatterBox.sayFound( foundTasks );
         }
+
     }
 
     /**
@@ -203,25 +174,19 @@ public class TaskList {
      * @param taskIndex index of task to be marked as done
      * @throws DukeException if index out of bounds
      */
-    public String markTask(int taskIndex) throws DukeException {
+    public Task markTask(int taskIndex) throws DukeException {
 
         try {
-
-            String res = "";
-
             Task task = this.list.get(taskIndex - 1);
 
             task.markAsDone();
 
-            res += "Nice! I've marked this task as done:";
-            res += task.toString();
-
             saveList();
 
-            return res;
+            return task;
 
         } catch( IndexOutOfBoundsException e){
-            throw new DukeException("Task.Task Index is invalid");
+            throw new DukeException(e);
         }
 
 

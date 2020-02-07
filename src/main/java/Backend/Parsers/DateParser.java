@@ -1,20 +1,20 @@
-package Task;
+package Backend.Parsers;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-public class DukeDate {
+public class DateParser {
 
     LocalDate date;
     String dateString;
 
-    public DukeDate( LocalDate date ) {
+    public DateParser( LocalDate date ) {
         this.date = date;
         this.dateString = convertToString( date );
     }
 
-    public DukeDate( String dateString ) {
+    public DateParser( String dateString ) {
         this.date = convertToDate( dateString );
         this.dateString = dateString;
     }

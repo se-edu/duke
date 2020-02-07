@@ -1,14 +1,16 @@
-package Task;
+package Backend.Objects.Task;
 
-public class Task {
+import Backend.Parsers.DateParser;
+
+public abstract class Task {
 
     public String content;
-    public DukeDate date;
+    public DateParser date;
     int index;
     boolean done;
 
 
-    public Task ( String content, int index, DukeDate date ) {
+    public Task ( String content, int index, DateParser date ) {
         this.content = content;
         this.date = date;
         this.index = index;

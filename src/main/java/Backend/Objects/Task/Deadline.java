@@ -1,8 +1,10 @@
-package Task;
+package Backend.Objects.Task;
+
+import Backend.Parsers.DateParser;
 
 public class Deadline extends Task {
 
-    public Deadline( String desc, int index, DukeDate date) {
+    public Deadline( String desc, int index, DateParser date) {
         super( desc, index, date );
     }
 

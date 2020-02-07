@@ -1,6 +1,4 @@
-package Task;
-
-import Task.Task;
+package Backend.Objects.Task;
 
 public class Todo extends Task {
 
