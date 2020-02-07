@@ -146,3 +146,11 @@ Issues:
 Find command unable to detect dates in english format
 
 
+8/2/20
+A-CodingStandards
+Fixed some coding standards formats
+
+
+A-Gradle
+Added Gradle support
+Included Shadow Jar
