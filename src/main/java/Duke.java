@@ -17,6 +17,8 @@ public class Duke {
         this.taskList = new ArrayList<Task>();
     }
 
+    Scanner scanner = new Scanner(System.in);
+
     public void printStraightLine(){
         System.out.println("___________________________________________________________________________\n");
     }
@@ -177,7 +179,7 @@ public class Duke {
             else {
                 performTasks(taskList, ogString, eventType);
             }
-            Scanner scanner = new Scanner(System.in);
+//            Scanner scanner = new Scanner(System.in);
             ogString = scanner.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!\n");
@@ -229,7 +231,6 @@ public class Duke {
      */
     public void startThingsOff(){
         printLogo();
-        Scanner scanner = new Scanner(System.in);
         String line;
         printStraightLine();
         System.out.println("Hello! I'm Hiroshi");
