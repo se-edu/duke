@@ -1,6 +1,6 @@
-package Resources;
+package resources;
 
-import Exceptions.DukeException;
+import exceptions.DukeException;
 
 import java.time.LocalDateTime;
 

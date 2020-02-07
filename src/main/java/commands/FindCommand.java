@@ -1,8 +1,8 @@
-package Commands;
+package commands;
 
-import Database.MyList;
-import Exceptions.DukeException;
-import Resources.Task;
+import database.MyList;
+import exceptions.DukeException;
+import resources.Task;
 import java.util.ArrayList;
 
 /**

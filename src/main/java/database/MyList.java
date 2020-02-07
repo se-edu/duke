@@ -1,8 +1,8 @@
-package Database;
+package database;
 
 import Duke.UI;
-import Exceptions.DukeException;
-import Resources.Task;
+import exceptions.DukeException;
+import resources.Task;
 
 import java.util.ArrayList;
 

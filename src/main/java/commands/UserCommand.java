@@ -1,6 +1,6 @@
-package Commands;
+package commands;
 
-import Exceptions.DukeException;
+import exceptions.DukeException;
 
 /**
  * The class Commands.UserCommand acts as a parent class for commands

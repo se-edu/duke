@@ -1,6 +1,6 @@
-package Commands;
+package commands;
 
-import Database.MyList;
+import database.MyList;
 
 /**
  * The command handles when user calls list

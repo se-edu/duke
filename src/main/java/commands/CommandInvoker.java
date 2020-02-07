@@ -1,8 +1,8 @@
-package Commands;/*
+package commands;/*
 *  "Duke.UI"
 * */
 
-import Exceptions.DukeException;
+import exceptions.DukeException;
 
 /**
  * The type Commands.Command invoker.

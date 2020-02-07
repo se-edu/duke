@@ -1,9 +1,9 @@
-package Commands;
+package commands;
 
-import Database.MyList;
+import database.MyList;
 import Duke.UI;
-import Resources.*;
-import Exceptions.DukeException;
+import resources.*;
+import exceptions.DukeException;
 
 /**
  * Commands.AddCommand is a Commands.Command that handles the adding of items

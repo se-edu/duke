@@ -1,8 +1,8 @@
-package Commands;
+package commands;
 
-import Database.Storage;
+import database.Storage;
 import Duke.UI;
-import Exceptions.DukeException;
+import exceptions.DukeException;
 
 /**
  * The class Commands.ByeCommand exit the bot swiftly by saving memory and stopping Invoker.

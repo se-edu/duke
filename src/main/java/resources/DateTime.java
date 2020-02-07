@@ -1,4 +1,4 @@
-package Resources; /**
+package resources; /**
  * The class Resources.DateTime creates LocalDateTime objects for functions
  */
 import java.time.LocalDateTime;

@@ -87,7 +87,7 @@ A sample checkstyle rule configuration is provided in the branch.
 
 The plugin adds a few _tasks_ to your project. Run `gradlew checkstyleMain checkstyleTest` to verify that you have set up Checkstyle properly (the command will check your main code and test code against the style rules).
 
-**Resources**:
+**resources**:
 * [Gradle documentation for CheckStyle plugin](https://docs.gradle.org/current/userguide/checkstyle_plugin.html)
 
 ### Shadow
@@ -115,7 +115,7 @@ shadowJar {
 
 Now you can run the command `gradlew shadowJar`.It publishes an executable jar to `./build/libs/`. You should be able to able to execute the created jar file by double-clicking it or using the command `java -jar {jarName}`?
 
-**Resources**:
+**resources**:
 * [Gradle documentation for Shadow plugin](https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow)
 * [Gradle documentation for JUnit](https://docs.gradle.org/current/userguide/java_testing.html#using_junit5)
 * [More about the Shadow plugin](https://imperceptiblethoughts.com/shadow/introduction/)
@@ -156,7 +156,7 @@ If you have imported your Gradle project into IntelliJ IDEA, you will notice tha
 
 You can now write a test (e.g., `test/java/seedu/duke/DukeTest.java`) and run it with `gradlew test`.
 
-**Resources**:
+**resources**:
 * [Gradle documentation for JUnit](https://docs.gradle.org/current/userguide/java_testing.html#using_junit5)
 
 ## Further Reading

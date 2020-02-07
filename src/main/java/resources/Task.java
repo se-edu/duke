@@ -1,7 +1,7 @@
-package Resources;
+package resources;
 
 import Duke.UI;
-import Exceptions.DukeException;
+import exceptions.DukeException;
 
 /**
  * The type Resources.Task.

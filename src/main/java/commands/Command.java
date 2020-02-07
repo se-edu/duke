@@ -1,6 +1,6 @@
-package Commands;
+package commands;
 
-import Exceptions.DukeException;
+import exceptions.DukeException;
 
 /**
  * An interface skeleton for all UserCommands

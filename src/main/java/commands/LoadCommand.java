@@ -1,7 +1,7 @@
-package Commands;
+package commands;
 
-import Database.MyList;
-import Exceptions.DukeException;
+import database.MyList;
+import exceptions.DukeException;
 
 /**
  * Loads the memory back into list

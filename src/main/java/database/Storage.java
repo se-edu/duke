@@ -1,10 +1,10 @@
-package Database;
-import Commands.CommandInvoker;
-import Commands.LoadCommand;
+package database;
+import commands.CommandInvoker;
+import commands.LoadCommand;
 import Duke.UI;
-import Exceptions.DukeException;
-import Resources.DateTimeHandler;
-import Resources.Task;
+import exceptions.DukeException;
+import resources.DateTimeHandler;
+import resources.Task;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package Resources;
+package resources;
 
 /**
  * ToDo is a type of task that accepts /at statements only

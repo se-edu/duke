@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 /**
  * The type Duke.Duke exception.

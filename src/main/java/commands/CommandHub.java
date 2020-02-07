@@ -1,7 +1,7 @@
-package Commands;
+package commands;
 
 import Duke.UI;
-import Exceptions.DukeException;
+import exceptions.DukeException;
 import java.util.HashMap;
 
 /**
