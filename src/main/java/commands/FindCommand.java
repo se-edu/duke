@@ -9,7 +9,6 @@ import java.util.ArrayList;
  * FindCommand command handles when user wants to find something in list
  */
 public class FindCommand extends UserCommand{
-    private static ArrayList<Task> localList;
     private static String keyword;
 
     /**

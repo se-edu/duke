@@ -69,8 +69,8 @@ public class MyList {
      * @throws DukeException the duke exception
      */
     public static void markDone(int ID) throws DukeException {
-        ID = ID-1;
-        if(ID>=DaList.size()|| ID<0){
+        ID = ID - 1;
+        if(ID >= DaList.size()|| ID < 0){
             throw new DukeException(UI.getReply("imaginary"));
         }
         DaList.get(ID).markDone();
@@ -102,7 +102,7 @@ public class MyList {
                 System.out.println("Found these tasks: ");
                 isFirst = false;
             }
-            System.out.println(count+ ". "+ t);
+            System.out.println(count + ". "+ t);
             count++;
         }
         return "Found in total of " + localList.size() + " items";

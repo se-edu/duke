@@ -21,8 +21,8 @@ public class Duke {
         while(!CommandInvoker.checkOff()){
             String userInput = getUserInput();
             try {
-                UserCommand c = CommandHub.FetchCommand(userInput);
-                invoker.Invoke(c);
+                UserCommand c = CommandHub.fetchCommand(userInput);
+                invoker.invoke(c);
             }
             catch(DukeException e){
                 System.out.println(e.getMessage());

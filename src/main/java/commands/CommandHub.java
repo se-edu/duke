@@ -47,8 +47,8 @@ public class CommandHub {
      * @return the user command
      * @throws DukeException the duke exception
      */
-    public static UserCommand FetchCommand(String userInput) throws DukeException {
-        String parsedCommand[] = parseString(userInput);
+    public static UserCommand fetchCommand(String userInput) throws DukeException {
+        String[] parsedCommand = parseString(userInput);
         String ID = parsedCommand[0];
         String desc = "null";
         if(parsedCommand.length>1) {//check if exist second line
@@ -57,29 +57,24 @@ public class CommandHub {
 
         if(commandList.containsKey(ID)) { //gets generic commands
             return commandList.get(ID);
-        }
-        else if(ID.contains("done")){ //done command
+        } else if(ID.contains("done")){ //done command
             if(desc.equals("null")||desc.equals("")){
                 throw new DukeException(UI.getReply("doneFieldEmpty"));
             }
             return new DoneCommand(Integer.parseInt(desc));
-        }
-        else if(ID.contains("todo")||ID.contains("deadline")||ID.contains("event")){
+        } else if(ID.contains("todo")||ID.contains("deadline")||ID.contains("event")){
             if(desc.equals("null")){
-                throw new DukeException("BAKA! Your not suppose to leave "+ID+" field empty!");
+                throw new DukeException("BAKA! Your not suppose to leave "+ ID +" field empty!");
             }
             return new AddCommand(ID, desc);
-        }
-        else if(ID.contains("delete")){
+        } else if(ID.contains("delete")){
             if(desc.equals("null")||desc.equals("")){
                 throw new DukeException(UI.getReply("deleteFieldEmpty"));
             }
             return new DeleteCommand(Integer.parseInt(desc));
-        }
-        else if(ID.contains("find")){
+        } else if(ID.contains("find")){
             return new FindCommand(desc);
-        }
-        else{
+        } else{
             throw new DukeException(UI.getReply("wrongCommand"));
         }
     }

@@ -22,7 +22,7 @@ public class CommandInvoker {
      * @param c the userCommand
      */
     CommandInvoker(UserCommand c){
-        Invoke(c);
+        invoke(c);
     }
 
 
@@ -31,7 +31,7 @@ public class CommandInvoker {
      *
      * @param c the Commands.UserCommand
      */
-    public static void Invoke(UserCommand c){
+    public static void invoke(UserCommand c){
         try {
             c.action();
             c.reply();

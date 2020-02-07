@@ -20,9 +20,9 @@ public class Deadline extends Task {
     public Deadline(String description) throws DukeException{
         super("default");
 
-            String[] parsed = getParse(description);
-            deadline = DateTimeHandler.getLocalDateTime(parsed[1]);
-            super.resetDesc(parsed[0]);
+        String[] parsed = getParse(description);
+        deadline = DateTimeHandler.getLocalDateTime(parsed[1]);
+        super.resetDesc(parsed[0]);
     }
 
     /**

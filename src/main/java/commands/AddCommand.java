@@ -40,14 +40,12 @@ public class AddCommand extends UserCommand {
     }
 
     @Override
-    public boolean action() throws DukeException, DukeException {
+    public boolean action() throws DukeException {
         if(type.equals("todo")){
             t = new ToDos(desc);
-        }
-        else if(type.equals("event")){
-            t= new Event(desc);
-        }
-        else{
+        } else if(type.equals("event")){
+            t = new Event(desc);
+        } else{
             t = new Deadline(desc);
         }
 

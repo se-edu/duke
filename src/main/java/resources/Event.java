@@ -21,9 +21,9 @@ public class Event extends Task {
         super("default");
 
 
-            String[] parsed = getParse(description);
-            endDate = DateTimeHandler.getLocalDateTime(parsed[1]);
-            super.resetDesc(parsed[0]);
+        String[] parsed = getParse(description);
+        endDate = DateTimeHandler.getLocalDateTime(parsed[1]);
+        super.resetDesc(parsed[0]);
     }
 
     /**

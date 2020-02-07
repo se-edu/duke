@@ -15,6 +15,5 @@ public class ListCommand extends UserCommand {
     @Override
     public void reply(){
         MyList.printList();
-
     }
 }

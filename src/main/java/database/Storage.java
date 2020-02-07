@@ -8,12 +8,12 @@ import resources.Task;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
+import java.util.ArrayList;
 /**
  * * The class Database.Storage handles the memory segment of the Bot
  */
@@ -35,6 +35,7 @@ public class Storage {
             }
         }
         catch (IOException e){
+            System.out.println("Failed to init memory..");
         }
     }
 
@@ -92,7 +93,7 @@ public class Storage {
             String type = parseType(splitted[0]);
             String isDone = parseDone(splitted[1]);
             String desc = parseDesc(splitted[2]);
-            String buildLine = type+ "~" + isDone + "~" + desc;
+            String buildLine = type + "~" + isDone + "~" + desc;
             if(first){
                 first = false;
                 overwrite(buildLine);
@@ -111,14 +112,11 @@ public class Storage {
     private static String parseType(String s) throws DukeException {
         if(s.equals("[D]")){
             return "deadline";
-        }
-        else if(s.equals("[E]")){
+        } else if(s.equals("[E]")){
             return "event";
-        }
-        else if(s.equals("[T]")){
+        } else if(s.equals("[T]")){
             return "todo";
-        }
-        else{
+        } else{
             throw new DukeException(UI.getReply("memParsedError"));
         }
     }
@@ -131,8 +129,7 @@ public class Storage {
     private static String parseDone(String s){
         if(s.equals("[\u2713]")){
             return "true";
-        }
-        else{
+        } else{
             return "false";
         }
     }
@@ -146,10 +143,10 @@ public class Storage {
         if(!str.contains("(")){
             return str;
         }
-        String typeSpecific = str.substring(str.indexOf("(")+1,str.indexOf(":"));
+        String typeSpecific = str.substring(str.indexOf("(") + 1,str.indexOf(":"));
         String desc = str.substring(0,str.indexOf("(") -1 );
-        String datedesc = str.substring(str.indexOf(":")+2,str.indexOf(")"));
-        return  desc + "/"+typeSpecific+ " "+ DateTimeHandler.revertDateTime(datedesc);
+        String datedesc = str.substring(str.indexOf(":") + 2,str.indexOf(")"));
+        return  desc + "/" + typeSpecific+ " " + DateTimeHandler.revertDateTime(datedesc);
 
     }
 
@@ -167,11 +164,10 @@ public class Storage {
                 String splitted[] = line.split("~");
                 if(splitted[1].equals("false")){
                     markdone= false;
-                }
-                else{
+                } else{
                     markdone = true;
                 }
-                CommandInvoker.Invoke(new LoadCommand(splitted[0],markdone,splitted[2]));
+                CommandInvoker.invoke(new LoadCommand(splitted[0],markdone,splitted[2]));
 
             }
         } catch (IOException e) {
