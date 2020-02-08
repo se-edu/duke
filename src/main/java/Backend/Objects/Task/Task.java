@@ -10,17 +10,19 @@ public abstract class Task {
     boolean done;
 
 
-    public Task ( String content, int index, DateParser date ) {
+    public Task ( String content, DateParser date ) {
         this.content = content;
         this.date = date;
-        this.index = index;
         this.done = false;
     }
 
-    public Task( String content, int index ) {
-        this.index = index;
+    public Task( String content ) {
         this.content = content;
         this.done = false;
+    }
+
+    public void indexTask( int index ){
+        this.index = index;
     }
 
     @Override

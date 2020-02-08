@@ -1,9 +1,12 @@
 package Frontend;
 
+import Backend.ChatterBox;
 import Backend.Exceptions.DukeException;
+import Backend.Parsers.TimeOfDay;
 import Backend.Storage;
 import Backend.Switcher;
 import Backend.TaskList;
+import Backend.Parsers.DateParser;
 import Frontend.Components.DialogBox.DukeDialogBox;
 import Frontend.Components.DialogBox.UserDialogBox;
 import Frontend.Objects.User;
@@ -16,6 +19,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.util.function.Supplier;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.function.Function;
 
 /**
  * This class handles all frontend rendering of components.
@@ -47,6 +57,7 @@ public class Main extends Application {
         initialiseComponents();
         resizeComponents(stage);
         setHandlers();
+        greet();
     }
 
     /**
@@ -78,17 +89,43 @@ public class Main extends Application {
     }
 
     /**
+     * Greets the user on launch and prints existing tasks (if any)
+     */
+    private void greet(){
+
+        String str = "";
+
+        str += ChatterBox.sayHello();
+        str += "\n";
+        str += ChatterBox.sayTaskList( taskList.getList() );
+
+        duke.addText( str );
+
+        dialogContainer.getChildren().add(
+                new DukeDialogBox( duke )
+        );
+
+        duke.clearText();
+    }
+
+    /**
      * Retrieves user input and displays response.
      * Also handles a DukeException but does not handle any logic.
      */
     private void handleUserInput() {
 
         try {
+            String userText = userInput.getText();
 
-            user.addText( userInput.getText() );
+            user.addText( userText );
             duke.addText( switcher.res(user.getText()) );
 
             displayUserInput( duke, user );
+
+            System.out.println( userText );
+            if( userText.equals("exit") ){
+                exitDuke();
+            }
 
         } catch ( DukeException e ){
 
@@ -98,6 +135,26 @@ public class Main extends Application {
         }
 
     }
+
+    private void exitDuke(){
+        new Thread( () -> {
+            try {
+                Thread.sleep( 1000 );
+                System.exit(0);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } ).start();
+    }
+
+//    private void handleExit() throws DukeException{
+//        try {
+//            Thread.sleep(1000);
+//            System.exit(0);
+//        } catch( InterruptedException e ){
+//            throw new DukeException( e );
+//        }
+//    }
 
     /**
      * Handles the initialisation of all backend components

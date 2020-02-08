@@ -4,8 +4,8 @@ import Backend.Parsers.DateParser;
 
 public class Event extends Task {
 
-    public Event(String desc, int index, DateParser date){
-        super(desc, index, date);
+    public Event(String content, DateParser date){
+        super(content, date);
     }
 
     @Override

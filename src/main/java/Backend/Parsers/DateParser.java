@@ -1,13 +1,18 @@
 package Backend.Parsers;
 
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 public class DateParser {
 
-    LocalDate date;
-    String dateString;
+    private LocalDate date;
+    private String dateString;
+
+    private static final String noonString = "12:00";
+    private static final String eveningString = "19:00";
 
     public DateParser( LocalDate date ) {
         this.date = date;
@@ -51,6 +56,34 @@ public class DateParser {
      */
     public String getDateString(){
         return this.dateString;
+    }
+
+    /**
+     * gets the timeOfDay enum depending on the LocalDateTime
+     * @return enum timeOfDay
+     */
+    public static TimeOfDay getTimeOfDay(){
+
+        String formatString = "yyyy-MM-dd HH:mm";
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatString);
+
+        LocalDateTime now = LocalDateTime.now();
+        String nowString = now.format(formatter);
+        String dateString = nowString.split(" ")[0];
+        LocalDateTime noon = LocalDateTime.parse(dateString + " " + noonString, formatter);
+        LocalDateTime night = LocalDateTime.parse( dateString + " " + eveningString, formatter);
+
+        assert( noon.isBefore( night ));
+
+        if( now.isBefore( noon )){
+            return TimeOfDay.MORNING;
+        } else if ( now.isAfter( night ) ){
+            return TimeOfDay.NIGHT;
+        } else {
+            return TimeOfDay.AFTERNOON;
+        }
+
     }
 
 }

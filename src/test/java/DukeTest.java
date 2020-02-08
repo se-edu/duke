@@ -3,49 +3,55 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import Backend.Exceptions.DukeException;
 import Backend.TaskList;
 import Backend.Objects.Task.Task;
+import Backend.Objects.Task.Todo;
+import Backend.Objects.Task.Event;
+import Backend.Objects.Task.Deadline;
+import Backend.Switcher;
 
 import Backend.Parsers.Parser;
 
 public class DukeTest {
 
+    TaskList taskList = new TaskList();
+    Switcher switcher = new Switcher(taskList);
+
     public static void main(String[] args){
+
+        DukeTest dukeTest = new DukeTest();
+
         try {
-            markTaskAsDoneTest();
-            addToListTest();
+            dukeTest.markTaskAsDoneTest();
+            dukeTest.addToListTest();
             parseSavedLineTest();
         } catch (Exception e){
             System.out.println(e);
         }
     }
 
-    public static void addToListTest() throws DukeException {
+    public void addToListTest() throws DukeException {
 
-        TaskList taskList = new TaskList();
+        switcher.res("todo go home");
+        switcher.res("deadline duke project /by 2020-01-31");
+        switcher.res("event no sleep /at 2020-01-30");
 
-        taskList.addTask("todo go home");
-        taskList.addTask("deadline duke project /by 2020-01-31");
-        taskList.addTask("event no sleep /at 2020-01-30");
-
-        assertEquals( taskList.list.get(0).toString(), "1.[T][N] go home");
-        assertEquals( taskList.list.get(1).toString(), "2.[D][N] duke project (by: 2020-01-31)");
-        assertEquals( taskList.list.get(2).toString(), "3.[E][N] no sleep (at: 2020-01-30)");
+        assertEquals( taskList.getList().get(0).toString(), "1.[T][N] go home");
+        assertEquals( taskList.getList().get(1).toString(), "2.[D][N] duke project (by: 2020-01-31)");
+        assertEquals( taskList.getList().get(2).toString(), "3.[E][N] no sleep (at: 2020-01-30)");
     }
 
-    public static void markTaskAsDoneTest() {
+    public void markTaskAsDoneTest() throws DukeException {
 
-        Task task = new Task("Homework", 0);
+        switcher.res("done 2");
 
-        task.markAsDone();
-
-        assertEquals(task.toString(), "[Y] Homework");
+        assertEquals(taskList.getList().get(1).toString(), "[Y] duke project (by: 2020-01-31)");
 
     }
 
-    public static void parseSavedLineTest(){
+    public static void parseSavedLineTest() throws DukeException {
 
         String line = "2.[D][N] duke project (by: 2020-01-31)";
 
-        Task task = Parser.parseTask(line, 2);
+        Task task = Parser.formatTaskString(line, 2);
 
         assertEquals( task.toString(), line);
 

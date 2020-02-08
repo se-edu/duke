@@ -1,10 +1,7 @@
 package Backend;
 
 import Backend.Exceptions.DukeException;
-import Backend.Objects.Task.Deadline;
-import Backend.Objects.Task.Event;
 import Backend.Objects.Task.Task;
-import Backend.Objects.Task.Todo;
 import Backend.Parsers.DateParser;
 import Backend.Parsers.Parser;
 
@@ -12,13 +9,14 @@ import java.time.format.DateTimeParseException;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
 public class TaskList {
 
-    public List<Task> list;
+    private List<Task> list;
 
     public TaskList(){
         this.list = new ArrayList<>();
@@ -36,7 +34,7 @@ public class TaskList {
         int i = 1;
 
         for( String line : dataArray ){
-            Task task = Parser.parseTask( line, i );
+            Task task = Parser.formatTaskString( line, i );
             list.add( task );
             i++;
         }
@@ -59,6 +57,13 @@ public class TaskList {
 
     }
 
+    public int getLength(){
+        return list.size();
+    }
+
+    public List<Task> getList(){
+        return list;
+    }
 
     public String printTasks(){
         return ChatterBox.sayTaskList( list );
@@ -70,7 +75,7 @@ public class TaskList {
         try {
 
             Parser parser = new Parser(req);
-            DateParser date = new DateParser(parser.getDateString());
+            DateParser date = new DateParser(parser.parseDateString());
 
             List<Task> filteredTaskList = list.stream()
                                             .filter( task -> task.date != null && task.date.getDateString().equals(date.getDateString()))
@@ -105,33 +110,12 @@ public class TaskList {
 
     /**
      * adds task to list
-     * @param req user input
+     * @param task task to be added
      * @throws DukeException if no date
      */
-    public Task addTask(String req) throws DukeException {
+    public Task addTask(Task task) throws DukeException {
 
-        Parser parser = new Parser(req);
-
-        int index = this.list.size() + 1;
-
-        Task task;
-
-        String command = parser.getCommand();
-        String content = parser.getContent();
-
-        switch( command ) {
-            case "event":
-                DateParser date = new DateParser(parser.getDateString());
-                task = new Event( content, index, date );
-                break;
-            case "deadline":
-                date = new DateParser(parser.getDateString());
-                task = new Deadline(content, index, date);
-                break;
-            default:
-                task = new Todo( content, index );
-        }
-
+        task.indexTask( this.list.size() + 1 );
         this.list.add( task );
         this.saveList();
 
@@ -141,7 +125,7 @@ public class TaskList {
     public String findTask(String req){
 
         Parser parser = new Parser(req);
-        String searchTerm = parser.getContent();
+        String searchTerm = parser.parseContent();
         Pattern p = Pattern.compile( searchTerm );
         List<Task> foundTasks = new ArrayList<>(  );
 

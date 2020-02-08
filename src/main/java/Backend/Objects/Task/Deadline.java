@@ -4,8 +4,8 @@ import Backend.Parsers.DateParser;
 
 public class Deadline extends Task {
 
-    public Deadline( String desc, int index, DateParser date) {
-        super( desc, index, date );
+    public Deadline( String content, DateParser date) {
+        super( content, date );
     }
 
     @Override

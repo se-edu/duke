@@ -2,8 +2,8 @@ package Backend.Objects.Task;
 
 public class Todo extends Task {
 
-    public Todo(String desc, int index){
-        super(desc, index);
+    public Todo(String content){
+        super(content);
     }
 
     @Override

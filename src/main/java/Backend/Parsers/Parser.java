@@ -1,5 +1,6 @@
 package Backend.Parsers;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import Backend.Exceptions.DukeException;
@@ -23,7 +24,7 @@ public class Parser {
      * Gets command, first word of input string
      * @return command
      */
-    public String getCommand(){
+    public String parseCommand(){
         return input.split(" ")[0].trim();
     }
 
@@ -31,14 +32,14 @@ public class Parser {
      * Gets content, removes command and everything after slash
      * @return content
      */
-    public String getContent(){
+    public String parseContent(){
 
         String[] splitArray = input.split("/");
 
         if( splitArray.length < 2 ){
-            return input.substring(getCommand().length() + 1).trim();
+            return input.substring(parseCommand().length() + 1).trim();
         } else {
-            return input.substring( getCommand().length() + 1 ).split("/")[0].trim();
+            return input.substring( parseCommand().length() + 1 ).split("/")[0].trim();
         }
 
     }
@@ -47,7 +48,7 @@ public class Parser {
      * Gets dateString
      * @return dateString
      */
-    public String getDateString(){
+    public String parseDateString(){
 
         String[] splitArray =  input.split("/");
 
@@ -63,12 +64,12 @@ public class Parser {
      * if content is integer, cast content to integer
      * @return content as integer
      */
-    public Optional<Integer> getContentAsInt(){
+    public Optional<Integer> parseContentAsInt(){
 
         Integer contentAsInt;
 
         try {
-            contentAsInt = Integer.parseInt(String.valueOf(getContent()));
+            contentAsInt = Integer.parseInt(String.valueOf(parseContent()));
             return Optional.of(contentAsInt);
         } catch( NumberFormatException e ){
             return Optional.empty();
@@ -82,7 +83,7 @@ public class Parser {
      * @param index index of task
      * @return task
      */
-    public static Task parseTask(String line, int index) throws DukeException {
+    public static Task formatTaskString( String line, int index) throws DukeException {
 
         try {
             //get type
@@ -102,16 +103,21 @@ public class Parser {
             switch (taskChar){
                 case 'T':
                     String content = subString.trim();
-                    task = new Todo(content, index);
+                    task = new Todo(content);
                     break;
                 case 'D':
                     content = subString.split("\\(")[0].trim();
-                    task =  new Deadline(content, index, new DateParser(dateString));
+                    task =  new Deadline(content, new DateParser(dateString));
+                    break;
+                case 'E':
+                    content = subString.split("\\(")[0].trim();
+                    task =  new Event(content, new DateParser(dateString));
                     break;
                 default:
-                    content = subString.split("\\(")[0].trim();
-                    task =  new Event(content, index, new DateParser(dateString));
+                    throw new DukeException( new IOException() );
             }
+
+            task.indexTask( index );
 
             if( doneChar == 'Y' ){
                 task.markAsDone();

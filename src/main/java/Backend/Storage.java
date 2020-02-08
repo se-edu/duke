@@ -6,8 +6,8 @@ import java.io.*;
 
 public class Storage {
 
-    static final String dirname = "./data";
-    static final String pathname = "./data/duke.txt";
+    private static final String dirname = "./data";
+    private static final String pathname = "./data/duke.txt";
 
     public Storage(){}
 
@@ -29,8 +29,6 @@ public class Storage {
                 while (( i = fileReader.read()) != -1){
                     data += (char)i;
                 }
-
-                System.out.println(data);
 
                 return data;
 
