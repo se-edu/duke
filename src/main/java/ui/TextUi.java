@@ -69,22 +69,6 @@ public class TextUi {
     }
 
     /**
-     * Shows messages after adding a task to the task list.
-     *
-     * @param givenTask the newly added task object
-     * @param tasks the current task list
-     */
-    public void showAddingTask(Task givenTask, TaskList tasks) {
-        showToUser(
-                Message.MESSAGE_LINE,
-                Message.MESSAGE_GOTIT,
-                "     " + givenTask.toString(),
-                "     Now you have " + tasks.getList().size() + " tasks in the list.",
-                Message.MESSAGE_LINE
-        );
-    }
-
-    /**
      * Returns messages after adding a task to the task list.
      *
      * @param givenTask the newly added task object
@@ -101,22 +85,6 @@ public class TextUi {
     }
 
     /**
-     * Presents the deleted task to the user.
-     *
-     * @param index the index of the deleted task in the task list
-     * @param tasks the task list
-     */
-    public void showDeletingTask(int index, TaskList tasks) {
-        showToUser(
-                Message.MESSAGE_LINE,
-                Message.MESSAGE_DELETEIT,
-                "     " + tasks.getList().get(index).toString(),
-                "     Now you have " + (tasks.getList().size() - 1) + " tasks in the list.",
-                Message.MESSAGE_LINE
-        );
-    }
-
-    /**
      * Returns the deleted task message to the user.
      *
      * @param index the index of the deleted task in the task list
@@ -130,21 +98,6 @@ public class TextUi {
         sb.append("     Now you have " + (tasks.getList().size() - 1) + " tasks in the list." + "\n");
         sb.append(Message.MESSAGE_LINE);
         return sb.toString();
-    }
-
-    /**
-     * Presents the done task to the user.
-     *
-     * @param index the index of the done task in the task list
-     * @param tasks the task list
-     */
-    public void showDoneTask(int index, TaskList tasks) {
-        showToUser(
-                Message.MESSAGE_LINE,
-                Message.MESSAGE_MARKASDONE,
-                "     " + tasks.getList().get(index).toString(),
-                Message.MESSAGE_LINE
-        );
     }
 
     /**
@@ -197,38 +150,6 @@ public class TextUi {
     }
 
     /**
-     * Displays the task list to to the user.
-     *
-     * @param tasks the task list
-     * @param dukeStorage the storage
-     */
-    public void displayList(TaskList tasks, Storage dukeStorage) {
-        showToUser(
-                Message.MESSAGE_LINE,
-                Message.MESSAGE_SHOWLIST
-        );
-        try {
-            tasks.renewList(dukeStorage.readFromFile());
-        } catch (Exception exp) {
-            showToUser(
-                    "Something went wrong with the file.",
-                    "Better say 'bye' now."
-            );
-        }
-        if (tasks.getList().isEmpty()) {
-            showToUser(
-                    Message.MESSAGE_EMPTYLIST,
-                    Message.MESSAGE_LINE
-            );
-        } else {
-            for (int i = 0; i < tasks.getList().size(); i++) {
-                showToUser("     " + (i + 1) + ". " + tasks.getList().get(i).toString());
-            }
-            showLine();
-        }
-    }
-
-    /**
      * Returns the string of task list to to the user.
      *
      * @param tasks the task list
@@ -257,32 +178,6 @@ public class TextUi {
             sb.append(Message.MESSAGE_LINE);
         }
         return sb.toString();
-    }
-
-    /**
-     * Finds the tasks in the task list which contain the keyword.
-     *
-     * @param tasks the task list
-     * @param item the keyword of the user-targeted tasks
-     */
-    public void findList(TaskList tasks, String item) {
-        showToUser(
-                Message.MESSAGE_LINE,
-                Message.MESSAGE_FIND
-        );
-        int marker = 1;
-        String thisItem;
-        for (int i = 0; i < tasks.getList().size(); i++) {
-            thisItem = tasks.getList().get(i).toString();
-            if (thisItem.toLowerCase().contains(item.toLowerCase())) {
-                showToUser("     " + marker + ". " + thisItem);
-                marker++;
-            }
-        }
-        if (marker == 1) {
-            showToUser(Message.MESSAGE_NULL);
-        }
-        showLine();
     }
 
     /**
