@@ -6,9 +6,9 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
-checkstyle {
-    toolVersion = '8.23'
-}
+//checkstyle {
+//    toolVersion = '8.23'
+//}
 
 shadowJar {
     archiveBaseName = "duke"
