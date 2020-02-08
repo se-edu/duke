@@ -29,7 +29,6 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
         tasks.add(this.thisTask);
         storage.writeToFile(tasks.getList());
-        //textUi.showAddingTask(thisTask, tasks);
         return textUi.showAddingTask_Str(thisTask, tasks);
     }
 

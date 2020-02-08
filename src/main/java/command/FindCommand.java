@@ -26,7 +26,6 @@ public class FindCommand extends Command {
      * @throws DukeException a duke exception representing errors in user input or storage
      */
     public String execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
-        //textUi.findList(tasks, searchingItem);
         return textUi.findList_Str(tasks, searchingItem);
     }
 

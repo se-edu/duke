@@ -30,15 +30,11 @@ public class FileParser {
 
         String[] words = this.thisLine.split(" \\| ");
 
-        boolean isDone = false;
-        if (words[1].trim().equals("1")) {
-            isDone = true;
-        } else {
-            isDone = false;
-        }
+        boolean isDone;
+        isDone = words[1].trim().equals("1");
 
         String name = words[2].trim();
-        String duration = "";
+        String duration;
 
         String category = words[0].trim();
         switch (category) {
@@ -53,7 +49,5 @@ public class FileParser {
         default:
             return new Task(name, isDone);
         }
-
     }
-
 }

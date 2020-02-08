@@ -28,7 +28,6 @@ public class TextUi {
      *
      * @param message the message that is to be shown to the user
      */
-    /** The Java varargs feature has been implemented in previous levels. */
     public void showToUser(String... message) {
         for (String m : message) {
             out.println(m);
@@ -59,13 +58,6 @@ public class TextUi {
                 "     Bye. Hope to see you again soon!",
                 Message.MESSAGE_LINE
         );
-    }
-
-    /**
-     * Shows the dividing line.
-     */
-    public void showLine() {
-        showToUser(Message.MESSAGE_LINE);
     }
 
     /**
@@ -159,7 +151,6 @@ public class TextUi {
         StringBuilder sb = new StringBuilder();
         sb.append(Message.MESSAGE_LINE + "\n");
         sb.append(Message.MESSAGE_SHOWLIST + "\n");
-
         try {
             tasks.renewList(dukeStorage.readFromFile());
         } catch (Exception exp) {

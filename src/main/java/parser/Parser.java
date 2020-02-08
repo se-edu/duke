@@ -32,7 +32,6 @@ public class Parser {
         if(input.equals("")){
             return new ErrorCommand();
         }
-        assert !input.equals(""): "the input is empty, yet still taken in";
         if (keyword.equalsIgnoreCase("find")) {
             if (words.length < 2) {
                 return new ErrorCommand();
