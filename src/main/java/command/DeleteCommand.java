@@ -30,7 +30,6 @@ public class DeleteCommand extends Command {
         if (this.index >= tasks.getList().size() || this.index < 0) {
             return textUi.showError_Str(Message.MESSAGE_INVALIDCOMMAND);
         }
-        //textUi.showDeletingTask(this.index, tasks);
         String res = textUi.showDeletingTask_Str(this.index, tasks);
         tasks.delete(this.index);
         storage.writeToFile(tasks.getList());

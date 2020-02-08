@@ -42,7 +42,7 @@ public class Task {
      * @return Returns a summary of the task, including description and the status icon
      */
     public String toString() {
-        String mark = "";
+        String mark;
         if (this.isDone) {
             mark = "[" + "\u2713" + "]";
         } else {
@@ -57,7 +57,7 @@ public class Task {
      * @return Returns a summary of the task in the file format
      */
     public String toStringFileFormat() {
-        int num = -1;
+        int num;
         if (isDone) {
             num = 1;
         } else {

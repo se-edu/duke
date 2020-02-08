@@ -20,10 +20,8 @@ public class DisplayCommand extends Command {
      * @param tasks   A TaskList containing all tasks
      * @param textUi a TextUi object that handles user-system interaction
      * @param storage A Storage object which specifies the location of the data
-     * @throws DukeException a duke exception representing errors in user input or storage
      */
-    public String execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
-        //textUi.displayList(tasks, storage);
+    public String execute(TaskList tasks, TextUi textUi, Storage storage) {
         return textUi.displayList_Str(tasks, storage);
     }
 

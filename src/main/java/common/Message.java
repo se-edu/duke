@@ -7,10 +7,10 @@ public class Message {
 
     public static final String MESSAGE_HELLOFROM = "Hello from";
     public static final String MESSAGE_LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
+            + "|  _ \\ _  _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+            + "|____/ \\__,|_|\\_\\___|\n";
     public static final String MESSAGE_IAM = "Hello! I'm Duke\n" + "What can I do for you?";
     public static final String MESSAGE_LINE = "    ____________________________________________________________";
     public static final String MESSAGE_MARKASDONE = "     Nice! I've marked this task as done:";

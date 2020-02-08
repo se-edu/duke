@@ -31,9 +31,10 @@ public class DoneCommand extends Command {
             return textUi.showError_Str(Message.MESSAGE_INVALIDCOMMAND);
 
         }
+        //add an assertion to check the range of this.index
+        assert (this.index <= tasks.getList().size() && this.index >= 0): "out of bound";
         tasks.done(this.index);
         storage.writeToFile(tasks.getList());
-        //textUi.showDoneTask(this.index, tasks);
         return textUi.showDoneTask_Str(this.index, tasks);
     }
 

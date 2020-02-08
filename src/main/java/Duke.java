@@ -37,7 +37,6 @@ public class Duke {
     public String getResponse(String text) {
         try {
             Command c = Parser.parse(text.trim());
-            boolean isExit = c.isExit();
             String commandResult = c.execute(tasks, textUi, dukeStorage);
             if(commandResult.equals("     It is time to say goodbye :(")){
                 this.isFinished = true;

@@ -24,15 +24,15 @@ public class Parser {
      *
      * @param input the input string of the user
      * @return a command object
-     * @throws DukeException when input is not valid
      */
-    public static Command parse(String input) throws DukeException {
+    public static Command parse(String input) {
         String[] words = input.split(" ");
         String[] stamps = input.split("/");
         String keyword = words[0];
         if(input.equals("")){
             return new ErrorCommand();
         }
+        assert !input.equals(""): "the input is empty, yet still taken in";
         if (keyword.equalsIgnoreCase("find")) {
             if (words.length < 2) {
                 return new ErrorCommand();
