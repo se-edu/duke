@@ -154,3 +154,8 @@ Fixed some coding standards formats
 A-Gradle
 Added Gradle support
 Included Shadow Jar
+
+
+9/2/20
+
+A-GUI
