@@ -5,16 +5,16 @@ import commands.CommandInvoker;
 import commands.UserCommand;
 import exceptions.DukeException;
 
-import javafx.scene.control.Label;
 import java.util.Scanner;
 
 public class Duke {
-
+    CommandInvoker invoker  = new CommandInvoker();
 
     public Duke() {
-
         DukeInit.initBot();
-        CommandInvoker invoker = new CommandInvoker();
+    }
+
+    public void run(){
 
         while(!CommandInvoker.checkOff()){
             String userInput = getUserInput();
@@ -27,7 +27,6 @@ public class Duke {
             }
 
         }
-
     }
 
     private static String getUserInput(){
