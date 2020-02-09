@@ -18,8 +18,8 @@ public class ByeCommand extends UserCommand{
 
 
     @Override
-    public void reply() {
-        System.out.println(UI.getReply("bye"));
+    public String reply() {
+        return (UI.getReply("bye"));
     }
 
     @Override

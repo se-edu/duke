@@ -173,6 +173,9 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        catch (DukeException e){
+            e.printStackTrace();
+        }
 
     }
 }

@@ -9,9 +9,10 @@ public interface Command {
     /**
      * Replies User when command is executed
      *
+     * @return String the response
      * @throws DukeException the duke exception
      */
-    public void reply() throws DukeException;
+    public String reply() throws DukeException;
 
     /**
      * Executes the Action of the Commands.Command

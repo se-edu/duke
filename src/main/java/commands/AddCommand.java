@@ -35,8 +35,8 @@ public class AddCommand extends UserCommand {
     }
 
     @Override
-    public void reply(){
-        System.out.println(UI.getReply("add"));
+    public String reply(){
+        return UI.getReply("add");
     }
 
     @Override

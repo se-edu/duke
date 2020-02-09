@@ -55,6 +55,7 @@ public class CommandHub {
             desc = parsedCommand[1];
         }
 
+        System.out.println(ID);
         if(commandList.containsKey(ID)) { //gets generic commands
             return commandList.get(ID);
         } else if(ID.contains("done")){ //done command

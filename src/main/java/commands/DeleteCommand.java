@@ -31,8 +31,8 @@ public class DeleteCommand extends UserCommand {
     }
 
     @Override
-    public void reply(){
-        System.out.println(UI.getReply("delete"));
+    public String reply(){
+        return UI.getReply("delete");
     }
 
 

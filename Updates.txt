@@ -162,3 +162,33 @@ A-GUI
 Added GUI (Tutorial)
 
 Stage 2:
+added some sort of integration to bot
+
+Issues:
+Majority function is not working
+    Known issues:
+	== Commands ==
+	- bye command: How to fix?
+	    Needs to save the memory
+		Turn off application
+	- list command: Unable to print out list
+	- Find command: Unable to print "Here are task found"
+	- Added Command: Does not show the number of list printed
+	== Features ==
+	- Memory not saved
+	- Some part of bot speech is not printed
+	
+	
+Stage 2-1:
+Fixes to issues
+
+Fixes:
+- ByeCommand/ListCommand:
+     Fix by initialising bot (Forgot)
+- FindCommand: 
+     Corrected the print
+- Bye_Command:
+     Fixed save memory
+     Application can now turn off : System.exit(0)
+     Suggested implementation: Bot does not print good bye statement
+	 

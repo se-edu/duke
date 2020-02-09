@@ -32,9 +32,8 @@ public class DoneCommand extends UserCommand {
         id = ID;
     }
     @Override
-    public void reply(){
-        System.out.println(UI.getReply("markedDone"));
-        System.out.println("Marking item " + id +" as done");
+    public String reply(){
+        return UI.getReply("markedDone") + "\nMarking item " + id +" as done";
     }
 
     @Override

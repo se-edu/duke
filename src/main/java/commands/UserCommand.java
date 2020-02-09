@@ -20,8 +20,8 @@ public class UserCommand implements Command {
 
 
     @Override
-    public void reply() {
-        System.out.println("This is some crazy event");
+    public String reply() {
+        return "This is some crazy event";
     }
 
     @Override

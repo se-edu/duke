@@ -43,16 +43,19 @@ public class MyList {
 
     /**
      * Prints list.
+     * @return A string with list prints
      */
-    public static void printList(){
+    public static String printList(){
+        String printed = "";
         if(DaList.size()==0){
-            System.out.println(UI.getReply("emptyList"));
+            return UI.getReply("emptyList");
         }
         int count = 1;
         for(Task t : DaList){
-            System.out.println(count+ ". "+ t);
+            printed = printed + count+ ". "+ t + "\n";
             count++;
         }
+        return printed;
     }
 
     /**
@@ -74,7 +77,7 @@ public class MyList {
             throw new DukeException(UI.getReply("imaginary"));
         }
         DaList.get(ID).markDone();
-        System.out.println(DaList.get(ID));
+        //System.out.println(DaList.get(ID));
     }
 
     /**
@@ -96,16 +99,18 @@ public class MyList {
         ArrayList<Task> localList = populateFindList(keyword);
         boolean isFirst = true;
         int count = 1;
+        String founded = "";
 
         for(Task t: localList){
             if(isFirst){
                 System.out.println("Found these tasks: ");
+                founded = "Found these tasks:\n";
                 isFirst = false;
             }
             System.out.println(count + ". "+ t);
             count++;
         }
-        return "Found in total of " + localList.size() + " items";
+        return founded+ "Found in total of " + localList.size() + " items";
     }
 
     /**

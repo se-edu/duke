@@ -16,30 +16,15 @@ public class CommandInvoker {
      */
     public CommandInvoker(){};
 
-    /**
-     * Invoke userCommand
-     *
-     * @param c the userCommand
-     */
-    CommandInvoker(UserCommand c){
-        invoke(c);
-    }
-
 
     /**
      * Invoke the Usercommand.
      *
      * @param c the Commands.UserCommand
      */
-    public static void invoke(UserCommand c){
-        try {
-            c.action();
-            c.reply();
-        }
-        catch(DukeException e){
-            System.out.println(e.getMessage());
-        }
-
+    public static String invoke(UserCommand c) throws DukeException{
+        c.action();
+        return c.reply();
     }
 
     /**
