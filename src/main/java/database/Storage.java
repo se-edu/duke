@@ -1,7 +1,7 @@
 package database;
 import commands.CommandInvoker;
 import commands.LoadCommand;
-import Duke.UI;
+import duke.UI;
 import exceptions.DukeException;
 import resources.DateTimeHandler;
 import resources.Task;

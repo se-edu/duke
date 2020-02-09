@@ -1,6 +1,6 @@
 package database;
 
-import Duke.UI;
+import duke.UI;
 import exceptions.DukeException;
 import resources.Task;
 

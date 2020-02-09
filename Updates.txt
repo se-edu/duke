@@ -110,7 +110,7 @@ Does not accepts date with no time (memory  save error
 	at Bot_Memory.saveMemory(Bot_Memory.java:65)
 	at Bye_Command.action(Bye_Command.java:15)
 	at commands.CommandInvoker.Invoke(commands.CommandInvoker.java:17)
-	at Duke.Duke.main(Duke.Duke.java:12)
+	at duke.duke.main(duke.duke.java:12)
      - Fixed by return localdate due to function not acceepting non time (LocalDateTime)
 	 - Fixed by accepting single digit numbers
 	
@@ -119,7 +119,7 @@ Datetime does not recognise if user type in single digit dates (3/03/2020)
 
 3/2/20
 A-More OOP
-Added Duke.UI class
+Added duke.UI class
 
 
 
@@ -159,3 +159,6 @@ Included Shadow Jar
 9/2/20
 
 A-GUI
+Added GUI (Tutorial)
+
+Stage 2:

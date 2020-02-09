@@ -1,6 +1,6 @@
 package resources;
 
-import Duke.UI;
+import duke.UI;
 import exceptions.DukeException;
 
 /**

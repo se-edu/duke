@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import commands.CommandHub;
 import commands.CommandInvoker;

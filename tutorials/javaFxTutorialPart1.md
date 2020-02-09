@@ -51,7 +51,7 @@ dependencies {
 
 ## Writing your first program
 
-As customary, let’s start off with a simple “Hello World” program. Modify your `Duke.Duke` class to extend `javafx.application.Application`. This requires you to override the `Application#start()` method and provide a concrete implementation. Notice that the method signature for `Application#start()` has a parameter `Stage`. This is the _primary stage_ that JavaFX provides.
+As customary, let’s start off with a simple “Hello World” program. Modify your `duke.duke` class to extend `javafx.application.Application`. This requires you to override the `Application#start()` method and provide a concrete implementation. Notice that the method signature for `Application#start()` has a parameter `Stage`. This is the _primary stage_ that JavaFX provides.
 
 ```java
 import javafx.application.Application;
@@ -59,7 +59,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class Duke.Duke extends Application {
+public class duke.duke extends Application {
     
     // ...
 
@@ -80,14 +80,14 @@ Next, we create another Java class, `Launcher`, as an entry point to our applica
 The `Launcher` class is reproduced below in its entirety.
 
 ```java
-import Duke.Duke;import javafx.application.Application;
+import duke.duke;import javafx.application.Application;
 
 /**
  * A launcher class to workaround classpath issues.
  */
 public class Launcher {
     public static void main(String[] args) {
-        Application.launch(Duke.class, args);
+        Application.launch(duke.class, args);
     }
 }
 ```

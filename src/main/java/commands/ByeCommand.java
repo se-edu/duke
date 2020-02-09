@@ -1,7 +1,7 @@
 package commands;
 
 import database.Storage;
-import Duke.UI;
+import duke.UI;
 import exceptions.DukeException;
 
 /**

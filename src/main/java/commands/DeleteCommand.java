@@ -1,7 +1,7 @@
 package commands;
 
 import database.MyList;
-import Duke.UI;
+import duke.UI;
 import exceptions.DukeException;
 
 /**

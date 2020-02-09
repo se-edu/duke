@@ -4,7 +4,7 @@ package resources; /**
  * It also handles anything regarding datetime
  */
 
-import Duke.UI;
+import duke.UI;
 import exceptions.DukeException;
 
 import java.time.DateTimeException;
