@@ -179,7 +179,7 @@ Majority function is not working
 	- Some part of bot speech is not printed
 	
 	
-Stage 2-1:
+Update 2-1:
 Fixes to issues
 
 Fixes:
@@ -191,4 +191,18 @@ Fixes:
      Fixed save memory
      Application can now turn off : System.exit(0)
      Suggested implementation: Bot does not print good bye statement
+	 
+Update 2-2:
+Added welcome message from bot
+Added Background image
+Added button(red)
+
+Issues:
+Some formating errors:
+    - List does not display nicely
+	
+Unfixed Issus:
+    - Does not show some output for commands (Speech not print)
+
+Update 2-3
 	 

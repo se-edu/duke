@@ -59,7 +59,7 @@ public class Duke {
             response = e.getMessage();
         }
 
-        
+
         return response;
     }
 }

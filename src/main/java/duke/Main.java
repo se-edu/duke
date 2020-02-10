@@ -24,6 +24,11 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Doki Doki Task Bot");
+            stage.centerOnScreen();
+            stage.setResizable(false);
+            //stage.getIcons().add(new Image(App.class.getResourceAsStream("/icons/icon.png")));
+
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
