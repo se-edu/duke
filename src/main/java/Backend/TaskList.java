@@ -53,7 +53,7 @@ public class TaskList {
             data.append( task.toString() ).append( "\n" );
         }
 
-        Storage.writeToFile( data.toString() );
+        Storage.writeDataToFile( data.toString() );
 
     }
 

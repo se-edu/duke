@@ -1,0 +1,21 @@
+The following is the list of all commands within my comprehension:
+
+DISPLAYING INFORMATION
+1. Printing Tasks
+    a. list
+    b. date /on YYYY-MM-DD
+
+2. Searching Tasks
+    a. find {search term}
+
+MANAGING TASKS
+3. Adding Tasks
+    a. todo {task description}
+    b. event {task description} /at YYYY-MM-DD
+    c. deadline {task description} /by YYYY-MM-DD
+
+4. Deleting Tasks
+    a. delete {task index}
+
+5. Handling Tasks
+    a. done {task index}

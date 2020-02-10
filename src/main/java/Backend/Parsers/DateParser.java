@@ -14,11 +14,20 @@ public class DateParser {
     private static final String noonString = "12:00";
     private static final String eveningString = "19:00";
 
+    /**
+     * creates a DateParser object given a LocalDate
+     * @param date - LocalDate object
+     */
     public DateParser( LocalDate date ) {
         this.date = date;
         this.dateString = convertToString( date );
     }
 
+    /**
+     * creates a DateParser object given a DateString.
+     * reduces the need for repeated conversion.
+     * @param dateString - string in format YYYY-MM-DD
+     */
     public DateParser( String dateString ) {
         this.date = convertToDate( dateString );
         this.dateString = dateString;
@@ -79,7 +88,7 @@ public class DateParser {
         if( now.isBefore( noon )){
             return TimeOfDay.MORNING;
         } else if ( now.isAfter( night ) ){
-            return TimeOfDay.NIGHT;
+            return TimeOfDay.EVENING;
         } else {
             return TimeOfDay.AFTERNOON;
         }

@@ -41,6 +41,8 @@ public class Switcher {
              * commands that have to do with printing
              */
             switch( command ){
+                case "help":
+                    return ChatterBox.sayHelp();
                 case "list":
                     return taskList.printTasks();
                 case "date":

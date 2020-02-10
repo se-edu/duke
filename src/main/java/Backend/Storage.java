@@ -6,17 +6,30 @@ import java.io.*;
 
 public class Storage {
 
-    private static final String dirname = "./data";
-    private static final String pathname = "./data/duke.txt";
+    private static final String dataDirname = "./data";
+    private static final String dataPathname = "./data/duke.txt";
+    private static final String helpPathname = "help.txt";
 
     public Storage(){}
+
+    public static String loadDataFromFile() throws DukeException{
+        return loadFromFile(dataPathname);
+    }
+
+    public static String loadHelpFromFile() throws DukeException {
+        return loadFromFile( helpPathname );
+    }
+
+    public static void writeDataToFile( String data ) throws DukeException{
+        writeToFile( data, dataDirname, dataPathname );
+    }
 
     /**
      * loads file and returns contents
      * @return data string
      * @throws DukeException error reading file or no file exists
      */
-    public static String loadFromFile() throws DukeException {
+    private static String loadFromFile(String pathname) throws DukeException {
         try {
 
             FileReader fileReader = new FileReader(pathname);
@@ -47,7 +60,7 @@ public class Storage {
      * @param data long string separated by newline character
      * @throws DukeException error writing or closing file
      */
-    public static void writeToFile( String data ) throws DukeException {
+    private static void writeToFile( String data, String dirname, String pathname ) throws DukeException {
 
         //make directory
         File dir = new File(dirname);

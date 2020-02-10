@@ -5,20 +5,17 @@ import Backend.Parsers.DateParser;
 public abstract class Task {
 
     public String content;
-    public DateParser date;
     int index;
-    boolean done;
+    boolean done = false;
+    public DateParser date;
 
-
-    public Task ( String content, DateParser date ) {
+    public Task( String content, DateParser date ) {
         this.content = content;
         this.date = date;
-        this.done = false;
     }
 
-    public Task( String content ) {
+    protected Task( String content ){
         this.content = content;
-        this.done = false;
     }
 
     public void indexTask( int index ){

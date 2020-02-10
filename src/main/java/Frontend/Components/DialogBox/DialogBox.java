@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 
 /**
  * An example of a custom control using FXML.
@@ -42,7 +43,8 @@ public abstract class DialogBox extends HBox {
         }
 
         dialog.setText( user.getText() );
-        displayPicture.setImage( user.getImage() );
+        dialog.prefHeight( Region.USE_COMPUTED_SIZE );
+//        displayPicture.setImage( user.getImage() );
 
     }
 

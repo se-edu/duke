@@ -61,7 +61,7 @@ public class Parser {
     }
 
     /**
-     * if content is integer, cast content to integer
+     * if content is integer, casts content to integer
      * @return content as integer
      */
     public Optional<Integer> parseContentAsInt(){

@@ -1,5 +1,6 @@
 package Frontend.Components;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -25,4 +26,6 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    public void handleUserInput( ActionEvent actionEvent ) {
+    }
 }

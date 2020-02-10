@@ -147,15 +147,6 @@ public class Main extends Application {
         } ).start();
     }
 
-//    private void handleExit() throws DukeException{
-//        try {
-//            Thread.sleep(1000);
-//            System.exit(0);
-//        } catch( InterruptedException e ){
-//            throw new DukeException( e );
-//        }
-//    }
-
     /**
      * Handles the initialisation of all backend components
      */
@@ -163,7 +154,7 @@ public class Main extends Application {
         taskList = new TaskList();
 
         try {
-            taskList.loadTasks( Storage.loadFromFile() );
+            taskList.loadTasks( Storage.loadDataFromFile() );
         } catch ( DukeException ignored){
 
         } finally {
