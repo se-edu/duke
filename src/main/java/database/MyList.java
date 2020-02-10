@@ -81,7 +81,7 @@ public class MyList {
     }
 
     /**
-     * Get list array list.
+     * Gets list array list.
      *
      * @return the list of objects
      */
@@ -95,22 +95,20 @@ public class MyList {
      * @param keyword takes in keyword
      * @return String stating number of items find
      */
-    public static String find(String keyword) throws DukeException{
+    public static String find(String keyword){
         ArrayList<Task> localList = populateFindList(keyword);
-        boolean isFirst = true;
         int count = 1;
         String founded = "";
 
+        if(localList.size()!=0){
+            founded = "Found these tasks:\n";
+        }
         for(Task t: localList){
-            if(isFirst){
-                System.out.println("Found these tasks: ");
-                founded = "Found these tasks:\n";
-                isFirst = false;
-            }
             System.out.println(count + ". "+ t);
+            founded = founded + count+ ". "+ t +"\n";
             count++;
         }
-        return founded+ "Found in total of " + localList.size() + " items";
+        return founded + "Found in total of " + localList.size() + " items";
     }
 
     /**

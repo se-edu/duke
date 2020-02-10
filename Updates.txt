@@ -185,7 +185,7 @@ Fixes to issues
 Fixes:
 - ByeCommand/ListCommand:
      Fix by initialising bot (Forgot)
-- FindCommand: 
+- ListCommand: 
      Corrected the print
 - Bye_Command:
      Fixed save memory
@@ -205,4 +205,9 @@ Unfixed Issus:
     - Does not show some output for commands (Speech not print)
 
 Update 2-3
-	 
+Added icon
+Changed Pics (Duke and user)
+Added instructions
+
+Fixes: 
+- Fixed find event

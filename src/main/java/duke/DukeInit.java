@@ -4,7 +4,7 @@ import commands.CommandHub;
 import database.Storage;
 
 /**
- * Initialises the bot
+ * Initialises the bot and holds strings pertaining to bot initialisation
  */
 public class DukeInit {
     private static String logo = " ____        _        \n"
@@ -25,8 +25,26 @@ public class DukeInit {
         System.out.println("Now what you want?");
     }
 
+    /**
+     * returns the init line (welcome)
+     * @return A string with the welcome speech
+     */
     public static String getInitLine(){
         return "Hello.. I am \n" + logo + "\nI am a very angry bot and I hate you";
+    }
+
+    public static String getInstr(){
+        String inst = "Here are my list of Commands:\n" +
+                    "========Add Tasks=======\n" +
+                    "1. todo <yourtasknamehere>\n" +
+                   "2. event <youreventnamehere> /at (date or Time)\n" +
+                   "3. deadline <youreventnamehere> /by (date or Time)\n\n" +
+                   "======= Other commands =======\n" +
+                  "1. Find <keyword>\n" +
+                  "2. Delete <tasknumber>\n" +
+                   "3. Done <tasknumber>";
+
+        return inst;
     }
 
 }

@@ -32,8 +32,7 @@ public class FindCommand extends UserCommand{
     }
 
     @Override
-    public boolean action() throws DukeException {
-        System.out.println(MyList.find(keyword));
-        return true;
+    public String reply() {
+        return MyList.find(keyword);
     }
 }

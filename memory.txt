@@ -1,4 +1,6 @@
-todo~true~eat
-todo~false~newone
 todo~false~one
 todo~false~ss
+event~false~/at 10/02/2020 0820
+deadline~false~oooo /by 10/02/2020 1200
+todo~false~read books
+todo~false~read manga

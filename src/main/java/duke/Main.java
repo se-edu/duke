@@ -6,6 +6,7 @@ import commands.CommandInvoker;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -27,7 +28,7 @@ public class Main extends Application {
             stage.setTitle("Doki Doki Task Bot");
             stage.centerOnScreen();
             stage.setResizable(false);
-            //stage.getIcons().add(new Image(App.class.getResourceAsStream("/icons/icon.png")));
+            stage.getIcons().add(new Image(("/images/mitsuri.jpg")));
 
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
