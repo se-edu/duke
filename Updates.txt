@@ -225,5 +225,5 @@ Show what is done in this week
 Remember to save all these into memory
 
 Issues:
-Remind user to say bye to save memory
+Remind user to say bye to save memory (Not fixed)
 
