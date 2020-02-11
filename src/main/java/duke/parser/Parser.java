@@ -19,6 +19,9 @@ import duke.task.Event;
 
 import java.util.Arrays;
 
+/**
+ * Parser class handles all the input of the user.
+ */
 public class Parser {
     /**
      * Process message and deem if user wants to quit.
@@ -41,16 +44,16 @@ public class Parser {
                 int taskIndex = Integer.parseInt(message.split(" ", 2)[1]);
                 return new DoneCommand(taskIndex);
             } else if (message.substring(0, 4).equals("todo")) {
-                temp = createTask(message, Symbol.T);
+                temp = parseTask(message, Symbol.T);
                 return new AddCommand(temp);
             } else if (message.substring(0, 4).equals("find")) {
                 String find = message.split(" ",2)[1];
                 return new FindCommand(find);
             } else if (message.substring(0, 5).equals("event")) {
-                temp = createTask(message, Symbol.T);
+                temp = parseTask(message, Symbol.E);
                 return new AddCommand(temp);
             } else if (message.substring(0, 8).equals("deadline")) {
-                temp = createTask(message, Symbol.T);
+                temp = parseTask(message, Symbol.D);
                 return new AddCommand(temp);
             } else if (message.substring(0, 6).equals("delete")) {
                 int taskIndex = Integer.parseInt(message.split(" ", 2)[1]);
@@ -67,7 +70,7 @@ public class Parser {
      * Creates task.
      * @param message use to store it in the tasks.
      */
-    public static Task createTask(String message, Symbol symbol) throws DukeException {
+    public static Task parseTask(String message, Symbol symbol) throws DukeException {
         String[] arrMessage = message.split(" ");
         Task task;
         if (symbol == Symbol.T) {
@@ -85,11 +88,7 @@ public class Parser {
             if (landmark == arrMessage.length) {
                 throw new DukeException("  ☹ OOPS!!! The description of a deadline cannot be empty.");
             }
-            String[] tempArr = Arrays.copyOfRange(arrMessage, 1, landmark);
-            String[] tempArr2 = Arrays.copyOfRange(arrMessage, landmark + 1, arrMessage.length);
-            String newMessage = String.join(" ", tempArr);
-            String newDate = String.join(" ", tempArr2);
-            task = new Deadlines(newMessage, TaskList.index, symbol, newDate);
+            task = createTask(arrMessage, 1, landmark);
         } else {
             int landmark = arrMessage.length;
             for (int i = 1; i < arrMessage.length; i++) {
@@ -101,12 +100,27 @@ public class Parser {
             if (landmark == arrMessage.length) {
                 throw new DukeException("  ☹ OOPS!!! The description of a event cannot be empty.");
             }
-            String[] tempArr = Arrays.copyOfRange(arrMessage, 1, landmark);
-            String[] tempArr2 = Arrays.copyOfRange(arrMessage, landmark + 1, arrMessage.length);
-            String newMessage = String.join(" ", tempArr);
-            String newDate = String.join(" ", tempArr2);
-            task = new Event(newMessage, TaskList.index, newDate);
+            task = createTask(arrMessage, 2, landmark);
         }
         return task;
+    }
+
+    /**
+     * Creates Task.
+     * @param arrMessage arrMessage contains the information of the task.
+     * @param i 1 == Deadline task, 2 == Event Task.
+     * @param landmark index of the /at or /by in the arr.
+     * @return returns a Task.
+     */
+    public static Task createTask(String[] arrMessage, int i, int landmark) {
+        String[] tempArr = Arrays.copyOfRange(arrMessage, 1, landmark);
+        String[] tempArr2 = Arrays.copyOfRange(arrMessage, landmark + 1, arrMessage.length);
+        String newMessage = String.join(" ", tempArr);
+        String newDate = String.join(" ", tempArr2);
+        if (i == 1) {
+            return new Deadlines(newMessage, TaskList.index, false, newDate);
+        } else {
+            return new Event(newMessage, TaskList.index, newDate);
+        }
     }
 }

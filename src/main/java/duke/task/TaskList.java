@@ -1,5 +1,8 @@
 package duke.task;
 
+import duke.exception.DukeException;
+import duke.storage.Storage;
+
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -36,6 +39,15 @@ public class TaskList {
         Task temp = this.tasks.get(num);
         temp.done();
         return temp;
+    }
+
+    /**
+     * Updates list with the latest stored details in the data.txt file.
+     * @param storage storage used to access the data.txt file.
+     * @throws DukeException throws exception when there is a error in laoding the file.
+     */
+    public void updateList(Storage storage) throws DukeException {
+        this.tasks = storage.load();
     }
 
     /**
@@ -88,4 +100,8 @@ public class TaskList {
         }
         return newTasks;
     }
+
+
+
+
 }

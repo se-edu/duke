@@ -1,8 +1,13 @@
 package duke.task;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline inherits from Task.
+ * Has additional attribute for date storage.
+ */
 public class Deadlines extends Task {
     private String date;
     private LocalDate date1;
@@ -19,7 +24,11 @@ public class Deadlines extends Task {
         super(title,index);
         this.symbol = "D";
         this.date = date;
-        this.date1 = LocalDate.parse(date);
+        try {
+            this.date1 = LocalDate.parse(date);
+        } catch (DateTimeException ex) {
+            this.date1 = null;
+        }
     }
 
     /**
@@ -34,6 +43,11 @@ public class Deadlines extends Task {
         super(title,index, don);
         this.symbol = "D";
         this.date = date;
+        try {
+            this.date1 = LocalDate.parse(date);
+        } catch (DateTimeException ex) {
+            this.date1 = null;
+        }
     }
 
     /**
@@ -56,7 +70,11 @@ public class Deadlines extends Task {
         } else {
             crosstick = "✗";
         }
-        String dateFormatted = this.date1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return String.format("[%s][%s] %s (by: %s)", this.symbol, crosstick, this.title, dateFormatted);
+        if (date1 != null) {
+            String dateFormatted = this.date1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return String.format("[%s][%s] %s (by: %s)", this.symbol, crosstick, this.title, dateFormatted);
+        } else {
+            return String.format("[%s][%s] %s (by: %s)", this.symbol, crosstick, this.title, date);
+        }
     }
 }

@@ -6,8 +6,16 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * ByeCommand inherits from the Command class.
+ * Terminates the program upon execution.
+ */
 public class ByeCommand extends Command {
 
+    /**
+     * Terminates the program.
+     * @param isExit always set to true to terminate the program.
+     */
     public ByeCommand(Boolean isExit) {
         super(isExit);
     }

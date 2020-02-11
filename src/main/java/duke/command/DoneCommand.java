@@ -6,6 +6,10 @@ import duke.task.TaskList;
 
 import duke.ui.Ui;
 
+/**
+ * DoneCommand that inherits from the Command Class.
+ * Implements abstract method execute.
+ */
 public class DoneCommand extends Command {
     private final int taskIndex;
     private final String success = "Success";
@@ -28,6 +32,7 @@ public class DoneCommand extends Command {
      */
     public CommandResult execute(TaskList taskList, Ui ui, Storage storage) {
         try {
+            taskList.updateList(storage);
             Task task = taskList.doneTask(taskIndex);
             ui.doneTask(task);
             storage.saveTask(taskList);

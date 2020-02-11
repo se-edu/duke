@@ -1,5 +1,8 @@
 package duke.command;
 
+/**
+ * Command result that record if the execution is successful.
+ */
 public class CommandResult {
     public final String feedbackToUser;
 

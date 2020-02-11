@@ -5,14 +5,27 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * AddCommand inherits from the Command abstract class.
+ * Executes the task in an orderly manner.
+ */
 public class AddCommand extends Command {
     private final Task task;
     private final String success = "Success";
 
+    /**
+     * Stores the task that needs to be added to the taskList later on.
+     * @param task task that needs to be stored later.
+     */
     public AddCommand(Task task) {
         this.task = task;
     }
 
+    /**
+     * Additional isExit variable that enables for quick exit feature.
+     * @param isExit if isExit is true the command will terminate the program after it executes.
+     * @param task task that needs to be stored inside the taskList.
+     */
     public AddCommand(Boolean isExit, Task task) {
         super(isExit);
         this.task = task;

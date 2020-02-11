@@ -4,6 +4,10 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * DisplayTaskCommand inherits Command.
+ * Implements the abstract method execute.
+ */
 public class DisplayTaskCommand extends Command {
     private final String success = "Success";
 

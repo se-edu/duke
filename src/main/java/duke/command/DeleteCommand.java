@@ -5,6 +5,10 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * DeleteCommand that inherits Command.
+ * Implements abstract method execute that deletes the task from a TaskList.
+ */
 public class DeleteCommand extends Command {
     private final int taskIndex;
     private final String success = "Task has been removed";

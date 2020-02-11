@@ -7,6 +7,10 @@ import duke.ui.Ui;
 
 import java.util.TreeMap;
 
+/**
+ * FindCommand inherits from abstract class Command.
+ * Implement abstract method execute.
+ */
 public class FindCommand extends Command {
     private String find;
     private final String success = "Success";

@@ -44,7 +44,7 @@ public class Ui {
         for (String s : splited) {
             System.out.println(String.format("  %-57s", s));
         }
-        System.out.println(String.format("%-57s",' '));
+        System.out.println(String.format(" %-57s",' '));
         System.out.println(String.format("%60s",' ').replace(' ','*'));
     }
 
@@ -107,14 +107,14 @@ public class Ui {
     public void printStoredTask(TaskList tasksList) {
         TreeMap<Integer,Task> tasks = tasksList.getList();
         System.out.println(String.format("%60s",' ').replace(' ','*'));
-        System.out.println(String.format("* %-57s*",' '));
+        System.out.println(String.format("%-57s",' '));
         int counter = 1;
         for (Map.Entry<Integer, Task> entry : tasks.entrySet()) {
             Task message = entry.getValue();
-            System.out.println(String.format("* %d.%-55s*", counter, message));
+            System.out.println(String.format("%d.%-55s", counter, message));
             counter++;
         }
-        System.out.println(String.format("* %-57s*",' '));
+        System.out.println(String.format("%-57s",' '));
         System.out.println(String.format("%60s",' ').replace(' ','*'));
     }
 
@@ -124,15 +124,15 @@ public class Ui {
     public void printFoundTask(TreeMap<Integer, Task> foundTasks) {
         String matching = " Here are the matching tasks in your list:";
         System.out.println(String.format("%60s",' ').replace(' ','*'));
-        System.out.println(String.format("* %-57s*",' '));
-        System.out.println(String.format("* %-57s*",matching));
+        System.out.println(String.format("%-57s",' '));
+        System.out.println(String.format("%-57s",matching));
         int counter = 1;
         for (Map.Entry<Integer, Task> entry : foundTasks.entrySet()) {
             Task message = entry.getValue();
-            System.out.println(String.format("* %d.%-55s*", counter, message));
+            System.out.println(String.format("%d.%-55s", counter, message));
             counter++;
         }
-        System.out.println(String.format("* %-57s*",' '));
+        System.out.println(String.format("%-57s",' '));
         System.out.println(String.format("%60s",' ').replace(' ','*'));
     }
 }

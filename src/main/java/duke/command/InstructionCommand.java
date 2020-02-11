@@ -4,6 +4,10 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * InstructionCommand inherits from Command class.
+ * Implements abstract method execute.
+ */
 public class InstructionCommand extends Command {
     private final String success = "Success";
 
