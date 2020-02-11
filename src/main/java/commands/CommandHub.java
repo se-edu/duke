@@ -27,6 +27,7 @@ public class CommandHub {
         commandList.put("null",null);
         commandList.put("bye",new ByeCommand());
         commandList.put("list",new ListCommand());
+        commandList.put("week", new ThisWeekCommand());
     }
     /**
      * Parses the Commands.UserCommand

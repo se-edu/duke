@@ -211,3 +211,19 @@ Added instructions
 
 Fixes: 
 - Fixed find event
+
+10/02/20
+A-Statistics
+Things wanted to implement (Not implemented):
+1. Count number of days
+3. Sort according to type
+4. Sort according to type
+
+Show what is done in this week
+
+
+Remember to save all these into memory
+
+Issues:
+Remind user to say bye to save memory
+

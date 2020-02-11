@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 public class MyList {
     private static ArrayList<Task> DaList = new ArrayList<>();
+    private static Task justAdded;
 
 
 
@@ -23,6 +24,15 @@ public class MyList {
     public static void addItem(Task t){
         System.out.println("added: " + t);
         DaList.add(t);
+        justAdded = t;
+    }
+    /**
+     * Gets the tasks that was recently just added in
+     *
+     * @return Task that was recently added
+     */
+    protected static Task getRecentAddedTask(){
+        return justAdded;
     }
 
     /**

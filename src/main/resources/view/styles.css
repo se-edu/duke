@@ -14,6 +14,10 @@
     -fx-fill: #f0f8ff;
 }
 
+.label{
+  -fx-padding: 5;
+}
+
 /*Taken from http://fxexperience.com/2011/12/styling-fx-buttons-with-css/*/
 .round-red {
     -fx-background-color: linear-gradient(#ff5400, #be1d00);

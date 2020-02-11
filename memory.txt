@@ -1,6 +1,6 @@
-todo~false~one
-todo~false~ss
-event~false~/at 10/02/2020 0820
-deadline~false~oooo /by 10/02/2020 1200
-todo~false~read books
-todo~false~read manga
+todo~false~one~1/1/1
+todo~true~ss~11/2/2020
+event~false~/at 10/02/2020 0820~1/1/1
+deadline~true~oooo /by 10/02/2020 1200~11/2/2020
+todo~false~read books~1/1/1
+todo~false~read manga~1/1/1
