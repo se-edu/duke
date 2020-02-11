@@ -18,18 +18,17 @@ public class LoadCommand extends AddCommand {
      * @param setDone the set done status of tasks
      * @param desc    the description of the task
      */
-    public LoadCommand(String type, boolean setDone, String desc){
+    public LoadCommand(String type, boolean setDone, String desc) {
         super(type, desc);
         this.isDone = setDone;
     }
 
     @Override
-    public boolean action() throws DukeException {
+    public void action() throws DukeException {
         super.action();
         count++;
-        if(isDone){
+        if (isDone) {
             MyList.markDone(count);
         }
-        return true;
     }
 }

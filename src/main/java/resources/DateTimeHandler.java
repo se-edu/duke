@@ -1,5 +1,7 @@
-package resources; /**
- * The class Resources.DateTimeHandler acts as a wrapper class for functions to getLocalDate time using only
+package resources;
+/**
+ * DateTimeHandler acts as a wrapper class for functions
+ * to getLocalDate time using only
  * descriptions
  * It also handles anything regarding datetime
  */
@@ -13,7 +15,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
-public class DateTimeHandler{
+public class DateTimeHandler {
     /**
      * Gets local date time.
      *
@@ -21,10 +23,10 @@ public class DateTimeHandler{
      * @return the local date time
      * @throws DukeException the duke exception
      */
-    public static LocalDateTime getLocalDateTime(String desc) throws DukeException{
+    public static LocalDateTime getLocalDateTime(String desc) throws DukeException {
         try {
             if (containsTime(desc)) {
-                String splitted[] = desc.split(" ");
+                String[] splitted = desc.split(" ");
                 return DateTime.getDateTime(splitted[0], splitted[1]);
             } else if (isValidDate(desc)) {
                 return DateTime.getDate(desc);
@@ -33,8 +35,7 @@ public class DateTimeHandler{
             } else {
                 throw new DukeException(UI.getReply("wrongDate"));
             }
-        }
-        catch(DateTimeException e){
+        } catch (DateTimeException e) {
             throw new DukeException(UI.getReply("wrongDateFormat"));
         }
     }
@@ -45,14 +46,12 @@ public class DateTimeHandler{
      * @param dateTime the date time
      * @return the string
      */
-    public static String printsLocalDateTime(LocalDateTime dateTime){
-        if(dateTime == null){
+    public static String printsLocalDateTime(LocalDateTime dateTime) {
+        if (dateTime == null) {
             return "";
-        }
-        else if(dateTime.getHour() == 0 && dateTime.getMinute() == 0 &&dateTime.getNano() == 0){ //only date
+        } else if (dateTime.getHour() == 0 && dateTime.getMinute() == 0 && dateTime.getNano() == 0) { //only date
             return printDate(dateTime);
-        }
-        else{
+        } else {
             return printDateAndTime(dateTime);
         }
     }
@@ -63,11 +62,13 @@ public class DateTimeHandler{
      * @param desc description
      * @return boolean value if description contains time syntax
      */
-    private static boolean containsTime(String desc){
+    private static boolean containsTime(String desc) {
         String pattern = "[0-9]{2}/[0-9]{2}/[0-9]{4} [0-9]{4}";
         String patternEng = "[0-9]{2} [a-zA-Z]{3} [0-9]{4} [0-9]{2}:[0-9]{2}[apmAPM]{2}";
         String patternEng2 = "[0-9]{1} [a-zA-Z]{3} [0-9]{4} [0-9]{2}:[0-9]{2}[apmAPM]{2}";
-        return Pattern.matches(pattern, desc)||Pattern.matches(patternEng, desc) || Pattern.matches(patternEng2, desc);
+        return Pattern.matches(pattern, desc)
+                 || Pattern.matches(patternEng, desc)
+                || Pattern.matches(patternEng2, desc); //i know this is bad
     }
 
     /**
@@ -76,7 +77,7 @@ public class DateTimeHandler{
      * @param date date in string
      * @return boolean value if string is a valid date
      */
-    private static boolean isValidDate(String date){
+    private static boolean isValidDate(String date) {
         String pattern = "[0-9]{2}/[0-9]{2}/[0-9]{4}";
         return Pattern.matches(pattern, date);
     }
@@ -88,7 +89,7 @@ public class DateTimeHandler{
      * @param time time in string
      * @return boolean value if string is a valid time
      */
-    private static boolean isValidTime(String time){
+    private static boolean isValidTime(String time) {
         String pattern = "[0-9]{4}";
         return Pattern.matches(pattern, time);
     }
@@ -99,17 +100,18 @@ public class DateTimeHandler{
      * @param dateTime
      * @return String of the dateTime in correct format
      */
-    private static String printDateAndTime(LocalDateTime dateTime){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy hh:mma");
+    private static String printDateAndTime(LocalDateTime dateTime) {
+        DateTimeFormatter formatter =
+                DateTimeFormatter.ofPattern("d MMM yyyy hh:mma");
         return dateTime.format(formatter);
     }
 
-    private static String printDate(LocalDateTime dateTime){
+    private static String printDate(LocalDateTime dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
         return dateTime.format(formatter);
     }
 
-    private static String printTime(LocalDateTime dateTime){
+    private static String printTime(LocalDateTime dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
         return dateTime.format(formatter);
     }
@@ -120,10 +122,10 @@ public class DateTimeHandler{
      * @param dateTime the date time
      * @return the string for memory storage
      */
-    public static String revertDateTime(String dateTime){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy hh:mma");;
+    public static String revertDateTime(String dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy hh:mma");
         DateTimeFormatter formatterSave = DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm");
-        if(!containsTime(dateTime)) {
+        if (!containsTime(dateTime)) {
             formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
             formatterSave = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             return LocalDate.parse(dateTime, formatter).format(formatterSave);

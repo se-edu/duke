@@ -14,7 +14,7 @@ public class UserCommand implements Command {
      *
      * @param id the id
      */
-    UserCommand(int id){
+    UserCommand(int id) {
         ID = id;
     };
 
@@ -25,8 +25,7 @@ public class UserCommand implements Command {
     }
 
     @Override
-    public boolean action() throws DukeException {
-        return true;
+    public void action() throws DukeException {
     }
 
 

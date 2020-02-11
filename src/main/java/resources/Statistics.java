@@ -1,6 +1,5 @@
 package resources;
 
-import commands.*;
 /**
  * Handles everything to do with statistics
  */
@@ -12,7 +11,7 @@ public class Statistics {
      *
      * @return String the task to add
      */
-    public static String taskDone(){
+    public static String taskDone() {
         return TaskTracker.doneThisWeek();
     }
 
@@ -22,7 +21,7 @@ public class Statistics {
      *
      * @return String the task of things completed
      */
-    public static String numDone(){
+    public static String numDone() {
         return "You have completed" + TaskTracker.done() + " this week...";
     }
 

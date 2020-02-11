@@ -13,7 +13,7 @@ public class ListCommand extends UserCommand {
         super(3);
     }
     @Override
-    public String reply(){
+    public String reply() {
         return MyList.printList();
     }
 }

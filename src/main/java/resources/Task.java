@@ -28,7 +28,7 @@ public class Task {
      *
      * @param desc the desc
      */
-    protected void resetDesc(String desc){
+    protected void resetDesc(String desc) {
         Description = desc;
     }
 
@@ -37,8 +37,8 @@ public class Task {
      *
      * @throws DukeException the duke exception
      */
-    public void markDone() throws DukeException{
-        if(isDone){
+    public void markDone() throws DukeException {
+        if (isDone) {
             throw new DukeException(UI.getReply("doneAlready"));
         }
         doneDate = LocalDate.now();
@@ -51,7 +51,7 @@ public class Task {
      *
      * @return LocalDate the Date this thing was done
      */
-    public LocalDate getDoneDate(){
+    public LocalDate getDoneDate() {
         return this.doneDate;
     }
 
@@ -59,9 +59,9 @@ public class Task {
      * Sets the done date of tasks
      * For Storage reloading function
      *
-     * @return LocalDate the Date this thing was done
+     * @param d LocalDate the Date this thing was done
      */
-    public void setDone(LocalDate d){
+    public void setDone(LocalDate d) {
         this.doneDate = d;
     }
     /**

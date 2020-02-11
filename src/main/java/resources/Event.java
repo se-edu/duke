@@ -25,26 +25,18 @@ public class Event extends Task {
         endDate = DateTimeHandler.getLocalDateTime(parsed[1]);
         super.resetDesc(parsed[0]);
     }
-
-    /**
-     * Parses the command for better execution
-     *
-     * @param desc the description
-     * @throws DukeException the duke exception
-     * @return A string array containing the parsed split desc and time
-     */
     private String[] getParse(String desc) throws DukeException {
-        if(!desc.contains("/at ")){
+        if (!desc.contains("/at ")) {
             throw new DukeException("Hello? Missing your /at command!");
         }
         String[] parsed = desc.split("/at ");
         return parsed;
     }
 
-
     @Override
     public String toString() {
-        return "[E] " + super.toString() + " (at: " + DateTimeHandler.printsLocalDateTime(endDate) + ")";
+        return "[E] " + super.toString()
+                + " (at: " + DateTimeHandler.printsLocalDateTime(endDate) + ")";
     }
 
 

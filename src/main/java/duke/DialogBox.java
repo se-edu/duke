@@ -27,7 +27,8 @@ public class DialogBox extends HBox {
 
     private DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader =
+                    new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -43,16 +44,31 @@ public class DialogBox extends HBox {
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        ObservableList<Node> tmp =
+                FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns the user Dialog to caller
+     *
+     * @param text the text
+     * @param img  the img
+     * @return the user dialog
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns the Duke Dialogs to caller
+     *
+     * @param text the text
+     * @param img  the img
+     * @return the duke dialog
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

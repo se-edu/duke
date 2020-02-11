@@ -16,7 +16,7 @@ public class DeleteCommand extends UserCommand {
      *
      * @param id the id
      */
-    DeleteCommand(int id){
+    DeleteCommand(int id) {
         super(5);
         setDel(id);
     }
@@ -26,21 +26,20 @@ public class DeleteCommand extends UserCommand {
      *
      * @param ID the id
      */
-    public static void setDel(int ID){
+    public static void setDel(int ID) {
         id = ID;
     }
 
     @Override
-    public String reply(){
+    public String reply() {
         return UI.getReply("delete");
     }
 
 
     @Override
-    public boolean action() throws DukeException {
+    public void action() throws DukeException {
 
         MyList.deleteItem(id);
         MyList.printCount();
-        return true;
     }
 }

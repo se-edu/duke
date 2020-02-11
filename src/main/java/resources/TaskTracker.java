@@ -20,7 +20,7 @@ public class TaskTracker {
      *
      * @param t the task to add
      */
-    public static void finishTask(Task t){
+    public static void finishTask(Task t) {
         //update current week
         currentWeek = getWeek(LocalDate.now());
         //Check if list of donetask is still in same week
@@ -32,12 +32,13 @@ public class TaskTracker {
     /**
      * Returns completed things this week
      *
-     * @returns String of things done this week
+     * @return String of things done this week
      */
-    public static String doneThisWeek(){
+    public static String doneThisWeek() {
         updateDone();
         String ans = "" + printList(listOfDoneTasksWeek);
-        return ans +"You have completed " + listOfDoneTasksWeek.size() + " things this week\n";
+        return ans + "You have completed "
+                + listOfDoneTasksWeek.size() + " things this week\n";
     }
 
     /**
@@ -45,18 +46,18 @@ public class TaskTracker {
      *
      * @return  int the task to add
      */
-    public static int done(){
+    public static int done() {
         return listOfDoneTasksWeek.size();
     }
 
 
-    private static String printList(ArrayList<Task> list){
+    private static String printList(ArrayList<Task> list) {
         String ans = "";
-        if(list.size() != 0){
+        if (list.size() != 0) {
             ans = "Task done this week: \n";
         }
         int count =  1;
-        for(Task t : list){
+        for (Task t : list) {
             ans =  ans + count + ". " + t + "\n";
             count++;
         }
@@ -64,23 +65,23 @@ public class TaskTracker {
     }
 
 
-    private static void updateDone(){
+    private static void updateDone() {
         ArrayList<Task> newDoneTasks = new ArrayList<>();
-        for(Task task: listOfDoneTasksWeek){
-            if(isSameWeekAsToday(task.getDoneDate())){
+        for (Task task: listOfDoneTasksWeek) {
+            if (isSameWeekAsToday(task.getDoneDate())) {
                 newDoneTasks.add(task);
             }
         }
         listOfDoneTasksWeek = newDoneTasks;
     }
 
-    private static boolean isSameWeekAsToday(LocalDate d){
+    private static boolean isSameWeekAsToday(LocalDate d) {
         int todayWeek = getWeek(d);
         return todayWeek == currentWeek;
     }
 
     //part of code snippet found at https://stackoverflow.com/questions/26012434/get-week-number-of-localdate-java-8/26013129
-    private static int getWeek(LocalDate d){
+    private static int getWeek(LocalDate d) {
         TemporalField woy = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
         int todayWeekNum = d.get(woy);
         return todayWeekNum;

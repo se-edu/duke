@@ -12,7 +12,7 @@ public interface Command {
      * @return String the response
      * @throws DukeException the duke exception
      */
-    public String reply() throws DukeException;
+     String reply() throws DukeException;
 
     /**
      * Executes the Action of the Commands.Command
@@ -20,12 +20,12 @@ public interface Command {
      * @return the boolean
      * @throws DukeException the duke exception
      */
-    public boolean action() throws DukeException;
+     void action() throws DukeException;
 
     /**
      * Returns the ID of the command
      *
      * @return the id
      */
-    public int getID();
+     public int getID();
 }

@@ -2,14 +2,14 @@ package commands;
 
 import resources.Statistics;
 
-public class ThisWeekCommand extends UserCommand{
+public class ThisWeekCommand extends UserCommand {
 
     /**
      * Instantiates a new User command.
      * Set the ID
      *
      */
-    ThisWeekCommand(){
+    ThisWeekCommand() {
         super(7);
     }
 

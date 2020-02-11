@@ -16,26 +16,32 @@ public class DukeInit {
     /**
      * Initalises bot.
      */
-    public static void initBot(){
+    public static void initBot() {
 
         System.out.println("Hello from\n" + logo);
         System.out.println("I am a very angry bot and I hate you");
         CommandHub.initCreator(); //init commands
-        Storage.memory_Init(); //init memory
+        Storage.memoryInit(); //init memory
         System.out.println("Now what you want?");
     }
 
     /**
-     * returns the init line (welcome)
+     * Returns the init line (welcome)
+     *
      * @return A string with the welcome speech
      */
-    public static String getInitLine(){
+    public static String getInitLine() {
         return "Hello.. I am \n" + logo + "\nI am a very angry bot and I hate you";
     }
 
-    public static String getInstr(){
+    /**
+     * Returns the Instructions
+     *
+     * @return the String instr
+     */
+    public static String getInstr() {
         String inst = "Here are my list of Commands:\n" +
-                    "========Add Tasks=======\n" +
+                     "========Add Tasks=======\n" +
                     "1. todo <yourtasknamehere>\n" +
                    "2. event <youreventnamehere> /at (date or Time)\n" +
                    "3. deadline <youreventnamehere> /by (date or Time)\n\n" +

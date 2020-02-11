@@ -5,9 +5,10 @@ import duke.UI;
 import exceptions.DukeException;
 
 /**
- * The class Commands.ByeCommand exit the bot swiftly by saving memory and stopping Invoker.
+ * The class Commands.ByeCommand exit the bot swiftly by
+ *  saving memory and stopping Invoker.
  */
-public class ByeCommand extends UserCommand{
+public class ByeCommand extends UserCommand {
 
     /**
      * Instantiates a new Bye command.
@@ -23,10 +24,9 @@ public class ByeCommand extends UserCommand{
     }
 
     @Override
-    public boolean action() throws DukeException {
+    public void action() throws DukeException {
         Storage.saveMemory();
         CommandInvoker.stop();
-        return true;
     }
 
 }

@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Database.MyList handles everything to do with the list
  */
 public class MyList {
-    private static ArrayList<Task> DaList = new ArrayList<>();
+    private static ArrayList<Task> listOfTasks = new ArrayList<>();
     private static Task justAdded;
 
 
@@ -21,9 +21,9 @@ public class MyList {
      *
      * @param t the t
      */
-    public static void addItem(Task t){
+    public static void addItem(Task t) {
         System.out.println("added: " + t);
-        DaList.add(t);
+        listOfTasks.add(t);
         justAdded = t;
     }
     /**
@@ -31,7 +31,7 @@ public class MyList {
      *
      * @return Task that was recently added
      */
-    protected static Task getRecentAddedTask(){
+    protected static Task getRecentAddedTask() {
         return justAdded;
     }
 
@@ -41,13 +41,13 @@ public class MyList {
      * @param ID the id
      * @throws DukeException the duke exception
      */
-    public static void deleteItem(int ID)throws DukeException{
-        ID = ID-1;
-        if(ID>=DaList.size()|| ID<0){
+    public static void deleteItem(int ID)throws DukeException {
+        ID = ID - 1;
+        if (ID >= listOfTasks.size() || ID < 0) {
             throw new DukeException(UI.getReply("deleteEmpty"));
         }
-        System.out.println("Deleted: " + DaList.get(ID));
-        DaList.remove(ID);
+        System.out.println("Deleted: " + listOfTasks.get(ID));
+        listOfTasks.remove(ID);
     }
 
 
@@ -55,14 +55,14 @@ public class MyList {
      * Prints list.
      * @return A string with list prints
      */
-    public static String printList(){
+    public static String printList() {
         String printed = "";
-        if(DaList.size()==0){
+        if (listOfTasks.size() == 0) {
             return UI.getReply("emptyList");
         }
         int count = 1;
-        for(Task t : DaList){
-            printed = printed + count+ ". "+ t + "\n";
+        for (Task t : listOfTasks) {
+            printed = printed + count + ". " + t + "\n";
             count++;
         }
         return printed;
@@ -71,8 +71,8 @@ public class MyList {
     /**
      * Prints number of items in tasks.
      */
-    public static void printCount(){
-        System.out.println("Now you have "+ DaList.size() + " things in your bloody list..");
+    public static void printCount() {
+        System.out.println("Now you have " + listOfTasks.size() + " things in your bloody list..");
     }
 
     /**
@@ -83,10 +83,10 @@ public class MyList {
      */
     public static void markDone(int ID) throws DukeException {
         ID = ID - 1;
-        if(ID >= DaList.size()|| ID < 0){
+        if (ID >= listOfTasks.size() || ID < 0) {
             throw new DukeException(UI.getReply("imaginary"));
         }
-        DaList.get(ID).markDone();
+        listOfTasks.get(ID).markDone();
         //System.out.println(DaList.get(ID));
     }
 
@@ -95,8 +95,8 @@ public class MyList {
      *
      * @return the list of objects
      */
-    public static ArrayList getList(){
-        return DaList;
+    public static ArrayList getList() {
+        return listOfTasks;
     }
 
     /**
@@ -105,17 +105,17 @@ public class MyList {
      * @param keyword takes in keyword
      * @return String stating number of items find
      */
-    public static String find(String keyword){
+    public static String find(String keyword) {
         ArrayList<Task> localList = populateFindList(keyword);
         int count = 1;
         String founded = "";
 
-        if(localList.size()!=0){
+        if (localList.size() != 0) {
             founded = "Found these tasks:\n";
         }
-        for(Task t: localList){
-            System.out.println(count + ". "+ t);
-            founded = founded + count+ ". "+ t +"\n";
+        for (Task t: localList) {
+            System.out.println(count + ". " + t);
+            founded = founded + count + ". " + t + "\n";
             count++;
         }
         return founded + "Found in total of " + localList.size() + " items";
@@ -127,10 +127,10 @@ public class MyList {
      * @param str takes in keyword
      * @return an ArrayList containing find results
      */
-    private static ArrayList populateFindList(String str){
+    private static ArrayList populateFindList(String str) {
         ArrayList<Task> localList = new ArrayList<>();
-        for(Task t: DaList){
-            if(t.toString().contains(str)){
+        for (Task t: listOfTasks) {
+            if (t.toString().contains(str)) {
                 localList.add(t);
             }
         }

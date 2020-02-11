@@ -17,31 +17,24 @@ public class Deadline extends Task {
      * @param description the description
      * @throws DukeException the duke exception
      */
-    public Deadline(String description) throws DukeException{
+    public Deadline(String description) throws DukeException {
         super("default");
 
         String[] parsed = getParse(description);
         deadline = DateTimeHandler.getLocalDateTime(parsed[1]);
         super.resetDesc(parsed[0]);
     }
-
-    /**
-     * Parses the command for better execution
-     *
-     * @param desc the description
-     * @throws DukeException the duke exception
-     * @return A string array containing the parsed split desc and time
-     */
-    private String[] getParse(String desc) throws DukeException{
-        if(!desc.contains("/by ")){
+    private String[] getParse(String desc) throws DukeException {
+        if (!desc.contains("/by ")) {
             throw new DukeException("Hello? Missing your /by command!");
         }
-        String[] parsed= desc.split("/by ");
+        String[] parsed = desc.split("/by ");
         return parsed;
     }
-
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (by: " + DateTimeHandler.printsLocalDateTime(deadline) + ")";
+        return "[D] " + super.toString()
+                + " (by: " + DateTimeHandler.printsLocalDateTime(deadline)
+                + ")";
     }
 }

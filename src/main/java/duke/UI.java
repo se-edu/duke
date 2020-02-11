@@ -12,8 +12,8 @@ public class UI {
      * @param id the str
      * @return the string
      */
-    public static String getReply(String id){
-        switch(id){
+    public static String getReply(String id) {
+        switch (id) {
         case "delete":
             return "Erasing your tracks are you?";
         case "emptyList":
@@ -35,10 +35,11 @@ public class UI {
      * @param id the str
      * @return the string
      */
-    private static String getErrorMsg(String id){
-        switch(id){
+    private static String getErrorMsg(String id) {
+        switch (id) {
         case "imaginary":
-            return "You want to finish something imaginary??? Please.. are you stupid?";
+            return "You want to finish something imaginary??? "
+                    + "Please.. are you stupid?";
         case "emptyList":
             return "Eto..(Twindle thumbs).. You have nothing inside your list";
         case "deleteEmpty":

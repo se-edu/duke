@@ -1,4 +1,4 @@
-package commands;/*
+package commands; /*
 *  "Duke.UI"
 * */
 
@@ -14,7 +14,8 @@ public class CommandInvoker {
     /**
      * Instantiates a new Commands.Command invoker.
      */
-    public CommandInvoker(){};
+    public CommandInvoker() {
+    };
 
 
     /**
@@ -22,7 +23,7 @@ public class CommandInvoker {
      *
      * @param c the Commands.UserCommand
      */
-    public static String invoke(UserCommand c) throws DukeException{
+    public static String invoke(UserCommand c) throws DukeException {
         c.action();
         return c.reply();
     }
@@ -30,16 +31,16 @@ public class CommandInvoker {
     /**
      * Stop the program. Sets the endProgram as true
      */
-    public static void stop(){
+    public static void stop() {
         isProgramEnd = true;
     }
 
     /**
-     * Check if program is quit
+     * Checks if program is turning off
      *
      * @return the boolean
      */
-    public static boolean checkOff(){
+    public static boolean isExit() {
         return isProgramEnd;
     }
 

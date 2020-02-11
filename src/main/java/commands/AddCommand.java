@@ -1,8 +1,14 @@
 package commands;
 
 import database.MyList;
+
 import duke.UI;
-import resources.*;
+
+import resources.Task;
+import resources.ToDos;
+import resources.Deadline;
+import resources.Event;
+
 import exceptions.DukeException;
 
 /**
@@ -28,30 +34,29 @@ public class AddCommand extends UserCommand {
      * @param type the type
      * @param desc the desc
      */
-    AddCommand(String type, String desc){
+    AddCommand(String type, String desc) {
         super(2);
         this.desc = desc;
         this.type = type;
     }
 
     @Override
-    public String reply(){
+    public String reply() {
         return UI.getReply("add");
     }
 
     @Override
-    public boolean action() throws DukeException {
-        if(type.equals("todo")){
+    public void action() throws DukeException {
+        if (type.equals("todo")) {
             t = new ToDos(desc);
-        } else if(type.equals("event")){
+        } else if (type.equals("event")) {
             t = new Event(desc);
-        } else{
+        } else {
             t = new Deadline(desc);
         }
 
         MyList.addItem(t);
         MyList.printCount();
-        return true;
     }
 
 }
