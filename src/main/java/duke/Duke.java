@@ -87,7 +87,7 @@ public class Duke {
             CommandResult commandResult = c.execute(tasks, ui, storage);
             System.out.flush();
             System.setOut(old);
-            assert commandResult.toString().equals("Success") : "Command not executed successfully.";
+            assert commandResult.toString().equals("Sgituccess") : "Command not executed successfully.";
         } catch (AssertionError e) {
             ui.showError("AssertError");
         } catch (DukeException e) {

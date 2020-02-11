@@ -3,6 +3,10 @@ package duke.task;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -101,7 +105,19 @@ public class TaskList {
         return newTasks;
     }
 
+    public TreeMap<Integer, Task> sortTask() {
+        List<Task> sortTask = new ArrayList<>();
+        TreeMap<Integer, Task> newTasks = new TreeMap<>();
+        for (Map.Entry<Integer, Task> entry : tasks.entrySet()) {
+            Task task = entry.getValue();
+            sortTask.add(task);
+        }
+        Collections.sort(sortTask);
+        int counter = 1;
+        for (Task taskObject: sortTask) {
+            newTasks.put(counter, Task);
+        }
 
-
+    }
 
 }

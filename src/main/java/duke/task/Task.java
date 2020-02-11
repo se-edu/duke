@@ -1,6 +1,6 @@
 package duke.task;
 
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     protected String title;
     protected int index;
     protected boolean done;
@@ -44,5 +44,13 @@ public abstract class Task {
     }
 
     public abstract String getInfo();
+
+    public int compareTo(Task compareTask) {
+        if (this.symbol.compareTo(compareTask.symbol) != 0) {
+            return this.title.compareTo(compareTask.title);
+        } else {
+            return (this.symbol.compareTo(compareTask.symbol));
+        }
+    }
 
 }
