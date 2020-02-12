@@ -33,21 +33,27 @@ public class Parser {
         if (nextString.equals("bye")) {
             Platform.exit();
         }else if (nextString.equals("list")) {
+            assert counter > 0 : "You can't get a list of tasks if you don't have anything in it!";
             return tasks.listTasks();
         } else if (nextString.contains("done")) {
+            assert counter > 0 : "You need to have a task to complete it!";
             return tasks.markComplete(nextString, storage);
         } else if (nextString.contains("find")) {
             return tasks.findTask(nextString);
         } else if (nextString.contains("todo")) {
+            assert nextString.length() > 5 : "You can't just set a todo if you don't have one!";
             counter++;
             return tasks.addTodo(nextString, storage);
         } else if (nextString.contains("deadline")) {
+            assert nextString.length() > 9 : "You can't just set a deadline if you don't have one!";
             counter++;
             return tasks.addDeadline(nextString, storage);
         } else if (nextString.contains("event")) {
+            assert nextString.length() > 6 : "You can't just set an event if you don't have one!";
             counter++;
             return tasks.addEvent(nextString, storage);
         } else if (nextString.contains("delete")) {
+            assert counter > 0 : "You need to have a task to delete it!";
             counter--;
             return tasks.deleteTask(nextString, storage);
         } else {

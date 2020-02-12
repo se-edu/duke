@@ -147,11 +147,14 @@ public class TaskList {
         String[] temp = nextString.split(" ");
         String keyword = temp[1];
         String toPrint = ui.showFindTaskMsg();
+        int counter = 0;
         for (Task t: tasks) {
             if (t.getDescription().contains(keyword)) {
                 toPrint = toPrint + (tasks.indexOf(t) + 1) + ". " + t.toString() + "\n";
+                counter++;
             }
         }
+        assert counter > 0 : "You can't find a task on the list if it's not even on it!";
         return toPrint;
     }
 
