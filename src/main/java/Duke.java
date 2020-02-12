@@ -11,6 +11,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 /**
  * The Main class used to run the application.
  * Creates the Ui, Storage and TaskList objects.
@@ -22,18 +24,23 @@ public class Duke extends Application {
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private int counter = 0;
     private Ui ui = new Ui();
 //    private Storage storage;
 //    private TaskList tasks;
     private Storage storage = new Storage("data/duke.txt");
-    private TaskList tasks = new TaskList(storage.load(), counter);
+
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private int counter;
+    private TaskList tasks;
+
+//    public Duke() {
+//
+//    }
 
     @Override
     public void start(Stage stage) {
@@ -124,12 +131,9 @@ public class Duke extends Application {
     }
 
     private Label greet() {
-        // You will need to import `javafx.scene.control.Label`.
-//        String tempText = "Hello! This is Duke, your personal chatbot.";
-//        ArrayList<Task> temp = tasks.getTasks();
-//        for (Task t: temp) {
-//            tempText = tempText + "\n" + t.toString();
-//        }
+        ArrayList<Task> temp = storage.load();
+        counter = temp.size();
+        tasks = new TaskList(temp, counter);
         Label textToAdd = new Label("Hello! This is Duke, your personal chatbot.");
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(textToAdd, new ImageView(duke))
