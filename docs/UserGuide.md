@@ -2,20 +2,18 @@
 
 ## Introduction
 
-Duke is for **target audience** to **achieve goal**.
-More importantly, Duke is **optimized for those who prefer to work with a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). 
-Interested? 
-Get [started now](#Quick-Start)!
+{Give a product intro}
 
 ## Quick Start
-1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `Duke` [here](http://link.to/duke).
-3. Copy the file to the folder where you want to use as the home folder for Duke.
-4. Double-click the file to start the application.
 
-![Screenshot of Duke](images/duke.png)
+{Give steps to get started quickly}
+
+1. Ensure that you have Java 11 or above installed.
+1. Down the latest version of `Duke` from [here](http://link.to/duke).
 
 ## Features 
+
+{Give detailed description of each feature}
 
 ### Adding a to-do: `todo`
 Adds a to-do item to the list of to-dos.
@@ -32,10 +30,13 @@ Example of usage:
 `todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
 
 ## FAQ
+
 **Q**: How do I transfer my data to another computer? 
 
 **A**: Well, write the User Guide in active voice anyway.
 
 ## Command Summary
+
+{Give a 'cheat sheet' of commands here}
 
 * Add to-do `todo n/TODO_NAME d/DEADLINE`
