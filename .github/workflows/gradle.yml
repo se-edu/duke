@@ -20,3 +20,14 @@ jobs:
 
       - name: Build and check with Gradle
         run: ./gradlew check
+
+      - name: Publish Jar
+        run: ./gradlew shadowJar
+
+      - name: Perform IO redirection test (*NIX)
+        if: runner.os == 'Linux'
+        working-directory:  ${{ github.workspace }}/test
+        run: ./test.sh
+
+
+
