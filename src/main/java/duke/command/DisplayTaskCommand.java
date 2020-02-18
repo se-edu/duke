@@ -7,9 +7,10 @@ import duke.ui.Ui;
 /**
  * DisplayTaskCommand inherits Command.
  * Implements the abstract method execute.
+ * @author Lua Jia Zheng.
  */
 public class DisplayTaskCommand extends Command {
-    private final String success = "Success";
+    static final String SUCCESS = "Success";
 
     public DisplayTaskCommand() {
     }
@@ -27,8 +28,10 @@ public class DisplayTaskCommand extends Command {
      */
     public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
         try {
+            tasks.sortTask();
+            storage.saveTask(tasks);
             ui.printStoredTask(tasks);
-            return new CommandResult(success);
+            return new CommandResult(SUCCESS);
         } catch (Exception ex) {
             return new CommandResult(ex.getMessage());
         }

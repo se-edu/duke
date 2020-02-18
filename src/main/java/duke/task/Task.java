@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * Abstract class representing a class.
+ * @author Lua Jia Zheng.
+ */
 public abstract class Task implements Comparable<Task> {
     protected String title;
     protected int index;
@@ -35,21 +39,22 @@ public abstract class Task implements Comparable<Task> {
         this.done = true;
     }
 
-    public String getSymbol() {
-        return this.symbol;
-    }
-
     public String getTitle() {
         return this.title;
     }
 
     public abstract String getInfo();
 
+    /**
+     * Used to set priority in sorting Tasks.
+     * @param compareTask compareTask is another task currently compared with.
+     * @return returns negative to indicate priority vice versa.
+     */
     public int compareTo(Task compareTask) {
-        if (this.symbol.compareTo(compareTask.symbol) != 0) {
+        if (this.symbol.compareTo(compareTask.symbol) == 0) {
             return this.title.compareTo(compareTask.title);
         } else {
-            return (this.symbol.compareTo(compareTask.symbol));
+            return (this.symbol.compareTo(compareTask.symbol)) * -1;
         }
     }
 

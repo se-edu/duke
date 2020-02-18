@@ -8,10 +8,11 @@ import duke.ui.Ui;
 /**
  * DeleteCommand that inherits Command.
  * Implements abstract method execute that deletes the task from a TaskList.
+ * @author Lua Jia Zheng.
  */
 public class DeleteCommand extends Command {
     private final int taskIndex;
-    private final String success = "Task has been removed";
+    static final String SUCCESS = "Task has been removed";
 
     public DeleteCommand(int taskIndex) {
         this.taskIndex = taskIndex;
@@ -35,7 +36,7 @@ public class DeleteCommand extends Command {
             Task temp = taskList.deleteTask(taskIndex);
             storage.saveTask(taskList);
             ui.deleteTaskSuccess(temp);
-            return new CommandResult(success);
+            return new CommandResult(SUCCESS);
         } catch (Exception ex) {
             return new CommandResult(ex.getMessage());
         }

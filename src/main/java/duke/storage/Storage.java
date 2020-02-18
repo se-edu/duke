@@ -17,6 +17,7 @@ import java.util.TreeMap;
 
 /**
  * Storage class handles all loading and saving of data into txt file.
+ * @author Lua Jia Zheng.
  */
 public class Storage {
     private java.nio.file.Path path;

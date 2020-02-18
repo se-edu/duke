@@ -7,6 +7,7 @@ import duke.ui.Ui;
 /**
  * IncorrectCommand class inherits from Command class.
  * Implements abstract method execute.
+ * @author Lua Jia Zheng.
  */
 public class IncorrectCommand extends Command {
     private final String feedbackToUser;

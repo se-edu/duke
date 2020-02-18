@@ -6,6 +6,7 @@ import duke.ui.Ui;
 
 /**
  * Abstract class with a core feature "execute".
+ * @author Lua Jia Zheng.
  */
 public abstract class Command {
     private boolean isExit;

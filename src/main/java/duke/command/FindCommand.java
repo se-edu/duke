@@ -10,10 +10,11 @@ import java.util.TreeMap;
 /**
  * FindCommand inherits from abstract class Command.
  * Implement abstract method execute.
+ * @author Lua Jia Zheng.
  */
 public class FindCommand extends Command {
     private String find;
-    private final String success = "Success";
+    static final String SUCCESS = "Success";
 
     public FindCommand(String find) {
         this.find = find;
@@ -31,7 +32,7 @@ public class FindCommand extends Command {
         try {
             TreeMap<Integer, Task> foundTasks = taskList.findTask(find);
             ui.printFoundTask(foundTasks);
-            return new CommandResult(success);
+            return new CommandResult(SUCCESS);
         } catch (Exception ex) {
             return new CommandResult(ex.getMessage());
         }

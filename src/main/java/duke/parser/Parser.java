@@ -21,6 +21,7 @@ import java.util.Arrays;
 
 /**
  * Parser class handles all the input of the user.
+ * @author Lua Jia Zheng.
  */
 public class Parser {
     /**
@@ -72,13 +73,15 @@ public class Parser {
      */
     public static Task parseTask(String message, Symbol symbol) throws DukeException {
         String[] arrMessage = message.split(" ");
-        Task task;
-        if (symbol == Symbol.T) {
+        Task task = null;
+        int landmark = arrMessage.length;
+        switch (symbol) {
+        case T:
             String[] tempArr = Arrays.copyOfRange(arrMessage,1,arrMessage.length);
             String newMessage = String.join(" ", tempArr);
             task = new Todo(newMessage, TaskList.index);
-        } else if (symbol == Symbol.D) {
-            int landmark = arrMessage.length;
+            break;
+        case D:
             for (int i = 1; i < arrMessage.length; i++) {
                 if (arrMessage[i].equals("/by")) {
                     landmark = i;
@@ -89,8 +92,8 @@ public class Parser {
                 throw new DukeException("  ☹ OOPS!!! The description of a deadline cannot be empty.");
             }
             task = createTask(arrMessage, 1, landmark);
-        } else {
-            int landmark = arrMessage.length;
+            break;
+        case E:
             for (int i = 1; i < arrMessage.length; i++) {
                 if (arrMessage[i].equals("/at")) {
                     landmark = i;
@@ -101,6 +104,9 @@ public class Parser {
                 throw new DukeException("  ☹ OOPS!!! The description of a event cannot be empty.");
             }
             task = createTask(arrMessage, 2, landmark);
+            break;
+        default:
+            System.out.println("No task created.");
         }
         return task;
     }

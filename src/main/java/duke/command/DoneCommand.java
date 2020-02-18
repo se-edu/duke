@@ -9,10 +9,11 @@ import duke.ui.Ui;
 /**
  * DoneCommand that inherits from the Command Class.
  * Implements abstract method execute.
+ * @author Lua Jia Zheng.
  */
 public class DoneCommand extends Command {
     private final int taskIndex;
-    private final String success = "Success";
+    static final String SUCCESS = "Success";
 
     public DoneCommand(int taskIndex) {
         this.taskIndex = taskIndex;
@@ -36,7 +37,7 @@ public class DoneCommand extends Command {
             Task task = taskList.doneTask(taskIndex);
             ui.doneTask(task);
             storage.saveTask(taskList);
-            return new CommandResult(success);
+            return new CommandResult(SUCCESS);
         } catch (Exception ex) {
             return new CommandResult(ex.getMessage());
         }

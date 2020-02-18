@@ -2,6 +2,7 @@ package duke.command;
 
 /**
  * Command result that record if the execution is successful.
+ * @author Lua Jia Zheng.
  */
 public class CommandResult {
     public final String feedbackToUser;

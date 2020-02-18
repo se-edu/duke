@@ -6,6 +6,10 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+/**
+ * Ui displays the output to the user.
+ * @author Lua Jia Zheng.
+ */
 public class Ui {
     private Scanner scanner;
 

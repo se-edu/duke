@@ -4,6 +4,11 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event inherits from Task.
+ * Has additional attribute for date storage.
+ * @author Lua Jia Zheng.
+ */
 public class Event extends Task {
     private String date;
     private LocalDate date1;

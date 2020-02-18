@@ -8,10 +8,11 @@ import duke.ui.Ui;
 /**
  * AddCommand inherits from the Command abstract class.
  * Executes the task in an orderly manner.
+ * @author Lua Jia Zheng.
  */
 public class AddCommand extends Command {
-    private final Task task;
-    private final String success = "Success";
+    private Task task;
+    static final String RESULT_SUCCESS = "Success";
 
     /**
      * Stores the task that needs to be added to the taskList later on.
@@ -45,7 +46,7 @@ public class AddCommand extends Command {
             taskList.addTask(this.task);
             storage.saveTask(taskList);
             ui.addTaskSuccess(this.task);
-            return new CommandResult(success);
+            return new CommandResult(RESULT_SUCCESS);
         } catch (Exception ex) {
             return new CommandResult(ex.getMessage());
         }

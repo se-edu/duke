@@ -4,16 +4,18 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * TaskList collections for Task.
+ * @author Lua Jia Zheng.
+ */
 public class TaskList {
     private TreeMap<Integer, Task> tasks;
     public static int index;
-    private int removed;
 
     /**
      * Constructor for duke.task.Task object initializing with 2 attribute.
@@ -22,7 +24,6 @@ public class TaskList {
     public TaskList(TreeMap<Integer, Task> tasks) {
         this.tasks = tasks;
         this.index = tasks.size() + 1;
-        this.removed = 0;
     }
 
     /**
@@ -31,7 +32,7 @@ public class TaskList {
     public TaskList() {
         this.tasks = new TreeMap<>();
         this.index = 1;
-        this.removed = 0;
+
     }
 
 
@@ -62,8 +63,7 @@ public class TaskList {
      */
     public Task deleteTask(int taskIndex) throws NullPointerException {
         try {
-            final Task temp = this.tasks.remove(taskIndex + removed);
-            this.removed++;
+            final Task temp = this.tasks.remove(taskIndex);
             return temp;
         } catch (NullPointerException ex) {
             throw new NullPointerException("Number provided does not exist in the list, please try again.");
@@ -75,12 +75,6 @@ public class TaskList {
         this.tasks.put(this.index, task);
         this.index++;
     }
-
-
-    public Task getTask(int i) {
-        return this.tasks.get(i);
-    }
-
 
     public TreeMap<Integer, Task> getList() {
         return this.tasks;
@@ -105,7 +99,10 @@ public class TaskList {
         return newTasks;
     }
 
-    public TreeMap<Integer, Task> sortTask() {
+    /**
+     * Sorts the existing taskList by type of event followed by title.
+     */
+    public void sortTask() {
         List<Task> sortTask = new ArrayList<>();
         TreeMap<Integer, Task> newTasks = new TreeMap<>();
         for (Map.Entry<Integer, Task> entry : tasks.entrySet()) {
@@ -115,9 +112,11 @@ public class TaskList {
         Collections.sort(sortTask);
         int counter = 1;
         for (Task taskObject: sortTask) {
-            newTasks.put(counter, Task);
+            newTasks.put(counter, taskObject);
+            counter++;
         }
 
+        this.tasks = newTasks;
     }
 
 }

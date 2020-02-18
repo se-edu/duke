@@ -7,9 +7,10 @@ import duke.ui.Ui;
 /**
  * InstructionCommand inherits from Command class.
  * Implements abstract method execute.
+ * @author Lua Jia Zheng.
  */
 public class InstructionCommand extends Command {
-    private final String success = "Success";
+    static final String SUCCESS = "Success";
 
     public InstructionCommand() {
     }
@@ -28,7 +29,7 @@ public class InstructionCommand extends Command {
     public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             ui.botInstruction();
-            return new CommandResult(success);
+            return new CommandResult(SUCCESS);
         } catch (Exception ex) {
             return new CommandResult(ex.getMessage());
         }

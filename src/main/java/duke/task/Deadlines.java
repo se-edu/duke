@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Deadline inherits from Task.
  * Has additional attribute for date storage.
+ * @author Lua Jia Zheng.
  */
 public class Deadlines extends Task {
     private String date;

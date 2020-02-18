@@ -9,6 +9,7 @@ import java.io.IOException;
 /**
  * ByeCommand inherits from the Command class.
  * Terminates the program upon execution.
+ * @author Lua Jia Zheng.
  */
 public class ByeCommand extends Command {
 
