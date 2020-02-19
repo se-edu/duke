@@ -1,11 +1,12 @@
 # Gradle Tutorial
 
-Gradle is a _build automation tool_ used to automate build processes. 
-There are many ways of integrating Gradle into a project. 
-In this guide, we will be using the _Gradle wrapper_.
+Gradle is a _build automation tool_ used to automate build processes.
+There are many ways of integrating Gradle into a project.
+This project template uses the _Gradle wrapper_.
 
 * [Introduction](#introduction)
-* [Adding Gradle Support to Your Project](#adding-gradle-support-to-your-project)
+* [Adding Gradle to the Project](#adding-gradle-to-the-project)
+* [Running Gradle Tasks](#running-gradle-tasks)
 * [Adding Plugins](#adding-plugins)
   * [CheckStyle](#checkstyle)
   * [Shadow](#shadow)
@@ -29,38 +30,45 @@ Tasks can be composed of other tasks or be dependent on another task.
 For instance, `mainClassName` of the `application` plugin is a compulsory property which tells Gradle which class is the entrypoint to your application.
 As Gradle favors [_convention over configuration_](https://en.wikipedia.org/wiki/Convention_over_configuration), there is not much to you need to configure if you follow the recommended directory structure.
 
-The Gradle wrapper is included in this template.
 
-#### Using Gradle from within IntelliJ
+## Adding Gradle to the Project
 
-1. After checking out this branch, IntelliJ might automatically ask you (via a pop-up at the bottom right corner of the Window) whether to import the project as a Gradle project.
-In that case, go ahead and say yes.
+This project template already supports Gradle. No further action required.
 
-1. If the above didn't happen, import the Gradle project by `Help > Find Action > Import Gradle Project`.
-   ![Import Gradle](assets/ImportGradle.png)
-
-1. If the above didn't work either, close IntelliJ, delete the IntelliJ project files (i.e., `.idea` folder and `*.iml` files), and set up the project again, but instead of choosing `Create project from existing sources`, choose `Import project from external model` -> `Gradle`.
-
-After this, IntelliJ IDEA will identify your project as a Gradle project and you will gain access to the `Gradle Toolbar`. 
+If you imported this project into Intellij as a Gradle project (i.e., you choose `Import project from external model` -> `Gradle` during the set up), IntelliJ IDEA will identify your project as a Gradle project and you will gain access to the `Gradle Toolbar`.
 Through the toolbar, you run Gradle tasks and view your project's dependencies.
 
-You can click on the Gradle icon in the Gradle toolbar and create a new run configuration for running Gradle tasks.
+
+## Running Gradle Tasks
+
+To run a task, locate the task in the Gradle toolbar, right-click on a task, and choose `run`.
 
 ![Gradle icon](assets/GradleIcon.png)
+
+Alternatively, you can type the command in the terminal.
+
+* On Windows: `gradlew <task1> <task2> …`​ e.g. `gradlew clean test`
+* On Mac/Linux: `./gradlew <task1> <task2> …`​ e.g. `./gradlew clean test`
+
 
 ## Adding Plugins
 
 Gradle plugins are reusable units of build logic. 
 Most common build tasks are provided as core plugins by Gradle. 
-These are the plugins available in the template
+CheckStyle, Shadow, and JUnit are three plugins available in this project template.
 
 ### CheckStyle
 
-Checkstyle expects configuration files for checkstyle to be in `./config/checkstyle/` by convention.
+CheckStyle is a tool for checking if the code complies with certain style rules.
+
+Checkstyle expects configuration files for checkstyle (e.g., files that specify which style rules to follow) to be in `./config/checkstyle/` by convention.
 A sample checkstyle rule configuration is provided in the template as well.
 
-The plugin adds a few _tasks_ to your project. 
-Run `gradle checkstyleMain checkstyleTest` to verify that you have set up Checkstyle properly (the command will check your main code and test code against the style rules).
+The plugin adds a few _tasks_ to your project.
+* `checkstyleMain`: checks if the main code complies with the style rules
+* `checkstyleTest`: checks if the test code complies with the style rules
+
+For example, you can run `gradlew checkstyleMain checkstyleTest` to verify that all your code complies with the style rules.
 
 **Resources**:
 * [Gradle documentation for CheckStyle plugin](https://docs.gradle.org/current/userguide/checkstyle_plugin.html)
@@ -72,7 +80,7 @@ Shadow is a plugin that packages an application into an executable jar file.
 The plugin can be configured by setting some properties. 
 By default, it produces a jar file with the name in the format of `{baseName}-{version}.jar`.
 
-You can generate an executable jar by running the command `gradle shadowJar` which publishes an executable jar to `./build/libs/`. 
+You can generate an executable jar by running the command `gradlew shadowJar` which publishes an executable jar to `./build/libs/`.
 You should be able to execute the created jar file by double-clicking it or using the command `java -jar {jarName}`.
 
 **Resources**:
@@ -80,41 +88,29 @@ You should be able to execute the created jar file by double-clicking it or usin
 * [Gradle documentation for JUnit](https://docs.gradle.org/current/userguide/java_testing.html#using_junit5)
 * [More about the Shadow plugin](https://imperceptiblethoughts.com/shadow/introduction/)
 
-## Adding Dependencies
-
-Gradle can automate the management of dependencies to third-party libraries. 
-Given below are some examples.
 
 ### JUnit
 
 JUnit is a testing framework for Java. 
 It allows developers to write robust tests and run them easily.
 
-
-By convention, java tests belong in `src/test/java` folder. 
-Create a new `test/java` folder in under `src`.
-
-```
-src
-├─main
-│  └─java
-│     └─seedu/duke/Duke.java
-└─test
-    └─java
-        └─seedu/duke/DukeTest.java
-```
+By convention, java tests belong in `src/test/java` folder. A sample test file is included in this project template.
 
 If you have imported your Gradle project into IntelliJ IDEA, you will notice that IDEA is able to mark the test directory as the _Test root_ (colored in green by default) automatically.
 
-You can now write a test (e.g., `test/java/seedu/duke/DukeTest.java`) and run it with `gradle test`.
+You can run a test (e.g., `test/java/seedu/duke/DukeTest.java`) by right-clicking on it and choosing `Run`.
 
 **Resources**:
 * [Gradle documentation for JUnit](https://docs.gradle.org/current/userguide/java_testing.html#using_junit5)
 
+
+## Adding Dependencies
+
+Gradle can automate the management of dependencies to third-party libraries. You just need to add the dependency into the `build.gradle` file and Gradle will do the rest.
+
+
 ## Further Reading
 
-Now that you have a general idea of how to accomplish basic tasks with Gradle, here's a list of material you can read to further your understanding.
- 
 * [Official Gradle Documentation](https://docs.gradle.org/current/userguide/userguide.html)
 
 ----------------------------------------------------------------------------------------
