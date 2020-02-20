@@ -13,4 +13,4 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/test/ACTUAL.txt
+/text-ui-test/ACTUAL.txt
