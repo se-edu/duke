@@ -30,11 +30,11 @@ Prerequisites: JDK 11
    
    What is your name?
    ```
-   Type some word and press enter to terminate the execution.
+   Type some word and press enter to let the execution proceed to the end. Also note how Intellij is now using Gradle to run your code (you can make Intellij run the code without Gradle [this way](tutorials/assets/RunUsingIntellij.png)).
 
 ## Build Automation using Gradle
 
-The project is already configured to use Gradle. Read the following tutorial to learn how to use gradle to do tasks such as run tests, check code against style rules, and generate the JAR file.
+This project is already configured to use Gradle. Read the following tutorial to learn how to use gradle to do tasks such as running tests, checking code against teh style rules, and generating the JAR file.
  
 * [Gradle Tutorial](tutorials/gradleTutorial.md)
 
