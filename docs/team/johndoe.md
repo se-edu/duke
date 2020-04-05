@@ -1,5 +1,7 @@
-# John Doe - Project Portfolio Page
-
+---
+layout: page
+title: "John Doe - Project Portfolio Page"
+---
 ## Overview
 
 

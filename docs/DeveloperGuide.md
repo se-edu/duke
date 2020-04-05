@@ -1,4 +1,7 @@
-# Duke - Developer Guide
+---
+layout: page
+title: "Developer Guide"
+---
 
 ## Setting up
 
