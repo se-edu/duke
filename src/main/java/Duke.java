@@ -1,6 +1,7 @@
 import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
+        int MAX_TASK = 100;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -18,10 +19,22 @@ public class Duke {
         String line;
         Scanner in = new Scanner(System.in);
         line = in.nextLine();
+        String[] tasks = new String[MAX_TASK];
+        int countTasks = 0;
         while (!line.equalsIgnoreCase("bye")) {
-            System.out.println("\t"+HORIZONTAL);
-            System.out.println("\t"+line);
-            System.out.println("\t"+HORIZONTAL);
+            while (!line.equalsIgnoreCase("list")) {
+                System.out.println("\t" + HORIZONTAL);
+                System.out.println("\t added: " + line);
+                System.out.println("\t" + HORIZONTAL);
+                tasks[countTasks] = line;
+                countTasks++;
+                line = in.nextLine();
+            }
+            System.out.println("\t" + HORIZONTAL);
+            for (int i = 1; i <= countTasks; i++) {
+                System.out.println("\t" + i + ". " + tasks[i-1]);
+            }
+            System.out.println("\t" + HORIZONTAL);
             line = in.nextLine();
         }
         System.out.println("\t"+HORIZONTAL);
