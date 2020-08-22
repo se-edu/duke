@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -13,6 +15,14 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
+    public static void printList(String[] list, int listLength){
+        System.out.println("____________________________________________________________");
+        for(int i = 0; i < listLength; i++){
+            System.out.printf("%d. %s\n", i, list[i]);
+        }
+        System.out.println("____________________________________________________________");
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -25,13 +35,28 @@ public class Duke {
         System.out.println(" What can I do for you?");
         System.out.println("____________________________________________________________");
 
+        String[] listInputs = new String[100];
+
         String input = "";
         Scanner in = new Scanner(System.in);
 
-        while(true){
+        boolean isRunning = true;
+        int listPosition = 0;
+
+        while(isRunning == true){
             input = in.nextLine();
-            printMessagae(input);
-            if(input.equals("bye")){
+            switch(input){
+            case "bye":
+                printMessagae(input);
+                isRunning = false;
+                break;
+            case "list":
+                printList(listInputs, listPosition);
+                break;
+            default:
+                printMessagae("added: " + input);
+                listInputs[listPosition] = input;
+                listPosition++;
                 break;
             }
         }
