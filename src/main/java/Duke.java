@@ -1,11 +1,31 @@
+import java.util.Scanner;
+
 public class Duke {
+    public static void printWithIndentation(String string) {
+        System.out.println("\t" + string);
+    }
+
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         String horizontalLine = "____________________________________________________________";
-        System.out.println(horizontalLine);
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        System.out.println(horizontalLine);
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(horizontalLine);
+
+        printWithIndentation(horizontalLine);
+        printWithIndentation("Hello! I'm Duke");
+        printWithIndentation("What can I do for you?");
+        printWithIndentation(horizontalLine);
+
+        String input = sc.nextLine();
+
+        while (!input.equals("bye")) {
+            printWithIndentation(horizontalLine);
+            printWithIndentation(input);
+            printWithIndentation(horizontalLine);
+
+            input = sc.nextLine();
+        }
+
+        printWithIndentation(horizontalLine);
+        printWithIndentation("Bye. Hope to see you again soon!");
+        printWithIndentation(horizontalLine);
     }
 }
