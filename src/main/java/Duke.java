@@ -1,10 +1,14 @@
 import java.util.Scanner;
 
 public class Duke {
+    static String[] storedUserInputs = new String[100];
+    static int numberStoredInputs = 0;
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
         dukeGreet();
+
         boolean dukeRunning = true;
         String userInput;
         while (dukeRunning){
@@ -12,11 +16,15 @@ public class Duke {
             if (userInput.equals("bye")){
                 dukeRunning = false;
             }
+            else if (userInput.equals("list")){
+                dukeRepeatInputs();
+            }
             else {
-                System.out.println(userInput);
+                dukeEcho(userInput);
+                storedUserInputs[numberStoredInputs] = userInput;
+                numberStoredInputs++;
             }
         }
-
         dukeGoodBye();
     }
 
@@ -38,6 +46,20 @@ public class Duke {
         printHorizontalLine(50);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println();
+        printHorizontalLine(50);
+    }
+
+    public static void dukeEcho(String userInput){
+        printHorizontalLine(50);
+        System.out.println("added: " + userInput);
+        printHorizontalLine(50);
+    }
+
+    public static void dukeRepeatInputs(){
+        printHorizontalLine(50);
+        for (int i = 0; i < numberStoredInputs; i++){
+            System.out.println((i+1) + ". " + storedUserInputs[i]);
+        }
         printHorizontalLine(50);
     }
 }
