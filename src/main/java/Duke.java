@@ -6,7 +6,7 @@ public class Duke {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    public static String HORIZONTAL = "______________________________________";
+    public static String HORIZONTAL = "--------------------------------------";
     public static String HELLO_GREET =
             " Hello! I'm Duke\n"
                     +" What can I do for you?";
@@ -17,10 +17,21 @@ public class Duke {
         System.out.println(HELLO_GREET);
         System.out.println(HORIZONTAL);
     }
-    public static void parseInput(int countTasks, String line, Task[] tasks, Scanner in) {
+    public static void printGoodbye() {
+        System.out.println("\t" +HORIZONTAL);
+        System.out.println("\t"+GOOD_BYE);
+        System.out.println("\t" +HORIZONTAL);
+    }
+    public static void parseInput(int countTasks, Task[] tasks) {
+
+        //Input and read inputs from the user
+        Scanner in = new Scanner(System.in);
+        String line = in.nextLine();
 
         while (!line.equalsIgnoreCase("bye")) {
             while (!line.equalsIgnoreCase("list")) {
+                if (line.equalsIgnoreCase("bye"))
+                    return;
                 if (!(line.indexOf("done ") == 0)) {
                     System.out.println("\t" + HORIZONTAL);
                     System.out.println("\t added: " + line);
@@ -70,20 +81,19 @@ public class Duke {
             System.out.println("\t" + HORIZONTAL);
             line = in.nextLine();
         }
+        //printGoodbye();
     }
     public static void main(String[] args) {
         printWelcomeGreet();
-        String line;
+        //String line;
 
         //Input and read inputs from the user
-        Scanner in = new Scanner(System.in);
-        line = in.nextLine();
+        //Scanner in = new Scanner(System.in);
+        //line = in.nextLine();
 
         Task[] tasks = new Task[MAX_TASK];
         int countTasks = 0;
-        parseInput(countTasks,line,tasks,in);
-        System.out.println("\t"+HORIZONTAL);
-        System.out.println("\t"+GOOD_BYE);
-        System.out.println("\t"+HORIZONTAL);
+        parseInput(countTasks,tasks);
+        printGoodbye();
     }
 }
