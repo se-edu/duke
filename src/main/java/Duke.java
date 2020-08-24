@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -5,9 +7,17 @@ public class Duke {
     public static void echo(String word) {
         System.out.println(
             "____________________________________________________________\n"
-            + word + " \n"
+            + "added: " + word + " \n"
             + "____________________________________________________________\n"
         );
+    }
+
+    private static void printList(List<String> botList) {
+        System.out.println("____________________________________________________________\n");
+        for(int i = 0; i < botList.size(); i++) {
+            System.out.println((i+1) + ". " + botList.get(i));
+        }
+        System.out.println("____________________________________________________________\n");
     }
 
     public static void main(String[] args) {
@@ -18,7 +28,6 @@ public class Duke {
         String byeSign = "____________________________________________________________\n"
                 + "Bye. Hope to see you again soon!\n"
                 + "____________________________________________________________\n";
-        String[] list = new String[100];
         int i = 0;
 
         System.out.println(logo);
@@ -27,8 +36,17 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         line = in.nextLine();
 
+        List<String> botList = new ArrayList<>();
+
         while (!line.equals("bye")) {
-            echo(line);
+            if(line.equals("list")){
+                printList(botList);
+            }
+            else {
+                //add item to list
+                botList.add(line);
+                echo(line);
+            }
             in = new Scanner(System.in);
             line = in.nextLine();
         }
