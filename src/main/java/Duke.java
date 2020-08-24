@@ -4,10 +4,9 @@ public class Duke {
 
     public static void echo(String word) {
         System.out.println(
-            "____________________________________________________________\n"
-            + "added: " + word + " \n"
-            + "____________________________________________________________\n"
-        );
+                "____________________________________________________________\n"
+                + "added: " + word + " \n"
+                + "____________________________________________________________\n");
     }
 
     public static void printList(Task[] taskList, int size) {
@@ -21,10 +20,9 @@ public class Duke {
 
     public static void printDone(Task doneItem) {
         System.out.println("____________________________________________________________\n"
-        + "Nice! I've marked this task as done: \n"
-        + doneItem.getStatusIcon()  + " "
-        + doneItem.description
-        );
+                + "Nice! I've marked this task as done: \n"
+                + doneItem.getStatusIcon()  + " "
+                + doneItem.description);
         System.out.println("____________________________________________________________\n");
     }
 
@@ -53,8 +51,7 @@ public class Duke {
                 int number = Integer.parseInt(line.replaceAll("[^0-9]", ""));
                 taskList[number-1].markAsDone();
                 printDone(taskList[number-1]);
-            }
-            else {
+            } else {
                 //add item to list
                 taskList[index] = new Task(line);
                 echo(line);
