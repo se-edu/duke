@@ -21,7 +21,7 @@ public class Duke {
         System.out.println("____________________________________________________________\n");
     }
 
-    private static void printDone(Task doneItem) {
+    public static void printDone(Task doneItem) {
         System.out.println("____________________________________________________________\n"
         + "Nice! I've marked this task as done: \n"
         + doneItem.getStatusIcon()  + " "
