@@ -28,7 +28,6 @@ public class Duke {
         String byeSign = "____________________________________________________________\n"
                 + "Bye. Hope to see you again soon!\n"
                 + "____________________________________________________________\n";
-        int i = 0;
 
         System.out.println(logo);
 
@@ -51,8 +50,6 @@ public class Duke {
             line = in.nextLine();
         }
 
-        if (line.equals("bye")) {
-            System.out.println(byeSign);
-        }
+        System.out.println(byeSign);
     }
 }
