@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
+
     public static void main(String[] args) {
         String greet = " ____________________________________________________________\n"
                 + "  Hello! I'm Duke\n"
@@ -9,26 +10,47 @@ public class Duke {
                 + " ____________________________________________________________\n";
         System.out.println(greet);
         String line;
-        String[] storeTask = new String[100];
+        Task currentTask;
+        Task[] storeTask = new Task[100];
         int numOfTasks = 0;
         Scanner in = new Scanner(System.in);
 
-        line = in.nextLine();
-        while (!(line.equals("bye"))) {
-            storeTask[numOfTasks] = line;
+        while (true) {
+            line = in.nextLine();
+            if (line.equals("bye")) {
+                break;
+            }
+
+            if (line.equals("list")) {
+                System.out.println(" ____________________________________________________________");
+                System.out.println("  Here are the tasks in your list:");
+                for (int i = 0; i < numOfTasks; i++) {
+                    System.out.print("  " + (i + 1) + ".[" + storeTask[i].getStatusIcon() + "] ");
+                    System.out.println(storeTask[i].getDescription());
+                }
+                System.out.println(" ____________________________________________________________");
+                continue;
+            }
+
+            if (line.contains("done")) {
+                String[] word = line.split(" ");
+                int taskNum = Integer.parseInt(word[1]);
+                if (taskNum >= 1 || taskNum <= numOfTasks) {
+                    storeTask[taskNum - 1].setDone();
+                    System.out.println(" ____________________________________________________________");
+                    System.out.println("  Nice! I've marked this task as done:");
+                    System.out.print("   " + taskNum + ".[" + storeTask[taskNum - 1].getStatusIcon() + "] ");
+                    System.out.println(storeTask[taskNum - 1].getDescription());
+                    System.out.println(" ____________________________________________________________");
+                }
+                continue;
+            }
+
+            storeTask[numOfTasks] = new Task(line);
             numOfTasks++;
             System.out.println(" ____________________________________________________________");
             System.out.println("  added: " + line);
             System.out.println(" ____________________________________________________________");
-            line = in.nextLine();
-            if (line.equals("list")) {
-                System.out.println(" ____________________________________________________________");
-                for (int i = 0; i < numOfTasks; i++) {
-                    System.out.println(" " + (i + 1) + ". " + storeTask[i]);
-                }
-                System.out.println(" ____________________________________________________________");
-                line = in.nextLine();
-            }
         }
         System.out.println(" ____________________________________________________________");
         System.out.println("  Bye. Hope to see you again soon!");
