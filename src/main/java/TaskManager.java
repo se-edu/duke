@@ -7,6 +7,10 @@ public class TaskManager {
         return tasksList;
     }
 
+    public int getNumberOfTasks() {
+        return tasksList.size();
+    }
+
     public void addTask(String description) {
         tasksList.add(new Task(description));
     }

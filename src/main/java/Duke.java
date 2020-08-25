@@ -32,7 +32,7 @@ public class Duke {
     public static void printTasks() {
         printWithIndentation(horizontalLine);
         ArrayList<Task> taskArrayList = taskManager.getTasksList();
-        for (int i = 0; i < taskArrayList.size(); i++) {
+        for (int i = 0; i < taskManager.getNumberOfTasks(); i++) {
             printWithIndentation((i + 1) + ". [" + taskArrayList.get(i).getStatusIcon() + "] "
                 + taskArrayList.get(i).description);
         }
@@ -46,8 +46,9 @@ public class Duke {
 
         String input = sc.nextLine();
         while (true) {
+            input = input.trim().toLowerCase();
             String[] inputSplit = input.split(" ");
-            if (inputSplit.length == 2 && inputSplit[0].toLowerCase().equals("done")) {
+            if (inputSplit.length == 2 && inputSplit[0].equals("done")) {
                 try {
                     int indexOfTask = Integer.parseInt(inputSplit[1]) - 1;
                     if (taskManager.markTaskAsDone(indexOfTask)) {
@@ -61,9 +62,9 @@ public class Duke {
                     printMessage("Invalid index of task!");
                 }
             } else {
-                if (input.toLowerCase().trim().equals("bye")) {
+                if (input.equals("bye")) {
                     break;
-                } else if (input.toLowerCase().trim().equals("list")) {
+                } else if (input.equals("list")) {
                     printTasks();
                 } else {
                     taskManager.addTask(input);
