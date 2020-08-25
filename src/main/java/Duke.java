@@ -9,10 +9,11 @@ public class Duke {
                 + "\n"
                 + " ____________________________________________________________\n";
         System.out.println(greet);
-        String line;
+        
         Task currentTask;
-        Task[] storeTask = new Task[100];
+        Task[] storeTasks = new Task[100];
         int numOfTasks = 0;
+        String line;
         Scanner in = new Scanner(System.in);
 
         while (true) {
@@ -25,8 +26,8 @@ public class Duke {
                 System.out.println(" ____________________________________________________________");
                 System.out.println("  Here are the tasks in your list:");
                 for (int i = 0; i < numOfTasks; i++) {
-                    System.out.print("  " + (i + 1) + ".[" + storeTask[i].getStatusIcon() + "] ");
-                    System.out.println(storeTask[i].getDescription());
+                    System.out.print("  " + (i + 1) + ".[" + storeTasks[i].getStatusIcon() + "] ");
+                    System.out.println(storeTasks[i].getDescription());
                 }
                 System.out.println(" ____________________________________________________________");
                 continue;
@@ -36,17 +37,17 @@ public class Duke {
                 String[] word = line.split(" ");
                 int taskNum = Integer.parseInt(word[1]);
                 if (taskNum >= 1 || taskNum <= numOfTasks) {
-                    storeTask[taskNum - 1].setDone();
+                    storeTasks[taskNum - 1].setDone();
                     System.out.println(" ____________________________________________________________");
                     System.out.println("  Nice! I've marked this task as done:");
-                    System.out.print("   " + taskNum + ".[" + storeTask[taskNum - 1].getStatusIcon() + "] ");
-                    System.out.println(storeTask[taskNum - 1].getDescription());
+                    System.out.print("   " + taskNum + ".[" + storeTasks[taskNum - 1].getStatusIcon() + "] ");
+                    System.out.println(storeTasks[taskNum - 1].getDescription());
                     System.out.println(" ____________________________________________________________");
                 }
                 continue;
             }
 
-            storeTask[numOfTasks] = new Task(line);
+            storeTasks[numOfTasks] = new Task(line);
             numOfTasks++;
             System.out.println(" ____________________________________________________________");
             System.out.println("  added: " + line);
