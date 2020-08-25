@@ -39,6 +39,16 @@ public class Duke {
         printWithIndentation(horizontalLine);
     }
 
+    public static void markTaskAsDone(int indexOfTask) {
+        if (taskManager.markTaskAsDone(indexOfTask)) {
+            Task taskMarkedAsDone = taskManager.getTasksList().get(indexOfTask);
+            printMessage("Nice! I've marked this task as done:\n" +
+                    "\t[" + taskMarkedAsDone.getStatusIcon() + "] " + taskMarkedAsDone.description);
+        } else {
+            printMessage("Index out of bounds!");
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -51,13 +61,7 @@ public class Duke {
             if (inputSplit.length == 2 && inputSplit[0].equals("done")) {
                 try {
                     int indexOfTask = Integer.parseInt(inputSplit[1]) - 1;
-                    if (taskManager.markTaskAsDone(indexOfTask)) {
-                        Task taskMarkedAsDone = taskManager.getTasksList().get(indexOfTask);
-                        printMessage("Nice! I've marked this task as done:\n" +
-                        "\t[" + taskMarkedAsDone.getStatusIcon() + "] " + taskMarkedAsDone.description);
-                    } else {
-                        printMessage("Index out of bounds!");
-                    }
+                    markTaskAsDone(indexOfTask);
                 } catch (NumberFormatException e) {
                     printMessage("Invalid index of task!");
                 }
