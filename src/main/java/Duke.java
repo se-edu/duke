@@ -1,6 +1,7 @@
 import java.util.Scanner;
+
 public class Duke {
-    static Scanner scan = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
     static int taskListIndex = 0;
     static Task taskList[] = new Task[100];
 
@@ -12,7 +13,7 @@ public class Duke {
 
         boolean isRunning = true;
         while(isRunning){
-            String input = scan.nextLine();
+            String input = scanner.nextLine();
 
             if  (input.equals("bye")) {
                 isRunning = false;
