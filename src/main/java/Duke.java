@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -5,6 +6,10 @@ public class Duke {
         boolean exit = false;
         String line;
         Scanner in = new Scanner(System.in);
+        List[] tasks = new List[100];
+        int taskAmount = 0;
+
+        //the logo and greet
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -12,17 +17,19 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         greet();
+
+        //main chat box
         while(!exit) {
             line = in.nextLine();
-            //System.out.println(line);
             if(line.equals("list")) {
-                list();
+                list(taskAmount, tasks);
             }
             else if(line.equals("bye")) {
                 exit = true;
             }
             else {
-                echo(line);
+                tasks[taskAmount] = new List(line);
+                taskAmount++;
             }
         }
         exit();
@@ -46,8 +53,18 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
-    public static void list() {
-        System.out.println("____________________________________________________________");
-        System.out.println("list");
-        System.out.println("____________________________________________________________");}
+    public static void list(int taskAmount, List[] tasks) {
+        if (taskAmount == 0) {
+            System.out.println("____________________________________________________________");
+            System.out.println("list");
+            System.out.println("____________________________________________________________");
+        }
+        else {
+            System.out.println("____________________________________________________________");
+            for(int i = 0; i< taskAmount; i++) {
+                System.out.println( (i+1) +". " + tasks[i].getTask());
+            }
+            System.out.println("____________________________________________________________");
+        }
+    }
 }
