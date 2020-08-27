@@ -21,7 +21,7 @@ public class Duke {
                 + "Bye. Hope to see you again soon!\n"
                 + "____________________________________________________________\n";
         String input = in.nextLine();
-        while((input.equals("bye") != true) && (input.equals("Bye") != true)){
+        while((!input.equals("bye")) && (!input.equals("Bye"))){
             System.out.println(""
                 + "____________________________________________________________\n"
                 + input
