@@ -1,8 +1,8 @@
 public class List {
+    /** Number of connections to this database */
     private String task;
     private boolean isDone;
     private static int totalTasks = 0;
-
 
     public List(String task) {
         setTask(task);

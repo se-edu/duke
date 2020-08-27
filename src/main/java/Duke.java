@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        boolean exit = false;
+        boolean canExit = false;
         String line;
         Scanner in = new Scanner(System.in);
         List[] tasks = new List[100];
@@ -19,16 +19,16 @@ public class Duke {
         greet();
 
         //main chat box
-        while(!exit) {
+        while(!canExit) {
             line = in.nextLine();
             if(line.equals("list")) {
-                list(taskAmount, tasks);
+                listTasks(taskAmount, tasks);
             }
             else if(line.equals("bye")) {
-                exit = true;
+                canExit = true;
             }
             else if(line.contains("done")) {
-                done(line, tasks, taskAmount);
+                markAsDone(line, tasks, taskAmount);
             }
             else {
                 tasks[taskAmount] = new List(line);
@@ -48,7 +48,8 @@ public class Duke {
     public static void echo(String message) {
         System.out.println("____________________________________________________________");
         System.out.println(message);
-        System.out.println("____________________________________________________________");}
+        System.out.println("____________________________________________________________");
+    }
 
     public static void exit() {
         System.out.println("____________________________________________________________");
@@ -56,7 +57,7 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
-    public static void list(int taskAmount, List[] tasks) {
+    public static void listTasks(int taskAmount, List[] tasks) {
         String isDone;
         if (taskAmount == 0) {
             System.out.println("____________________________________________________________");
@@ -74,7 +75,7 @@ public class Duke {
         }
     }
 
-    public static void done(String line, List[] tasks, int taskAmount) {
+    public static void markAsDone(String line, List[] tasks, int taskAmount) {
         String[] words = line.split(" ");
         int taskIndex = (Integer.parseInt(words[1])) - 1;
         if(taskIndex < 0 || taskIndex > taskAmount) {
