@@ -27,6 +27,9 @@ public class Duke {
             else if(line.equals("bye")) {
                 exit = true;
             }
+            else if(line.contains("done")) {
+                done(line, tasks, taskAmount);
+            }
             else {
                 tasks[taskAmount] = new List(line);
                 taskAmount++;
@@ -54,6 +57,7 @@ public class Duke {
     }
 
     public static void list(int taskAmount, List[] tasks) {
+        String isDone;
         if (taskAmount == 0) {
             System.out.println("____________________________________________________________");
             System.out.println("list");
@@ -62,9 +66,28 @@ public class Duke {
         else {
             System.out.println("____________________________________________________________");
             for(int i = 0; i< taskAmount; i++) {
-                System.out.println( (i+1) +". " + tasks[i].getTask());
+                System.out.print((i+1) +".");
+                System.out.print(tasks[i].getStatusIcon() + " ");
+                System.out.println(tasks[i].getTask());
             }
             System.out.println("____________________________________________________________");
         }
+    }
+
+    public static void done(String line, List[] tasks, int taskAmount) {
+        String[] words = line.split(" ");
+        int taskIndex = (Integer.parseInt(words[1])) - 1;
+        if(taskIndex < 0 || taskIndex > taskAmount) {
+            System.out.println("____________________________________________________________");
+            System.out.println("Task index cannot be identified, please enter again");
+            System.out.println("____________________________________________________________");
+            return;
+        }
+        tasks[taskIndex].markAsDone();
+        System.out.println("____________________________________________________________");
+        System.out.println("Nice! I've marked this task as done: ");
+        System.out.print(tasks[taskIndex].getStatusIcon() + " ");
+        System.out.println(tasks[taskIndex].getTask());
+        System.out.println("____________________________________________________________");
     }
 }

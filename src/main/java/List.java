@@ -1,10 +1,12 @@
 public class List {
     private String task;
+    private boolean isDone;
     private static int totalTasks = 0;
 
 
     public List(String task) {
         setTask(task);
+        this.isDone = false;
         totalTasks++;
         System.out.println("____________________________________________________________");
         System.out.println("added: " + task);
@@ -19,10 +21,16 @@ public class List {
         return task;
     }
 
-    //To add new task into list
-    public static void addTasks(String task) {
-        return;
-        //List.tasks = task;
+    public boolean getIsDone() {
+        return isDone;
+    }
+
+    public void markAsDone() {
+        isDone = true;
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "[\u2713]" : "[\u2718]"); //return tick or X symbols
     }
 
     public List() {
