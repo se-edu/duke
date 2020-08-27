@@ -37,7 +37,7 @@ public class Duke {
 
     public static void addList(){
         Scanner in = new Scanner(System.in);
-        String[] list = new String[100];
+        Task[] list = new Task[100];
         int index = 0;
 
         String input = in.nextLine();
@@ -47,18 +47,33 @@ public class Duke {
                 System.out.println("____________________________________________________________");
                 while(list[count] != null){
                     System.out.println(""
-                        + (count + 1) + "." + " "
-                        + list[count]
+                        + (count + 1) + "." + "[" + list[count].getStatusIcon() + "]" + " "
+                        + list[count].description
                     );
                     count ++;
                 }
                 System.out.println("____________________________________________________________");
             }
-            else{
-                list[index] = input;
+            else if(input.contains("done") || input.contains("Done")){
+                String checkedStrIndex = input.replaceAll("[^0-9]", "");
+                int checkedIntIndex = Integer.parseInt(checkedStrIndex);
+                if(checkedIntIndex <= index + 1 && checkedIntIndex > 0){
+                    list[checkedIntIndex - 1].checkDone();
+                }
                 System.out.println(""
                     + "____________________________________________________________\n"
-                    + "added: " + input
+                    + "Nice! I've marked this task as done:\n"
+                    + "  " + "[" + list[checkedIntIndex - 1].getStatusIcon() + "]"
+                    + list[checkedIntIndex - 1].description
+                    + "\n____________________________________________________________"
+
+                );
+            }
+            else{
+                list[index] = new Task(input);
+                System.out.println(""
+                    + "____________________________________________________________\n"
+                    + "added: " + list[index].description
                     + "\n____________________________________________________________\n"
                 );
                 index++;
