@@ -1,7 +1,14 @@
 import java.util.Scanner;
 
 public class Duke {
+
+    public static int NUM_OF_TASKS = 0;
+
     public static void main(String[] args) {
+        Greetings();
+        ListActions();
+    }
+    public static void Greetings(){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -9,34 +16,59 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
-        List();
-
     }
-
-    public static void List() {
-        String list[] = new String[100];
+    
+    public static void ListActions() {
+        Task[] List = new Task[100];
         Scanner in = new Scanner(System.in);
-        int number = 1;
+        String line;
 
-        while (true){
-        String line = in.nextLine();
-        if (line.contains("bye") || line.equalsIgnoreCase("bye")) {
-            Bye();
-            break;
-        }else if(line.equalsIgnoreCase("list")){
-            for (int i=0;i<number-1;i++){
-                System.out.println(i+1 + ". " + list[i]);
+        do {
+            line = in.nextLine();
+            if (line.contains("done")){
+                UpdateTask(line,List);
+            }else if (line.equalsIgnoreCase("bye")){
+                PrintBye();
+                break;
+            }else if(line.equalsIgnoreCase("list")) {
+                PrintList(List);
+            }else{
+                List[NUM_OF_TASKS] = AddToList(line);
             }
-        }else{
-            list[number-1] = line;
-            System.out.println("added " + line);
-            number++;
-        }
-        }
+        } while (!line.equalsIgnoreCase("bye"));
 
     }
-    public static void Bye(){
+
+    public static Task AddToList(String line){
+        Task t = new Task(line);
+        System.out.println("added " + line);
+        NUM_OF_TASKS++;
+        return t;
+    }
+
+    public static void PrintList(Task[] List) {
+        if (NUM_OF_TASKS == 0){
+            System.out.println("The list is empty!");
+        }else {
+            System.out.println("Here are the tasks in your list.");
+            for (int i = 0; i < NUM_OF_TASKS; i++) {
+            System.out.println(i+1 + ". " + "[" + List[i].getStatusIcon() + "] " + List[i].description);
+            }
+        }
+    }
+
+    public static void UpdateTask(String line,Task[] List){
+        String taskNumString = line.substring(5);
+        int taskNumInt = Integer.parseInt(taskNumString);
+        List[taskNumInt-1].markAsDone();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("["+List[taskNumInt-1].getStatusIcon()+"]"+ List[taskNumInt-1].description);
+    }
+
+    public static void PrintBye(){
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+
 }
+
