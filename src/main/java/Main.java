@@ -1,12 +1,8 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Main {
-
-//    public void echo(String line) {
-//        System.out.println("____________________________________________________________");
-//        System.out.println(line);
-//        System.out.println("____________________________________________________________");
-//    }
+    public static final int MAX_TASK_CAPACITY = 100;
 
 
     public static void main(String[] args) {
@@ -14,29 +10,22 @@ public class Main {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         Scanner in = new Scanner(System.in);
-        String[] items = new String[100];
+        Task[] tasks = new Task[MAX_TASK_CAPACITY];
         String line;
-        int numItem = 0;
+        int numTask = 0;
         while (true) {
             line = in.nextLine();
+            String[] words = line.split(" ");
             if (line.equals("bye")) {
                 break;
             } else if (line.equals("list")) {
-                int numPrintedItems = 0;
-                System.out.println("____________________________________________________________");
-                for (String item : items) {
-                    if (item == null) {
-                        break;
-                    }
-                    numPrintedItems++;
-                    System.out.println(numPrintedItems + ". " + item);
-
-                }
-                System.out.println("____________________________________________________________");
+                Task.printTaskList(tasks);
+            } else if (words[0].equals("done")) {
+                tasks[Integer.parseInt(words[1]) - 1].markAsDone();
             } else {
                 System.out.println("added: " + line);
-                items[numItem] = line;
-                numItem++;
+                tasks[numTask] = new Task(line);
+                numTask++;
             }
         }
         System.out.println("____________________________________________________________");
@@ -44,3 +33,5 @@ public class Main {
         System.out.println("____________________________________________________________");
     }
 }
+
+
