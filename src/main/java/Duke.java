@@ -6,18 +6,23 @@ import java.util.Scanner;
 public class Duke {
     static Task[] storedUserTasks = new Task[100];
     static int numberStoredTasks = 0;
+    static boolean dukeActive = false;
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
         dukeGreet();
+        dukeStart();
+        dukePrintInstructions();
 
-        boolean dukeRunning = true;
         String userInput;
-        while (dukeRunning){
+        while (dukeActive){
             userInput = in.nextLine();
+            if (userInput.length() == 0){
+                continue;
+            }
             if (userInput.equals("bye")){
-                dukeRunning = false;
+                dukeStop();
             }
             else if (userInput.equals("list")){
                 dukeReadStoredTasks();
@@ -28,15 +33,36 @@ public class Duke {
             }
             else {
                 dukeEcho(userInput);
-                storedUserTasks[numberStoredTasks] = new Task(userInput);
-                numberStoredTasks++;
+                dukeAddTask(userInput);
             }
         }
         dukeGoodBye();
     }
+    private static void dukeStart(){
+        dukeActive = true;
+    }
+    private static void dukeStop(){
+        dukeActive = false;
+    }
+
+    private static void dukePrintInstructions(){
+        System.out.print("Here is NOT how you should ever use me\n" +
+                "------ List of commands -------\n" +
+                "bye: this will exit the programme\n" +
+                "list: List out the set of tasks stored\n" +
+                "done #(task number): set the task with the provided task number to done\n\n" +
+                "Any other input will be added as a task\n" +
+                "GOT IT????"
+        );
+    }
+
+    private static void dukeAddTask(String userInput) {
+        storedUserTasks[numberStoredTasks] = new Task(userInput);
+        numberStoredTasks++;
+    }
 
     /**
-     * prints a horizontal line with the specificed length
+     * prints a horizontal line with the specified length
      *
      * @param length the length of horizontal line
      */
@@ -94,7 +120,7 @@ public class Duke {
      * @param taskNumber the task number of the task in order the task was given to duke e.g. 10th task is 10
      */
     public static void dukeSetDone(int taskNumber){
-        if (taskNumber >= numberStoredTasks || taskNumber <= 0){
+        if (taskNumber > numberStoredTasks || taskNumber <= 0){
             System.out.println("Are you stupid? There is no such Task");
             return;
         }
