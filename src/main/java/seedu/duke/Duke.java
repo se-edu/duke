@@ -27,6 +27,8 @@ public class Duke {
         String[] commandTracker = new String[100];
         int index = 0;
         String lineToEcho = in.nextLine();
+
+        //keeps taking in inputs - while loop stops when "bye" is input
         while (!lineToEcho.equals("bye")) {
             if (lineToEcho.equals("list")) { //if equal list, print all in commandTracker
                 for (int i = 0; i < index; i++) {
@@ -39,6 +41,8 @@ public class Duke {
             }
             lineToEcho = in.nextLine();
         }
+
         System.out.println(String.format("Bye %s. See you again soon!", name));
+
     }
 }
