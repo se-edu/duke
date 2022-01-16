@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Duke {
@@ -16,6 +17,16 @@ public class Duke {
         System.out.println("What is your name?");
 
         Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        String name = in.nextLine();
+        System.out.println("Hello " + name);
+
+        String lineToEcho = in.nextLine();
+        while (!lineToEcho.equals("bye")) {
+            System.out.println(lineToEcho);
+            lineToEcho = in.nextLine();
+        }
+        System.out.println(String.format("Bye %s. See you again soon!", name));
+
     }
+
 }
