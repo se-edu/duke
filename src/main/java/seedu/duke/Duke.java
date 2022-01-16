@@ -17,5 +17,17 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
+
+        Scanner in = new Scanner(System.in);
+        String name = in.nextLine();
+        System.out.println("Hello " + name);
+
+        String lineToEcho = in.nextLine();
+        while (!lineToEcho.equals("bye")) {
+            System.out.println(lineToEcho);
+            lineToEcho = in.nextLine();
+        }
+        System.out.println(String.format("Bye %s. See you again soon!", name));
     }
 }
+
