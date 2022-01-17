@@ -28,18 +28,19 @@ public class Duke {
                 taskList.printTasks();
             }
             else if (command.startsWith("mark")) { //if command mark is used, then we mark the specified task as done
-                taskList.mark(Integer.parseInt(command.substring(5)) - 1);
+                taskList = taskList.mark(Integer.parseInt(command.substring(5)) - 1);
                 //command.substring(6) cuts out the command "mark "
             }
             else if (command.startsWith("unmark")) {//if command unmark is used, then we mark the specified task as undone
-                taskList.unmark(Integer.parseInt(command.substring(7)) - 1);
+                taskList = taskList.unmark(Integer.parseInt(command.substring(7)) - 1);
                 //command.substring(6) cuts out the command "unmark "
             }
             else if (command.startsWith("todo")) { //if not, just add task to taskList
                 String taskName = command.substring(5);
                 Task newTask = new Task(taskName);
+
                 //command.substring(5) cuts out the command
-                taskList.add(newTask);
+                taskList = taskList.add(newTask);
                 System.out.println(String.format("added: %s", taskName));
             }
             else {
