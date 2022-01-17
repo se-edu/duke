@@ -99,16 +99,16 @@ public class TaskList {
         } else {
             Task taskToUpdate = this.tasks[index];
             if (!taskToUpdate.isDone()) { //if task is already unmarked
-                System.out.
-                        println("It seems like you haven't marked it as done yet...");
+                System.out
+                        .println("It seems like you haven't marked it as done yet...");
                 return this;
             }
             Task newTask = taskToUpdate.uncompleteTask();
             Task[] newTasks = this.copyTaskList(this.tasks.length);
             newTasks[index] = newTask;
 
-            System.out.println(String.
-                    format("OK, I've marked this task as not done yet:\n %s", newTask.toString()));
+            System.out.println(String
+                    .format("OK, I've marked this task as not done yet:\n %s", newTask.toString()));
 
             return new TaskList(newTasks, this.nextIndexToAddTo);
         }

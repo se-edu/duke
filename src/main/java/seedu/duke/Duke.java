@@ -32,7 +32,8 @@ class Duke {
             } else if (command.startsWith("mark")) {
                 //if command mark is used,then we mark the specified task as done
                 int indexAfterCommand = 5;
-                taskList = taskList.mark(Integer.
+                taskList = taskList
+                        .mark(Integer.
                         parseInt(command.substring(indexAfterCommand)) - 1);
                 //command.substring(6) cuts out the command "mark "
             } else if (command.startsWith("unmark")) {
