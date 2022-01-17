@@ -27,12 +27,12 @@ public class TaskList {
 
     /**
      * Overloaded constructor.
-     * @param tasks
-     * @param nextIndexToAddTo
+     * @param tasks is a Task[] with tasks
+     * @param nextIndex specifies where the next task will be added in Task[]
      */
-    TaskList(Task[] tasks, int nextIndexToAddTo) {
+    TaskList(Task[] tasks, int nextIndex) {
         this.tasks = tasks;
-        this.nextIndexToAddTo = nextIndexToAddTo;
+        this.nextIndexToAddTo = nextIndex;
     }
 
     /**
@@ -40,7 +40,8 @@ public class TaskList {
      */
     void printTasks() {
         for (int i = 0; i < nextIndexToAddTo; i++) {
-            System.out.println(String.format("%d . %s", i + 1, this.tasks[i].toString()));
+            System.out.println(String
+                    .format("%d . %s", i + 1, this.tasks[i].toString()));
         }
     }
 
@@ -55,18 +56,20 @@ public class TaskList {
 
     /**
      * Marks a task as done.
-     * @param index
+     * @param index where task to be marked is at in TaskList
      * @return TaskList with updated Task[]
      */
     TaskList mark(int index) {
         if (index > this.nextIndexToAddTo - 1 || index < 0) {
-            System.out.println("Not so fast! I don't think that task exists! See for yourself");
+            System.out
+                    .println("Not so fast! I don't think that task exists! See for yourself");
             this.printTasks();
             return this;
         } else {
             Task taskToUpdate = this.tasks[index];
             if (taskToUpdate.isDone()) {
-                System.out.println("Oh hmm...you finished it already though...what a trooper!");
+                System.out
+                        .println("Oh hmm...you finished it already though...what a trooper!");
                 return this;
             }
             Task newTask = taskToUpdate.completeTask();
@@ -75,7 +78,8 @@ public class TaskList {
             Task[] newTasks = this.copyTaskList(this.tasks.length);
             newTasks[index] = newTask;
 
-            System.out.println(String.format("Nice! I've marked this task as done:\n %s", newTask.toString()));
+            System.out.println(String
+                    .format("Nice! I've marked this task as done:\n %s", newTask.toString()));
 
             return new TaskList(newTasks, this.nextIndexToAddTo);
 
@@ -84,7 +88,7 @@ public class TaskList {
 
     /**
      * Marks a task as undone.
-     * @param index
+     * @param index where the task to be unmarked is at in TaskList
      * @return TaskList with updated Task[]
      */
     TaskList unmark(int index) {
@@ -100,7 +104,6 @@ public class TaskList {
                 return this;
             }
             Task newTask = taskToUpdate.uncompleteTask();
-
             Task[] newTasks = this.copyTaskList(this.tasks.length);
             newTasks[index] = newTask;
 
@@ -113,7 +116,7 @@ public class TaskList {
 
     /**
      * Adds tasks to TaskList.
-     * @param task
+     * @param task to be added to TaskList
      * @return new TaskList with increased size to accomodate newTask
      */
     TaskList add(Task task) {

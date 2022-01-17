@@ -3,7 +3,7 @@ package seedu.duke;
 import java.util.Scanner;
 
 /**
- * Functions as the chatbot by taking in inputs and giving out specificed outputs
+ * Functions as the chatbot by taking in inputs and giving out specificed outputs.
  */
 class Duke {
     /**
@@ -38,8 +38,8 @@ class Duke {
             } else if (command.startsWith("unmark")) {
                 //if command unmark is used,// then we mark the specified task as undone
                 int indexAfterCommand = 7;
-                taskList = taskList.unmark(Integer.
-                        parseInt(command.substring(indexAfterCommand)) - 1);
+                taskList = taskList.unmark(Integer
+                        .parseInt(command.substring(indexAfterCommand)) - 1);
                 //command.substring(6) cuts out the command "unmark "
             } else if (command.startsWith("todo")) { //if not, just add task to taskList
                 int indexTaskName = 5;

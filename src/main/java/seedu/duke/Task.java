@@ -23,7 +23,7 @@ public class Task {
     /**
      * Constructor for a task that consists of task name and boolean done for task status.
      * @param name refers to the task name
-     * @param done refers to the boolean that tracks if a task is complete
+     * @param doneStatus refers to the boolean that tracks if a task is complete
      */
     Task(String name, boolean doneStatus) {
         this.taskName = name;
