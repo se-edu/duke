@@ -1,9 +1,11 @@
 package seedu.duke;
 
-import java.util.HashMap;
 import java.util.Scanner;
 
-public class Duke {
+/**
+ * Functions as the chatbot by taking in inputs and giving out specificed outputs.
+ */
+class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
@@ -20,29 +22,38 @@ public class Duke {
         String name = in.nextLine();
         System.out.println("Hello " + name);
 
-        Scanner in = new Scanner(System.in);
-        String name = in.nextLine();
-        System.out.println("Hello " + name);
+        TaskList taskList = new TaskList();
+        String command = in.nextLine();
 
-        String[] commandTracker = new String[100];
-        int index = 0;
-        String lineToEcho = in.nextLine();
+        while (!command.equals("bye")) {
+            if (command.startsWith("list")) {
+                //if equal list, print all in commandTracker
+                taskList.printTasks();
+            } else if (command.startsWith("mark")) {
+                //if command mark is used,then we mark the specified task as done
+                int indexAfterCommand = 5;
+                taskList = taskList
+                        .mark(Integer
+                                .parseInt(command.substring(indexAfterCommand)) - 1);
+                //command.substring(6) cuts out the command "mark "
+            } else if (command.startsWith("unmark")) {
+                //if command unmark is used,// then we mark the specified task as undone
+                int indexAfterCommand = 7;
+                taskList = taskList.unmark(Integer.parseInt(command.substring(indexAfterCommand)) - 1);
+                //command.substring(6) cuts out the command "unmark "
+            } else if (command.startsWith("todo")) { //if not, just add task to taskList
+                int indexTaskName = 5;
+                String taskName = command.substring(indexTaskName);
+                Task newTask = new Task(taskName);
 
-        //keeps taking in inputs - while loop stops when "bye" is input
-        while (!lineToEcho.equals("bye")) {
-            if (lineToEcho.equals("list")) { //if equal list, print all in commandTracker
-                for (int i = 0; i < index; i++) {
-                    //label = index + 1 because array is 0 indexed
-                    System.out.println(String
-                            .format("%d . %s",i + 1, commandTracker[i]));
-                }
-            } else { //if not, just add to list
-                commandTracker[index++] = lineToEcho;
-                System.out.println(String.format("added: %s", lineToEcho));
+                //command.substring(5) cuts out the command
+                taskList = taskList.add(newTask);
+                System.out.println(String.format("added: %s", taskName));
+            } else {
+                System.out.println("Sorry I don't understand! :(");
             }
-            lineToEcho = in.nextLine();
+            command = in.nextLine();
         }
-
         System.out.println(String.format("Bye %s. See you again soon!", name));
     }
 }
