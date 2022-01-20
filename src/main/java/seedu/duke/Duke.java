@@ -42,7 +42,7 @@ class Duke {
                 taskList = taskList.unmark(Integer.parseInt(command.substring(indexAfterCommand)) - 1);
                 //command.substring(6) cuts out the command "unmark "
             } else if (command.startsWith("todo")) { //if not, just add task to taskList
-                int indexTaskName = 5; //command is given as "todo <task>"
+                int indexTaskName = 5; //command is given as "todo <taskIndex>"
                 String taskName = command.substring(indexTaskName);
                 Task newTask = new ToDo(taskName);
 
@@ -62,6 +62,10 @@ class Duke {
                 String date = command.substring(slashIndex + 3); //+2 is because of "at " that occurs before the date
                 Task newTask = new Event(taskName, date);
                 taskList = taskList.add(newTask);
+            } else if (command.startsWith("delete")) {
+                int indexTaskName = 7; //command is given as "delete <taskIndex>"
+                int index = Integer.parseInt(command.substring(indexTaskName, indexTaskName + 1));
+                taskList = taskList.delete(index);
             } else {
                 System.out.println("Sorry I don't understand! :(");
             }

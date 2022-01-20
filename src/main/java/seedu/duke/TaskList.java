@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -9,68 +11,61 @@ public class TaskList {
     /**
      * An array that contains all tasks that will be added.
      */
-    private final Task[] tasks;
-    /**
-     * Keeps track of the next index in the task array to add to.
-     */
-    private final int nextIndexToAddTo;
+    private final ArrayList<Task> tasks;
 
     /**
-     * Constructor for TaskList, with Task[] of size 1 to save space.
-     * Task[] size will expand with add().
+     * Constructor for TaskList, with ArrayList<Task> of size 1 to save space.
+     * ArrayList<Task> size will expand with add().
      */
     TaskList() {
-        this.tasks = new Task[1];
-        //create a task list of size 1 first and then expand as we add
-        this.nextIndexToAddTo = 0;
+        this.tasks = new ArrayList<>();
     }
 
     /**
-     * Overloaded constructor.
-     * @param tasks is a Task[] with tasks
-     * @param nextIndex specifies where the next task will be added in Task[]
+     * Creates a task list with attribute tasks being specified as a given arraylist
+     * @param newTaskList is an arraylist of tasks
      */
-    TaskList(Task[] tasks, int nextIndex) {
-        this.tasks = tasks;
-        this.nextIndexToAddTo = nextIndex;
+    TaskList(ArrayList<Task> newTaskList) {
+        this.tasks = newTaskList;
     }
 
     int getNumberOfTasks() {
-        return this.tasks.length;
+        return this.tasks.size();
     }
 
     /**
-     * Used to print all tasks in Task[] when command "list" is called in Duke.
+     * Used to print all tasks in ArrayList<Task> when command "list" is called in Duke.
      */
     void printTasks() {
-        for (int i = 0; i < nextIndexToAddTo; i++) {
+        System.out.println("Here is your to-do:");
+        for (int i = 0; i < this.getNumberOfTasks(); i++) {
             System.out.println(String
-                    .format("%d . %s", i + 1, this.tasks[i].toString()));
+                    .format("%d . %s", i + 1, tasks.get(i).toString()));
         }
     }
 
     /**
      * Used to preserve immutability.
-     * @param size for size of array
-     * @return Task[] of a specific size with this.tasks copied over
+     * @return ArrayList<Task>, a copy of this
      */
-    Task[] copyTaskList(int size) {
-        return Arrays.copyOf(this.tasks, size);
+    ArrayList<Task> copyTaskList() {
+        return new ArrayList<Task>(this.tasks);
     }
 
     /**
      * Marks a task as done.
      * @param index where task to be marked is at in TaskList
-     * @return TaskList with updated Task[]
+     * @return TaskList with updated ArrayList<Task>
      */
     TaskList mark(int index) {
-        if (index > this.nextIndexToAddTo - 1 || index < 0) {
+        if (index > this.getNumberOfTasks() - 1 || index < 0) {
+            //index is not in the list
             System.out
                     .println("Not so fast! I don't think that task exists! See for yourself");
             this.printTasks();
             return this;
         } else {
-            Task taskToUpdate = this.tasks[index];
+            Task taskToUpdate = this.tasks.get(index);
             if (taskToUpdate.isDone()) {
                 System.out
                         .println("Oh hmm...you finished it already though...what a trooper!");
@@ -79,13 +74,13 @@ public class TaskList {
             Task newTask = taskToUpdate.changeTaskStatus(true);
 
             //create same size array since we are just adjusting values in the same array
-            Task[] newTasks = this.copyTaskList(this.tasks.length);
-            newTasks[index] = newTask;
+            ArrayList<Task> newTasks = this.copyTaskList();
+            newTasks.set(index, newTask);
 
             System.out.println(String
                     .format("Nice! I've marked this task as done: \n%s", newTask.toString()));
 
-            return new TaskList(newTasks, this.nextIndexToAddTo);
+            return new TaskList(newTasks);
 
         }
     }
@@ -93,28 +88,28 @@ public class TaskList {
     /**
      * Marks a task as undone.
      * @param index where the task to be unmarked is at in TaskList
-     * @return TaskList with updated Task[]
+     * @return TaskList with updated ArrayList<Task>
      */
     TaskList unmark(int index) {
-        if (index > this.nextIndexToAddTo - 1 || index < 0) {
+        if (index > this.getNumberOfTasks() - 1 || index < 0) {
             System.out.println("Not so fast! I don't think that task exists! See for yourself");
             this.printTasks();
             return this;
         } else {
-            Task taskToUpdate = this.tasks[index];
+            Task taskToUpdate = this.tasks.get(index);
             if (!taskToUpdate.isDone()) { //if task is already unmarked
                 System.out
                         .println("It seems like you haven't marked it as done yet...");
                 return this;
             }
             Task newTask = taskToUpdate.changeTaskStatus(false);
-            Task[] newTasks = this.copyTaskList(this.tasks.length);
-            newTasks[index] = newTask;
+            ArrayList<Task> newTasks = this.copyTaskList();
+            newTasks.set(index, newTask);
 
             System.out.println(String
                     .format("OK, I've marked this task as not done yet:\n %s", newTask.toString()));
 
-            return new TaskList(newTasks, this.nextIndexToAddTo);
+            return new TaskList(newTasks);
         }
     }
 
@@ -125,13 +120,24 @@ public class TaskList {
      */
     TaskList add(Task task) {
         //increase size of taskList by 1
-        Task[] newTasks = this.copyTaskList(this.tasks.length + 1);
-        newTasks[nextIndexToAddTo] = task;
+        ArrayList<Task> newTasks = this.copyTaskList();
+        newTasks.add(task);
         System.out.println(String
                 .format("Got it, I've added this task: \n %s\nNow you have %d task in the list",
                         task.toString(),
-                        this.getNumberOfTasks()));
-        return new TaskList(newTasks, this.nextIndexToAddTo + 1);
+                        this.getNumberOfTasks() + 1));
+        return new TaskList(newTasks);
     }
 
+    TaskList delete(int index) {
+        //increase size of taskList by 1
+        ArrayList<Task> updatedTasks = this.copyTaskList();
+        Task taskToRemove = this.tasks.get(index);
+        updatedTasks.remove(index);
+        System.out.println(String
+                .format("Got it, I've deleted this task: \n %s\nNow you have %d task in the list",
+                        taskToRemove.toString(),
+                        this.getNumberOfTasks() - 1));
+        return new TaskList(updatedTasks);
+    }
 }
