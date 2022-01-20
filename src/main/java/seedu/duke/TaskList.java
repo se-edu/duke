@@ -58,13 +58,7 @@ public class TaskList {
      * @return TaskList with updated ArrayList<Task>
      */
     TaskList mark(int index) {
-        if (index > this.getNumberOfTasks() - 1 || index < 0) {
-            //index is not in the list
-            System.out
-                    .println("Not so fast! I don't think that task exists! See for yourself");
-            this.printTasks();
-            return this;
-        } else {
+        try {
             Task taskToUpdate = this.tasks.get(index);
             if (taskToUpdate.isDone()) {
                 System.out
@@ -81,7 +75,11 @@ public class TaskList {
                     .format("Nice! I've marked this task as done: \n%s", newTask.toString()));
 
             return new TaskList(newTasks);
-
+        } catch (IndexOutOfBoundsException e) {
+            System.out
+                    .println("Not so fast! I don't think that task exists! See for yourself");
+            this.printTasks();
+            return this;
         }
     }
 
@@ -91,11 +89,7 @@ public class TaskList {
      * @return TaskList with updated ArrayList<Task>
      */
     TaskList unmark(int index) {
-        if (index > this.getNumberOfTasks() - 1 || index < 0) {
-            System.out.println("Not so fast! I don't think that task exists! See for yourself");
-            this.printTasks();
-            return this;
-        } else {
+        try {
             Task taskToUpdate = this.tasks.get(index);
             if (!taskToUpdate.isDone()) { //if task is already unmarked
                 System.out
@@ -110,6 +104,11 @@ public class TaskList {
                     .format("OK, I've marked this task as not done yet:\n %s", newTask.toString()));
 
             return new TaskList(newTasks);
+        } catch (IndexOutOfBoundsException e) {
+            System.out
+                    .println("Not so fast! I don't think that task exists! See for yourself");
+            this.printTasks();
+            return this;
         }
     }
 

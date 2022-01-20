@@ -9,7 +9,7 @@ class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws commandDoesNotExistException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -42,19 +42,32 @@ class Duke {
                 taskList = taskList.unmark(Integer.parseInt(command.substring(indexAfterCommand)) - 1);
                 //command.substring(6) cuts out the command "unmark "
             } else if (command.startsWith("todo")) { //if not, just add task to taskList
-                int indexTaskName = 5; //command is given as "todo <taskIndex>"
-                String taskName = command.substring(indexTaskName);
-                Task newTask = new ToDo(taskName);
-
-                //command.substring(5) cuts out the command
-                taskList = taskList.add(newTask);
+                try {
+                    int indexTaskName = 5; //command is given as "todo <taskIndex>"
+                    String taskName = command.substring(indexTaskName);
+                    if (taskName.equals("")) {
+                        throw new noTaskException();
+                    }
+                    Task newTask = new ToDo(taskName);
+                    //command.substring(5) cuts out the command
+                    taskList = taskList.add(newTask);
+                } catch (noTaskException e) {
+                    System.out.println("Oh no! You didn't give me a task.");
+                }
             } else if (command.startsWith("deadline")) {
-                int indexTaskName = 9; //command is given as e.g. "deadline return book /by Sunday"
-                int slashIndex = command.indexOf("/");
-                String taskName = command.substring(indexTaskName, slashIndex);
-                String date = command.substring(slashIndex + 1);
-                Task newTask = new Deadline(taskName, date);
-                taskList = taskList.add(newTask);
+                try {
+                    int indexTaskName = 9; //command is given as e.g. "deadline return book /by Sunday"
+                    int slashIndex = command.indexOf("/");
+                    if (slashIndex == -1) {
+                        throw new noDateException();
+                    }
+                    String taskName = command.substring(indexTaskName, slashIndex);
+                    String date = command.substring(slashIndex + 1);
+                    Task newTask = new Deadline(taskName, date);
+                    taskList = taskList.add(newTask);
+                } catch (noDateException e) {
+                    System.out.println("Oh no! You didn't give me a task.");
+                }
             } else if (command.startsWith("event")) {
                 int indexTaskName = 6; //event project meeting /at Mon 2-4pm
                 int slashIndex = command.indexOf("/");
@@ -67,7 +80,7 @@ class Duke {
                 int index = Integer.parseInt(command.substring(indexTaskName, indexTaskName + 1));
                 taskList = taskList.delete(index);
             } else {
-                System.out.println("Sorry I don't understand! :(");
+                throw new commandDoesNotExistException("Sorry I don't understand! :(");
             }
             command = in.nextLine();
         }
