@@ -33,7 +33,8 @@ public class Duke {
             if (lineToEcho.equals("list")) { //if equal list, print all in commandTracker
                 for (int i = 0; i < index; i++) {
                     //label = index + 1 because array is 0 indexed
-                    System.out.println(String.format("%d . %s",i + 1, commandTracker[i]));
+                    System.out.println(String
+                            .format("%d . %s",i + 1, commandTracker[i]));
                 }
             } else { //if not, just add to list
                 commandTracker[index++] = lineToEcho;
@@ -43,6 +44,5 @@ public class Duke {
         }
 
         System.out.println(String.format("Bye %s. See you again soon!", name));
-
     }
 }
