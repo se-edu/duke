@@ -45,11 +45,12 @@ public abstract class Task {
     String getTaskName() {
         return this.taskName;
     }
+
     /**
      * Marks task as done.or undone.
      * @return new Task with done attribute as the boolean parameter
      */
-    abstract Task changeTaskStatus(boolean status);
+    public abstract Task changeTaskStatus(boolean status);
 
     /**
      * prints task.

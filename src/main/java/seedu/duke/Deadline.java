@@ -8,8 +8,8 @@ public class Deadline extends Task {
 
     /**
      * Creates a deadline.
-     * @param taskName
-     * @param date
+     * @param taskName for task name
+     * @param date for end date
      */
     Deadline(String taskName, String date) {
         super(taskName, false);
@@ -18,8 +18,8 @@ public class Deadline extends Task {
 
     /**
      * Used to help adjust the done status.
-     * @param oldDeadline
-     * @param done
+     * @param oldDeadline to extract task name and date
+     * @param done for specified boolean
      */
     Deadline(Deadline oldDeadline, boolean done) {
         super(oldDeadline.getTaskName(), done);
@@ -36,7 +36,7 @@ public class Deadline extends Task {
 
     /**
      * returns a new Task with the specified attribute 'done' based on boolean 'status'.
-     * @param status
+     * @param status to provide boolean
      * @return new Task with specified boolean for attribute 'done'
      */
     @Override

@@ -21,7 +21,7 @@ public class Event extends Deadline {
     }
 
     /**
-     * returns a new task with specified boolean as the done attribute
+     * Returns a new task with specified boolean as the done attribute.
      * @param status that provides a specified boolean for the new task
      * @return new Task with updated 'done' attribute
      */

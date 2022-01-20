@@ -2,6 +2,8 @@ package seedu.duke;
 
 public class ToDo extends Task {
 
+    private boolean status;
+
     /**
      * used to construct a ToDo object.
      * @param taskName which specifies name of task
@@ -19,6 +21,11 @@ public class ToDo extends Task {
         super(oldToDo.getTaskName(), done);
     }
 
+    /**
+     * returns new task with specified boolean as status.
+     * @param status gives a specified boolean
+     * @return new Task with adjusted boolean
+     */
     @Override
     public Task changeTaskStatus(boolean status) {
         return new ToDo(this, status);
