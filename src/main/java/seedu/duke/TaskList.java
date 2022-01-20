@@ -35,6 +35,10 @@ public class TaskList {
         this.nextIndexToAddTo = nextIndex;
     }
 
+    int getNumberOfTasks() {
+        return this.tasks.length;
+    }
+
     /**
      * Used to print all tasks in Task[] when command "list" is called in Duke.
      */
@@ -72,14 +76,14 @@ public class TaskList {
                         .println("Oh hmm...you finished it already though...what a trooper!");
                 return this;
             }
-            Task newTask = taskToUpdate.completeTask();
+            Task newTask = taskToUpdate.changeTaskStatus(true);
 
             //create same size array since we are just adjusting values in the same array
             Task[] newTasks = this.copyTaskList(this.tasks.length);
             newTasks[index] = newTask;
 
             System.out.println(String
-                    .format("Nice! I've marked this task as done:\n %s", newTask.toString()));
+                    .format("Nice! I've marked this task as done: \n%s", newTask.toString()));
 
             return new TaskList(newTasks, this.nextIndexToAddTo);
 
@@ -103,7 +107,7 @@ public class TaskList {
                         .println("It seems like you haven't marked it as done yet...");
                 return this;
             }
-            Task newTask = taskToUpdate.uncompleteTask();
+            Task newTask = taskToUpdate.changeTaskStatus(false);
             Task[] newTasks = this.copyTaskList(this.tasks.length);
             newTasks[index] = newTask;
 
@@ -123,6 +127,10 @@ public class TaskList {
         //increase size of taskList by 1
         Task[] newTasks = this.copyTaskList(this.tasks.length + 1);
         newTasks[nextIndexToAddTo] = task;
+        System.out.println(String
+                .format("Got it, I've added this task: \n %s\nNow you have %d task in the list",
+                        task.toString(),
+                        this.getNumberOfTasks()));
         return new TaskList(newTasks, this.nextIndexToAddTo + 1);
     }
 

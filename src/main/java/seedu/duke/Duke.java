@@ -34,7 +34,7 @@ class Duke {
                 int indexAfterCommand = 5;
                 taskList = taskList
                         .mark(Integer
-                                .parseInt(command.substring(indexAfterCommand)) - 1);
+                                .parseInt(command.substring(indexAfterCommand,indexAfterCommand + 1)) - 1);
                 //command.substring(6) cuts out the command "mark "
             } else if (command.startsWith("unmark")) {
                 //if command unmark is used,// then we mark the specified task as undone
@@ -42,13 +42,26 @@ class Duke {
                 taskList = taskList.unmark(Integer.parseInt(command.substring(indexAfterCommand)) - 1);
                 //command.substring(6) cuts out the command "unmark "
             } else if (command.startsWith("todo")) { //if not, just add task to taskList
-                int indexTaskName = 5;
+                int indexTaskName = 5; //command is given as "todo <task>"
                 String taskName = command.substring(indexTaskName);
-                Task newTask = new Task(taskName);
+                Task newTask = new ToDo(taskName);
 
                 //command.substring(5) cuts out the command
                 taskList = taskList.add(newTask);
-                System.out.println(String.format("added: %s", taskName));
+            } else if (command.startsWith("deadline")) {
+                int indexTaskName = 9; //command is given as e.g. "deadline return book /by Sunday"
+                int slashIndex = command.indexOf("/");
+                String taskName = command.substring(indexTaskName, slashIndex);
+                String date = command.substring(slashIndex + 1);
+                Task newTask = new Deadline(taskName, date);
+                taskList = taskList.add(newTask);
+            } else if (command.startsWith("event")) {
+                int indexTaskName = 6; //event project meeting /at Mon 2-4pm
+                int slashIndex = command.indexOf("/");
+                String taskName = command.substring(indexTaskName, slashIndex);
+                String date = command.substring(slashIndex + 3); //+2 is because of "at " that occurs before the date
+                Task newTask = new Event(taskName, date);
+                taskList = taskList.add(newTask);
             } else {
                 System.out.println("Sorry I don't understand! :(");
             }

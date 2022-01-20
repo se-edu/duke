@@ -1,7 +1,7 @@
 package seedu.duke;
 
 
-public class Task {
+public abstract class Task {
     /**
      * taskName refers to the name of the task.
      */
@@ -39,20 +39,17 @@ public class Task {
     }
 
     /**
-     * Marks task as done.
-     * @return new Task with boolean attribute 'done' being marked as true
+     * Gets the taskName of the taskList.
+     * @return String task name
      */
-    Task completeTask() {
-        return new Task(this.taskName, true);
+    String getTaskName() {
+        return this.taskName;
     }
-
     /**
-     * Marks task as undone.
-     * @return new Task with boolean attribute 'done' being marked as false
+     * Marks task as done.or undone.
+     * @return new Task with done attribute as the boolean parameter
      */
-    Task uncompleteTask() {
-        return new Task(this.taskName, false);
-    }
+    abstract Task changeTaskStatus(boolean status);
 
     /**
      * prints task.
