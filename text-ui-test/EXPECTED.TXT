@@ -52,4 +52,3 @@ Here is your to-do:
 2 . [D][X] pass books 
 3 . [E][ ] project meeting 
 bye
-Bye bel. See you again soon!
