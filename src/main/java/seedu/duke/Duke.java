@@ -9,7 +9,7 @@ class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) throws commandDoesNotExistException {
+    public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -26,36 +26,29 @@ class Duke {
         String command = in.nextLine();
 
         while (!command.equals("bye")) {
-            if (command.startsWith("list")) {
-                //if equal list, print all in commandTracker
-                taskList.printTasks();
-            } else if (command.startsWith("mark")) {
-                //if command mark is used,then we mark the specified task as done
-                int indexAfterCommand = 5;
-                taskList = taskList
-                        .mark(Integer
-                                .parseInt(command.substring(indexAfterCommand,indexAfterCommand + 1)) - 1);
-                //command.substring(6) cuts out the command "mark "
-            } else if (command.startsWith("unmark")) {
-                //if command unmark is used,// then we mark the specified task as undone
-                int indexAfterCommand = 7;
-                taskList = taskList.unmark(Integer.parseInt(command.substring(indexAfterCommand)) - 1);
-                //command.substring(6) cuts out the command "unmark "
-            } else if (command.startsWith("todo")) { //if not, just add task to taskList
-                try {
+            try {
+                if (command.startsWith("list")) {
+                    //if equal list, print all in commandTracker
+                    taskList.printTasks();
+                } else if (command.startsWith("mark")) {
+                    //if command mark is used,then we mark the specified task as done
+                    int indexAfterCommand = 5;
+                    taskList = taskList
+                            .mark(Integer
+                                    .parseInt(command.substring(indexAfterCommand, indexAfterCommand + 1)) - 1);
+                    //command.substring(6) cuts out the command "mark "
+                } else if (command.startsWith("unmark")) {
+                    //if command unmark is used,// then we mark the specified task as undone
+                    int indexAfterCommand = 7;
+                    taskList = taskList.unmark(Integer.parseInt(command.substring(indexAfterCommand)) - 1);
+                    //command.substring(6) cuts out the command "unmark "
+                } else if (command.startsWith("todo")) { //if not, just add task to taskList
                     int indexTaskName = 5; //command is given as "todo <taskIndex>"
                     String taskName = command.substring(indexTaskName);
-                    if (taskName.equals("")) {
-                        throw new noTaskException();
-                    }
                     Task newTask = new ToDo(taskName);
                     //command.substring(5) cuts out the command
                     taskList = taskList.add(newTask);
-                } catch (noTaskException e) {
-                    System.out.println("Oh no! You didn't give me a task.");
-                }
-            } else if (command.startsWith("deadline")) {
-                try {
+                } else if (command.startsWith("deadline")) {
                     int indexTaskName = 9; //command is given as e.g. "deadline return book /by Sunday"
                     int slashIndex = command.indexOf("/");
                     if (slashIndex == -1) {
@@ -65,22 +58,29 @@ class Duke {
                     String date = command.substring(slashIndex + 1);
                     Task newTask = new Deadline(taskName, date);
                     taskList = taskList.add(newTask);
-                } catch (noDateException e) {
-                    System.out.println("Oh no! You didn't give me a task.");
+                } else if (command.startsWith("event")) {
+                    int indexTaskName = 6; //event project meeting /at Mon 2-4pm
+                    int slashIndex = command.indexOf("/");
+                    if (slashIndex == -1) {
+                        throw new noDateException();
+                    }
+                    String taskName = command.substring(indexTaskName, slashIndex);
+                    String date = command.substring(slashIndex + 3); //+2 is because of "at " that occurs before the date
+                    Task newTask = new Event(taskName, date);
+                    taskList = taskList.add(newTask);
+                } else if (command.startsWith("delete")) {
+                    int indexTaskName = 7; //command is given as "delete <taskIndex>"
+                    int index = Integer.parseInt(command.substring(indexTaskName, indexTaskName + 1));
+                    taskList = taskList.delete(index);
+                } else {
+                    throw new noCommandException();
                 }
-            } else if (command.startsWith("event")) {
-                int indexTaskName = 6; //event project meeting /at Mon 2-4pm
-                int slashIndex = command.indexOf("/");
-                String taskName = command.substring(indexTaskName, slashIndex);
-                String date = command.substring(slashIndex + 3); //+2 is because of "at " that occurs before the date
-                Task newTask = new Event(taskName, date);
-                taskList = taskList.add(newTask);
-            } else if (command.startsWith("delete")) {
-                int indexTaskName = 7; //command is given as "delete <taskIndex>"
-                int index = Integer.parseInt(command.substring(indexTaskName, indexTaskName + 1));
-                taskList = taskList.delete(index);
-            } else {
-                throw new commandDoesNotExistException("Sorry I don't understand! :(");
+            } catch (noCommandException e) {
+                System.out.println("Sorry I don't understand :(");
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("Oh no! You didn't give me a task.");
+            } catch (noDateException e) {
+                System.out.println("I don't you gave me a valid date");
             }
             command = in.nextLine();
         }
