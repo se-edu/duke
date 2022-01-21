@@ -8,7 +8,8 @@ public class NoDateException extends Exception {
     /**
      * parameterless constructor for NoDateException.
      */
-    public NoDateException() { }
+    public NoDateException() {
+    }
 
     /**
      * a constructor for NoDateException.
