@@ -7,14 +7,14 @@ import java.util.ArrayList;
  */
 public class TaskList {
     /**
-     * An array that contains all tasks that will be added.
+     *An array that contains all tasks that will be added.
      */
     private final ArrayList<Task> tasks;
 
     /**
      * Constructor for TaskList with no parameters.
      */
-     TaskList() {
+    public TaskList() {
         this.tasks = new ArrayList<>();
     }
 

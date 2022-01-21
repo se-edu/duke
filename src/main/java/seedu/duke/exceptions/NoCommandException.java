@@ -7,7 +7,8 @@ public class NoCommandException extends Exception {
     /**
      * parameterless constructor for NoCommandException.
      */
-    public NoCommandException() { }
+    public NoCommandException() {
+    }
 
     /**
      * A constructor for NoCommandException.

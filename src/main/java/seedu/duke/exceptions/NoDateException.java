@@ -1,7 +1,7 @@
 package seedu.duke.exceptions;
 
 /**
- * The NoDateException is thrown when for commands like deadline or event, there is no slash so code cannot find the date.
+ * The NoDateException is thrown when for commands which requires dates.
  */
 public class NoDateException extends Exception {
 
