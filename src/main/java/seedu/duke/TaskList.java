@@ -1,8 +1,6 @@
 package seedu.duke;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * TaskList is used to track all tasks taken in by Duke.
@@ -14,27 +12,30 @@ public class TaskList {
     private final ArrayList<Task> tasks;
 
     /**
-     * Constructor for TaskList, with ArrayList<Task> of size 1 to save space.
-     * ArrayList<Task> size will expand with add().
+     * Constructor for TaskList with no parameters.
      */
-    TaskList() {
+     TaskList() {
         this.tasks = new ArrayList<>();
     }
 
     /**
-     * Creates a task list with attribute tasks being specified as a given arraylist
-     * @param newTaskList is an arraylist of tasks
+     * Creates a {@link TaskList} with attribute tasks being specified as a given {@link ArrayList}.
+     * @param newTaskList is an {@link ArrayList} of {@link Task}.
      */
     TaskList(ArrayList<Task> newTaskList) {
         this.tasks = newTaskList;
     }
 
+    /**
+     * returns the number of tasks in the {@link ArrayList} of {@link Task}.
+     * @return an integer specifying the number of tasks
+     */
     int getNumberOfTasks() {
         return this.tasks.size();
     }
 
     /**
-     * Used to print all tasks in ArrayList<Task> when command "list" is called in Duke.
+     * Used to print all tasks when command "list" is called in Duke.
      */
     void printTasks() {
         System.out.println("Here is your to-do:");
@@ -46,7 +47,7 @@ public class TaskList {
 
     /**
      * Used to preserve immutability.
-     * @return ArrayList<Task>, a copy of this
+     * @return {@link ArrayList}, a copy of this
      */
     ArrayList<Task> copyTaskList() {
         return new ArrayList<Task>(this.tasks);
@@ -55,7 +56,7 @@ public class TaskList {
     /**
      * Marks a task as done.
      * @param index where task to be marked is at in TaskList
-     * @return TaskList with updated ArrayList<Task>
+     * @return TaskList with updated {@link ArrayList}
      */
     TaskList mark(int index) {
         try {
@@ -86,7 +87,7 @@ public class TaskList {
     /**
      * Marks a task as undone.
      * @param index where the task to be unmarked is at in TaskList
-     * @return TaskList with updated ArrayList<Task>
+     * @return TaskList with updated {@link ArrayList}
      */
     TaskList unmark(int index) {
         try {
@@ -114,7 +115,7 @@ public class TaskList {
 
     /**
      * Adds tasks to TaskList.
-     * @param task to be added to TaskList
+     * @param task is the one to be added to TaskList
      * @return new TaskList with increased size to accomodate newTask
      */
     TaskList add(Task task) {
@@ -128,6 +129,11 @@ public class TaskList {
         return new TaskList(newTasks);
     }
 
+    /**
+     * Deletes task from TaskList.
+     * @param index of task to be deleted from TaskList
+     * @return new {@link TaskList} with specified task deleted
+     */
     TaskList delete(int index) {
         //increase size of taskList by 1
         ArrayList<Task> updatedTasks = this.copyTaskList();
