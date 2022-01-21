@@ -103,6 +103,6 @@ class Duke {
             }
             command = in.nextLine();
         }
-        System.out.print(String.format("Bye %s. See you again soon!", name));
+        System.out.println(String.format("Bye %s. See you again soon!", name));
     }
 }

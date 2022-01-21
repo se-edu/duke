@@ -50,6 +50,4 @@ list
 Here is your to-do:
 1 . [T][ ] return books
 2 . [D][X] pass books 
-3 . [E][ ] project meeting 
-bye
-Bye bel. See you again soon!
+3 . [E][ ] project meeting
